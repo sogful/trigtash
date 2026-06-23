@@ -1,0 +1,35 @@
+{
+  "tabs": [
+    {"index": 0, "name": "Gameplay"},
+    {"index": 1, "name": "GUI"},
+    {"index": 2, "name": "Controls"},
+    {"index": 3, "name": "Other", "xoff": 8},
+    {"index": 4, "name": "TAS"}
+  ],
+  "options": [
+
+    {"tab": 0, "id": "nospin", "name": "Disable Spinning", "desc": "Removes spinning of objects like orbs and saws. May improve performance by up to 20% depending on the level."},
+    {"tab": 0, "id": "disableparticles", "name": "Disable Particles", "desc": "Disables the use of the particle engine. May improve performance."},
+    {"tab": 0, "id": "hidepause", "name": "Hide Pause Button", "desc": "Hides the pause button at the top right when playing."},
+    {"tab": 0, "id": "legacypads", "name": "Legacy Pads Logic", "desc": "Brings back the old code for pads. Recommended when speedrunning."},
+
+    {"tab": 1, "id": "timer", "name": "Speedrun Timer", "desc": "Adds a timer in the top left."},
+    {"tab": 1, "id": "fps", "name": "FPS Counter", "desc": "Adds an FPS counter in the bottom right."},
+    {"tab": 1, "id": "hidemmvignette", "name": "Hide Master Mode Vignette", "desc": "Hides the red vignette when playing in master mode."},
+
+    {"tab": 2, "id": "quickrestart", "name": "Quick Restart", "desc": "Pressing 'T' will restart the level."},
+
+    {"tab": 3, "id": "fullscreen", "name": "Fullscreen Mode", "desc": "Changes the screen mode, windowed or fullscreen. Also chooses the default mode on launch."},
+    {"tab": 3, "id": "compressedmusic", "name": "Compressed Music", "desc": "Uses the original lower quality music files to save memory and decrease delays."},
+    {"tab": 3, "kind": "button", "match": "Import Save File"},
+    {"tab": 3, "kind": "button", "match": "Export Save File"},
+
+
+    {"tab": 4, "id": "macrohotkey", "name": "Macro Overlay Hotkey", "desc": "Pressing 'Tab' toggles the macro overlay when playing a level. With it enabled, your inputs will be automatically recorded in the background. Hence, turning this off could improve performance. Do not use any of the features in main level completions if you want it to count as legitimate!"},
+    {"tab": 4, "id": "macroframeadv", "name": "Frame Advance (unstable)", "desc": "Adds frame stepping controls to the macro overlay. The issues related to frame stepping are very difficult to fix, so you should consider using speedhack and practice mode instead."},
+    {"tab": 4, "id": "macroinputviewer", "name": "Input Display", "desc": "Shows a small D-Pad in the bottom right. Helps spotting when you're not holding a key."},
+    {"tab": 4, "id": "macrovideoui", "name": "Show UI While Recording", "desc": "Keeps the game UI visible in showcases. Off by default for clean footage, but you can use this regardless."},
+    {"tab": 4, "id": "macrovelocity", "name": "Player Info", "desc": "Shows a readout of the player's coordinates and X/Y/angular velocity in the bottom left while playing. Could be useful for precise movement."},
+    {"tab": 4, "id": "macrovelvector", "name": "Velocity Vector", "desc": "Draws an arrow from the player showing the direction and strength of its current velocity."}
+  ]
+}

@@ -1,0 +1,30 @@
+// the 25 music tracks, by their pretty filename (same in project/assets/audio/music
+// and .../music/compressed). swapcompressed + ~buildaltaudio read the compressed copy
+// of each by this name. "X." = not a numbered level song (menu / time attack).
+module.exports = [
+  "1. Tutorial by Blazulite.ogg",
+  "2. Swirl by Waterflame.ogg",
+  "3. Apoplexy by Bee Hunter.ogg",
+  "4. Infernoplex by Dimrain47.ogg",
+  "5. Forsaken Neon by Dimrain47.ogg",
+  "6. Octagon Force by Waterflame.ogg",
+  "7. Sky Maneuvers by Waterflame.ogg",
+  "8. Hyperspin by Waterflame.ogg",
+  "9. Funny Cat by nonomino.ogg",
+  "10. Ultimate Destruction by TMM43.ogg",
+  "11. Flock by madhousedude.ogg",
+  "12. Betrayal Of Fear by Goukisan.ogg",
+  "13. The 7th Day by TMM43.ogg",
+  "14. Thermodynamix by dj-Nate.ogg",
+  "15. Silent Hill (Dubstep) by Aydin-Jewelz123.ogg",
+  "16. Fire Aura by Kid2Will.ogg",
+  "17. Awake - Supernova by Rawrthaas.ogg",
+  "18. Every End by Dimrain47.ogg",
+  "19. Haunted Woods by Waterflame.ogg",
+  "20. Twilight Techno by Dimrain47.ogg",
+  "21. Crowd Control by Waterflame.ogg",
+  "22. Blip Stream by Kevin Macleod.ogg",
+  "23. City Out Loud by Aryxil.ogg",
+  "X. Menu Theme by Blazulite.ogg",
+  "X. Time Attack by AndrewCR.ogg",
+];

@@ -1,0 +1,376 @@
+{
+   "na": {
+      "name": "Unrated",
+      "emoji": "<:tdUnrated:1194847656061718579>",
+      "spritesheet": {
+         "x": 0,
+         "y": 48,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 0
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741394139811900/Background.png?ex=6a28d508&is=6a278388&hm=73c89bc13d6931afb485c228c90c58507c4e3e6ef476f150c5d00389d8110ee8&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741394613764106/tile001.png?ex=6a28d508&is=6a278388&hm=d80b76dd0da11ba584507f09ad6f55f8f400de76bd05746b4bff61ebf0a186c2&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741395045912746/tile002.png?ex=6a28d508&is=6a278388&hm=d347a5b2da4d2ee91d7c3306bec2e72c45ba4cc7f4901ed1ef250593735737c6&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741395544903680/tile003.png?ex=6a28d508&is=6a278388&hm=b3f562ee7fc30fe7265e40e8e9ffb873682712a975f7bc999b014c332fda9771&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741396035633212/tile004.png?ex=6a28d508&is=6a278388&hm=5a38cd102b85586d58436905c3a279b711e9c349cd89bb91a68d37520a082710&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741396534890627/tile005.png?ex=6a28d508&is=6a278388&hm=93d1c52b05a44cc472831ff2aecd8de1c88440b99272f1be41eff3d2b5cfaa8d&"
+      ]
+   },
+   "auto": {
+      "name": "Auto",
+      "emoji": "<:tdAuto:1194847653285081108>",
+      "spritesheet": {
+         "x": 0,
+         "y": 0,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 360
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741913629392936/tile090.png?ex=6a28d584&is=6a278404&hm=c6b0813d7442b7ed1b1ebabf725821fb5f703a184d33ca68bf6173e5b7294368&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741914141102341/tile091.png?ex=6a28d584&is=6a278404&hm=73a895e1081503f34e629f1949900a01b0f8a09c26de3bef8b00b797eb4d6cee&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741914610995350/tile092.png?ex=6a28d584&is=6a278404&hm=b0f4a2ea9199fd7a116a36abffadeb566c7dedce610cf9eec1c6b4fe0aff4025&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741915059650700/tile093.png?ex=6a28d584&is=6a278404&hm=cc4a33ca3971d9bc8cb5e4cf187638aa9482f6d926a40c4227584d59be5eb49d&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741915516964954/tile094.png?ex=6a28d584&is=6a278404&hm=4f9e770008fb2cbb3cd87f7a5b25365ba6798c8f2a3aee1cbcaf2d188b9de132&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741915927871618/tile095.png?ex=6a28d584&is=6a278404&hm=89721324e0dd72af3702874ed81b92ddd3bdf97fcb04a99f67c4252806b1d2d7&"
+      ]
+   },
+   "easy": {
+      "name": "Easy",
+      "emoji": "<:tdEasy:1203519817316040714>",
+      "spritesheet": {
+         "x": 16,
+         "y": 0,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 336
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741882365050912/tile084.png?ex=6a28d57c&is=6a2783fc&hm=f03c2508a28a9b5efd0a0ef4804d2839f50a4ce4cb25756fc2ba4ee829f63179&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741882780553378/tile085.png?ex=6a28d57c&is=6a2783fc&hm=9c77336a56bffc89817d4af1fdf9e6c2eda9dcdbbd8a16648c0ca6cbccf0e761&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741883262894120/tile086.png?ex=6a28d57c&is=6a2783fc&hm=0b972b66242c589b8e4e530a45958e1ba73a52dec38bd0e89f63d59e350113af&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741883744977066/tile087.png?ex=6a28d57d&is=6a2783fd&hm=0986f434b16c4995f476eb1723de36672f13e2ec18a9f035317eace6b1688dae&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741884194033818/tile088.png?ex=6a28d57d&is=6a2783fd&hm=346bcfb2d9b943e627e2333f4478c370d08be61b46e8d44bc143731e6b331617&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741884638494910/tile089.png?ex=6a28d57d&is=6a2783fd&hm=f1eb62f0f3c923b1acb7e30f095d00ccd86d395c7107908126d31bfe643cb688&"
+      ]
+   },
+   "normal": {
+      "name": "Normal",
+      "emoji": "<:tdNormal:1163254435519139923>",
+      "spritesheet": {
+         "x": 32,
+         "y": 0,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 312
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741855265783879/tile078.png?ex=6a28d576&is=6a2783f6&hm=7d22251b1de85965a1238f6a7879b464c0be1d8f80e9f8010c8f670cf24796a2&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741855718899742/tile079.png?ex=6a28d576&is=6a2783f6&hm=5788ff6821700279f1e7f8e1a5be5d79628c5ff69915c93d88eafe522e4089ca&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741856205176842/tile080.png?ex=6a28d576&is=6a2783f6&hm=e72af9d2b5e8b597ce7e171e84494f20ad0ff358f54f0d39847d6fa9b0dff0dd&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741856759087124/tile081.png?ex=6a28d576&is=6a2783f6&hm=eab476cd0208a8cd9c24d4a4b017aa979e1f8093803f474546d9d78af0896183&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741857266335914/tile082.png?ex=6a28d576&is=6a2783f6&hm=75f452a3c558140a7802bcc2a169cdf94a6bf5e25d5336797a2dc5faff63ced6&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741857799274556/tile083.png?ex=6a28d576&is=6a2783f6&hm=c70e220ac0f59133fbf319bb7a004e55b0adfd179a6991f015202794c0c5d158&"
+      ]
+   },
+   "medium": {
+      "name": "Medium",
+      "emoji": "<:tdMedium:1191489657532317818>",
+      "spritesheet": {
+         "x": 48,
+         "y": 0,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 288
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741823305056418/tile072.png?ex=6a28d56e&is=6a2783ee&hm=c45f111fe6bda938e4e7d9ad8b691c00d7c5b7c4b967754ab03158b77441a328&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741823774949694/tile073.png?ex=6a28d56e&is=6a2783ee&hm=7f75588a319fbc4d479c242ce4c91631f0c71c2a64748697af627985aa8c6758&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741824207093760/tile074.png?ex=6a28d56e&is=6a2783ee&hm=72e88acc426dd5fcc1c02422b3be60ddf7c0e6e93d34f082717f559d2c98b256&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741824668205096/tile075.png?ex=6a28d56e&is=6a2783ee&hm=0a7f29390e962182bdfd783c92c9f9c4897e6581db2a02ebc5b96129a66bbea8&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741825091965038/tile076.png?ex=6a28d56f&is=6a2783ef&hm=050f5553e8f6223eaa776c2626bf197bda0d9bee7edf6390f3aa942d53be0e65&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741825569980476/tile077.png?ex=6a28d56f&is=6a2783ef&hm=a65eb4ab4ba2d2322e24b2e83e18bdf55a277f4e767816ec27f675f8c8dd3394&"
+      ]
+   },
+   "hard": {
+      "name": "Hard",
+      "emoji": "<:tdHard:1163254514476920893>",
+      "spritesheet": {
+         "x": 64,
+         "y": 0,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 264
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741799376556133/tile066.png?ex=6a28d568&is=6a2783e8&hm=5e2a6c2adbb77a009e083eaffdedf45b694e8acc277d9fbb7bcc062d8dd8d65d&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741799863226570/tile067.png?ex=6a28d569&is=6a2783e9&hm=0e5e55e0ccc656ea01901ffb878d909ad0a320f9092bea84625fa583dfdba4e5&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741800341504212/tile068.png?ex=6a28d569&is=6a2783e9&hm=1c0d30a1a297839eaa2741643b9bef3292766b722d900344853417be7e6a6add&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741800945352866/tile069.png?ex=6a28d569&is=6a2783e9&hm=906bc2c32e666edc9a3e2f1595f2448ed550f0f254005532af118de122ced860&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741801486549112/tile070.png?ex=6a28d569&is=6a2783e9&hm=cb1d69e30bd56e98ff86e8f93ad347d8896c1aa9326980253bc9f570bc5d1ef0&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741801994064033/tile071.png?ex=6a28d569&is=6a2783e9&hm=64097ffd9e9f47ba00322e811522af3dce47158ca08217d4d6d2ecacffb2856b&"
+      ]
+   },
+   "harder": {
+      "name": "Harder",
+      "emoji": "<:tdHarder:1163254547901325443>",
+      "spritesheet": {
+         "x": 80,
+         "y": 0,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 240
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741752878760086/tile060.png?ex=6a28d55d&is=6a2783dd&hm=8679fa4e117dfa41a36ad59d1cbb6a92991f2a8b2b60fcbc659ae7b2a6c20a17&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741753553784832/tile061.png?ex=6a28d55e&is=6a2783de&hm=27f017c2fefbd15c7fe5bc2f6f773f6cbec3a8f65c1e0ffb84fb491f25445d50&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741754216743052/tile062.png?ex=6a28d55e&is=6a2783de&hm=d829c00e50ced58ad8a89191adba304a5967dc2dd751dfecb6a6fb5fd3cb550c&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741754891763912/tile063.png?ex=6a28d55e&is=6a2783de&hm=ef5176d94efa6a5950673bdaf0e9b664093e0ea12822682f2c489f2af6fce99f&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741755520913478/tile064.png?ex=6a28d55e&is=6a2783de&hm=66d9f840c47b503f56e1da5c2a6313a20e71d90ce7a0728dab35d563204fd269&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741756233941125/tile065.png?ex=6a28d55e&is=6a2783de&hm=e68464ae4673ea2da43acb047e6ea7d2ac0a5a57cf4fc633913959c4fb659f97&"
+      ]
+   },
+   "veryhard": {
+      "name": "Very Hard",
+      "emoji": "<:tdVeryHard:1163254576879779880>",
+      "spritesheet": {
+         "x": 96,
+         "y": 0,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 216
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741732389589077/tile054.png?ex=6a28d558&is=6a2783d8&hm=1b556a7970e7267d6653420095b4a36d9ebdc4e03ea1d7a30ddf80b243f5833b&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741732842569960/tile055.png?ex=6a28d559&is=6a2783d9&hm=265f778e286ce627b0639398d5b1bf2e190bb747e4ef61667047a32fd9c917d9&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741733312073869/tile056.png?ex=6a28d559&is=6a2783d9&hm=6b2a616945a6a849165a6b011896f58126406a9a5c9faeea49d2d95a8bf73eb3&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741733769515108/tile057.png?ex=6a28d559&is=6a2783d9&hm=f2104a56a30ae14f5170962cd7f5da2120d5fbce9d77b60cf21e8faee62e6288&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741734264180958/tile058.png?ex=6a28d559&is=6a2783d9&hm=481b83c3dd8bae1964b7f4194306df83dd5c78e9fa79d5de07ae36880505b67a&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741734784532480/tile059.png?ex=6a28d559&is=6a2783d9&hm=8602cb08776eb00c2b8526d0b9d51e3bb873107eb27f43f62645746e2af698a7&"
+      ]
+   },
+   "tough": {
+      "name": "Tough",
+      "emoji": "<:tdTough:1163254620282421258>",
+      "spritesheet": {
+         "x": 112,
+         "y": 0,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 192
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741710130282536/tile048.png?ex=6a28d553&is=6a2783d3&hm=66905c4d8bb8af2460a7ce39a2b3d4c237242e36977ae045e72abc5162d74c0b&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741710583267448/tile049.png?ex=6a28d553&is=6a2783d3&hm=3c8efb9b21afb55e3374166b22063f79ecfb38ee7a4e5b049136c81de09d7b24&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741711044509896/tile050.png?ex=6a28d553&is=6a2783d3&hm=00dfc82f3b270fa614be8a3510bb0d630af8f516f3d35f442523d101ec97d59a&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741711581511842/tile051.png?ex=6a28d554&is=6a2783d4&hm=89c12f80939e91ee727d6aa19bac065f2006f0171c516a597bf2809e03d81dd0&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741712046948362/tile052.png?ex=6a28d554&is=6a2783d4&hm=ee53140da9a6d26e677f0a40cb27485fc1e0b581427a6bc261a07e0aeb3b4fa1&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741712554725596/tile053.png?ex=6a28d554&is=6a2783d4&hm=ec3b0bc95d75d9e2bc178767188132d411ec72203052abce959b936c329322c9&"
+      ]
+   },
+   "insane": {
+      "name": "Insane",
+      "emoji": "<:tdInsane:1194847657324191845>",
+      "spritesheet": {
+         "x": 128,
+         "y": 0,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 168
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741660780101672/tile042.png?ex=6a28d547&is=6a2783c7&hm=dd307ae0699ba4fce148a9d926275fdc028ca6cece949fb0b7b29294f8d1c471&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741661229023324/tile043.png?ex=6a28d547&is=6a2783c7&hm=90e67a05a4fa628bd3511fab6d07c888e5e8958dd52092f990abce6ad0cf57c1&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741661849784523/tile044.png?ex=6a28d548&is=6a2783c8&hm=16a0f2e190117453a519a083f7acc8e8ca64bdabbcebf50517fb5e24f9affed2&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741662407491736/tile045.png?ex=6a28d548&is=6a2783c8&hm=b8611e258fc3e7df56678db34811d077e7190c915a599b6c4b8bfdbc08c40e00&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741662839636038/tile046.png?ex=6a28d548&is=6a2783c8&hm=0baf8164a76676af0784b593834e3a25141fd54abc8b173b83dec62578801e6e&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741663493685349/tile047.png?ex=6a28d548&is=6a2783c8&hm=7267b268cfb63835c92297426404437bda4c8e3fb212f106b3dcb1eeca57d3c7&"
+      ]
+   },
+   "extreme": {
+      "name": "Extreme",
+      "emoji": "<:tdExtreme:1194847654186852496>",
+      "spritesheet": {
+         "x": 144,
+         "y": 0,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 144
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741618044207124/tile036.png?ex=6a28d53d&is=6a2783bd&hm=7c5904ae895acfc977db5f4c52c389d7c3030a8231f3572f8775cec7c92ae3ee&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741618665095250/tile037.png?ex=6a28d53d&is=6a2783bd&hm=b995758a98b16bf77a229d4dc25f828bf06cd4a026c58d512793e127ab824a28&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741619269210334/tile038.png?ex=6a28d53d&is=6a2783bd&hm=6c1c730f2e848b31c949440909a215f1816ef9cf534e2784db10e882badac458&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741620615319713/tile039.png?ex=6a28d53e&is=6a2783be&hm=362197b5258c5d67ba504d6e85124fa067a1160ea16af3e1b1211bcc141f3891&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741621479342120/tile040.png?ex=6a28d53e&is=6a2783be&hm=7639199a6909abf4b039efa9ac68131dcd99489713d2039ee961cc8d0d65f68e&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741622012022805/tile041.png?ex=6a28d53e&is=6a2783be&hm=75d833c5fd01a9b0ce326a47e7d688058e2a0fb1a375a6c20d05f69977a57f2c&"
+      ]
+   },
+   "easydemon": {
+      "name": "Easy Demon",
+      "emoji": "<:tdDemonEasy:1192674773952626728>",
+      "spritesheet": {
+         "x": 0,
+         "y": 16,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 120
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741586637393920/tile030.png?ex=6a28d536&is=6a2783b6&hm=cc0c626d2be3676acbbf4d54d2d89d5b805d538c7f3e41e55c7a8a7d57f32e90&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741587144900730/tile031.png?ex=6a28d536&is=6a2783b6&hm=70b9b64e6283d9f4842bbeb36aa6289775bb90cdda5eed146ec222bac0c9105d&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741587853869217/tile032.png?ex=6a28d536&is=6a2783b6&hm=c7c10abdeee24d6bb5fb45ca10dba693bd5302db38168777a76304b3d77bcb37&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741588306722918/tile033.png?ex=6a28d536&is=6a2783b6&hm=fc8984f2222f66e6df7048db57b7c778295762fb4aacb3f7d3c15cc3c8935de9&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741588772294656/tile034.png?ex=6a28d536&is=6a2783b6&hm=09dd3a3f0ace3f3b0048867dbfb8f1d4d18268c50bc7d437180883a3d4d855ea&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741589309296651/tile035.png?ex=6a28d536&is=6a2783b6&hm=0a90b8a657b87d87699091fa9c375a8990e86114eeb69eae7a6a9cd39cd2b29d&"
+      ]
+   },
+   "mediumdemon": {
+      "name": "Medium Demon",
+      "emoji": "<:tdDemonMedium:1191490584054091856>",
+      "spritesheet": {
+         "x": 16,
+         "y": 16,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 96
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741544568651926/tile024.png?ex=6a28d52c&is=6a2783ac&hm=7029417655e9397cc7c4399b1271d77f75f441f8ba2c2e96394e9d7451592731&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741545260716062/tile025.png?ex=6a28d52c&is=6a2783ac&hm=5f521e22f6815dde87a5071bcf67687333c846cdfa53bac67bb45295fcdc1b18&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741546120544308/tile026.png?ex=6a28d52c&is=6a2783ac&hm=0a254c6d3c7552d27147032d772546e366fe9a89d5f0d314b09e7d2aef3abd53&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741546820997240/tile027.png?ex=6a28d52c&is=6a2783ac&hm=1163923c06f15966112e362bffc23d1fed4525ce91fdad7e3d0d8d53ab54cfef&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741547374379029/tile028.png?ex=6a28d52c&is=6a2783ac&hm=fe36a5878a55fd7ed353fbff7bca4ee3d82e639979ebbaf205559722ed70bd3b&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741547923963954/tile029.png?ex=6a28d52c&is=6a2783ac&hm=e7f13e1d4a3755ccc02ded4732b57bdecd1a15c378073bcdfc335cec5d58bfec&"
+      ]
+   },
+   "demon": {
+      "name": "Hard Demon",
+      "emoji": "<:tdDemon:1191490585446580224>",
+      "spritesheet": {
+         "x": 32,
+         "y": 16,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 72
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741500914340000/tile018.png?ex=6a28d521&is=6a2783a1&hm=6fe9b5d94a7a43e4b2f71b5692b59eb3d77ed5aaa04a9b521bd85068ab19b0ba&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741501442818198/tile019.png?ex=6a28d521&is=6a2783a1&hm=7755e684702279040932012370a73a55404577b5f69153e60de5713127aa82c2&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741502512238743/tile020.png?ex=6a28d522&is=6a2783a2&hm=87443b1c3c71eba52b04d640bdcb257a04a8e435fb41a9e0c91ee947ac46fd12&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741503518998598/tile021.png?ex=6a28d522&is=6a2783a2&hm=fbdada2ec76643db0958d12dd8bf7119206c3f13f09054c78e7b804063bf8844&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741504299143250/tile022.png?ex=6a28d522&is=6a2783a2&hm=569ebd988d26a6caab36123d0a96ab7b66e117449d4e3366027fd9627f5e8c84&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741505351651430/tile023.png?ex=6a28d522&is=6a2783a2&hm=b4444823679f5c29d6f5277ada91df3db8f3b701a2816c6db10b89a72f869a1e&"
+      ]
+   },
+   "harddemon": {
+      "name": "Hard Demon",
+      "emoji": "<:tdDemon:1191490585446580224>",
+      "spritesheet": {
+         "x": 32,
+         "y": 16,
+         "height": 16,
+         "width": 16
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 72
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741500914340000/tile018.png?ex=6a28d521&is=6a2783a1&hm=6fe9b5d94a7a43e4b2f71b5692b59eb3d77ed5aaa04a9b521bd85068ab19b0ba&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741501442818198/tile019.png?ex=6a28d521&is=6a2783a1&hm=7755e684702279040932012370a73a55404577b5f69153e60de5713127aa82c2&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741502512238743/tile020.png?ex=6a28d522&is=6a2783a2&hm=87443b1c3c71eba52b04d640bdcb257a04a8e435fb41a9e0c91ee947ac46fd12&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741503518998598/tile021.png?ex=6a28d522&is=6a2783a2&hm=fbdada2ec76643db0958d12dd8bf7119206c3f13f09054c78e7b804063bf8844&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741504299143250/tile022.png?ex=6a28d522&is=6a2783a2&hm=569ebd988d26a6caab36123d0a96ab7b66e117449d4e3366027fd9627f5e8c84&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741505351651430/tile023.png?ex=6a28d522&is=6a2783a2&hm=b4444823679f5c29d6f5277ada91df3db8f3b701a2816c6db10b89a72f869a1e&"
+      ]
+   },
+   "insanedemon": {
+      "name": "Insane Demon",
+      "emoji": "<:tdDemonInsane:1191490587329826946>",
+      "spritesheet": {
+         "x": 48,
+         "y": 16,
+         "height": 16,
+         "width": 18
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 48
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741464503455884/tile012.png?ex=6a28d519&is=6a278399&hm=efbc28fa42156382d201f1cb4b3f0f68d49e3f52e043c76e0f34b67daf55697a&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741465103372469/tile013.png?ex=6a28d519&is=6a278399&hm=96bc6de64a72392ca91c10aad3878647c2957c9d2aee7e4d2687166fadf61466&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741465556226118/tile014.png?ex=6a28d519&is=6a278399&hm=f3bb60705531aedb14c6795169f947fa059898aa92e0efb6f0df0e8218287af8&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741466025984070/tile015.png?ex=6a28d519&is=6a278399&hm=90d4966d65fc06f2476ea2bcd2085cafce9a8b2a9841917dcf33a21dd8c86213&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741466558664774/tile016.png?ex=6a28d519&is=6a278399&hm=6d0564e05a74821d04e291fd2c4b09d7eeab302347b47589deec5204098cea72&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741467271692468/tile017.png?ex=6a28d519&is=6a278399&hm=180e8dfec8731f4231662764902e00cbbd7db69490ef2b10ee46b58229b2955d&"
+      ]
+   },
+   "extremedemon": {
+      "name": "Extreme Demon",
+      "emoji": "<:tdDemonExtreme:1192674854609113148>",
+      "spritesheet": {
+         "x": 66,
+         "y": 16,
+         "height": 16,
+         "width": 18
+      },
+      "ratesheet": {
+         "x": 0,
+         "y": 24
+      },
+      "image_url": [
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741432274288640/tile006.png?ex=6a28d511&is=6a278391&hm=1085d50fa2d1ff7dc4a6c97aead455bac307712d12f884de96d146d80af44b55&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741432740118658/tile007.png?ex=6a28d511&is=6a278391&hm=fc4121e301a79271770275c91dc70fdc86657e129ff2213d1c3eec55973fa561&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741433222332567/tile008.png?ex=6a28d511&is=6a278391&hm=3a0a786f663b56a3b36215639517aafe1d9b7a5ffe3e5db50f4a070996d0394e&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741433687773244/tile009.png?ex=6a28d511&is=6a278391&hm=fca445ebf298d17d0727f0bf55b9dbc3945e4678749b505f376d29e4012aeebf&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741434115854466/tile010.png?ex=6a28d511&is=6a278391&hm=cb238a2d3e7bc2bf5817de553ca076a35f89fa1ec378da9661721259b351e496&",
+         "https://cdn.discordapp.com/attachments/1512958930177753088/1513741434598064259/tile011.png?ex=6a28d511&is=6a278391&hm=66754f4a0a41745f7a11a8befc043229386e47c4341519c830f4e42eb3d4014f&"
+      ]
+   }
+}

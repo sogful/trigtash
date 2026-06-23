@@ -1,0 +1,38 @@
+{
+  "name": "gdexporter",
+  "version": "3.2.12",
+  "description": "A CLI exporter for GDevelop projects",
+  "engines": {
+    "node": ">= 14.0.0"
+  },
+  "types": "./types.d.ts",
+  "engineStrict": true,
+  "main": "./src/main.js",
+  "scripts": {
+    "start": "node ./bin/cli.js"
+  },
+  "bin": {
+    "gdexport": "./bin/cli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthuro555/gdexporter.git"
+  },
+  "keywords": [
+    "cli",
+    "ci",
+    "GDevelop",
+    "automation"
+  ],
+  "author": "Arthur Pacaud (arthuro555)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arthuro555/gdexporter/issues"
+  },
+  "homepage": "https://github.com/arthuro555/gdexporter#readme",
+  "dependencies": {
+    "gdcore-tools": "2.0.0-gd-v5.6.269-autobuild",
+    "jsdom": "^16.4.0",
+    "minimist": "^1.2.5"
+  }
+}

@@ -1,0 +1,2145 @@
+{
+   "cubes": [
+      {
+         "name": "Dot",
+         "spritesheet": {
+            "x": 0,
+            "y": 0
+         }
+      },
+      {
+         "name": "Face",
+         "spritesheet": {
+            "x": 16,
+            "y": 0
+         }
+      },
+      {
+         "name": "Cut",
+         "spritesheet": {
+            "x": 32,
+            "y": 0
+         }
+      },
+      {
+         "name": "Rob",
+         "spritesheet": {
+            "x": 48,
+            "y": 0
+         }
+      },
+      {
+         "name": "Teeth",
+         "spritesheet": {
+            "x": 64,
+            "y": 0
+         }
+      },
+      {
+         "name": "Sign",
+         "spritesheet": {
+            "x": 80,
+            "y": 0
+         }
+      },
+      {
+         "name": "Lock",
+         "spritesheet": {
+            "x": 96,
+            "y": 0
+         }
+      },
+      {
+         "name": "Score",
+         "spritesheet": {
+            "x": 112,
+            "y": 0
+         }
+      },
+      {
+         "name": "Bot",
+         "spritesheet": {
+            "x": 128,
+            "y": 0
+         }
+      },
+      {
+         "name": "Jaw",
+         "spritesheet": {
+            "x": 144,
+            "y": 0
+         }
+      },
+      {
+         "name": "Skull",
+         "spritesheet": {
+            "x": 160,
+            "y": 0
+         }
+      },
+      {
+         "name": "Rage",
+         "spritesheet": {
+            "x": 176,
+            "y": 0
+         }
+      },
+      {
+         "name": "Funny",
+         "spritesheet": {
+            "x": 0,
+            "y": 16
+         }
+      },
+      {
+         "name": "Mine",
+         "spritesheet": {
+            "x": 16,
+            "y": 16
+         }
+      },
+      {
+         "name": "Cross",
+         "spritesheet": {
+            "x": 32,
+            "y": 16
+         }
+      },
+      {
+         "name": "Safe",
+         "spritesheet": {
+            "x": 48,
+            "y": 16
+         }
+      },
+      {
+         "name": "Star",
+         "spritesheet": {
+            "x": 64,
+            "y": 16
+         }
+      },
+      {
+         "name": "Freak",
+         "spritesheet": {
+            "x": 80,
+            "y": 16
+         }
+      },
+      {
+         "name": "X",
+         "spritesheet": {
+            "x": 96,
+            "y": 16
+         }
+      },
+      {
+         "name": "Power",
+         "spritesheet": {
+            "x": 112,
+            "y": 16
+         }
+      },
+      {
+         "name": "Arrow",
+         "spritesheet": {
+            "x": 128,
+            "y": 16
+         }
+      },
+      {
+         "name": "Winner",
+         "spritesheet": {
+            "x": 144,
+            "y": 16
+         }
+      },
+      {
+         "name": "Board",
+         "spritesheet": {
+            "x": 160,
+            "y": 16
+         }
+      },
+      {
+         "name": "Dither",
+         "spritesheet": {
+            "x": 176,
+            "y": 16
+         }
+      },
+      {
+         "name": "Hero",
+         "spritesheet": {
+            "x": 0,
+            "y": 32
+         }
+      },
+      {
+         "name": "Bug",
+         "spritesheet": {
+            "x": 16,
+            "y": 32
+         }
+      },
+      {
+         "name": "Four",
+         "spritesheet": {
+            "x": 32,
+            "y": 32
+         }
+      },
+      {
+         "name": "Wild",
+         "spritesheet": {
+            "x": 48,
+            "y": 32
+         }
+      },
+      {
+         "name": "Space",
+         "spritesheet": {
+            "x": 64,
+            "y": 32
+         }
+      },
+      {
+         "name": "Snout",
+         "spritesheet": {
+            "x": 80,
+            "y": 32
+         }
+      },
+      {
+         "name": "Sun",
+         "spritesheet": {
+            "x": 96,
+            "y": 32
+         }
+      },
+      {
+         "name": "Venus",
+         "spritesheet": {
+            "x": 112,
+            "y": 32
+         }
+      },
+      {
+         "name": "Earth",
+         "spritesheet": {
+            "x": 128,
+            "y": 32
+         }
+      },
+      {
+         "name": "Mars",
+         "spritesheet": {
+            "x": 144,
+            "y": 32
+         }
+      },
+      {
+         "name": "Shock",
+         "spritesheet": {
+            "x": 160,
+            "y": 32
+         }
+      },
+      {
+         "name": "Gate",
+         "spritesheet": {
+            "x": 176,
+            "y": 32
+         }
+      },
+      {
+         "name": "Flare",
+         "spritesheet": {
+            "x": 0,
+            "y": 48
+         }
+      },
+      {
+         "name": "Fury",
+         "spritesheet": {
+            "x": 16,
+            "y": 48
+         }
+      },
+      {
+         "name": "Tie",
+         "spritesheet": {
+            "x": 32,
+            "y": 48
+         }
+      },
+      {
+         "name": "Child",
+         "spritesheet": {
+            "x": 48,
+            "y": 48
+         }
+      },
+      {
+         "name": "Alan",
+         "spritesheet": {
+            "x": 64,
+            "y": 48
+         }
+      },
+      {
+         "name": "Creator",
+         "spritesheet": {
+            "x": 80,
+            "y": 48
+         }
+      },
+      {
+         "name": "Love",
+         "spritesheet": {
+            "x": 96,
+            "y": 48
+         }
+      },
+      {
+         "name": "Pyramid",
+         "spritesheet": {
+            "x": 112,
+            "y": 48
+         }
+      },
+      {
+         "name": "Comma",
+         "spritesheet": {
+            "x": 128,
+            "y": 48
+         }
+      },
+      {
+         "name": "Villian",
+         "spritesheet": {
+            "x": 144,
+            "y": 48
+         }
+      },
+      {
+         "name": "Alien",
+         "spritesheet": {
+            "x": 160,
+            "y": 48
+         }
+      },
+      {
+         "name": "Eye",
+         "spritesheet": {
+            "x": 176,
+            "y": 48
+         }
+      },
+      {
+         "name": "Kitty",
+         "spritesheet": {
+            "x": 0,
+            "y": 64
+         }
+      },
+      {
+         "name": "Swirl",
+         "spritesheet": {
+            "x": 16,
+            "y": 64
+         }
+      },
+      {
+         "name": "Sight",
+         "credit": "Perspectivity",
+         "spritesheet": {
+            "x": 32,
+            "y": 64
+         }
+      },
+      {
+         "name": "World",
+         "credit": "Perspectivity",
+         "spritesheet": {
+            "x": 48,
+            "y": 64
+         }
+      },
+      {
+         "name": "Dice",
+         "credit": "Perspectivity",
+         "spritesheet": {
+            "x": 64,
+            "y": 64
+         }
+      },
+      {
+         "name": "Muck",
+         "credit": "Jonkl",
+         "spritesheet": {
+            "x": 80,
+            "y": 64
+         }
+      },
+      {
+         "name": "Beam",
+         "spritesheet": {
+            "x": 96,
+            "y": 64
+         }
+      },
+      {
+         "name": "Tony",
+         "spritesheet": {
+            "x": 112,
+            "y": 64
+         }
+      },
+      {
+         "name": "Vertex",
+         "spritesheet": {
+            "x": 128,
+            "y": 64
+         }
+      },
+      {
+         "name": "Bunny",
+         "spritesheet": {
+            "x": 144,
+            "y": 64
+         }
+      },
+      {
+         "name": "Frog",
+         "spritesheet": {
+            "x": 160,
+            "y": 64
+         }
+      },
+      {
+         "name": "Knight",
+         "spritesheet": {
+            "x": 176,
+            "y": 64
+         }
+      },
+      {
+         "name": "Mushroom",
+         "spritesheet": {
+            "x": 0,
+            "y": 80
+         }
+      },
+      {
+         "name": "Buckaneer",
+         "spritesheet": {
+            "x": 16,
+            "y": 80
+         }
+      },
+      {
+         "name": "Under",
+         "spritesheet": {
+            "x": 32,
+            "y": 80
+         }
+      },
+      {
+         "name": "Maze",
+         "spritesheet": {
+            "x": 48,
+            "y": 80
+         }
+      },
+      {
+         "name": "Monster",
+         "spritesheet": {
+            "x": 64,
+            "y": 80
+         }
+      },
+      {
+         "name": "Coward",
+         "spritesheet": {
+            "x": 80,
+            "y": 80
+         }
+      },
+      {
+         "name": "Origami",
+         "spritesheet": {
+            "x": 96,
+            "y": 80
+         }
+      },
+      {
+         "name": "Snail",
+         "spritesheet": {
+            "x": 112,
+            "y": 80
+         }
+      },
+      {
+         "name": "Itch",
+         "spritesheet": {
+            "x": 128,
+            "y": 80
+         }
+      },
+      {
+         "name": "Technic",
+         "spritesheet": {
+            "x": 144,
+            "y": 80
+         }
+      },
+      {
+         "name": "Ninja",
+         "spritesheet": {
+            "x": 160,
+            "y": 80
+         }
+      },
+      {
+         "name": "Pinwheel",
+         "spritesheet": {
+            "x": 176,
+            "y": 80
+         }
+      },
+      {
+         "name": "Demon",
+         "spritesheet": {
+            "x": 0,
+            "y": 96
+         }
+      },
+      {
+         "name": "Groover",
+         "spritesheet": {
+            "x": 16,
+            "y": 96
+         }
+      },
+      {
+         "name": "Psychic",
+         "spritesheet": {
+            "x": 32,
+            "y": 96
+         }
+      },
+      {
+         "name": "Zombie",
+         "spritesheet": {
+            "x": 48,
+            "y": 96
+         }
+      },
+      {
+         "name": "Swag",
+         "spritesheet": {
+            "x": 64,
+            "y": 96
+         }
+      },
+      {
+         "name": "Window",
+         "spritesheet": {
+            "x": 80,
+            "y": 96
+         }
+      },
+      {
+         "name": "Radio",
+         "spritesheet": {
+            "x": 96,
+            "y": 96
+         }
+      },
+      {
+         "name": "Grin",
+         "credit": "Dest",
+         "spritesheet": {
+            "x": 112,
+            "y": 96
+         }
+      },
+      {
+         "name": "Friend",
+         "spritesheet": {
+            "x": 128,
+            "y": 96
+         }
+      },
+      {
+         "name": "Guard",
+         "spritesheet": {
+            "x": 144,
+            "y": 96
+         }
+      },
+      {
+         "name": "Flushed",
+         "spritesheet": {
+            "x": 160,
+            "y": 96
+         }
+      },
+      {
+         "name": "Shy",
+         "spritesheet": {
+            "x": 176,
+            "y": 96
+         }
+      },
+      {
+         "name": "Stone",
+         "spritesheet": {
+            "x": 0,
+            "y": 112
+         }
+      },
+      {
+         "name": "Flipper",
+         "spritesheet": {
+            "x": 16,
+            "y": 112
+         }
+      },
+      {
+         "name": "Lifter",
+         "spritesheet": {
+            "x": 32,
+            "y": 112
+         }
+      },
+      {
+         "name": "Dual",
+         "credit": "Perspectivity",
+         "spritesheet": {
+            "x": 48,
+            "y": 112
+         }
+      },
+      {
+         "name": "Chomp",
+         "credit": "suumycrafty",
+         "spritesheet": {
+            "x": 64,
+            "y": 112
+         }
+      },
+      {
+         "name": "Cute",
+         "credit": "blurple_galaxy",
+         "spritesheet": {
+            "x": 80,
+            "y": 112
+         }
+      },
+      {
+         "name": "Zig",
+         "credit": "blurple_galaxy",
+         "spritesheet": {
+            "x": 96,
+            "y": 112
+         }
+      },
+      {
+         "name": "Bipolar",
+         "credit": "blurple_galaxy",
+         "spritesheet": {
+            "x": 112,
+            "y": 112
+         }
+      },
+      {
+         "name": "Anger",
+         "spritesheet": {
+            "x": 128,
+            "y": 112
+         }
+      },
+      {
+         "name": "Force",
+         "credit": "blurple_galaxy",
+         "spritesheet": {
+            "x": 144,
+            "y": 112
+         }
+      },
+      {
+         "name": "Squire",
+         "spritesheet": {
+            "x": 160,
+            "y": 112
+         }
+      },
+      {
+         "name": "Dead",
+         "spritesheet": {
+            "x": 176,
+            "y": 112
+         }
+      },
+      {
+         "name": "Jack",
+         "spritesheet": {
+            "x": 0,
+            "y": 128
+         }
+      },
+      {
+         "name": "Samurai",
+         "spritesheet": {
+            "x": 16,
+            "y": 128
+         }
+      },
+      {
+         "name": "King",
+         "spritesheet": {
+            "x": 32,
+            "y": 128
+         }
+      },
+      {
+         "name": "Fist",
+         "spritesheet": {
+            "x": 48,
+            "y": 128
+         }
+      },
+      {
+         "name": "Brain",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 64,
+            "y": 128
+         }
+      },
+      {
+         "name": "Game",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 80,
+            "y": 128
+         }
+      },
+      {
+         "name": "Mask",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 96,
+            "y": 128
+         }
+      },
+      {
+         "name": "Helix",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 112,
+            "y": 128
+         }
+      },
+      {
+         "name": "Bone",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 128,
+            "y": 128
+         }
+      },
+      {
+         "name": "Chat",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 144,
+            "y": 128
+         }
+      },
+      {
+         "name": "Derp",
+         "credit": "suumycrafty",
+         "spritesheet": {
+            "x": 160,
+            "y": 128
+         }
+      },
+      {
+         "name": "Shop",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 176,
+            "y": 128
+         }
+      },
+      {
+         "name": "Wreck",
+         "credit": "retrocore_guy",
+         "spritesheet": {
+            "x": 0,
+            "y": 144
+         }
+      },
+      {
+         "name": "Bite",
+         "credit": "Dagameron",
+         "spritesheet": {
+            "x": 16,
+            "y": 144
+         }
+      },
+      {
+         "name": "Clamp",
+         "credit": "DrKidSpidey",
+         "spritesheet": {
+            "x": 32,
+            "y": 144
+         }
+      },
+      {
+         "name": "Scream",
+         "spritesheet": {
+            "x": 48,
+            "y": 144
+         }
+      },
+      {
+         "name": "Doggie",
+         "spritesheet": {
+            "x": 64,
+            "y": 144
+         }
+      },
+      {
+         "name": "Ogre",
+         "spritesheet": {
+            "x": 80,
+            "y": 144
+         }
+      },
+      {
+         "name": "Plug",
+         "spritesheet": {
+            "x": 96,
+            "y": 144
+         }
+      },
+      {
+         "name": "Explode",
+         "credit": "AliMicro",
+         "spritesheet": {
+            "x": 112,
+            "y": 144
+         }
+      },
+      {
+         "name": "Burger",
+         "credit": "AliMicro",
+         "spritesheet": {
+            "x": 128,
+            "y": 144
+         }
+      },
+      {
+         "name": "Owo",
+         "credit": "AliMicro",
+         "spritesheet": {
+            "x": 144,
+            "y": 144
+         }
+      },
+      {
+         "name": "Corny",
+         "credit": "Corner",
+         "spritesheet": {
+            "x": 160,
+            "y": 144
+         }
+      },
+      {
+         "name": "Jigsaw",
+         "spritesheet": {
+            "x": 176,
+            "y": 144
+         }
+      },
+      {
+         "name": "Cycle",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 0,
+            "y": 160
+         }
+      },
+      {
+         "name": "Plex",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 16,
+            "y": 160
+         }
+      },
+      {
+         "name": "Fox",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 32,
+            "y": 160
+         }
+      },
+      {
+         "name": "Ghoul",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 48,
+            "y": 160
+         }
+      },
+      {
+         "name": "Reptile",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 64,
+            "y": 160
+         }
+      },
+      {
+         "name": "Side",
+         "spritesheet": {
+            "x": 80,
+            "y": 160
+         }
+      },
+      {
+         "name": "Develop",
+         "spritesheet": {
+            "x": 96,
+            "y": 160
+         }
+      },
+      {
+         "name": "Smirk",
+         "spritesheet": {
+            "x": 128,
+            "y": 160
+         }
+      },
+      {
+         "name": "Machine",
+         "spritesheet": {
+            "x": 144,
+            "y": 160
+         }
+      },
+      {
+         "name": "Fanart",
+         "spritesheet": {
+            "x": 160,
+            "y": 160
+         }
+      },
+      {
+         "name": "Smug",
+         "spritesheet": {
+            "x": 32,
+            "y": 176
+         }
+      },
+      {
+         "name": "Masked",
+         "spritesheet": {
+            "x": 48,
+            "y": 176
+         }
+      },
+      {
+         "name": "Forward",
+         "spritesheet": {
+            "x": 80,
+            "y": 176
+         }
+      },
+      {
+         "name": "Awakening",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 112,
+            "y": 176
+         }
+      },
+      {
+         "name": "Twitch",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 128,
+            "y": 176
+         }
+      },
+      {
+         "name": "Pan",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 144,
+            "y": 176
+         }
+      },
+      {
+         "name": "Human",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 160,
+            "y": 176
+         }
+      },
+      {
+         "name": "Piano",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 176,
+            "y": 176
+         }
+      },
+      {
+         "name": "Omni",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 0,
+            "y": 192
+         }
+      },
+      {
+         "name": "Knight",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 16,
+            "y": 192
+         }
+      },
+      {
+         "name": "Boomling",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 32,
+            "y": 192
+         }
+      },
+      {
+         "name": "Static",
+         "spritesheet": {
+            "x": 48,
+            "y": 192
+         }
+      },
+      {
+         "name": "Reddit",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 64,
+            "y": 192
+         }
+      },
+      {
+         "name": "Sodaguy",
+         "credit": "SodaSkull",
+         "spritesheet": {
+            "x": 80,
+            "y": 192
+         }
+      },
+      {
+         "name": "Retro",
+         "credit": "SodaSkull",
+         "spritesheet": {
+            "x": 96,
+            "y": 192
+         }
+      },
+      {
+         "name": "Dilate",
+         "spritesheet": {
+            "x": 176,
+            "y": 160
+         }
+      },
+      {
+         "name": "Cripplert",
+         "credit": "Dest",
+         "spritesheet": {
+            "x": 112,
+            "y": 192
+         }
+      },
+      {
+         "name": "Nitroling",
+         "spritesheet": {
+            "x": 128,
+            "y": 192
+         }
+      },
+      {
+         "name": "Grimace",
+         "spritesheet": {
+            "x": 144,
+            "y": 192
+         }
+      },
+      {
+         "name": "Lick",
+         "spritesheet": {
+            "x": 160,
+            "y": 192
+         }
+      },
+      {
+         "name": "Hertz",
+         "spritesheet": {
+            "x": 176,
+            "y": 192
+         }
+      },
+      {
+         "name": "Pirate",
+         "spritesheet": {
+            "x": 0,
+            "y": 208
+         }
+      },
+      {
+         "name": "Suum",
+         "spritesheet": {
+            "x": 16,
+            "y": 208
+         }
+      },
+      {
+         "name": "Squid",
+         "credit": "SodaSkull",
+         "spritesheet": {
+            "x": 48,
+            "y": 208
+         }
+      },
+      {
+         "name": "Placer",
+         "credit": "Mitsos",
+         "spritesheet": {
+            "x": 64,
+            "y": 208
+         }
+      },
+      {
+         "name": "Control",
+         "spritesheet": {
+            "x": 80,
+            "y": 208
+         }
+      },
+      {
+         "name": "Logic",
+         "spritesheet": {
+            "x": 96,
+            "y": 208
+         }
+      },
+      {
+         "name": "North",
+         "spritesheet": {
+            "x": 112,
+            "y": 208
+         }
+      },
+      {
+         "name": "Gradient",
+         "spritesheet": {
+            "x": 128,
+            "y": 208
+         }
+      },
+      {
+         "name": "Majislop",
+         "spritesheet": {
+            "x": 144,
+            "y": 208
+         }
+      },
+      {
+         "name": "Floggy",
+         "credit": "SONGDarkHorse",
+         "spritesheet": {
+            "x": 160,
+            "y": 208
+         }
+      },
+      {
+         "name": "Octo",
+         "credit": "SONGDarkHorse",
+         "spritesheet": {
+            "x": 176,
+            "y": 208
+         }
+      }
+   ],
+   "ships": [
+      {
+         "name": "Air",
+         "spritesheet": {
+            "x": 0,
+            "y": 0
+         }
+      },
+      {
+         "name": "Rocket",
+         "spritesheet": {
+            "x": 25,
+            "y": 0
+         }
+      },
+      {
+         "name": "Sharp",
+         "spritesheet": {
+            "x": 50,
+            "y": 0
+         }
+      },
+      {
+         "name": "Galaxy",
+         "spritesheet": {
+            "x": 75,
+            "y": 0
+         }
+      },
+      {
+         "name": "Poison",
+         "spritesheet": {
+            "x": 100,
+            "y": 0
+         }
+      },
+      {
+         "name": "Bang",
+         "spritesheet": {
+            "x": 125,
+            "y": 0
+         }
+      },
+      {
+         "name": "Seahorse",
+         "spritesheet": {
+            "x": 150,
+            "y": 0
+         }
+      },
+      {
+         "name": "Frost",
+         "spritesheet": {
+            "x": 175,
+            "y": 0
+         }
+      },
+      {
+         "name": "Dino",
+         "spritesheet": {
+            "x": 0,
+            "y": 36
+         }
+      },
+      {
+         "name": "Bird",
+         "spritesheet": {
+            "x": 25,
+            "y": 36
+         }
+      },
+      {
+         "name": "Firework",
+         "spritesheet": {
+            "x": 50,
+            "y": 36
+         }
+      },
+      {
+         "name": "Ray",
+         "spritesheet": {
+            "x": 75,
+            "y": 36
+         }
+      },
+      {
+         "name": "Shark",
+         "spritesheet": {
+            "x": 100,
+            "y": 36
+         }
+      },
+      {
+         "name": "Arrow",
+         "spritesheet": {
+            "x": 125,
+            "y": 36
+         }
+      },
+      {
+         "name": "Striker",
+         "spritesheet": {
+            "x": 150,
+            "y": 36
+         }
+      },
+      {
+         "name": "Cyber",
+         "spritesheet": {
+            "x": 175,
+            "y": 36
+         }
+      },
+      {
+         "name": "Airplane",
+         "spritesheet": {
+            "x": 0,
+            "y": 72
+         }
+      },
+      {
+         "name": "Mouth",
+         "credit": "Tequilla",
+         "spritesheet": {
+            "x": 25,
+            "y": 72
+         }
+      },
+      {
+         "name": "Superhero",
+         "spritesheet": {
+            "x": 50,
+            "y": 72
+         }
+      },
+      {
+         "name": "Brick",
+         "credit": "Dest",
+         "spritesheet": {
+            "x": 75,
+            "y": 72
+         }
+      },
+      {
+         "name": "Queen",
+         "spritesheet": {
+            "x": 100,
+            "y": 72
+         }
+      },
+      {
+         "name": "Stagger",
+         "spritesheet": {
+            "x": 125,
+            "y": 72
+         }
+      },
+      {
+         "name": "Car",
+         "spritesheet": {
+            "x": 150,
+            "y": 72
+         }
+      },
+      {
+         "name": "Hoverboard",
+         "spritesheet": {
+            "x": 175,
+            "y": 72
+         }
+      },
+      {
+         "name": "Probe",
+         "spritesheet": {
+            "x": 0,
+            "y": 108
+         }
+      },
+      {
+         "name": "Starship",
+         "spritesheet": {
+            "x": 25,
+            "y": 108
+         }
+      },
+      {
+         "name": "Chain",
+         "spritesheet": {
+            "x": 50,
+            "y": 108
+         }
+      },
+      {
+         "name": "Knife",
+         "spritesheet": {
+            "x": 75,
+            "y": 108
+         }
+      },
+      {
+         "name": "Guitar",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 100,
+            "y": 108
+         }
+      },
+      {
+         "name": "Punch",
+         "spritesheet": {
+            "x": 125,
+            "y": 108
+         }
+      },
+      {
+         "name": "Blade",
+         "spritesheet": {
+            "x": 150,
+            "y": 108
+         }
+      },
+      {
+         "name": "Pea",
+         "spritesheet": {
+            "x": 175,
+            "y": 108
+         }
+      },
+      {
+         "name": "Crayon",
+         "spritesheet": {
+            "x": 25,
+            "y": 144
+         }
+      },
+      {
+         "name": "Dino",
+         "spritesheet": {
+            "x": 50,
+            "y": 144
+         }
+      },
+      {
+         "name": "Veggie",
+         "spritesheet": {
+            "x": 75,
+            "y": 144
+         }
+      },
+      {
+         "name": "Sword",
+         "spritesheet": {
+            "x": 100,
+            "y": 144
+         }
+      },
+      {
+         "name": "Submarine",
+         "spritesheet": {
+            "x": 125,
+            "y": 144
+         }
+      },
+      {
+         "name": "Scorpion",
+         "spritesheet": {
+            "x": 0,
+            "y": 180
+         }
+      },
+      {
+         "name": "Axolotl",
+         "spritesheet": {
+            "x": 50,
+            "y": 180
+         }
+      },
+      {
+         "name": "Wrapped",
+         "spritesheet": {
+            "x": 100,
+            "y": 180
+         }
+      },
+      {
+         "name": "Scooter",
+         "spritesheet": {
+            "x": 125,
+            "y": 180
+         }
+      },
+      {
+         "name": "Capybara",
+         "spritesheet": {
+            "x": 150,
+            "y": 180
+         }
+      },
+      {
+         "name": "Derivative",
+         "spritesheet": {
+            "x": 175,
+            "y": 180
+         }
+      }
+   ],
+   "balls": [
+      {
+         "name": "Blade",
+         "spritesheet": {
+            "x": 0,
+            "y": 0
+         }
+      },
+      {
+         "name": "Razor",
+         "spritesheet": {
+            "x": 16,
+            "y": 0
+         }
+      },
+      {
+         "name": "Circle",
+         "spritesheet": {
+            "x": 32,
+            "y": 0
+         }
+      },
+      {
+         "name": "Bubble",
+         "spritesheet": {
+            "x": 48,
+            "y": 0
+         }
+      },
+      {
+         "name": "Cog",
+         "spritesheet": {
+            "x": 64,
+            "y": 0
+         }
+      },
+      {
+         "name": "Circus",
+         "spritesheet": {
+            "x": 80,
+            "y": 0
+         }
+      },
+      {
+         "name": "Shuriken",
+         "spritesheet": {
+            "x": 96,
+            "y": 0
+         }
+      },
+      {
+         "name": "Oswald",
+         "spritesheet": {
+            "x": 112,
+            "y": 0
+         }
+      },
+      {
+         "name": "Wheel",
+         "spritesheet": {
+            "x": 128,
+            "y": 0
+         }
+      },
+      {
+         "name": "Shuffle",
+         "spritesheet": {
+            "x": 144,
+            "y": 0
+         }
+      },
+      {
+         "name": "Orb",
+         "spritesheet": {
+            "x": 0,
+            "y": 16
+         }
+      },
+      {
+         "name": "Lightning",
+         "spritesheet": {
+            "x": 16,
+            "y": 16
+         }
+      },
+      {
+         "name": "Cutter",
+         "spritesheet": {
+            "x": 32,
+            "y": 16
+         }
+      },
+      {
+         "name": "Zen",
+         "spritesheet": {
+            "x": 48,
+            "y": 16
+         }
+      },
+      {
+         "name": "Hedgehog",
+         "credit": "xxerojj",
+         "spritesheet": {
+            "x": 64,
+            "y": 16
+         }
+      },
+      {
+         "name": "Gratitude",
+         "spritesheet": {
+            "x": 80,
+            "y": 16
+         }
+      },
+      {
+         "name": "Tron",
+         "credit": "Perspectivity",
+         "spritesheet": {
+            "x": 96,
+            "y": 16
+         }
+      },
+      {
+         "name": "Squiggle",
+         "credit": "DrawnDreary",
+         "spritesheet": {
+            "x": 112,
+            "y": 16
+         }
+      },
+      {
+         "name": "Maw",
+         "credit": "DrawnDreary",
+         "spritesheet": {
+            "x": 128,
+            "y": 16
+         }
+      },
+      {
+         "name": "Shield",
+         "credit": "DrawnDreary",
+         "spritesheet": {
+            "x": 144,
+            "y": 16
+         }
+      },
+      {
+         "name": "Link",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 0,
+            "y": 32
+         }
+      },
+      {
+         "name": "Peep",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 16,
+            "y": 32
+         }
+      },
+      {
+         "name": "Gear",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 32,
+            "y": 32
+         }
+      },
+      {
+         "name": "Quad",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 48,
+            "y": 32
+         }
+      },
+      {
+         "name": "Blend",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 64,
+            "y": 32
+         }
+      },
+      {
+         "name": "Laugh",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 80,
+            "y": 32
+         }
+      },
+      {
+         "name": "Double",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 96,
+            "y": 32
+         }
+      },
+      {
+         "name": "Cool",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 112,
+            "y": 32
+         }
+      },
+      {
+         "name": "Rattle",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 128,
+            "y": 32
+         }
+      },
+      {
+         "name": "Normal",
+         "spritesheet": {
+            "x": 144,
+            "y": 32
+         }
+      },
+      {
+         "name": "Cube",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 0,
+            "y": 48
+         }
+      },
+      {
+         "name": "Beach",
+         "spritesheet": {
+            "x": 16,
+            "y": 48
+         }
+      },
+      {
+         "name": "Talk",
+         "spritesheet": {
+            "x": 32,
+            "y": 48
+         }
+      },
+      {
+         "name": "Smile",
+         "spritesheet": {
+            "x": 48,
+            "y": 48
+         }
+      },
+      {
+         "name": "Connect",
+         "spritesheet": {
+            "x": 64,
+            "y": 48
+         }
+      },
+      {
+         "name": "Disc",
+         "credit": "SodaSkull",
+         "spritesheet": {
+            "x": 80,
+            "y": 48
+         }
+      }
+   ],
+   "ufos": [
+      {
+         "name": "Saucer",
+         "spritesheet": {
+            "x": 0,
+            "y": 0
+         }
+      },
+      {
+         "name": "Genesis",
+         "spritesheet": {
+            "x": 18,
+            "y": 0
+         }
+      },
+      {
+         "name": "Mech",
+         "spritesheet": {
+            "x": 36,
+            "y": 0
+         }
+      },
+      {
+         "name": "Vega",
+         "spritesheet": {
+            "x": 54,
+            "y": 0
+         }
+      },
+      {
+         "name": "Grass",
+         "credit": "Tequilla",
+         "spritesheet": {
+            "x": 72,
+            "y": 0
+         }
+      },
+      {
+         "name": "Cloud",
+         "spritesheet": {
+            "x": 90,
+            "y": 0
+         }
+      },
+      {
+         "name": "Scout",
+         "spritesheet": {
+            "x": 108,
+            "y": 0
+         }
+      },
+      {
+         "name": "Tighty",
+         "spritesheet": {
+            "x": 126,
+            "y": 0
+         }
+      },
+      {
+         "name": "Death",
+         "credit": "suumycrafty",
+         "spritesheet": {
+            "x": 144,
+            "y": 0
+         }
+      },
+      {
+         "name": "Virtual",
+         "credit": "suumycrafty",
+         "spritesheet": {
+            "x": 162,
+            "y": 0
+         }
+      },
+      {
+         "name": "Martian",
+         "spritesheet": {
+            "x": 0,
+            "y": 18
+         }
+      },
+      {
+         "name": "Fighter",
+         "spritesheet": {
+            "x": 18,
+            "y": 18
+         }
+      },
+      {
+         "name": "Warp",
+         "spritesheet": {
+            "x": 36,
+            "y": 18
+         }
+      },
+      {
+         "name": "Viking",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 54,
+            "y": 18
+         }
+      },
+      {
+         "name": "Crown",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 72,
+            "y": 18
+         }
+      },
+      {
+         "name": "Bee",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 90,
+            "y": 18
+         }
+      },
+      {
+         "name": "Moth",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 108,
+            "y": 18
+         }
+      },
+      {
+         "name": "Tank",
+         "spritesheet": {
+            "x": 126,
+            "y": 18
+         }
+      },
+      {
+         "name": "Hover",
+         "spritesheet": {
+            "x": 144,
+            "y": 18
+         }
+      },
+      {
+         "name": "Drone",
+         "spritesheet": {
+            "x": 162,
+            "y": 18
+         }
+      },
+      {
+         "name": "Shine",
+         "spritesheet": {
+            "x": 0,
+            "y": 36
+         }
+      },
+      {
+         "name": "Maji",
+         "spritesheet": {
+            "x": 18,
+            "y": 36
+         }
+      },
+      {
+         "name": "Future",
+         "spritesheet": {
+            "x": 36,
+            "y": 36
+         }
+      },
+      {
+         "name": "Glitter",
+         "spritesheet": {
+            "x": 54,
+            "y": 36
+         }
+      }
+   ],
+   "waves": [
+      {
+         "name": "Arrow",
+         "spritesheet": {
+            "x": 0,
+            "y": 0
+         }
+      },
+      {
+         "name": "Cone",
+         "spritesheet": {
+            "x": 12,
+            "y": 0
+         }
+      },
+      {
+         "name": "Missile",
+         "spritesheet": {
+            "x": 24,
+            "y": 0
+         }
+      },
+      {
+         "name": "Cursor",
+         "spritesheet": {
+            "x": 36,
+            "y": 0
+         }
+      },
+      {
+         "name": "Tree",
+         "spritesheet": {
+            "x": 48,
+            "y": 0
+         }
+      },
+      {
+         "name": "Bottle",
+         "spritesheet": {
+            "x": 60,
+            "y": 0
+         }
+      },
+      {
+         "name": "Stellar",
+         "spritesheet": {
+            "x": 72,
+            "y": 0
+         }
+      },
+      {
+         "name": "Sword",
+         "spritesheet": {
+            "x": 84,
+            "y": 0
+         }
+      },
+      {
+         "name": "Gem",
+         "spritesheet": {
+            "x": 0,
+            "y": 14
+         }
+      },
+      {
+         "name": "Dart",
+         "spritesheet": {
+            "x": 12,
+            "y": 14
+         }
+      },
+      {
+         "name": "Rad",
+         "spritesheet": {
+            "x": 24,
+            "y": 14
+         }
+      },
+      {
+         "name": "Plug",
+         "spritesheet": {
+            "x": 36,
+            "y": 14
+         }
+      },
+      {
+         "name": "Magnet",
+         "spritesheet": {
+            "x": 48,
+            "y": 14
+         }
+      },
+      {
+         "name": "Galaga",
+         "spritesheet": {
+            "x": 60,
+            "y": 14
+         }
+      },
+      {
+         "name": "Pizza",
+         "spritesheet": {
+            "x": 72,
+            "y": 14
+         }
+      },
+      {
+         "name": "Combat",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 84,
+            "y": 14
+         }
+      },
+      {
+         "name": "Fold",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 0,
+            "y": 28
+         }
+      },
+      {
+         "name": "Twist",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 12,
+            "y": 28
+         }
+      },
+      {
+         "name": "William",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 24,
+            "y": 28
+         }
+      },
+      {
+         "name": "Wavey",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 36,
+            "y": 28
+         }
+      },
+      {
+         "name": "Bolt",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 48,
+            "y": 28
+         }
+      },
+      {
+         "name": "Triforce",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 60,
+            "y": 28
+         }
+      },
+      {
+         "name": "Tracer",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 72,
+            "y": 28
+         }
+      },
+      {
+         "name": "Carrot",
+         "credit": "Muril2k10",
+         "spritesheet": {
+            "x": 84,
+            "y": 28
+         }
+      },
+      {
+         "name": "Stripe",
+         "spritesheet": {
+            "x": 0,
+            "y": 42
+         }
+      },
+      {
+         "name": "Gnaw",
+         "spritesheet": {
+            "x": 24,
+            "y": 42
+         }
+      },
+      {
+         "name": "Wrap",
+         "spritesheet": {
+            "x": 36,
+            "y": 42
+         }
+      },
+      {
+         "name": "Evil",
+         "spritesheet": {
+            "x": 48,
+            "y": 42
+         }
+      }
+   ]
+}

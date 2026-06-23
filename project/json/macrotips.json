@@ -1,0 +1,14 @@
+{
+  "pauseresume": "freeze/unfreeze the level",
+  "stepb": "unadvance one frame (,)",
+  "stepf": "advance one frame (.)",
+  "slower": "slow the game down",
+  "speed": "reset speed to normal",
+  "faster": "speed the game up",
+  "hitbox": "toggle hitboxes",
+  "exportm": "save the recorded macro as a file",
+  "importm": "load a macro from a file",
+  "video": "render the macro as a video",
+  "playmacro": "replay the recorded macro",
+  "practice": "toggle practice mode"
+}

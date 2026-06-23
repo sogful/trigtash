@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Trigonometry Dash",
+  "version": "1.5.2",
+  "identifier": "com.geomangle.trigonometrydash",
+  "build": {
+    "frontendDist": "../frontend-stub"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": ["icons/icon.ico"],
+    "resources": []
+  }
+}

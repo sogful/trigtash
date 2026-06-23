@@ -1,0 +1,34 @@
+[package]
+name = "trigonometry-dash"
+version = "1.5.2"
+edition = "2021"
+rust-version = "1.77"
+
+[lib]
+name = "tgd_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+# devtools feature enables the webview inspector (F12 / right-click) in release
+# builds too, so in-game console logs are visible for debugging.
+tauri = { version = "2", features = ["devtools"] }
+tauri-plugin-shell = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-dialog = "2"
+serde_json = "1"
+arboard = "3"
+
+# fast iteration. lto + codegen-units=1 (size opts) forced a ~10+ min whole-program
+# relink on EVERY rust change for negligible runtime gain on a webview shell, so
+# they're off. with assets external, game-only changes don't recompile rust at all;
+# only lib.rs edits do, and those are now ~minutes, not 15. for a final size-min ship
+# build, re-add:  lto = true  and  codegen-units = 1.
+[profile.release]
+opt-level = "s"
+codegen-units = 256
+incremental = true
+panic = "abort"
+strip = true

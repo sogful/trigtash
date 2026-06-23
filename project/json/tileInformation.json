@@ -1,0 +1,3529 @@
+[
+   {
+      "name": "Block",
+      "var": "block",
+      "spritesheet": {
+         "x": 0,
+         "y": 0,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Spike",
+      "var": "spike",
+      "spritesheet": {
+         "x": 16,
+         "y": 0,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "kill"
+      ]
+   },
+   {
+      "name": "Short Spike",
+      "var": "shortspike",
+      "spritesheet": {
+         "x": 32,
+         "y": 0,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "kill"
+      ]
+   },
+   {
+      "name": "Small Spike",
+      "var": "smallspike",
+      "spritesheet": {
+         "x": 96,
+         "y": 80,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "kill"
+      ]
+   },
+   {
+      "name": "Thorns",
+      "var": "thorns",
+      "spritesheet": {
+         "x": 48,
+         "y": 0,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "kill"
+      ]
+   },
+   {
+      "name": "Big Saw",
+      "var": "bigsaw",
+      "spin": 2,
+      "spritesheet": {
+         "x": 112,
+         "y": 64,
+         "z": 1,
+         "height": 48,
+         "width": 48
+      },
+      "props": [
+         "spin",
+         "kill"
+      ]
+   },
+   {
+      "name": "Saw",
+      "var": "saw",
+      "spin": 4,
+      "spritesheet": {
+         "x": 80,
+         "y": 96,
+         "z": 1,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "spin",
+         "kill"
+      ]
+   },
+   {
+      "name": "Small Saw",
+      "var": "smallsaw",
+      "spin": 5,
+      "spritesheet": {
+         "x": 144,
+         "y": 48,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "spin",
+         "kill"
+      ]
+   },
+   {
+      "name": "Slab",
+      "var": "slab",
+      "spritesheet": {
+         "x": 64,
+         "y": 0,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Block Two",
+      "var": "block2",
+      "spritesheet": {
+         "x": 80,
+         "y": 0,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Cup Block Two",
+      "var": "cupblock2",
+      "spritesheet": {
+         "x": 0,
+         "y": 96,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Pillar Block Two",
+      "var": "pillarblock2",
+      "spritesheet": {
+         "x": 144,
+         "y": 32,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Corner Block Two",
+      "var": "cornerblock2",
+      "spritesheet": {
+         "x": 16,
+         "y": 96,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Edge Block Two",
+      "var": "edgeblock2",
+      "spritesheet": {
+         "x": 32,
+         "y": 96,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Empty Block Two",
+      "var": "emptyblock2",
+      "spritesheet": {
+         "x": 96,
+         "y": 0,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Slope",
+      "var": "slope",
+      "spritesheet": {
+         "x": 112,
+         "y": 0,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Wedge",
+      "var": "wedge",
+      "spritesheet": {
+         "x": 128,
+         "y": 0,
+         "z": 1,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Flipped Wedge",
+      "var": "flippedwedge",
+      "spritesheet": {
+         "x": 0,
+         "y": 64,
+         "z": 1,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Yellow Orb",
+      "var": "yelloworb",
+      "spin": 3,
+      "spritesheet": {
+         "x": 0,
+         "y": 16,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "spin"
+      ]
+   },
+   {
+      "name": "Yellow Pad",
+      "var": "yellowpad",
+      "spritesheet": {
+         "x": 0,
+         "y": 32,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Blue Orb",
+      "var": "blueorb",
+      "spin": 3,
+      "spritesheet": {
+         "x": 16,
+         "y": 80,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "spin"
+      ]
+   },
+   {
+      "name": "Blue Pad",
+      "var": "bluepad",
+      "spritesheet": {
+         "x": 0,
+         "y": 80,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Yellow Portal",
+      "var": "yellowportal",
+      "spritesheet": {
+         "x": 16,
+         "y": 16,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Blue Portal",
+      "var": "blueportal",
+      "spritesheet": {
+         "x": 48,
+         "y": 16,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Cube Portal",
+      "var": "cubeportal",
+      "spritesheet": {
+         "x": 80,
+         "y": 16,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Ship Portal",
+      "var": "shipportal",
+      "spritesheet": {
+         "x": 112,
+         "y": 16,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Empty Black Block",
+      "var": "emptyblackblock",
+      "spritesheet": {
+         "x": 144,
+         "y": 16,
+         "z": 2.2,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Push Block",
+      "var": "pushblock",
+      "spritesheet": {
+         "x": 0,
+         "y": 48,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "physics"
+      ]
+   },
+   {
+      "name": "Checkpoint",
+      "var": "checkpoint",
+      "spritesheet": {
+         "x": 32,
+         "y": 64,
+         "z": 3,
+         "height": 32,
+         "width": 32
+      }
+   },
+   {
+      "name": "Goal",
+      "var": "goal",
+      "spin": 1,
+      "spritesheet": {
+         "x": 48,
+         "y": 96,
+         "z": 3,
+         "height": 32,
+         "width": 32
+      }
+   },
+   {
+      "name": "Ball Portal",
+      "var": "ballportal",
+      "spritesheet": {
+         "x": 0,
+         "y": 128,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Block Three",
+      "var": "block3",
+      "spritesheet": {
+         "x": 96,
+         "y": 128,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Cup Block Three",
+      "var": "cupblock3",
+      "spritesheet": {
+         "x": 32,
+         "y": 128,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Pillar Block Three",
+      "var": "pillarblock3",
+      "spritesheet": {
+         "x": 64,
+         "y": 128,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Corner Block Three",
+      "var": "cornerblock3",
+      "spritesheet": {
+         "x": 48,
+         "y": 128,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Edge Block Three",
+      "var": "edgeblock3",
+      "spritesheet": {
+         "x": 80,
+         "y": 128,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Empty Block Three",
+      "var": "emptyblock3",
+      "spritesheet": {
+         "x": 112,
+         "y": 128,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Slope Three",
+      "var": "slope3",
+      "spritesheet": {
+         "x": 32,
+         "y": 112,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Wedge Three",
+      "var": "wedge3",
+      "spritesheet": {
+         "x": 128,
+         "y": 112,
+         "z": 1,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Flipped Wedge Three",
+      "var": "flippedwedge3",
+      "spritesheet": {
+         "x": 128,
+         "y": 128,
+         "z": 1,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Ripples",
+      "var": "ripples",
+      "spritesheet": {
+         "x": 16,
+         "y": 112,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "kill"
+      ]
+   },
+   {
+      "name": "Fake Spike",
+      "var": "fakespike",
+      "spritesheet": {
+         "x": 112,
+         "y": 112,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Fake Short Spike",
+      "var": "fakeshortspike",
+      "spritesheet": {
+         "x": 32,
+         "y": 144,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Small Chain",
+      "var": "smallchain",
+      "spritesheet": {
+         "x": 32,
+         "y": 160,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Chain",
+      "var": "chain",
+      "spritesheet": {
+         "x": 48,
+         "y": 144,
+         "z": 0,
+         "height": 32,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Crystal Clouds",
+      "var": "crystals",
+      "spritesheet": {
+         "x": 64,
+         "y": 160,
+         "z": 0,
+         "height": 16,
+         "width": 48
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Green Orb",
+      "var": "greenorb",
+      "spin": 3,
+      "spritesheet": {
+         "x": 64,
+         "y": 144,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "spin"
+      ]
+   },
+   {
+      "name": "Pink Orb",
+      "var": "pinkorb",
+      "spin": 3,
+      "spritesheet": {
+         "x": 32,
+         "y": 80,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "spin"
+      ]
+   },
+   {
+      "name": "Red Orb",
+      "var": "redorb",
+      "spin": 3,
+      "spritesheet": {
+         "x": 16,
+         "y": 64,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "spin"
+      ]
+   },
+   {
+      "name": "Black Block",
+      "var": "blackblock",
+      "spritesheet": {
+         "x": 144,
+         "y": 144,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Cup Black Block",
+      "var": "cupblackblock",
+      "spritesheet": {
+         "x": 80,
+         "y": 144,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Pillar Black Block",
+      "var": "pillarblackblock",
+      "spritesheet": {
+         "x": 112,
+         "y": 144,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Corner Black Block",
+      "var": "cornerblackblock",
+      "spritesheet": {
+         "x": 96,
+         "y": 144,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Edge Black Block",
+      "var": "edgeblackblock",
+      "spritesheet": {
+         "x": 128,
+         "y": 144,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Black Slope",
+      "var": "blackslope",
+      "spritesheet": {
+         "x": 96,
+         "y": 112,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Black Wedge",
+      "var": "blackwedge",
+      "spritesheet": {
+         "x": 144,
+         "y": 112,
+         "z": 1,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Flipped Black Wedge",
+      "var": "flippedblackwedge",
+      "spritesheet": {
+         "x": 144,
+         "y": 128,
+         "z": 1,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Red Pad",
+      "var": "redpad",
+      "spritesheet": {
+         "x": 16,
+         "y": 32,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Pink Pad",
+      "var": "pinkpad",
+      "spritesheet": {
+         "x": 16,
+         "y": 48,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Ice Block",
+      "var": "iceblock",
+      "spritesheet": {
+         "x": 0,
+         "y": 112,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Background Color Trigger",
+      "var": "bgcolortrigger",
+      "data": {
+         "fadeTime": 0.3,
+         "color1": "60;104;255",
+         "color2": "32;53;210",
+         "radius": 3
+      },
+      "explanation": "Change the background colors by changing <color1> and <color2> in an RGB format over <fadeTime> seconds.\n\n<radius> determines the player's distance from the trigger for it to activate. This is shown by the circle around the trigger.",
+      "expHeight": 5,
+      "spritesheet": {
+         "x": 16,
+         "y": 128,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Fake Small Spike",
+      "var": "fakesmallspike",
+      "spritesheet": {
+         "x": 80,
+         "y": 80,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Ground Color Trigger",
+      "var": "groundcolortrigger",
+      "data": {
+         "fadeTime": 0.3,
+         "color1": "99;162;255",
+         "color2": "60;104;255",
+         "radius": 3
+      },
+      "explanation": "Change the ground colors by changing <color1> and <color2> in an RGB format over <fadeTime> seconds.\n\n<radius> determines the player's distance from the trigger for it to activate. This is shown by the circle around the trigger.",
+      "expHeight": 5,
+      "spritesheet": {
+         "x": 16,
+         "y": 144,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Coin",
+      "var": "coin",
+      "spritesheet": {
+         "x": 32,
+         "y": 16,
+         "z": 3,
+         "height": 32,
+         "width": 32
+      }
+   },
+   {
+      "name": "Boulder",
+      "var": "boulder",
+      "spritesheet": {
+         "x": 0,
+         "y": 144,
+         "z": 1,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "physics"
+      ]
+   },
+   {
+      "name": "Flower Spinner",
+      "var": "flowerspinner",
+      "spin": 3,
+      "spritesheet": {
+         "x": 80,
+         "y": 160,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "spin"
+      ]
+   },
+   {
+      "name": "Small Flower Spinner",
+      "var": "smallflowerspinner",
+      "spin": 3,
+      "spritesheet": {
+         "x": 48,
+         "y": 160,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "spin"
+      ]
+   },
+   {
+      "name": "Swiggly",
+      "var": "swiggly",
+      "spritesheet": {
+         "x": 96,
+         "y": 160,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Swiggly Corner",
+      "var": "swigglycorner",
+      "spritesheet": {
+         "x": 112,
+         "y": 160,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "UFO Portal",
+      "var": "ufoportal",
+      "spritesheet": {
+         "x": 96,
+         "y": 16,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Tall Push Block",
+      "var": "tallpushblock",
+      "spritesheet": {
+         "x": 64,
+         "y": 112,
+         "z": 1,
+         "height": 32,
+         "width": 16
+      },
+      "props": [
+         "physics"
+      ]
+   },
+   {
+      "name": "Colossal Push Block",
+      "var": "colossalpushblock",
+      "spritesheet": {
+         "x": 80,
+         "y": 112,
+         "z": 1,
+         "height": 64,
+         "width": 16
+      },
+      "props": [
+         "physics"
+      ]
+   },
+   {
+      "name": "Ghost Spike",
+      "var": "ghostspike",
+      "spritesheet": {
+         "x": 32,
+         "y": 32,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "kill"
+      ]
+   },
+   {
+      "name": "Ghost Short Spike",
+      "var": "ghostshortspike",
+      "spritesheet": {
+         "x": 48,
+         "y": 32,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "kill"
+      ]
+   },
+   {
+      "name": "Ghost Small Spike",
+      "var": "ghostsmallspike",
+      "spritesheet": {
+         "x": 64,
+         "y": 32,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "kill"
+      ]
+   },
+   {
+      "name": "Ghost Block",
+      "var": "ghostblock",
+      "spritesheet": {
+         "x": 80,
+         "y": 32,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Ghost Slope",
+      "var": "ghostslope",
+      "spritesheet": {
+         "x": 128,
+         "y": 96,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Ghost Wedge",
+      "var": "ghostwedge",
+      "spritesheet": {
+         "x": 144,
+         "y": 80,
+         "z": 1,
+         "height": 32,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Flipped Ghost Wedge",
+      "var": "flippedghostwedge",
+      "spritesheet": {
+         "x": 144,
+         "y": 96,
+         "z": 1,
+         "height": 32,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Ghost Slab",
+      "var": "ghostslab",
+      "spritesheet": {
+         "x": 64,
+         "y": 16,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Big Ghost Saw",
+      "var": "ghostbigsaw",
+      "spin": 2,
+      "spritesheet": {
+         "x": 48,
+         "y": 48,
+         "z": 1,
+         "height": 48,
+         "width": 48
+      },
+      "props": [
+         "tint",
+         "kill"
+      ]
+   },
+   {
+      "name": "Ghost Saw",
+      "var": "ghostsaw",
+      "spin": 4,
+      "spritesheet": {
+         "x": 64,
+         "y": 48,
+         "z": 1,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint",
+         "kill"
+      ]
+   },
+   {
+      "name": "Small Ghost Saw",
+      "var": "ghostsmallsaw",
+      "spin": 5,
+      "spritesheet": {
+         "x": 80,
+         "y": 48,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "kill"
+      ]
+   },
+   {
+      "name": "Text",
+      "var": "text",
+      "data": {
+         "color": "255;255;255",
+         "content": "Sample Text",
+         "outline": 0,
+         "width": 0
+      },
+      "explanation": "Change <content> to change the text.\n\nChange <color> in an RGB format to change the text's color.\n\nChange <outline> from 0 to 4 to choose the font.\n\nChange <width> to set word wrapping to N pixels. Leaving it at 0 disables word wrap.",
+      "expHeight": 7,
+      "spritesheet": {
+         "x": 48,
+         "y": 80,
+         "z": 3.5,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Corner Thorns",
+      "var": "cornerthorns",
+      "spritesheet": {
+         "x": 64,
+         "y": 80,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Corner Ripples",
+      "var": "cornerripples",
+      "spritesheet": {
+         "x": 64,
+         "y": 96,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Old UFO Portal",
+      "var": "oldufoportal",
+      "spritesheet": {
+         "x": 0,
+         "y": 0,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      }
+   },
+   {
+      "name": "Wave Portal",
+      "var": "waveportal",
+      "spritesheet": {
+         "x": 128,
+         "y": 16,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Brick Block",
+      "var": "brickblock",
+      "spritesheet": {
+         "x": 48,
+         "y": 64,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Cup Brick Block",
+      "var": "cupbrickblock",
+      "spritesheet": {
+         "x": 64,
+         "y": 64,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Pillar Brick Block",
+      "var": "pillarbrickblock",
+      "spritesheet": {
+         "x": 80,
+         "y": 64,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Corner Brick Block",
+      "var": "cornerbrickblock",
+      "spritesheet": {
+         "x": 96,
+         "y": 64,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Edge Brick Block",
+      "var": "edgebrickblock",
+      "spritesheet": {
+         "x": 96,
+         "y": 48,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Empty Brick Block",
+      "var": "emptybrickblock",
+      "spritesheet": {
+         "x": 32,
+         "y": 48,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Brick Slope",
+      "var": "brickslope",
+      "spritesheet": {
+         "x": 96,
+         "y": 96,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Brick Wedge",
+      "var": "brickwedge",
+      "spritesheet": {
+         "x": 112,
+         "y": 48,
+         "z": 1,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Flipped Brick Wedge",
+      "var": "flippedbrickwedge",
+      "spritesheet": {
+         "x": 112,
+         "y": 32,
+         "z": 1,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Star",
+      "var": "star",
+      "spritesheet": {
+         "x": 112,
+         "y": 96,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Triangle",
+      "var": "triangle",
+      "spritesheet": {
+         "x": 112,
+         "y": 80,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Icon",
+      "var": "iconpush",
+      "data": {
+         "icon": 3,
+         "color1": "249;255;104",
+         "color2": "60;255;242",
+         "glow": 0,
+         "glowcolor": "60;255;242"
+      },
+      "explanation": "Make the icon you want to use in the icon kit tab, then click the copy button (under the color picker), go back here, remove the old contents and paste what you copied here.",
+      "expHeight": 2,
+      "spritesheet": {
+         "x": 128,
+         "y": 80,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "physics"
+      ]
+   },
+   {
+      "name": "Big Gear",
+      "var": "biggear",
+      "spin": 2,
+      "spritesheet": {
+         "x": 128,
+         "y": 32,
+         "z": 1,
+         "height": 48,
+         "width": 48
+      },
+      "props": [
+         "spin",
+         "kill"
+      ]
+   },
+   {
+      "name": "Gear",
+      "var": "gear",
+      "spin": 4,
+      "spritesheet": {
+         "x": 128,
+         "y": 48,
+         "z": 1,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "spin",
+         "kill"
+      ]
+   },
+   {
+      "name": "Small Gear",
+      "var": "smallgear",
+      "spin": 5,
+      "spritesheet": {
+         "x": 128,
+         "y": 64,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "spin",
+         "kill"
+      ]
+   },
+   {
+      "name": "Question Mark",
+      "var": "questionmark",
+      "spritesheet": {
+         "x": 96,
+         "y": 32,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Arrow",
+      "var": "arrow",
+      "spritesheet": {
+         "x": 144,
+         "y": 0,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Exclamation Mark",
+      "var": "exclamationmark",
+      "spritesheet": {
+         "x": 144,
+         "y": 64,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Break Block",
+      "var": "breakblock",
+      "spritesheet": {
+         "x": 0,
+         "y": 160,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "1x Speed Portal",
+      "var": "speedportal1",
+      "spritesheet": {
+         "x": 16,
+         "y": 160,
+         "z": 2,
+         "height": 32,
+         "width": 32
+      }
+   },
+   {
+      "name": "2x Speed Portal",
+      "var": "speedportal2",
+      "spritesheet": {
+         "x": 128,
+         "y": 160,
+         "z": 2,
+         "height": 32,
+         "width": 32
+      }
+   },
+   {
+      "name": "3x Speed Portal",
+      "var": "speedportal3",
+      "spritesheet": {
+         "x": 144,
+         "y": 160,
+         "z": 2,
+         "height": 32,
+         "width": 48
+      }
+   },
+   {
+      "name": "Small Boulder",
+      "var": "smallboulder",
+      "spritesheet": {
+         "x": 160,
+         "y": 0,
+         "z": 1,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "physics"
+      ]
+   },
+   {
+      "name": "Spike Boulder",
+      "var": "spikeboulder",
+      "spritesheet": {
+         "x": 160,
+         "y": 16,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "physics",
+         "kill"
+      ]
+   },
+   {
+      "name": "Small Spike Boulder",
+      "var": "smallspikeboulder",
+      "spritesheet": {
+         "x": 160,
+         "y": 32,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "physics",
+         "kill"
+      ]
+   },
+   {
+      "name": "Player Pass Block",
+      "var": "playerpass",
+      "spritesheet": {
+         "x": 160,
+         "y": 48,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Physics Pass Block",
+      "var": "physicspass",
+      "spritesheet": {
+         "x": 160,
+         "y": 64,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "On/Off Switch",
+      "var": "onoffswitch",
+      "data": {
+         "physicsCanPress": 0
+      },
+      "explanation": "When <physicsCanPress> is at 0, only the player can press the switch.\n\nWhen it's at 1, only objects affected by gravity can press it.\n\nWhen it's at 2, both the player and gravity objects can press it.",
+      "expHeight": 5,
+      "spritesheet": {
+         "x": 160,
+         "y": 112,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Off Block",
+      "var": "offblock",
+      "spritesheet": {
+         "x": 160,
+         "y": 80,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "On Block",
+      "var": "onblock",
+      "spritesheet": {
+         "x": 160,
+         "y": 96,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Cross",
+      "var": "cross",
+      "spritesheet": {
+         "x": 160,
+         "y": 128,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Sharpy",
+      "var": "sharpy",
+      "spritesheet": {
+         "x": 160,
+         "y": 144,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Sharpy Corner",
+      "var": "sharpycorner",
+      "spritesheet": {
+         "x": 160,
+         "y": 160,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Off Spike",
+      "var": "offspike",
+      "spritesheet": {
+         "x": 176,
+         "y": 16,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "On Spike",
+      "var": "onspike",
+      "spritesheet": {
+         "x": 176,
+         "y": 0,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Force Trigger",
+      "var": "forcetrigger",
+      "data": {
+         "force": 100,
+         "angle": 0,
+         "radius": 3
+      },
+      "explanation": "<force> determines the speed gravity-affected objects will have from the trigger.\n\n<angle> changes the angle of the force in degrees (starting from what is usually 90 degrees). This is shown by the line going from the trigger.\n\n<radius> determines the objects' distance from the trigger for it to apply force. This is shown by the circle around the trigger.",
+      "expHeight": 7,
+      "spritesheet": {
+         "x": 176,
+         "y": 32,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Metal Block",
+      "var": "metalblock",
+      "spritesheet": {
+         "x": 176,
+         "y": 48,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "phant",
+      "var": "phant",
+      "spritesheet": {
+         "x": 0,
+         "y": 0,
+         "z": 1,
+         "height": 80,
+         "width": 112
+      }
+   },
+   {
+      "name": "Green Portal",
+      "var": "greenportal",
+      "spritesheet": {
+         "x": 176,
+         "y": 64,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Line Block",
+      "var": "lineblock",
+      "spritesheet": {
+         "x": 80,
+         "y": 32,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Cup Line Block",
+      "var": "cuplineblock",
+      "spritesheet": {
+         "x": 176,
+         "y": 96,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Pillar Line Block",
+      "var": "pillarlineblock",
+      "spritesheet": {
+         "x": 176,
+         "y": 112,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Corner Line Block",
+      "var": "cornerlineblock",
+      "spritesheet": {
+         "x": 176,
+         "y": 128,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Edge Line Block",
+      "var": "edgelineblock",
+      "spritesheet": {
+         "x": 176,
+         "y": 144,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Corner Dot",
+      "var": "cornerdot",
+      "spritesheet": {
+         "x": 176,
+         "y": 160,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Line Slope",
+      "var": "lineslope",
+      "spritesheet": {
+         "x": 176,
+         "y": 80,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Line Wedge",
+      "var": "linewedge",
+      "spritesheet": {
+         "x": 192,
+         "y": 0,
+         "z": 2,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Flipped Line Wedge",
+      "var": "flippedlinewedge",
+      "spritesheet": {
+         "x": 192,
+         "y": 16,
+         "z": 2,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Mini Portal",
+      "var": "miniportal",
+      "spritesheet": {
+         "x": 192,
+         "y": 32,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Mega Portal",
+      "var": "megaportal",
+      "spritesheet": {
+         "x": 192,
+         "y": 48,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Red Portal",
+      "var": "redportal",
+      "spritesheet": {
+         "x": 192,
+         "y": 64,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Black Portal",
+      "var": "blackportal",
+      "spritesheet": {
+         "x": 192,
+         "y": 80,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      },
+      "props": [
+         "indicated"
+      ]
+   },
+   {
+      "name": "Arrow Orb",
+      "var": "arroworb",
+      "spritesheet": {
+         "x": 192,
+         "y": 96,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Block Four",
+      "var": "block4",
+      "spritesheet": {
+         "x": 192,
+         "y": 112,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Cup Block Four",
+      "var": "cupblock4",
+      "spritesheet": {
+         "x": 192,
+         "y": 128,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Pillar Block Four",
+      "var": "pillarblock4",
+      "spritesheet": {
+         "x": 192,
+         "y": 144,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Corner Block Four",
+      "var": "cornerblock4",
+      "spritesheet": {
+         "x": 192,
+         "y": 160,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Edge Block Four",
+      "var": "edgeblock4",
+      "spritesheet": {
+         "x": 208,
+         "y": 0,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Empty Block Four",
+      "var": "emptyblock4",
+      "spritesheet": {
+         "x": 208,
+         "y": 16,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Slope Four",
+      "var": "slope4",
+      "spritesheet": {
+         "x": 208,
+         "y": 32,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Wedge Four",
+      "var": "wedge4",
+      "spritesheet": {
+         "x": 208,
+         "y": 48,
+         "z": 1,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Flipped Wedge Four",
+      "var": "flippedwedge4",
+      "spritesheet": {
+         "x": 208,
+         "y": 64,
+         "z": 1,
+         "height": 16,
+         "width": 32
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Big Flower Spinner",
+      "var": "bigflowerspinner",
+      "spin": 1,
+      "spritesheet": {
+         "x": 208,
+         "y": 80,
+         "z": 0,
+         "height": 48,
+         "width": 48
+      },
+      "props": [
+         "spin",
+         "tint"
+      ]
+   },
+   {
+      "name": "Clouds",
+      "var": "clouds",
+      "spritesheet": {
+         "x": 208,
+         "y": 96,
+         "z": 0,
+         "height": 16,
+         "width": 48
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Cave Spike",
+      "var": "cavespike",
+      "spritesheet": {
+         "x": 208,
+         "y": 112,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "kill"
+      ]
+   },
+   {
+      "name": "Short Cave Spike",
+      "var": "shortcavespike",
+      "spritesheet": {
+         "x": 208,
+         "y": 128,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "kill"
+      ]
+   },
+   {
+      "name": "Small Cave Spike",
+      "var": "smallcavespike",
+      "spritesheet": {
+         "x": 208,
+         "y": 144,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "kill"
+      ]
+   },
+   {
+      "name": "Ridges",
+      "var": "ridges",
+      "spritesheet": {
+         "x": 208,
+         "y": 160,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "kill"
+      ]
+   },
+   {
+      "name": "Corner Ridges",
+      "var": "cornerridges",
+      "spritesheet": {
+         "x": 0,
+         "y": 176,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Waves",
+      "var": "waves",
+      "spritesheet": {
+         "x": 16,
+         "y": 176,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "kill"
+      ]
+   },
+   {
+      "name": "Corner Waves",
+      "var": "cornerwaves",
+      "spritesheet": {
+         "x": 32,
+         "y": 176,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Small Octospinner",
+      "var": "smalloctospinner",
+      "spin": 4,
+      "spritesheet": {
+         "x": 48,
+         "y": 176,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Octospinner",
+      "var": "octospinner",
+      "spin": 3,
+      "spritesheet": {
+         "x": 64,
+         "y": 176,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Big Octospinner",
+      "var": "bigoctospinner",
+      "spin": 1,
+      "spritesheet": {
+         "x": 80,
+         "y": 176,
+         "z": 0,
+         "height": 48,
+         "width": 48
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Small Burst Spinner",
+      "var": "smallburstspinner",
+      "spin": 4,
+      "spritesheet": {
+         "x": 96,
+         "y": 176,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Burst Spinner",
+      "var": "burstspinner",
+      "spin": 3,
+      "spritesheet": {
+         "x": 112,
+         "y": 176,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Big Burst Spinner",
+      "var": "bigburstspinner",
+      "spin": 1,
+      "spritesheet": {
+         "x": 128,
+         "y": 176,
+         "z": 0,
+         "height": 48,
+         "width": 48
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Auto Portal",
+      "var": "autoportal",
+      "spritesheet": {
+         "x": 144,
+         "y": 176,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      }
+   },
+   {
+      "name": "Normal Portal",
+      "var": "normalportal",
+      "spritesheet": {
+         "x": 160,
+         "y": 176,
+         "z": 2,
+         "height": 48,
+         "width": 32
+      }
+   },
+   {
+      "name": "Small Star Spinner",
+      "var": "smallstarspinner",
+      "spin": 1,
+      "spritesheet": {
+         "x": 176,
+         "y": 176,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Star Spinner",
+      "var": "starspinner",
+      "spin": 1,
+      "spritesheet": {
+         "x": 192,
+         "y": 176,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Big Star Spinner",
+      "var": "bigstarspinner",
+      "spin": 1,
+      "spritesheet": {
+         "x": 208,
+         "y": 176,
+         "z": 0,
+         "height": 48,
+         "width": 48
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Small Cross Spinner",
+      "var": "smallcrossspinner",
+      "spin": 1,
+      "spritesheet": {
+         "x": 0,
+         "y": 192,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Cross Spinner",
+      "var": "crossspinner",
+      "spin": 1,
+      "spritesheet": {
+         "x": 16,
+         "y": 192,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Big Crosshair Spinner",
+      "var": "bigcrossspinner",
+      "spin": 1,
+      "spritesheet": {
+         "x": 32,
+         "y": 192,
+         "z": 0,
+         "height": 48,
+         "width": 48
+      },
+      "props": [
+         "tint",
+         "spin"
+      ]
+   },
+   {
+      "name": "Squares",
+      "var": "squares",
+      "spritesheet": {
+         "x": 48,
+         "y": 192,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "kill"
+      ]
+   },
+   {
+      "name": "Corner Squares",
+      "var": "cornersquares",
+      "spritesheet": {
+         "x": 64,
+         "y": 192,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Black Orb",
+      "var": "blackorb",
+      "spin": 3,
+      "spritesheet": {
+         "x": 80,
+         "y": 192,
+         "z": 2,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "spin"
+      ]
+   },
+   {
+      "name": "Tiled Rectangle",
+      "var": "tiledrectangle",
+      "data": {
+         "id": 14,
+         "width": 1,
+         "height": 1
+      },
+      "explanation": "Use this instead of placing a lot of decoration blocks individually for faster building and better performance.\n\n<id> was changed when you chose the block to place, and no you can't use anything but what you were shown.\n\n<width> and <height> (in blocks) are changed when you drag the block and release it, but you can also change them manually.",
+      "expHeight": 8,
+      "spritesheet": {
+         "x": 96,
+         "y": 192,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Mini Block",
+      "var": "miniblock",
+      "spritesheet": {
+         "x": 112,
+         "y": 192,
+         "z": 1,
+         "height": 8,
+         "width": 8
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Mini Ghost Block",
+      "var": "minighostblock",
+      "spritesheet": {
+         "x": 128,
+         "y": 192,
+         "z": 1,
+         "height": 8,
+         "width": 8
+      },
+      "props": [
+         "tint",
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Mini Spike",
+      "var": "minispike",
+      "spritesheet": {
+         "x": 144,
+         "y": 192,
+         "z": 1,
+         "height": 8,
+         "width": 8
+      },
+      "props": [
+         "kill"
+      ]
+   },
+   {
+      "name": "Mini Ghost Spike",
+      "var": "minighostspike",
+      "spritesheet": {
+         "x": 160,
+         "y": 192,
+         "z": 1,
+         "height": 8,
+         "width": 8
+      },
+      "props": [
+         "tint",
+         "kill"
+      ]
+   },
+   {
+      "name": "Mini Cave Spike",
+      "var": "minicavespike",
+      "spritesheet": {
+         "x": 176,
+         "y": 192,
+         "z": 1,
+         "height": 8,
+         "width": 8
+      },
+      "props": [
+         "tint",
+         "kill"
+      ]
+   },
+   {
+      "name": "Fake Mini Spike",
+      "var": "fakeminispike",
+      "spritesheet": {
+         "x": 192,
+         "y": 192,
+         "z": 0,
+         "height": 8,
+         "width": 8
+      }
+   },
+   {
+      "name": "Grass Block",
+      "var": "grassblock",
+      "spritesheet": {
+         "x": 0,
+         "y": 208,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Cup Grass Block",
+      "var": "cupgrassblock",
+      "spritesheet": {
+         "x": 16,
+         "y": 208,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Pillar Grass Block",
+      "var": "pillargrassblock",
+      "spritesheet": {
+         "x": 32,
+         "y": 208,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Corner Grass Block",
+      "var": "cornergrassblock",
+      "spritesheet": {
+         "x": 48,
+         "y": 208,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Edge Grass Block",
+      "var": "edgegrassblock",
+      "spritesheet": {
+         "x": 64,
+         "y": 208,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Dot Grass Block",
+      "var": "dotgrassblock",
+      "spritesheet": {
+         "x": 80,
+         "y": 208,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Empty Grass Block",
+      "var": "emptygrassblock",
+      "spritesheet": {
+         "x": 96,
+         "y": 208,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Big Spear Saw",
+      "var": "bigspearsaw",
+      "spin": 3,
+      "spritesheet": {
+         "x": 112,
+         "y": 208,
+         "z": 1,
+         "height": 48,
+         "width": 48
+      },
+      "props": [
+         "spin"
+      ]
+   },
+   {
+      "name": "Spear Saw",
+      "var": "spearsaw",
+      "spin": 4,
+      "spritesheet": {
+         "x": 128,
+         "y": 208,
+         "z": 1,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "spin"
+      ]
+   },
+   {
+      "name": "Small Spear Saw",
+      "var": "smallspearsaw",
+      "spin": 5,
+      "spritesheet": {
+         "x": 144,
+         "y": 208,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "spin"
+      ]
+   },
+   {
+      "name": "Square Wire End",
+      "var": "squarewireend",
+      "spritesheet": {
+         "x": 160,
+         "y": 208,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Square Wire Line",
+      "var": "squarewireline",
+      "spritesheet": {
+         "x": 176,
+         "y": 208,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Square Wire Corner",
+      "var": "squarewirecorner",
+      "spritesheet": {
+         "x": 192,
+         "y": 208,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Square Wire Tee",
+      "var": "squarewiretee",
+      "spritesheet": {
+         "x": 208,
+         "y": 208,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Square Wire Center",
+      "var": "squarewirecenter",
+      "spritesheet": {
+         "x": 208,
+         "y": 192,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Fake Block",
+      "var": "fakeblock",
+      "spritesheet": {
+         "x": 0,
+         "y": 224,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Fake Slab",
+      "var": "fakeslab",
+      "spritesheet": {
+         "x": 16,
+         "y": 224,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      }
+   },
+   {
+      "name": "Fake Mini Block",
+      "var": "fakeminiblock",
+      "spritesheet": {
+         "x": 32,
+         "y": 224,
+         "z": 0,
+         "height": 8,
+         "width": 8
+      }
+   },
+   {
+      "name": "Left Xslab",
+      "var": "leftxslab",
+      "spritesheet": {
+         "x": 48,
+         "y": 224,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Main Xslab",
+      "var": "mainxslab",
+      "spritesheet": {
+         "x": 64,
+         "y": 224,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Right Xslab",
+      "var": "rightxslab",
+      "spritesheet": {
+         "x": 80,
+         "y": 224,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Sole Xslab",
+      "var": "solexslab",
+      "spritesheet": {
+         "x": 96,
+         "y": 224,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Corner Xslab",
+      "var": "cornerxslab",
+      "spritesheet": {
+         "x": 112,
+         "y": 224,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Dot Xslab",
+      "var": "dotxslab",
+      "spritesheet": {
+         "x": 128,
+         "y": 224,
+         "z": 1,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "jumpOn"
+      ]
+   },
+   {
+      "name": "Baseless Chain",
+      "var": "baselesschain",
+      "spritesheet": {
+         "x": 144,
+         "y": 224,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "4x Speed Portal",
+      "var": "speedportal4",
+      "spritesheet": {
+         "x": 160,
+         "y": 224,
+         "z": 2,
+         "height": 32,
+         "width": 48
+      }
+   },
+   {
+      "name": "0.5x Speed Portal",
+      "var": "speedportalhalf",
+      "spritesheet": {
+         "x": 176,
+         "y": 224,
+         "z": 2,
+         "height": 32,
+         "width": 32
+      }
+   },
+   {
+      "name": "Fan Spinner",
+      "var": "fanspinner",
+      "spin": 3,
+      "spritesheet": {
+         "x": 192,
+         "y": 224,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Big Fan Spinner",
+      "var": "bigfanspinner",
+      "spin": 2,
+      "spritesheet": {
+         "x": 208,
+         "y": 224,
+         "z": 0,
+         "height": 48,
+         "width": 48
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Chevron Arrow",
+      "var": "chevronarrow",
+      "spritesheet": {
+         "x": 0,
+         "y": 240,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Small Helix",
+      "var": "smallhelix",
+      "spritesheet": {
+         "x": 16,
+         "y": 240,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Helix",
+      "var": "helix",
+      "spritesheet": {
+         "x": 32,
+         "y": 240,
+         "z": 0,
+         "height": 32,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Note",
+      "var": "note",
+      "spritesheet": {
+         "x": 48,
+         "y": 240,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Heart",
+      "var": "heart",
+      "spritesheet": {
+         "x": 64,
+         "y": 240,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Small Cog Spinner",
+      "var": "smallcogspinner",
+      "spin": 4,
+      "spritesheet": {
+         "x": 112,
+         "y": 240,
+         "z": 0,
+         "height": 16,
+         "width": 16
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Cog Spinner",
+      "var": "cogspinner",
+      "spin": 3,
+      "spritesheet": {
+         "x": 96,
+         "y": 240,
+         "z": 0,
+         "height": 32,
+         "width": 32
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Big Cog Spinner",
+      "var": "bigcogspinner",
+      "spin": 2,
+      "spritesheet": {
+         "x": 80,
+         "y": 240,
+         "z": 0,
+         "height": 48,
+         "width": 48
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Short Ground Thorn",
+      "var": "shortgroundthorn",
+      "spritesheet": {
+         "x": 128,
+         "y": 240,
+         "z": 0
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Ground Thorn",
+      "var": "groundthorn",
+      "spritesheet": {
+         "x": 144,
+         "y": 240,
+         "z": 0,
+         "height": 32
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Tall Ground Thorn",
+      "var": "tallgroundthorn",
+      "spritesheet": {
+         "x": 160,
+         "y": 240,
+         "z": 0,
+         "height": 32
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Ground Rectangles",
+      "var": "groundrectangles",
+      "spritesheet": {
+         "x": 176,
+         "y": 240,
+         "z": 0,
+         "height": 32
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Square Clouds",
+      "var": "squareclouds",
+      "spritesheet": {
+         "x": 192,
+         "y": 240,
+         "z": 0,
+         "width": 48
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Diamond Star",
+      "var": "diamondstar",
+      "spritesheet": {
+         "x": 208,
+         "y": 240,
+         "z": 0
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Sole Square Wire",
+      "var": "squarewiresole",
+      "spritesheet": {
+         "x": 0,
+         "y": 256,
+         "z": 0
+      },
+      "props": [
+         "tint"
+      ]
+   },
+   {
+      "name": "Dot Block Two",
+      "var": "dotblock2",
+      "spritesheet": {
+         "x": 16,
+         "y": 256,
+         "z": 1
+      }
+   },
+   {
+      "name": "Dot Block Three",
+      "var": "dotblock3",
+      "spritesheet": {
+         "x": 32,
+         "y": 256,
+         "z": 1
+      }
+   },
+   {
+      "name": "Dot Black Block",
+      "var": "dotblackblock",
+      "spritesheet": {
+         "x": 48,
+         "y": 256,
+         "z": 1
+      }
+   },
+   {
+      "name": "Dot Brick Block",
+      "var": "dotbrickblock",
+      "spritesheet": {
+         "x": 64,
+         "y": 256,
+         "z": 1
+      }
+   },
+   {
+      "name": "Mega Block",
+      "var": "megablock",
+      "spritesheet": {
+         "x": 80,
+         "y": 256,
+         "z": 1,
+         "width": 32,
+         "height": 32
+      }
+   },
+   {
+      "name": "Mega Ghost Block",
+      "var": "megaghostblock",
+      "spritesheet": {
+         "x": 96,
+         "y": 256,
+         "z": 1,
+         "width": 32,
+         "height": 32
+      }
+   },
+   {
+      "name": "Mega Push Block",
+      "var": "megapushblock",
+      "spritesheet": {
+         "x": 112,
+         "y": 256,
+         "z": 1,
+         "width": 32,
+         "height": 32
+      }
+   },
+   {
+      "name": "Pixel 1x1",
+      "var": "pixel1x1sdf",
+      "spritesheet": {
+         "x": 128,
+         "y": 256,
+         "z": 3,
+         "width": 1,
+         "height": 1
+      }
+   },
+   {
+      "name": "Pixel 2x2",
+      "var": "pixel2x2sdf",
+      "spritesheet": {
+         "x": 144,
+         "y": 256,
+         "z": 3,
+         "width": 2,
+         "height": 2
+      }
+   },
+   {
+      "name": "Pixel 3x3",
+      "var": "pixel3x3sdf",
+      "spritesheet": {
+         "x": 160,
+         "y": 256,
+         "z": 3,
+         "width": 3,
+         "height": 3
+      }
+   },
+   {
+      "name": "Pixel 4x4",
+      "var": "pixel4x4sdf",
+      "spritesheet": {
+         "x": 176,
+         "y": 256,
+         "z": 3,
+         "width": 4,
+         "height": 4
+      }
+   },
+   {
+      "name": "Crusher",
+      "var": "crusherasd",
+      "spritesheet": {
+         "x": 192,
+         "y": 256,
+         "z": 1,
+         "width": 32,
+         "height": 32
+      }
+   },
+   {
+      "name": "Golden Block",
+      "var": "goldenblocksdf",
+      "spritesheet": {
+         "x": 208,
+         "y": 256,
+         "z": 1,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Metal Corner",
+      "var": "cornermetal",
+      "spritesheet": {
+         "x": 128,
+         "y": 272,
+         "z": 1,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Metal Dot",
+      "var": "dotmetal",
+      "spritesheet": {
+         "x": 144,
+         "y": 272,
+         "z": 1,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Metal Slab",
+      "var": "slabmetal",
+      "spritesheet": {
+         "x": 160,
+         "y": 272,
+         "z": 1,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Metal Platform",
+      "var": "metalplatform",
+      "spritesheet": {
+         "x": 176,
+         "y": 272,
+         "z": 1,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Block",
+      "var": "electroblock",
+      "spritesheet": {
+         "x": 0,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Cup",
+      "var": "electrocup",
+      "spritesheet": {
+         "x": 16,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Pillar",
+      "var": "electropillar",
+      "spritesheet": {
+         "x": 32,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Corner",
+      "var": "cornerelectro",
+      "spritesheet": {
+         "x": 48,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Edge",
+      "var": "electroedge",
+      "spritesheet": {
+         "x": 64,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Dot",
+      "var": "electrodot",
+      "spritesheet": {
+         "x": 80,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Fill",
+      "var": "electrofill",
+      "spritesheet": {
+         "x": 96,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro 2-Dot",
+      "var": "electro2dot",
+      "spritesheet": {
+         "x": 112,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro 4-Dot",
+      "var": "electro4dot",
+      "spritesheet": {
+         "x": 128,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Dot Edge",
+      "var": "electrodotedge",
+      "spritesheet": {
+         "x": 144,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro 2-Dot Edge",
+      "var": "electro2dotedge",
+      "spritesheet": {
+         "x": 160,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Dot Corner",
+      "var": "electrodotcorner",
+      "spritesheet": {
+         "x": 176,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Slope",
+      "var": "electroslope",
+      "spritesheet": {
+         "x": 192,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Slope Extension",
+      "var": "electroslopeextension",
+      "spritesheet": {
+         "x": 208,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Wedge",
+      "var": "electrowedge",
+      "spritesheet": {
+         "x": 112,
+         "y": 288,
+         "z": 0,
+         "width": 32,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Wedge Extension 1",
+      "var": "electrowedgeextension1",
+      "spritesheet": {
+         "x": 112,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   },
+   {
+      "name": "Electro Wedge Extension 2",
+      "var": "electrowedgeextension2",
+      "spritesheet": {
+         "x": 112,
+         "y": 288,
+         "z": 0,
+         "width": 16,
+         "height": 16
+      }
+   }
+]

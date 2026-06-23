@@ -1,0 +1,57 @@
+{
+	"cube":{
+		"mode":"cube",
+		"name":"Cube",
+		"spritesheet":{
+			"x":0,
+			"y":0,
+			"height":16,
+			"width":16
+		},
+		"nextmode": "ship"
+	},
+	"ship":{
+		"mode":"ship",
+		"name":"Ship",
+		"spritesheet":{
+			"x":16,
+			"y":0,
+			"height":18,
+			"width":25
+		},
+		"nextmode": "ball"
+	},
+	"ball":{
+		"mode":"ball",
+		"name":"Ball",
+		"spritesheet":{
+			"x":71,
+			"y":0,
+			"height":16,
+			"width":16
+		},
+		"nextmode": "ufo"
+	},
+	"ufo":{
+		"mode":"ufo",
+		"name":"UFO",
+		"spritesheet":{
+			"x":41,
+			"y":0,
+			"height":18,
+			"width":18
+		},
+		"nextmode": "wave"
+	},
+	"wave":{
+		"mode":"wave",
+		"name":"Wave",
+		"spritesheet":{
+			"x":59,
+			"y":0,
+			"height":14,
+			"width":12
+		},
+		"nextmode": "cube"
+	}
+}
