@@ -25,11 +25,11 @@
     {"tab": 3, "kind": "button", "match": "Export Save File"},
 
 
-    {"tab": 4, "id": "macrohotkey", "name": "Macro Overlay Hotkey", "desc": "Pressing 'Tab' toggles the macro overlay when playing a level. With it enabled, your inputs will be automatically recorded in the background. Hence, turning this off could improve performance. Do not use any of the features in main level completions if you want it to count as legitimate!"},
-    {"tab": 4, "id": "macroframeadv", "name": "Frame Advance (unstable)", "desc": "Adds frame stepping controls to the macro overlay. The issues related to frame stepping are very difficult to fix, so you should consider using speedhack and practice mode instead."},
+    {"tab": 4, "id": "macrohotkey", "name": "Macro Overlay Hotkey", "desc": "Pressing 'Tab' toggles the macro overlay when playing a level. With it enabled, your inputs will be automatically recorded in the background."},
+    {"tab": 4, "id": "macroframeadv", "name": "Frame Advance (unstable)", "desc": "Adds frame stepping controls to the macro overlay. ...You should consider using speedhack and practice mode instead."},
     {"tab": 4, "id": "macroinputviewer", "name": "Input Display", "desc": "Shows a small D-Pad in the bottom right. Helps spotting when you're not holding a key."},
     {"tab": 4, "id": "macrovideoui", "name": "Show UI While Recording", "desc": "Keeps the game UI visible in showcases. Off by default for clean footage, but you can use this regardless."},
-    {"tab": 4, "id": "macrovelocity", "name": "Player Info", "desc": "Shows a readout of the player's coordinates and X/Y/angular velocity in the bottom left while playing. Could be useful for precise movement."},
+    {"tab": 4, "id": "macrovelocity", "name": "Player Info", "desc": "Shows player's coordinates and X/Y/angular velocity in the bottom left. Could be useful for precise movement."},
     {"tab": 4, "id": "macrovelvector", "name": "Velocity Vector", "desc": "Draws an arrow from the player showing the direction and strength of its current velocity."}
   ]
 }

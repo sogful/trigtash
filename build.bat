@@ -53,6 +53,13 @@ if not exist "%GDEXP%\node_modules\gdcore-tools\src\index.mjs" (
   popd
   if not "!ERR!"=="0" ( echo gdcore-tools install failed & exit /b 1 )
 )
+
+echo reinjecting feature scripts..
+for %%S in (tas\~build.js settings\~build.js demonlist\~build.js mappack\~build.js portal\~build.js rated\~build.js leveldeco\build.js blackorb\~build.js) do (
+  call node "%ROOT%scripts\%%S" >nul
+  if not "!errorlevel!"=="0" ( echo inject failed: %%S & exit /b 1 )
+)
+
 echo packaging project\Geomangle.json ..
 pushd "%GDEXP%"
 call node run.mjs "%STAGE%"

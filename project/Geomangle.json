@@ -6883,7 +6883,7 @@
               "folded": true,
               "name": "description",
               "type": "string",
-              "value": "Pressing 'Tab' toggles the macro overlay when playing a level. With it enabled, your inputs will be automatically recorded in the background. Hence, turning this off could improve performance. Do not use any of the features in main level completions if you want it to count as legitimate!"
+              "value": "Pressing 'Tab' toggles the macro overlay when playing a level. With it enabled, your inputs will be automatically recorded in the background."
             }
           ]
         },
@@ -6929,7 +6929,7 @@
               "folded": true,
               "name": "description",
               "type": "string",
-              "value": "Adds frame stepping controls to the macro overlay. The issues related to frame stepping are very difficult to fix, so you should consider using speedhack and practice mode instead."
+              "value": "Adds frame stepping controls to the macro overlay. ...You should consider using speedhack and practice mode instead."
             }
           ]
         },
@@ -7067,7 +7067,7 @@
               "folded": true,
               "name": "description",
               "type": "string",
-              "value": "Shows a readout of the player's coordinates and X/Y/angular velocity in the bottom left while playing. Could be useful for precise movement."
+              "value": "Shows player's coordinates and X/Y/angular velocity in the bottom left. Could be useful for precise movement."
             }
           ]
         },
@@ -21961,7 +21961,7 @@
                   "timeBetweenFrames": 0.08,
                   "sprites": [
                     {
-                      "hasCustomCollisionMask": true,
+                      "hasCustomCollisionMask": false,
                       "image": "assets\\textures\\system\\playlevel0.png",
                       "points": [],
                       "originPoint": {
@@ -44689,8 +44689,8 @@
                   },
                   "parameters": [
                     "editorpagebuttons",
-                    "Space",
                     "",
+                    "no",
                     ""
                   ]
                 }
@@ -46077,6 +46077,15 @@
                     "settingsShown",
                     "=",
                     "1"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ResetTimer"
+                  },
+                  "parameters": [
+                    "",
+                    "\"levelSettingsMenu\""
                   ]
                 }
               ]
@@ -49405,8 +49414,8 @@
                           },
                           "parameters": [
                             "playlevel",
-                            "Space",
                             "",
+                            "no",
                             ""
                           ]
                         },
@@ -49417,8 +49426,8 @@
                           },
                           "parameters": [
                             "backbutton",
-                            "Space",
                             "",
+                            "no",
                             ""
                           ]
                         },
@@ -51771,8 +51780,8 @@
                       },
                       "parameters": [
                         "playlevel",
-                        "Space",
                         "",
+                        "no",
                         ""
                       ]
                     }
@@ -51800,8 +51809,8 @@
                       },
                       "parameters": [
                         "backbutton",
-                        "Space",
                         "",
+                        "no",
                         ""
                       ]
                     }
@@ -52672,8 +52681,8 @@
                           },
                           "parameters": [
                             "playlevel",
-                            "Space",
                             "",
+                            "no",
                             ""
                           ]
                         }
@@ -52689,8 +52698,8 @@
                           },
                           "parameters": [
                             "backbutton",
-                            "Space",
                             "",
+                            "no",
                             ""
                           ]
                         }
@@ -52754,8 +52763,8 @@
                   },
                   "parameters": [
                     "backbutton",
-                    "Space",
                     "",
+                    "no",
                     ""
                   ]
                 }
@@ -52784,8 +52793,8 @@
                   },
                   "parameters": [
                     "playlevel",
-                    "Space",
                     "",
+                    "no",
                     ""
                   ]
                 }
@@ -57526,6 +57535,17 @@
                     "colorSelectorShown",
                     "=",
                     "-1"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "CompareTimer"
+                  },
+                  "parameters": [
+                    "",
+                    "\"levelSettingsMenu\"",
+                    ">=",
+                    "0.1"
                   ]
                 }
               ],
@@ -64232,870 +64252,6 @@
       },
       "events": [
         {
-          "colorB": 228,
-          "colorG": 74,
-          "colorR": 176,
-          "creationTime": 0,
-          "name": "portal menu (tas)",
-          "source": "",
-          "type": "BuiltinCommonInstructions::Group",
-          "events": [
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "BuiltinCommonInstructions::Once"
-                  },
-                  "parameters": []
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "TiledSpriteObject::YOffset"
-                  },
-                  "parameters": [
-                    "titles",
-                    "=",
-                    "158"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ResizableCapability::ResizableBehavior::SetWidth"
-                  },
-                  "parameters": [
-                    "titles",
-                    "Resizable",
-                    "=",
-                    "72"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ResizableCapability::ResizableBehavior::SetHeight"
-                  },
-                  "parameters": [
-                    "titles",
-                    "Resizable",
-                    "=",
-                    "20"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
-                  },
-                  "parameters": [
-                    "transition",
-                    "FlashTransitionPainter",
-                    "\"0;0;0\"",
-                    "0.2",
-                    "\"Circular\"",
-                    "\"Backward\"",
-                    "0"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [],
-              "actions": [
-                {
-                  "type": {
-                    "value": "ModVarObjet"
-                  },
-                  "parameters": [
-                    "titles",
-                    "phase",
-                    "+",
-                    "1*TimeDelta()*60"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "SetAngle"
-                  },
-                  "parameters": [
-                    "titles",
-                    "=",
-                    "cos(ToRad(titles.Variable(phase)))*3"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "MettreX"
-                  },
-                  "parameters": [
-                    "titles",
-                    "=",
-                    "216 - titles.Width()/2"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "TiledSpriteObject::XOffset"
-                  },
-                  "parameters": [
-                    "bgglint",
-                    "+",
-                    "TimeDelta()*40"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "BitmapText::BitmapTextObject::SetText"
-                  },
-                  "parameters": [
-                    "help",
-                    "=",
-                    "\"\""
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "creator",
-                    "",
-                    "",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "ChangeScaleWidth"
-                  },
-                  "parameters": [
-                    "creator",
-                    "=",
-                    "lerp(creator.ScaleX(),1.2,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ChangeScaleHeight"
-                  },
-                  "parameters": [
-                    "creator",
-                    "=",
-                    "lerp(creator.ScaleY(),1.2,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "BitmapText::BitmapTextObject::SetText"
-                  },
-                  "parameters": [
-                    "help",
-                    "=",
-                    "creator.Variable(helpMsg)"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "inverted": true,
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "creator",
-                    "",
-                    "",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "ChangeScaleWidth"
-                  },
-                  "parameters": [
-                    "creator",
-                    "=",
-                    "lerp(creator.ScaleX(),1,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ChangeScaleHeight"
-                  },
-                  "parameters": [
-                    "creator",
-                    "=",
-                    "lerp(creator.ScaleY(),1,0.5)"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "creator",
-                    "",
-                    "",
-                    ""
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "MouseButtonReleased"
-                  },
-                  "parameters": [
-                    "",
-                    "Left"
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
-                  },
-                  "parameters": [
-                    "transition",
-                    "FlashTransitionPainter",
-                    "\"0;0;0\"",
-                    "0.2",
-                    "\"Circular\"",
-                    "\"Forward\"",
-                    "0"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "Wait"
-                  },
-                  "parameters": [
-                    "0.2"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "Scene"
-                  },
-                  "parameters": [
-                    "",
-                    "\"creator\"",
-                    "yes"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "mappacks2",
-                    "",
-                    "",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "ChangeScaleWidth"
-                  },
-                  "parameters": [
-                    "mappacks2",
-                    "=",
-                    "lerp(mappacks2.ScaleX(),1.2,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ChangeScaleHeight"
-                  },
-                  "parameters": [
-                    "mappacks2",
-                    "=",
-                    "lerp(mappacks2.ScaleY(),1.2,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "BitmapText::BitmapTextObject::SetText"
-                  },
-                  "parameters": [
-                    "help",
-                    "=",
-                    "mappacks2.Variable(helpMsg)"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "inverted": true,
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "mappacks2",
-                    "",
-                    "",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "ChangeScaleWidth"
-                  },
-                  "parameters": [
-                    "mappacks2",
-                    "=",
-                    "lerp(mappacks2.ScaleX(),1,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ChangeScaleHeight"
-                  },
-                  "parameters": [
-                    "mappacks2",
-                    "=",
-                    "lerp(mappacks2.ScaleY(),1,0.5)"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "mappacks2",
-                    "",
-                    "",
-                    ""
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "MouseButtonReleased"
-                  },
-                  "parameters": [
-                    "",
-                    "Left"
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
-                  },
-                  "parameters": [
-                    "transition",
-                    "FlashTransitionPainter",
-                    "\"0;0;0\"",
-                    "0.2",
-                    "\"Circular\"",
-                    "\"Forward\"",
-                    "0"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "Wait"
-                  },
-                  "parameters": [
-                    "0.2"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "Scene"
-                  },
-                  "parameters": [
-                    "",
-                    "\"mappack\"",
-                    "yes"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "demonlist2",
-                    "",
-                    "",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "ChangeScaleWidth"
-                  },
-                  "parameters": [
-                    "demonlist2",
-                    "=",
-                    "lerp(demonlist2.ScaleX(),1.2,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ChangeScaleHeight"
-                  },
-                  "parameters": [
-                    "demonlist2",
-                    "=",
-                    "lerp(demonlist2.ScaleY(),1.2,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "BitmapText::BitmapTextObject::SetText"
-                  },
-                  "parameters": [
-                    "help",
-                    "=",
-                    "demonlist2.Variable(helpMsg)"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "inverted": true,
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "demonlist2",
-                    "",
-                    "",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "ChangeScaleWidth"
-                  },
-                  "parameters": [
-                    "demonlist2",
-                    "=",
-                    "lerp(demonlist2.ScaleX(),1,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ChangeScaleHeight"
-                  },
-                  "parameters": [
-                    "demonlist2",
-                    "=",
-                    "lerp(demonlist2.ScaleY(),1,0.5)"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "demonlist2",
-                    "",
-                    "",
-                    ""
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "MouseButtonReleased"
-                  },
-                  "parameters": [
-                    "",
-                    "Left"
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
-                  },
-                  "parameters": [
-                    "transition",
-                    "FlashTransitionPainter",
-                    "\"0;0;0\"",
-                    "0.2",
-                    "\"Circular\"",
-                    "\"Forward\"",
-                    "0"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "Wait"
-                  },
-                  "parameters": [
-                    "0.2"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "Scene"
-                  },
-                  "parameters": [
-                    "",
-                    "\"demonlist\"",
-                    "yes"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "featured",
-                    "",
-                    "",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "ChangeScaleWidth"
-                  },
-                  "parameters": [
-                    "featured",
-                    "=",
-                    "lerp(featured.ScaleX(),1.2,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ChangeScaleHeight"
-                  },
-                  "parameters": [
-                    "featured",
-                    "=",
-                    "lerp(featured.ScaleY(),1.2,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "BitmapText::BitmapTextObject::SetText"
-                  },
-                  "parameters": [
-                    "help",
-                    "=",
-                    "featured.Variable(helpMsg)"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "inverted": true,
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "featured",
-                    "",
-                    "",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "ChangeScaleWidth"
-                  },
-                  "parameters": [
-                    "featured",
-                    "=",
-                    "lerp(featured.ScaleX(),1,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ChangeScaleHeight"
-                  },
-                  "parameters": [
-                    "featured",
-                    "=",
-                    "lerp(featured.ScaleY(),1,0.5)"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "featured",
-                    "",
-                    "",
-                    ""
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "MouseButtonReleased"
-                  },
-                  "parameters": [
-                    "",
-                    "Left"
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
-                  },
-                  "parameters": [
-                    "transition",
-                    "FlashTransitionPainter",
-                    "\"0;0;0\"",
-                    "0.2",
-                    "\"Circular\"",
-                    "\"Forward\"",
-                    "0"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "Wait"
-                  },
-                  "parameters": [
-                    "0.2"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "Scene"
-                  },
-                  "parameters": [
-                    "",
-                    "\"rated\"",
-                    "yes"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "backbutton",
-                    "",
-                    "",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "ChangeScaleWidth"
-                  },
-                  "parameters": [
-                    "backbutton",
-                    "=",
-                    "lerp(backbutton.ScaleX(),1.2,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ChangeScaleHeight"
-                  },
-                  "parameters": [
-                    "backbutton",
-                    "=",
-                    "lerp(backbutton.ScaleY(),1.2,0.5)"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "inverted": true,
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "backbutton",
-                    "",
-                    "",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "ChangeScaleWidth"
-                  },
-                  "parameters": [
-                    "backbutton",
-                    "=",
-                    "lerp(backbutton.ScaleX(),1,0.5)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "ChangeScaleHeight"
-                  },
-                  "parameters": [
-                    "backbutton",
-                    "=",
-                    "lerp(backbutton.ScaleY(),1,0.5)"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "SourisSurObjet"
-                  },
-                  "parameters": [
-                    "backbutton",
-                    "",
-                    "",
-                    ""
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "MouseButtonReleased"
-                  },
-                  "parameters": [
-                    "",
-                    "Left"
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
-                  },
-                  "parameters": [
-                    "transition",
-                    "FlashTransitionPainter",
-                    "\"0;0;0\"",
-                    "0.2",
-                    "\"Circular\"",
-                    "\"Forward\"",
-                    "0"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "Wait"
-                  },
-                  "parameters": [
-                    "0.2"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "Scene"
-                  },
-                  "parameters": [
-                    "",
-                    "\"mainmenu\"",
-                    "yes"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [],
-              "actions": [
-                {
-                  "type": {
-                    "value": "MettreX"
-                  },
-                  "parameters": [
-                    "help",
-                    "=",
-                    "216 - help.Width()/2"
-                  ]
-                }
-              ]
-            }
-          ],
-          "parameters": []
-        },
-        {
           "type": "BuiltinCommonInstructions::Group",
           "disabled": false,
           "folded": true,
@@ -65176,6 +64332,913 @@
               "events": []
             }
           ]
+        },
+        {
+          "colorB": 228,
+          "colorG": 74,
+          "colorR": 176,
+          "creationTime": 0,
+          "folded": true,
+          "name": "portal menu (tas)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "events": [
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::Once"
+                  },
+                  "parameters": []
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "TiledSpriteObject::YOffset"
+                  },
+                  "parameters": [
+                    "titles",
+                    "=",
+                    "158"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ResizableCapability::ResizableBehavior::SetWidth"
+                  },
+                  "parameters": [
+                    "titles",
+                    "Resizable",
+                    "=",
+                    "72"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ResizableCapability::ResizableBehavior::SetHeight"
+                  },
+                  "parameters": [
+                    "titles",
+                    "Resizable",
+                    "=",
+                    "20"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
+                  },
+                  "parameters": [
+                    "transition",
+                    "FlashTransitionPainter",
+                    "\"0;0;0\"",
+                    "0.2",
+                    "\"Circular\"",
+                    "\"Backward\"",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ModVarObjet"
+                  },
+                  "parameters": [
+                    "titles",
+                    "phase",
+                    "+",
+                    "1*TimeDelta()*60"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetAngle"
+                  },
+                  "parameters": [
+                    "titles",
+                    "=",
+                    "cos(ToRad(titles.Variable(phase)))*3"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "MettreX"
+                  },
+                  "parameters": [
+                    "titles",
+                    "=",
+                    "216 - titles.Width()/2"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "TiledSpriteObject::XOffset"
+                  },
+                  "parameters": [
+                    "bgglint",
+                    "+",
+                    "TimeDelta()*40"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BitmapText::BitmapTextObject::SetText"
+                  },
+                  "parameters": [
+                    "help",
+                    "=",
+                    "\"\""
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "creator",
+                    "",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ChangeScaleWidth"
+                  },
+                  "parameters": [
+                    "creator",
+                    "=",
+                    "lerp(creator.ScaleX(),1.2,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ChangeScaleHeight"
+                  },
+                  "parameters": [
+                    "creator",
+                    "=",
+                    "lerp(creator.ScaleY(),1.2,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BitmapText::BitmapTextObject::SetText"
+                  },
+                  "parameters": [
+                    "help",
+                    "=",
+                    "creator.Variable(helpMsg)"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": true,
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "creator",
+                    "",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ChangeScaleWidth"
+                  },
+                  "parameters": [
+                    "creator",
+                    "=",
+                    "lerp(creator.ScaleX(),1,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ChangeScaleHeight"
+                  },
+                  "parameters": [
+                    "creator",
+                    "=",
+                    "lerp(creator.ScaleY(),1,0.5)"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "creator",
+                    "",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "MouseButtonReleased"
+                  },
+                  "parameters": [
+                    "",
+                    "Left"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
+                  },
+                  "parameters": [
+                    "transition",
+                    "FlashTransitionPainter",
+                    "\"0;0;0\"",
+                    "0.2",
+                    "\"Circular\"",
+                    "\"Forward\"",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Wait"
+                  },
+                  "parameters": [
+                    "0.2"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Scene"
+                  },
+                  "parameters": [
+                    "",
+                    "\"creator\"",
+                    "yes"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "mappacks2",
+                    "",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ChangeScaleWidth"
+                  },
+                  "parameters": [
+                    "mappacks2",
+                    "=",
+                    "lerp(mappacks2.ScaleX(),1.2,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ChangeScaleHeight"
+                  },
+                  "parameters": [
+                    "mappacks2",
+                    "=",
+                    "lerp(mappacks2.ScaleY(),1.2,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BitmapText::BitmapTextObject::SetText"
+                  },
+                  "parameters": [
+                    "help",
+                    "=",
+                    "mappacks2.Variable(helpMsg)"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": true,
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "mappacks2",
+                    "",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ChangeScaleWidth"
+                  },
+                  "parameters": [
+                    "mappacks2",
+                    "=",
+                    "lerp(mappacks2.ScaleX(),1,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ChangeScaleHeight"
+                  },
+                  "parameters": [
+                    "mappacks2",
+                    "=",
+                    "lerp(mappacks2.ScaleY(),1,0.5)"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "mappacks2",
+                    "",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "MouseButtonReleased"
+                  },
+                  "parameters": [
+                    "",
+                    "Left"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
+                  },
+                  "parameters": [
+                    "transition",
+                    "FlashTransitionPainter",
+                    "\"0;0;0\"",
+                    "0.2",
+                    "\"Circular\"",
+                    "\"Forward\"",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Wait"
+                  },
+                  "parameters": [
+                    "0.2"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Scene"
+                  },
+                  "parameters": [
+                    "",
+                    "\"mappack\"",
+                    "yes"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "demonlist2",
+                    "",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ChangeScaleWidth"
+                  },
+                  "parameters": [
+                    "demonlist2",
+                    "=",
+                    "lerp(demonlist2.ScaleX(),1.2,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ChangeScaleHeight"
+                  },
+                  "parameters": [
+                    "demonlist2",
+                    "=",
+                    "lerp(demonlist2.ScaleY(),1.2,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BitmapText::BitmapTextObject::SetText"
+                  },
+                  "parameters": [
+                    "help",
+                    "=",
+                    "demonlist2.Variable(helpMsg)"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": true,
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "demonlist2",
+                    "",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ChangeScaleWidth"
+                  },
+                  "parameters": [
+                    "demonlist2",
+                    "=",
+                    "lerp(demonlist2.ScaleX(),1,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ChangeScaleHeight"
+                  },
+                  "parameters": [
+                    "demonlist2",
+                    "=",
+                    "lerp(demonlist2.ScaleY(),1,0.5)"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "demonlist2",
+                    "",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "MouseButtonReleased"
+                  },
+                  "parameters": [
+                    "",
+                    "Left"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
+                  },
+                  "parameters": [
+                    "transition",
+                    "FlashTransitionPainter",
+                    "\"0;0;0\"",
+                    "0.2",
+                    "\"Circular\"",
+                    "\"Forward\"",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Wait"
+                  },
+                  "parameters": [
+                    "0.2"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Scene"
+                  },
+                  "parameters": [
+                    "",
+                    "\"demonlist\"",
+                    "yes"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "featured",
+                    "",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ChangeScaleWidth"
+                  },
+                  "parameters": [
+                    "featured",
+                    "=",
+                    "lerp(featured.ScaleX(),1.2,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ChangeScaleHeight"
+                  },
+                  "parameters": [
+                    "featured",
+                    "=",
+                    "lerp(featured.ScaleY(),1.2,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BitmapText::BitmapTextObject::SetText"
+                  },
+                  "parameters": [
+                    "help",
+                    "=",
+                    "featured.Variable(helpMsg)"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": true,
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "featured",
+                    "",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ChangeScaleWidth"
+                  },
+                  "parameters": [
+                    "featured",
+                    "=",
+                    "lerp(featured.ScaleX(),1,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ChangeScaleHeight"
+                  },
+                  "parameters": [
+                    "featured",
+                    "=",
+                    "lerp(featured.ScaleY(),1,0.5)"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "featured",
+                    "",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "MouseButtonReleased"
+                  },
+                  "parameters": [
+                    "",
+                    "Left"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
+                  },
+                  "parameters": [
+                    "transition",
+                    "FlashTransitionPainter",
+                    "\"0;0;0\"",
+                    "0.2",
+                    "\"Circular\"",
+                    "\"Forward\"",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Wait"
+                  },
+                  "parameters": [
+                    "0.2"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Scene"
+                  },
+                  "parameters": [
+                    "",
+                    "\"rated\"",
+                    "yes"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "backbutton",
+                    "",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ChangeScaleWidth"
+                  },
+                  "parameters": [
+                    "backbutton",
+                    "=",
+                    "lerp(backbutton.ScaleX(),1.2,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ChangeScaleHeight"
+                  },
+                  "parameters": [
+                    "backbutton",
+                    "=",
+                    "lerp(backbutton.ScaleY(),1.2,0.5)"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": true,
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "backbutton",
+                    "",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ChangeScaleWidth"
+                  },
+                  "parameters": [
+                    "backbutton",
+                    "=",
+                    "lerp(backbutton.ScaleX(),1,0.5)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ChangeScaleHeight"
+                  },
+                  "parameters": [
+                    "backbutton",
+                    "=",
+                    "lerp(backbutton.ScaleY(),1,0.5)"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SourisSurObjet"
+                  },
+                  "parameters": [
+                    "backbutton",
+                    "",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "MouseButtonReleased"
+                  },
+                  "parameters": [
+                    "",
+                    "Left"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "FlashTransitionPainter::FlashTransitionPainter::PaintEffect"
+                  },
+                  "parameters": [
+                    "transition",
+                    "FlashTransitionPainter",
+                    "\"0;0;0\"",
+                    "0.2",
+                    "\"Circular\"",
+                    "\"Forward\"",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Wait"
+                  },
+                  "parameters": [
+                    "0.2"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Scene"
+                  },
+                  "parameters": [
+                    "",
+                    "\"mainmenu\"",
+                    "yes"
+                  ]
+                }
+              ],
+              "events": []
+            },
+            {
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "MettreX"
+                  },
+                  "parameters": [
+                    "help",
+                    "=",
+                    "216 - help.Width()/2"
+                  ]
+                }
+              ],
+              "events": []
+            }
+          ],
+          "parameters": []
         }
       ],
       "layers": [
@@ -113976,7 +114039,7 @@
                             "winLeave",
                             "Tween",
                             "\"winLeaveX\"",
-                            "216-pauseLeave.Width()/2-24+15",
+                            "213-pauseLeave.Width()/2-24+15",
                             "116+15",
                             "\"swingTo\"",
                             "1000*(0.5)",
@@ -113991,7 +114054,7 @@
                             "winRestart",
                             "Tween",
                             "\"winRestartX\"",
-                            "216-pauseLeave.Width()/2+24+15",
+                            "213-pauseLeave.Width()/2+24+15",
                             "116+15",
                             "\"swingTo\"",
                             "1000*(0.5)",
@@ -114023,7 +114086,7 @@
                             "winLeave",
                             "Tween",
                             "\"winLeaveX\"",
-                            "216-pauseLeave.Width()/2-32+15",
+                            "213-pauseLeave.Width()/2-32+15",
                             "116+15",
                             "\"swingTo\"",
                             "1000*(0.5)",
@@ -114038,7 +114101,7 @@
                             "winRestart",
                             "Tween",
                             "\"winRestartX\"",
-                            "216-pauseLeave.Width()/2+15",
+                            "213-pauseLeave.Width()/2+15",
                             "116+15",
                             "\"swingTo\"",
                             "1000*(0.5)",
@@ -114053,7 +114116,7 @@
                             "winEdit",
                             "Tween",
                             "\"winEditX\"",
-                            "216-pauseLeave.Width()/2+32+15",
+                            "213-pauseLeave.Width()/2+32+15",
                             "116+15",
                             "\"swingTo\"",
                             "1000*(0.5)",
@@ -134260,6 +134323,9 @@
                 "    if (t.mode === \"record\") {",
                 "      t.macro.events = t.macro.events.filter(ev => ev[0] < snap.frame);",
                 "      t.macro.icon.length = Math.min(t.macro.icon.length, snap.frame);",
+                "      // remember the world state at this rollback frame so a replay can re-apply it",
+                "      // (a replay only force-corrects the player, so physics + switch blocks would drift)",
+                "      if (t.macro && snap.objs) (t.macro.worldsnaps = t.macro.worldsnaps || {})[snap.frame] = snap.objs;",
                 "      t.prevkeys = Object.assign({}, snap.reckeys || {});",
                 "      t.prevmouse = !!snap.recmouse;",
                 "      applykeystate({}, false);",
@@ -134590,6 +134656,10 @@
                 "  function applykeystate(keys, mouse) {",
                 "    for (const name in t.watch) {",
                 "      const code = t.watch[name];",
+                "      // never REPLAY control keys as raw input: escape(27)/r(82)/t(84)/u(85) each have",
+                "      // their own handling (pause via requestpause, restart, backtrack via \"back\" events).",
+                "      // a recorded escape (user paused mid-record) would otherwise pause the replay.",
+                "      if (code === 27 || code === 82 || code === 84 || code === 85) continue;",
                 "      const want = !!keys[name] || (code === 32 && mouse);",
                 "      if (want && !input.isKeyPressed(code)) input.onKeyPressed(code, 0);",
                 "      if (!want && input.isKeyPressed(code)) input.onKeyReleased(code, 0);",
@@ -134735,6 +134805,7 @@
                 "    let pos = 0, nf = 0;",
                 "    const desired = {keys: {}, mouse: false, cursor: null};",
                 "    const emitted = {keys: {}, mouse: false, cursor: null};",
+                "    const ws = m.worldsnaps || {}, newworldsnaps = {};",
                 "    for (let f = 0; f < m.length; f++) {",
                 "      while (pos < events.length && events[pos][0] === f) {",
                 "        const ev = events[pos++];",
@@ -134760,11 +134831,13 @@
                 "        emitted.cursor = desired.cursor;",
                 "      }",
                 "      newicon[nf] = icon[f];",
+                "      if (ws[f]) newworldsnaps[nf] = ws[f];",
                 "      nf++;",
                 "    }",
                 "    note(\"trimmed macro: \" + m.length + \" -> \" + nf + \" frames (\" + clusters.length + \" segment(s) merged)\");",
                 "    m.events = newevents;",
                 "    m.icon = newicon;",
+                "    m.worldsnaps = newworldsnaps;",
                 "    m.length = nf;",
                 "  }",
                 "  /*//// trim end ////*/",
@@ -134938,6 +135011,7 @@
                 "      t.prevkeys = {}; t.prevmouse = false; t.prevcursor = [0, 0];",
                 "      try {t.prevdeaths = svar(scene, \"deaths\").getAsNumber()} catch (e) {}",
                 "      t.prevstop = 0;",
+                "      t.timerstarted = false; t.timerstartframe = 0; t.tprevx = undefined;",
                 "      t.practice = false;",
                 "",
                 "      if (t.playable) {",
@@ -135014,6 +135088,11 @@
                 "",
                 "      let backinject = false;",
                 "      if (t.requestbacktrack && inlevel()) {const bt = (t.requestbacktrack === true) ? backtarget() : t.requestbacktrack; t.requestbacktrack = false; if (bt) {applynormalcp(scene, bt); t.ubacktrack = 8; backinject = true; try {input.onKeyPressed(82, 0)} catch (e) {}}}",
+                "      // re-apply the recorded world state at rollback frames so physics + switch blocks",
+                "      // match the run instead of drifting (a replay only force-corrects the player)",
+                "      if (t.mode === \"play\" && !replaypaused && t.playm.worldsnaps && t.playm.worldsnaps[t.frame]) {",
+                "        try {restoreobjs(scene, t.playm.worldsnaps[t.frame])} catch (e) {}",
+                "      }",
                 "      try {scene.render = (i === n - 1) ? realRender : noRender} catch (e) {}",
                 "      alive = t.origstep(t.step);",
                 "      if (pauseinject) try {input.onKeyReleased(27, 0)} catch (e) {}",
@@ -135048,7 +135127,7 @@
                 "",
                 "  function startsession(scene) {",
                 "    t.timerstarted = false;",
-                "    t.macro = {levelInfo: macrometa(scene), events: [], icon: [], length: 0};",
+                "    t.macro = {levelInfo: macrometa(scene), events: [], icon: [], length: 0, worldsnaps: {}};",
                 "    t.frame = 0; t.ring = [];",
                 "    t.prevkeys = {}; t.prevmouse = false; t.prevcursor = [0, 0];",
                 "    t.editmode = false; t.cheated = false; t.fresh = null;",
@@ -135059,7 +135138,7 @@
                 "    const m = t.playable && t.playable.macro;",
                 "    if (!m || !m.length) {note(\"no finished macro to export\"); return}",
                 "    const levelInfo = Object.assign({}, m.levelInfo, {length: m.length});",
-                "    const data = JSON.stringify({levelInfo: levelInfo, events: m.events, icon: m.icon});",
+                "    const data = JSON.stringify({levelInfo: levelInfo, events: m.events, icon: m.icon, worldsnaps: m.worldsnaps || {}});",
                 "    const fname = ((m.levelInfo && m.levelInfo.name) || \"macro\").replace(/[^\\w\\- ]/g, \"\") + \".tgdm\";",
                 "    invoke(\"save_text_file\", {defaultName: fname, content: data}).then(function (saved) {",
                 "      note(saved ? \"macro exported\" : \"export cancelled\");",
@@ -135079,7 +135158,7 @@
                 "        if (!m || !Array.isArray(m.events)) {note(\"invalid macro file\"); return}",
                 "        const li = m.levelInfo || (m.meta && m.meta.level) || {};",
                 "        const len = (m.levelInfo && m.levelInfo.length) || m.length || 0;",
-                "        t.playable = {macro: {levelInfo: li, events: m.events, icon: m.icon || [], length: len}, src: \"loaded\"};",
+                "        t.playable = {macro: {levelInfo: li, events: m.events, icon: m.icon || [], length: len, worldsnaps: m.worldsnaps || {}}, src: \"loaded\"};",
                 "        note(\"macro imported (\" + t.playable.macro.length + \" frames)\");",
                 "      } catch (e) {note(\"invalid macro file\")}",
                 "    };",
@@ -135277,7 +135356,16 @@
                 "      if (t.frame < t.playm.length) playframe();",
                 "      setblackalpha(0);",
                 "      applypendingsynth();",
+                "      // replay the recorded death/backtrack: playframe sets requestbacktrack on \"back\"",
+                "      // events, but the export never consumed it - so deaths only teleported the player",
+                "      // and block states never reset. mirror the live replay (applynormalcp + R inject)",
+                "      let backinject = false;",
+                "      if (t.requestbacktrack && inlevel()) {const bt = (t.requestbacktrack === true) ? backtarget() : t.requestbacktrack; t.requestbacktrack = false; if (bt) {applynormalcp(scene, bt); t.ubacktrack = 8; backinject = true; try {input.onKeyPressed(82, 0)} catch (e) {}}}",
+                "      // re-apply the recorded world state at rollback frames (same as the live replay),",
+                "      // else physics + switch blocks drift in the export even though they're right live",
+                "      if (t.playm.worldsnaps && t.playm.worldsnaps[t.frame]) {try {restoreobjs(scene, t.playm.worldsnaps[t.frame])} catch (e) {}}",
                 "      t.origstep(t.step);",
+                "      if (backinject) try {input.onKeyReleased(82, 0)} catch (e) {}",
                 "      applyicon(scene, t.frame);",
                 "      paintandcap(scene);",
                 "      if (winshown(scene)) {t.offsub = \"outro\"; t.offwon = t.offframe; t.offcompleteat = -1}",
@@ -135870,11 +135958,11 @@
                 "            try {gdjs.evtTools.runtimeScene.unpauseTimer(scene, \"stopwatch\")} catch (e) {}",
                 "          }",
                 "        }",
-                "        // during a replay the timer is frame-locked to the played frames, so a",
-                "        // pause can't change the final time (the game's pause/unpause is a frame",
-                "        // late each toggle, which drifted the stopwatch a bit per pause)",
                 "        if (t.mode === \"play\" && t.timerstarted) {",
-                "          try {const tm = scene.getTimeManager()._timers.get(\"stopwatch\"); if (tm) tm.setTime((t.frame - (t.timerstartframe || 0)) * t.step)} catch (e) {}",
+                "          // frame-lock the timer, BUT if the game has dropped it well below our value the",
+                "          // level was restarted (pause-menu restart) - leave it so the step loop's restart",
+                "          // detection catches it instead of us masking the reset.",
+                "          try {const tm = scene.getTimeManager()._timers.get(\"stopwatch\"); const want = Math.max(0, (t.frame - (t.timerstartframe || 0)) * t.step); if (tm && tm.getTime() >= want - 200) tm.setTime(want)} catch (e) {}",
                 "        }",
                 "        t.tprevx = plx; t.tprevy = ply;",
                 "      }",
@@ -135928,14 +136016,32 @@
                 "            if (s.length > 7) {s = n.toExponential(1); if (s.length > 7) s = n.toExponential(0)}",
                 "            return s.padStart(7);",
                 "          };",
+                "          const vxs = fit(vx, 2);",
                 "          t.veltext.setText(",
                 "            lbl(\"x\") + fit(px, 3) + \" \" + lbl(\"y\") + fit(py, 3) + \"\\n\" +",
-                "            lbl(\"xvel\") + fit(vx, 2) + \" \" + lbl(\"yvel\") + fit(vy, 2) + \"\\n\" +",
+                "            lbl(\"xvel\") + \"       \" + \" \" + lbl(\"yvel\") + fit(vy, 2) + \"\\n\" +",
                 "            lbl(\"ang\") + va.toFixed(4));",
+                "          try {t.veltext.setTint(\"255;255;255\")} catch (e) {}",
                 "          let gh = 224; try {gh = game.getGameResolutionHeight()} catch (e) {}",
-                "          t.veltext.setPosition(4, gh - 6 - t.veltext.getHeight());",
-                "        } else if (t.veltext) {t.veltext.hide(true)}",
-                "      } else if (t.veltext) {t.veltext.hide(true)}",
+                "          const vty = gh - 6 - t.veltext.getHeight();",
+                "          t.veltext.setPosition(4, vty);",
+                "          // overlay just the xvel value, tinted redder the further |xvel| runs past the",
+                "          // gamemode's normal cap - a successful xvel boost. cube/ball 150, ship 75,",
+                "          // ufo 200, wave 175 (read live from the mode + <mode>speed scene vars)",
+                "          if (t.xvelcol) {",
+                "            let cap = 150;",
+                "            try {const m = svar(scene, \"mode\").getAsString(); const c = svar(scene, m + \"speed\").getAsNumber(); if (c > 0) cap = c} catch (e) {}",
+                "            const rr = Math.min(1, Math.max(0, Math.abs(vx) - cap) / (cap * 0.5));",
+                "            const gb = Math.round(255 - rr * 195);",
+                "            t.xvelcol.hide(false);",
+                "            try {t.xvelcol.setScale(0.5)} catch (e) {}",
+                "            t.xvelcol.setText(vxs);",
+                "            try {t.xvelcol.setTint(\"255;\" + gb + \";\" + gb)} catch (e) {try {t.xvelcol.setColor(\"255;\" + gb + \";\" + gb)} catch (e2) {}}",
+                "            let cw = 0, lh = 0; try {cw = t.veltext.getWidth() / 25; lh = t.veltext.getHeight() / 3} catch (e) {}",
+                "            t.xvelcol.setPosition(4 + 5 * cw, vty + lh);",
+                "          }",
+                "        } else {if (t.veltext) t.veltext.hide(true); if (t.xvelcol) t.xvelcol.hide(true)}",
+                "      } else {if (t.veltext) t.veltext.hide(true); if (t.xvelcol) t.xvelcol.hide(true)}",
                 "      if (t.veldraw) {",
                 "        try {t.veldraw.clear()} catch (e) {}",
                 "        if (pl && wantvec) {",
@@ -135994,6 +136100,10 @@
                 "      if (t.vidphase === \"exported\" && performance.now() - t.exporteddone > 2000) {",
                 "        t.vidphase = null; t.vidblock = false;",
                 "        completegrey(scene, false);",
+                "        // the render dimmed the complete-screen objects to hide them from the footage;",
+                "        // bring them back so the complete screen reappears after exporting - the bg dim",
+                "        // is semitransparent (the game tweens it to 255/3), the rest are fully opaque",
+                "        for (const n of completeobjs) for (const o of scene.getObjects(n) || []) {try {o.setOpacity(n === \"levelCompleteBg\" ? 85 : 255)} catch (e) {}}",
                 "        if (t.counttext) {t.counttext.hide(); try {t.counttext.setScale(3)} catch (e) {}}",
                 "        t.vidstep = \"\";",
                 "      }",
@@ -136365,6 +136475,18 @@
                 "    try {t.veltext.setWrapping(false)} catch (e) {}",
                 "    t.veltext.hide(true);",
                 "  }",
+                "  // dedicated overlay for just the xvel value so it tints independently of the rest of",
+                "  // the readout (bitmaptext is single-colour). the tasbtn pool is fully spent by the",
+                "  // named grabs, so spin up a fresh instance",
+                "  t.xvelcol = null;",
+                "  try {t.xvelcol = runtimeScene.createObject(\"tasbtn\")} catch (e) {}",
+                "  if (t.xvelcol) {",
+                "    t.xvelcol.setLayer(\"ui\");",
+                "    t.xvelcol.setZOrder(10006);",
+                "    try {t.xvelcol.setScale(0.5)} catch (e) {}",
+                "    try {t.xvelcol.setWrapping(false)} catch (e) {}",
+                "    t.xvelcol.hide(true);",
+                "  }",
                 "  t.tiptext = grab(\"tasbtn\");",
                 "  if (t.tiptext) {",
                 "    t.tiptext.setLayer(\"ui\");",
@@ -136454,6 +136576,64 @@
                 "",
                 "t.practicetick(runtimeScene);",
                 "t.refreshhud();",
+                ""
+              ],
+              "parameterObjects": "",
+              "useStrict": true,
+              "eventsSheetExpanded": false
+            }
+          ]
+        },
+        {
+          "colorB": 74,
+          "colorG": 228,
+          "colorR": 176,
+          "creationTime": 0,
+          "folded": true,
+          "name": "decoration colour (tas)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "parameters": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::JsCode",
+              "inlineCode": [
+                "const scene = runtimeScene;",
+                "const v = scene.getVariables();",
+                "",
+                "const valid = s => /^\\d+;\\d+;\\d+$/.test(s);",
+                "const tint = (names, color) => {",
+                "  if (!valid(color)) return;",
+                "  for (const n of names) {",
+                "    for (const o of (scene.getObjects(n) || [])) {try {o.setColor(color)} catch (e) {}}",
+                "  }",
+                "};",
+                "",
+                "let deco1 = \"\", deco2 = \"\";",
+                "try {",
+                "  const li = v.get(\"loadedLevel\").getChild(\"levelInfo\");",
+                "  deco1 = li.getChild(\"deco1\").getAsString();",
+                "  deco2 = li.getChild(\"deco2\").getAsString();",
+                "} catch (e) {}",
+                "",
+                "const DECO1 = [\"baselesschain\", \"bigburstspinner\", \"bigcogspinner\", \"bigcrossspinner\",",
+                "  \"bigfanspinner\", \"bigflowerspinner\", \"bigoctospinner\", \"bigstarspinner\", \"burstspinner\",",
+                "  \"chain\", \"cogspinner\", \"crossspinner\", \"crystals\", \"fanspinner\", \"flowerspinner\",",
+                "  \"groundthorn\", \"helix\", \"octospinner\", \"shortgroundthorn\", \"smallburstspinner\",",
+                "  \"smallchain\", \"smallcogspinner\", \"smallcrossspinner\", \"smallflowerspinner\", \"smallhelix\",",
+                "  \"smalloctospinner\", \"smallstarspinner\", \"starspinner\", \"tallgroundthorn\"];",
+                "const DECO2 = [\"arrow\", \"chevronarrow\", \"clouds\", \"cross\", \"diamondstar\", \"exclamationmark\",",
+                "  \"groundrectangles\", \"heart\", \"note\", \"questionmark\", \"sharpy\", \"sharpycorner\",",
+                "  \"squareclouds\", \"squarewirecenter\", \"squarewirecorner\", \"squarewireend\", \"squarewireline\",",
+                "  \"squarewiresole\", \"squarewiretee\", \"star\", \"swiggly\", \"swigglycorner\", \"triangle\"];",
+                "",
+                "const P = (window.__leveldeco = window.__leveldeco || {});",
+                "if (P.owner !== scene) {P.owner = scene; P.d1 = null; P.d2 = null}",
+                "if (deco1 !== P.d1 || deco2 !== P.d2) {",
+                "  P.d1 = deco1; P.d2 = deco2;",
+                "  tint(DECO1, deco1);",
+                "  tint(DECO2, deco2);",
+                "}",
                 ""
               ],
               "parameterObjects": "",
@@ -164923,6 +165103,7 @@
           "name": "map pack data (tas)",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
+          "parameters": [],
           "events": [
             {
               "type": "BuiltinCommonInstructions::JsCode",
@@ -164930,15 +165111,17 @@
                 "const scene = runtimeScene;",
                 "const P = (window.__mappack = window.__mappack || {});",
                 "",
-                "// pack metadata (names/colours/difficulty)",
                 "const META = [",
                 "  {name: \"Beginner Pack\", diff: \"easy\", id: 0, num: 3, frontColor: \"60;104;255\", backColor: \"99;162;255\"},",
                 "  {name: \"UFO Pack\", diff: \"hard\", id: 1, num: 3, frontColor: \"255;152;47\", backColor: \"255;208;47\"},",
                 "  {name: \"Intermediate Pack\", diff: \"hard\", id: 2, num: 3, frontColor: \"255;152;47\", backColor: \"255;208;47\"}",
                 "];",
                 "",
+                "// i hope yalls firebase is configured correctly v2",
                 "const KEY = \"AIzaSyDW-WtdoFxgkx6IC9z6ZqKIo-9yTZ5ILWE\";",
-                "const URL = \"https://firestore.googleapis.com/v1/projects/tgd-reborn/databases/(default)/documents/mappacks?key=\" + KEY + \"&pageSize=100\";",
+                "const URL = \"https://firestore.googleapis.com/v1/projects/tgd-reborn/databases/(default)/documents:runQuery?key=\" + KEY;",
+                "",
+                "/*////////////////////////////////////////////////////////////////////*/",
                 "",
                 "function makeLevelstore(byId) {",
                 "  for (const id in byId) {",
@@ -164967,11 +165150,14 @@
                 "    }",
                 "  } catch (e) {}",
                 "  if (cache) {makeLevelstore(cache); P.created = true}",
-                "",
                 "  try {",
-                "    fetch(URL).then(r => r.json()).then(j => {",
+                "    // a plain collection GET silently paginates; the runQuery POST returns all of them",
+                "    fetch(URL, {method: \"POST\", headers: {\"Content-Type\": \"application/json\"},",
+                "      body: JSON.stringify({structuredQuery: {from: [{collectionId: \"mappacks\"}], limit: 300}})",
+                "    }).then(r => r.json()).then(j => {",
                 "      const byId = {};",
-                "      (j.documents || []).forEach(d => {",
+                "      const rows = Array.isArray(j) ? j.filter(x => x && x.document).map(x => x.document) : (j.documents || []);",
+                "      rows.forEach(d => {",
                 "        const f = d.fields || {};",
                 "        const id = parseInt((f.id && (f.id.integerValue || f.id.doubleValue)) || \"0\", 10);",
                 "        const data = (f.data && f.data.arrayValue && f.data.arrayValue.values) || [];",
@@ -164994,10 +165180,12 @@
                 "    }).catch(e => {});",
                 "  } catch (e) {}",
                 "}",
+                "",
                 "if (P.pendingReload) {",
                 "  P.pendingReload = false;",
                 "  gdjs.evtTools.runtimeScene.replaceScene(scene, \"mappack\", true);",
                 "}",
+                "",
                 "try {const nv = scene.getObjects(\"nerdview\"); if (nv && nv[0]) nv[0].hide(true)} catch (e) {}",
                 ""
               ],
@@ -165005,8 +165193,7 @@
               "useStrict": true,
               "eventsSheetExpanded": false
             }
-          ],
-          "parameters": []
+          ]
         },
         {
           "type": "BuiltinCommonInstructions::Standard",
@@ -168323,249 +168510,6 @@
       },
       "events": [
         {
-          "colorB": 74,
-          "colorG": 228,
-          "colorR": 176,
-          "creationTime": 0,
-          "folded": true,
-          "name": "demonlist (tas)",
-          "source": "",
-          "type": "BuiltinCommonInstructions::Group",
-          "events": [
-            {
-              "type": "BuiltinCommonInstructions::JsCode",
-              "inlineCode": [
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "// demonlist tab (recovered from code10.js). the recovered scene had no",
-                "// events; this fetches the live \"demonlist\" Firestore collection (project",
-                "// tgd-reborn) over REST, sorts by pos asc, and builds a scrollable list of",
-                "// rows on the \"mappack\" layer matching the original layout:",
-                "//   maplevel row bg @ (92, 52+44i)",
-                "//   placement rank \"N.\" @ (62, +16)",
-                "//   title name @ (126, +10)",
-                "//   title \"by author\" @ (126, +21), tinted 60;104;255",
-                "//   mapPackLevelDifficulty icon @ (X centred on maplevel.X+20, +1)",
-                "//   playbutton @ (308, +8)",
-                "// title logo = titles TiledSprite YOffset 118, 111x20. play sets the global",
-                "// \"level\" json + \"lvlFrom\" and opens \"level\"; back -> portal; refresh.",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "const scene = runtimeScene;",
-                "const G = scene.getGame().getVariables();",
-                "const P = (window.__demonlist = window.__demonlist || {});",
-                "",
-                "const KEY = \"AIzaSyDW-WtdoFxgkx6IC9z6ZqKIo-9yTZ5ILWE\";",
-                "const URL = \"https://firestore.googleapis.com/v1/projects/tgd-reborn/databases/(default)/documents:runQuery?key=\" + KEY;",
-                "",
-                "// difficulty name (lowercased, spaces stripped) -> [xoff, yoff, w, h]",
-                "const DIFF = {",
-                "  unrated: [0, 48, 16, 16], auto: [0, 0, 16, 16], easy: [16, 0, 16, 16],",
-                "  normal: [32, 0, 16, 16], medium: [48, 0, 16, 16], hard: [64, 0, 16, 16],",
-                "  harder: [80, 0, 16, 16], veryhard: [96, 0, 16, 16], tough: [112, 0, 16, 16],",
-                "  insane: [128, 0, 16, 16], extreme: [144, 0, 16, 16], easydemon: [0, 16, 16, 16],",
-                "  mediumdemon: [16, 16, 16, 16], harddemon: [32, 16, 16, 16],",
-                "  insanedemon: [48, 16, 18, 16], extremedemon: [66, 16, 18, 16]",
-                "};",
-                "",
-                "const create = n => {try {return scene.createObject(n)} catch (e) {return null}};",
-                "const first = n => {const l = scene.getObjects(n); return l && l.length ? l[0] : null};",
-                "const released = gdjs.evtTools.input.isMouseButtonReleased(scene, \"Left\");",
-                "const settext = (o, t) => {try {o.getBehavior(\"Text\").setText(t)} catch (e) {try {o.setText(t)} catch (e2) {}}};",
-                "const tint = (o, c) => {try {o.setTint(c)} catch (e) {}};",
-                "const zord = (o, z) => {try {o.setZOrder(z)} catch (e) {}};",
-                "const hov = o => {",
-                "  if (!o || o.isHidden()) return false;",
-                "  const ly = o.getLayer();",
-                "  const mx = gdjs.evtTools.input.getCursorX(scene, ly, 0);",
-                "  const my = gdjs.evtTools.input.getCursorY(scene, ly, 0);",
-                "  return mx >= o.getAABBLeft() && mx <= o.getAABBRight() && my >= o.getAABBTop() && my <= o.getAABBBottom();",
-                "};",
-                "const fmtName = s => ((\"\" + s).length > 21 ? (\"\" + s).substring(0, 18) + \"...\" : \"\" + s);",
-                "",
-                "function fetchList() {",
-                "  P.docs = null;",
-                "  P.error = \"\";",
-                "  try {",
-                "    fetch(URL, {method: \"POST\", headers: {\"Content-Type\": \"application/json\"}, body: JSON.stringify({structuredQuery: {from: [{collectionId: \"demonlist\"}], limit: 300}})}).then(r => r.json()).then(j => {",
-                "      const g = (f, k) => {",
-                "        const c = f[k];",
-                "        if (!c) return \"\";",
-                "        if (c.stringValue != null) return c.stringValue;",
-                "        if (c.integerValue != null) return c.integerValue;",
-                "        if (c.doubleValue != null) return \"\" + c.doubleValue;",
-                "        return \"\";",
-                "      };",
-                "      const docs = (Array.isArray(j) ? j : []).filter(x => x.document).map(x => x.document).map(d => {",
-                "        const f = d.fields || {};",
-                "        return {name: g(f, \"name\"), author: g(f, \"author\"), diff: g(f, \"diff\"),",
-                "          pos: parseFloat(g(f, \"pos\") || \"0\"), lvl: g(f, \"lvl\")};",
-                "      });",
-                "      docs.sort((a, b) => a.pos - b.pos);",
-                "      P.docs = docs;",
-                "    }).catch(e => {P.docs = []; P.error = \"offline\"});",
-                "  } catch (e) {P.docs = []; P.error = \"offline\"}",
-                "}",
-                "",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "if (P.owner !== scene) {",
-                "  P.owner = scene;",
-                "  P.rows = [];",
-                "  P.built = false;",
-                "  P.scroll = 120;",
-                "  P.pending = null;",
-                "  fetchList();",
-                "  // title logo: point the titles TiledSprite at the demonlist strip",
-                "  try {",
-                "    const tt = first(\"titles\");",
-                "    if (tt) {",
-                "      tt.setXOffset(0); tt.setYOffset(118);",
-                "      tt.getBehavior(\"Resizable\").setWidth(111);",
-                "      tt.getBehavior(\"Resizable\").setHeight(20);",
-                "      tt.setX(216 - 111 / 2);",
-                "    }",
-                "  } catch (e) {}",
-                "  // transition wipe in",
-                "  try {const tr = first(\"transition\"); if (tr) tr.getBehavior(\"FlashTransitionPainter\").PaintEffect(\"0;0;0\", 0.2, \"Circular\", \"Backward\", 0, null)} catch (e) {}",
-                "}",
-                "",
-                "// status line: only while loading / on error (cleared once the rows exist),",
-                "// kept horizontally centred",
-                "const nv = first(\"nerdview\");",
-                "if (nv) {",
-                "  const msg = P.docs == null ? \"Loading demon list...\" : (P.error ? \"Could not reach the server\" : \"\");",
-                "  settext(nv, msg);",
-                "  if (msg) {try {nv.setX(216 - nv.getWidth() / 2)} catch (e) {}}",
-                "}",
-                "",
-                "// title logo rock back and forth (matches the portal/other menus)",
-                "P.tphase = (P.tphase || 0) + gdjs.evtTools.runtimeScene.getElapsedTimeInSeconds(scene) * 60;",
-                "try {",
-                "  const tt = first(\"titles\");",
-                "  if (tt) {tt.setAngle(Math.cos(gdjs.toRad(P.tphase)) * 3); tt.setX(216 - tt.getWidth() / 2)}",
-                "} catch (e) {}",
-                "",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "// build rows once the data arrives",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "if (P.docs && !P.built) {",
-                "  P.built = true;",
-                "  for (let i = 0; i < P.docs.length; i++) {",
-                "    const d = P.docs[i];",
-                "    const y = 52 + 44 * i;",
-                "    const rank = i + 1;",
-                "    const row = {lvl: d.lvl, objs: []};",
-                "",
-                "    const ml = create(\"maplevel\");",
-                "    if (ml) {",
-                "      try {ml.setLayer(\"mappack\")} catch (e) {}",
-                "      try {ml.setPosition(92, y)} catch (e) {}",
-                "      zord(ml, 2);",
-                "      row.bg = ml; row.objs.push(ml);",
-                "    }",
-                "    const bx = ml ? ml.getX() : 92;",
-                "    const base = ml ? ml.getY() : y;",
-                "    const rowH = ml ? ml.getHeight() : 40;",
-                "",
-                "    const place = create(\"placement\");",
-                "    if (place) {try {place.setLayer(\"mappack\")} catch (e) {} try {place.setPosition(62, base + 16)} catch (e) {} zord(place, 4); settext(place, (rank < 10 ? \" \" : \"\") + rank + \".\"); row.objs.push(place)}",
-                "",
-                "    const tName = create(\"title\");",
-                "    if (tName) {try {tName.setLayer(\"mappack\")} catch (e) {} try {tName.setPosition(126, base + 10)} catch (e) {} zord(tName, 4); settext(tName, fmtName(d.name)); row.objs.push(tName)}",
-                "",
-                "    const tAuth = create(\"title\");",
-                "    if (tAuth) {",
-                "      try {tAuth.setLayer(\"mappack\")} catch (e) {}",
-                "      try {tAuth.setPosition(126, base + 21)} catch (e) {}",
-                "      zord(tAuth, 4);",
-                "      // the author line uses the outline-less garden font, tinted muted blue",
-                "      try {tAuth.setBitmapFontAndTextureAtlasResourceName(\"fonts\\\\garden.fnt\", \"fonts\\\\garden.png\")} catch (e) {}",
-                "      settext(tAuth, \"by \" + d.author);",
-                "      tint(tAuth, \"60;104;255\");",
-                "      row.objs.push(tAuth);",
-                "    }",
-                "",
-                "    const icon = create(\"mapPackLevelDifficulty\");",
-                "    if (icon) {",
-                "      try {icon.setLayer(\"mappack\")} catch (e) {}",
-                "      zord(icon, 3);",
-                "      const dd = DIFF[(\"\" + d.diff).toLowerCase().replace(/ /g, \"\")] || DIFF.unrated;",
-                "      try {icon.setXOffset(dd[0]); icon.setYOffset(dd[1])} catch (e) {}",
-                "      try {icon.getBehavior(\"Resizable\").setWidth(dd[2]); icon.getBehavior(\"Resizable\").setHeight(dd[3])} catch (e) {}",
-                "      try {icon.setPosition((bx + 20) - icon.getWidth() / 2, base + rowH / 2 - icon.getHeight() / 2)} catch (e) {}",
-                "      row.objs.push(icon);",
-                "    }",
-                "",
-                "    const play = create(\"playbutton\");",
-                "    if (play) {try {play.setLayer(\"mappack\")} catch (e) {} try {play.setPosition(308, base + 8)} catch (e) {} zord(play, 4); row.play = play; row.objs.push(play)}",
-                "",
-                "    P.rows.push(row);",
-                "  }",
-                "}",
-                "",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "// scroll the mappack-layer camera",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "const dt = gdjs.evtTools.runtimeScene.getElapsedTimeInSeconds(scene);",
-                "if (gdjs.evtTools.input.isScrollingDown && gdjs.evtTools.input.isScrollingDown(scene)) P.scroll += 44;",
-                "if (gdjs.evtTools.input.isScrollingUp && gdjs.evtTools.input.isScrollingUp(scene)) P.scroll -= 44;",
-                "if (gdjs.evtTools.input.isKeyPressed(scene, \"Down\")) P.scroll += 360 * dt;",
-                "if (gdjs.evtTools.input.isKeyPressed(scene, \"Up\")) P.scroll -= 360 * dt;",
-                "const count = P.docs ? P.docs.length : 0;",
-                "P.scroll = Math.min(Math.max(P.scroll, 120), Math.max(120, 44 * count - 56));",
-                "try {gdjs.evtTools.camera.setCameraY(scene, P.scroll, \"mappack\", 0)} catch (e) {}",
-                "",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "// pending scene change (after the transition paint)",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "if (P.pending && performance.now() >= P.pending.at) {",
-                "  const tgt = P.pending.scene;",
-                "  P.pending = null;",
-                "  gdjs.evtTools.runtimeScene.replaceScene(scene, tgt, true);",
-                "}",
-                "",
-                "function paintGo(target) {",
-                "  try {const tr = first(\"transition\"); if (tr) tr.getBehavior(\"FlashTransitionPainter\").PaintEffect(\"0;0;0\", 0.2, \"Circular\", \"Forward\", 0, null)} catch (e) {}",
-                "  P.pending = {at: performance.now() + 200, scene: target};",
-                "}",
-                "",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "// input: play a row, back, refresh",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "if (!P.pending && released) {",
-                "  const back = first(\"backbutton\");",
-                "  const refresh = first(\"refresh\");",
-                "  if (back && hov(back)) {",
-                "    paintGo(\"portal\");",
-                "  } else if (refresh && hov(refresh)) {",
-                "    for (const r of P.rows) for (const o of r.objs) {try {o.deleteFromScene(scene)} catch (e) {}}",
-                "    P.rows = []; P.built = false; P.scroll = 120;",
-                "    fetchList();",
-                "  } else {",
-                "    for (const r of P.rows) {",
-                "      if (r.play && hov(r.play)) {",
-                "        try {G.get(\"level\").setString(r.lvl)} catch (e) {}",
-                "        try {G.get(\"lvlFrom\").setString(\"demonlist\")} catch (e) {}",
-                "        paintGo(\"level\");",
-                "        break;",
-                "      }",
-                "    }",
-                "  }",
-                "}",
-                ""
-              ],
-              "parameterObjects": "",
-              "useStrict": true,
-              "eventsSheetExpanded": false
-            }
-          ],
-          "parameters": []
-        },
-        {
           "type": "BuiltinCommonInstructions::Group",
           "disabled": false,
           "folded": true,
@@ -168644,6 +168588,222 @@
                 }
               ],
               "events": []
+            }
+          ]
+        },
+        {
+          "colorB": 74,
+          "colorG": 228,
+          "colorR": 176,
+          "creationTime": 0,
+          "folded": true,
+          "name": "demonlist (tas)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "parameters": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::JsCode",
+              "inlineCode": [
+                "const scene = runtimeScene;",
+                "const G = scene.getGame().getVariables();",
+                "const P = (window.__demonlist = window.__demonlist || {});",
+                "",
+                "// you get the point",
+                "const KEY = \"AIzaSyDW-WtdoFxgkx6IC9z6ZqKIo-9yTZ5ILWE\";",
+                "const URL = \"https://firestore.googleapis.com/v1/projects/tgd-reborn/databases/(default)/documents:runQuery?key=\" + KEY;",
+                "",
+                "const DIFF = {",
+                "  unrated: [0, 48, 16, 16], auto: [0, 0, 16, 16], easy: [16, 0, 16, 16],",
+                "  normal: [32, 0, 16, 16], medium: [48, 0, 16, 16], hard: [64, 0, 16, 16],",
+                "  harder: [80, 0, 16, 16], veryhard: [96, 0, 16, 16], tough: [112, 0, 16, 16],",
+                "  insane: [128, 0, 16, 16], extreme: [144, 0, 16, 16], easydemon: [0, 16, 16, 16],",
+                "  mediumdemon: [16, 16, 16, 16], harddemon: [32, 16, 16, 16],",
+                "  insanedemon: [48, 16, 18, 16], extremedemon: [66, 16, 18, 16]",
+                "};",
+                "",
+                "const create = n => {try {return scene.createObject(n)} catch (e) {return null}};",
+                "const first = n => {const l = scene.getObjects(n); return l && l.length ? l[0] : null};",
+                "const released = gdjs.evtTools.input.isMouseButtonReleased(scene, \"Left\");",
+                "const settext = (o, t) => {try {o.getBehavior(\"Text\").setText(t)} catch (e) {try {o.setText(t)} catch (e2) {}}};",
+                "const tint = (o, c) => {try {o.setTint(c)} catch (e) {}};",
+                "const zord = (o, z) => {try {o.setZOrder(z)} catch (e) {}};",
+                "const hov = o => {",
+                "  if (!o || o.isHidden()) return false;",
+                "  const ly = o.getLayer();",
+                "  const mx = gdjs.evtTools.input.getCursorX(scene, ly, 0);",
+                "  const my = gdjs.evtTools.input.getCursorY(scene, ly, 0);",
+                "  return mx >= o.getAABBLeft() && mx <= o.getAABBRight() && my >= o.getAABBTop() && my <= o.getAABBBottom();",
+                "};",
+                "const fmtName = s => ((\"\" + s).length > 21 ? (\"\" + s).substring(0, 18) + \"...\" : \"\" + s);",
+                "",
+                "function fetchList() {",
+                "  P.docs = null;",
+                "  P.error = \"\";",
+                "  try {",
+                "    // a plain collection GET silently paginates down to 18; the runQuery POST returns all 69",
+                "    fetch(URL, {method: \"POST\", headers: {\"Content-Type\": \"application/json\"},",
+                "      body: JSON.stringify({structuredQuery: {from: [{collectionId: \"demonlist\"}], limit: 300}})",
+                "    }).then(r => r.json()).then(j => {",
+                "      const g = (f, k) => {",
+                "        const c = f[k];",
+                "        if (!c) return \"\";",
+                "        if (c.stringValue != null) return c.stringValue;",
+                "        if (c.integerValue != null) return c.integerValue;",
+                "        if (c.doubleValue != null) return \"\" + c.doubleValue;",
+                "        return \"\";",
+                "      };",
+                "      const rows = Array.isArray(j) ? j.filter(x => x && x.document).map(x => x.document) : (j.documents || []);",
+                "      const docs = rows.map(d => {",
+                "        const f = d.fields || {};",
+                "        return {name: g(f, \"name\"), author: g(f, \"author\"), diff: g(f, \"diff\"),",
+                "          pos: parseFloat(g(f, \"pos\") || \"0\"), lvl: g(f, \"lvl\")};",
+                "      });",
+                "      docs.sort((a, b) => a.pos - b.pos);",
+                "      P.docs = docs;",
+                "    }).catch(e => {P.docs = []; P.error = \"offline\"});",
+                "  } catch (e) {P.docs = []; P.error = \"offline\"}",
+                "}",
+                "",
+                "/*//////////////////////////////////////////////////////////////////////*/",
+                "",
+                "if (P.owner !== scene) {",
+                "  P.owner = scene;",
+                "  P.rows = [];",
+                "  P.built = false;",
+                "  P.scroll = 120;",
+                "  P.pending = null;",
+                "  fetchList();",
+                "  try {",
+                "    const tt = first(\"titles\");",
+                "    if (tt) {",
+                "      tt.setXOffset(0); tt.setYOffset(118);",
+                "      tt.getBehavior(\"Resizable\").setWidth(111);",
+                "      tt.getBehavior(\"Resizable\").setHeight(20);",
+                "      tt.setX(216 - 111 / 2);",
+                "    }",
+                "  } catch (e) {}",
+                "  try {const tr = first(\"transition\"); if (tr) tr.getBehavior(\"FlashTransitionPainter\").PaintEffect(\"0;0;0\", 0.2, \"Circular\", \"Backward\", 0, null)} catch (e) {}",
+                "}",
+                "",
+                "const nv = first(\"nerdview\");",
+                "if (nv) {",
+                "  const msg = P.docs == null ? \"Loading demon list...\" : (P.error ? \"Could not reach the server\" : \"\");",
+                "  settext(nv, msg);",
+                "  if (msg) {try {nv.setX(216 - nv.getWidth() / 2)} catch (e) {}}",
+                "}",
+                "",
+                "P.tphase = (P.tphase || 0) + gdjs.evtTools.runtimeScene.getElapsedTimeInSeconds(scene) * 60;",
+                "try {",
+                "  const tt = first(\"titles\");",
+                "  if (tt) {tt.setAngle(Math.cos(gdjs.toRad(P.tphase)) * 3); tt.setX(216 - tt.getWidth() / 2)}",
+                "} catch (e) {}",
+                "",
+                "/*//////////////////////////////////////////////////////////////////////*/",
+                "",
+                "if (P.docs && !P.built) {",
+                "  P.built = true;",
+                "  for (let i = 0; i < P.docs.length; i++) {",
+                "    const d = P.docs[i];",
+                "    const y = 52 + 44 * i;",
+                "    const rank = i + 1;",
+                "    const row = {lvl: d.lvl, objs: []};",
+                "",
+                "    const ml = create(\"maplevel\");",
+                "    if (ml) {",
+                "      try {ml.setLayer(\"mappack\")} catch (e) {}",
+                "      try {ml.setPosition(92, y)} catch (e) {}",
+                "      zord(ml, 2);",
+                "      row.bg = ml; row.objs.push(ml);",
+                "    }",
+                "    const bx = ml ? ml.getX() : 92;",
+                "    const base = ml ? ml.getY() : y;",
+                "    const rowH = ml ? ml.getHeight() : 40;",
+                "",
+                "    const place = create(\"placement\");",
+                "    if (place) {try {place.setLayer(\"mappack\")} catch (e) {} try {place.setPosition(62, base + 16)} catch (e) {} zord(place, 4); settext(place, (rank < 10 ? \" \" : \"\") + rank + \".\"); row.objs.push(place)}",
+                "",
+                "    const tName = create(\"title\");",
+                "    if (tName) {try {tName.setLayer(\"mappack\")} catch (e) {} try {tName.setPosition(126, base + 10)} catch (e) {} zord(tName, 4); settext(tName, fmtName(d.name)); row.objs.push(tName)}",
+                "",
+                "    const tAuth = create(\"title\");",
+                "    if (tAuth) {",
+                "      try {tAuth.setLayer(\"mappack\")} catch (e) {}",
+                "      try {tAuth.setPosition(126, base + 21)} catch (e) {}",
+                "      zord(tAuth, 4);",
+                "      try {tAuth.setBitmapFontAndTextureAtlasResourceName(\"fonts\\\\garden.fnt\", \"fonts\\\\garden.png\")} catch (e) {}",
+                "      settext(tAuth, \"by \" + d.author);",
+                "      tint(tAuth, \"60;104;255\");",
+                "      row.objs.push(tAuth);",
+                "    }",
+                "",
+                "    const icon = create(\"mapPackLevelDifficulty\");",
+                "    if (icon) {",
+                "      try {icon.setLayer(\"mappack\")} catch (e) {}",
+                "      zord(icon, 3);",
+                "      const dd = DIFF[(\"\" + d.diff).toLowerCase().replace(/ /g, \"\")] || DIFF.unrated;",
+                "      try {icon.setXOffset(dd[0]); icon.setYOffset(dd[1])} catch (e) {}",
+                "      try {icon.getBehavior(\"Resizable\").setWidth(dd[2]); icon.getBehavior(\"Resizable\").setHeight(dd[3])} catch (e) {}",
+                "      try {icon.setPosition((bx + 20) - icon.getWidth() / 2, base + rowH / 2 - icon.getHeight() / 2)} catch (e) {}",
+                "      row.objs.push(icon);",
+                "    }",
+                "",
+                "    const play = create(\"playbutton\");",
+                "    if (play) {try {play.setLayer(\"mappack\")} catch (e) {} try {play.setPosition(308, base + 8)} catch (e) {} zord(play, 4); row.play = play; row.objs.push(play)}",
+                "",
+                "    P.rows.push(row);",
+                "  }",
+                "}",
+                "",
+                "/*//////////////////////////////////////////////////////////////////////*/",
+                "",
+                "const dt = gdjs.evtTools.runtimeScene.getElapsedTimeInSeconds(scene);",
+                "if (gdjs.evtTools.input.isScrollingDown && gdjs.evtTools.input.isScrollingDown(scene)) P.scroll += 44;",
+                "if (gdjs.evtTools.input.isScrollingUp && gdjs.evtTools.input.isScrollingUp(scene)) P.scroll -= 44;",
+                "if (gdjs.evtTools.input.isKeyPressed(scene, \"Down\")) P.scroll += 360 * dt;",
+                "if (gdjs.evtTools.input.isKeyPressed(scene, \"Up\")) P.scroll -= 360 * dt;",
+                "const count = P.docs ? P.docs.length : 0;",
+                "P.scroll = Math.min(Math.max(P.scroll, 120), Math.max(120, 44 * count - 56));",
+                "try {gdjs.evtTools.camera.setCameraY(scene, P.scroll, \"mappack\", 0)} catch (e) {}",
+                "",
+                "if (P.pending && performance.now() >= P.pending.at) {",
+                "  const tgt = P.pending.scene;",
+                "  P.pending = null;",
+                "  gdjs.evtTools.runtimeScene.replaceScene(scene, tgt, true);",
+                "}",
+                "",
+                "function paintGo(target) {",
+                "  try {const tr = first(\"transition\"); if (tr) tr.getBehavior(\"FlashTransitionPainter\").PaintEffect(\"0;0;0\", 0.2, \"Circular\", \"Forward\", 0, null)} catch (e) {}",
+                "  P.pending = {at: performance.now() + 200, scene: target};",
+                "}",
+                "",
+                "/*//////////////////////////////////////////////////////////////////////*/",
+                "",
+                "if (!P.pending && released) {",
+                "  const back = first(\"backbutton\");",
+                "  const refresh = first(\"refresh\");",
+                "  if (back && hov(back)) {",
+                "    paintGo(\"portal\");",
+                "  } else if (refresh && hov(refresh)) {",
+                "    for (const r of P.rows) for (const o of r.objs) {try {o.deleteFromScene(scene)} catch (e) {}}",
+                "    P.rows = []; P.built = false; P.scroll = 120;",
+                "    fetchList();",
+                "  } else {",
+                "    for (const r of P.rows) {",
+                "      if (r.play && hov(r.play)) {",
+                "        try {G.get(\"level\").setString(r.lvl)} catch (e) {}",
+                "        try {G.get(\"lvlFrom\").setString(\"demonlist\")} catch (e) {}",
+                "        paintGo(\"level\");",
+                "        break;",
+                "      }",
+                "    }",
+                "  }",
+                "}",
+                ""
+              ],
+              "parameterObjects": "",
+              "useStrict": true,
+              "eventsSheetExpanded": false
             }
           ]
         }
@@ -170915,267 +171075,6 @@
       },
       "events": [
         {
-          "colorB": 74,
-          "colorG": 228,
-          "colorR": 176,
-          "creationTime": 0,
-          "folded": true,
-          "name": "rated (tas)",
-          "source": "",
-          "type": "BuiltinCommonInstructions::Group",
-          "events": [
-            {
-              "type": "BuiltinCommonInstructions::JsCode",
-              "inlineCode": [
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "// rated tab (recovered from code11.js). like demonlist - a vertical scroll",
-                "// list of rows on the \"mappack\" layer - but ordered by rateDate desc and",
-                "// filtered by the rate type: rateselect 1 = all rated (rate 1 or 2), 2 =",
-                "// featured only (rate 2). each row carries a \"ratetype\" badge (featured ->",
-                "// YOffset 24). the featuredSlider toggles the filter. play sets the global",
-                "// \"level\" + \"lvlFrom\" and opens \"level\"; back -> portal; refresh refetches.",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "const scene = runtimeScene;",
-                "const G = scene.getGame().getVariables();",
-                "const P = (window.__rated = window.__rated || {});",
-                "",
-                "const KEY = \"AIzaSyDW-WtdoFxgkx6IC9z6ZqKIo-9yTZ5ILWE\";",
-                "const URL = \"https://firestore.googleapis.com/v1/projects/tgd-reborn/databases/(default)/documents/rated?key=\" + KEY + \"&pageSize=300\";",
-                "",
-                "// rated uses the rateicons_new.png \"ratesheet\" (NOT difficulties.png): each",
-                "// difficulty is a ROW at ratesheet.y in 24px cells, with a 6-frame animated",
-                "// glow running along X. value here = ratesheet.y for that difficulty.",
-                "const RATE = {",
-                "  na: 0, auto: 360, easy: 336, normal: 312, medium: 288, hard: 264, harder: 240,",
-                "  veryhard: 216, tough: 192, insane: 168, extreme: 144, easydemon: 120,",
-                "  mediumdemon: 96, demon: 72, harddemon: 72, insanedemon: 48, extremedemon: 24",
-                "};",
-                "",
-                "const create = n => {try {return scene.createObject(n)} catch (e) {return null}};",
-                "const first = n => {const l = scene.getObjects(n); return l && l.length ? l[0] : null};",
-                "const released = gdjs.evtTools.input.isMouseButtonReleased(scene, \"Left\");",
-                "const settext = (o, t) => {try {o.getBehavior(\"Text\").setText(t)} catch (e) {try {o.setText(t)} catch (e2) {}}};",
-                "const tint = (o, c) => {try {o.setTint(c)} catch (e) {}};",
-                "const zord = (o, z) => {try {o.setZOrder(z)} catch (e) {}};",
-                "const hov = o => {",
-                "  if (!o || o.isHidden()) return false;",
-                "  const ly = o.getLayer();",
-                "  const mx = gdjs.evtTools.input.getCursorX(scene, ly, 0);",
-                "  const my = gdjs.evtTools.input.getCursorY(scene, ly, 0);",
-                "  return mx >= o.getAABBLeft() && mx <= o.getAABBRight() && my >= o.getAABBTop() && my <= o.getAABBBottom();",
-                "};",
-                "const fmtName = s => ((\"\" + s).length > 21 ? (\"\" + s).substring(0, 18) + \"...\" : \"\" + s);",
-                "",
-                "function rateselect() {try {const r = G.get(\"rateselect\").getAsNumber(); return r === 2 ? 2 : 1} catch (e) {return 1}}",
-                "",
-                "function fetchList() {",
-                "  P.docs = null;",
-                "  P.error = \"\";",
-                "  try {",
-                "    fetch(URL).then(r => r.json()).then(j => {",
-                "      const g = (f, k) => {",
-                "        const c = f[k];",
-                "        if (!c) return \"\";",
-                "        if (c.stringValue != null) return c.stringValue;",
-                "        if (c.integerValue != null) return c.integerValue;",
-                "        if (c.doubleValue != null) return \"\" + c.doubleValue;",
-                "        return \"\";",
-                "      };",
-                "      const docs = (j.documents || []).map(d => {",
-                "        const f = d.fields || {};",
-                "        return {name: g(f, \"name\"), author: g(f, \"author\"), diff: g(f, \"diff\"),",
-                "          rate: parseInt(g(f, \"rate\") || \"1\", 10), rateDate: parseFloat(g(f, \"rateDate\") || \"0\"), lvl: g(f, \"lvl\")};",
-                "      });",
-                "      docs.sort((a, b) => b.rateDate - a.rateDate);",
-                "      P.docs = docs;",
-                "    }).catch(e => {P.docs = []; P.error = \"offline\"});",
-                "  } catch (e) {P.docs = []; P.error = \"offline\"}",
-                "}",
-                "",
-                "function clearRows() {",
-                "  for (const r of P.rows || []) for (const o of r.objs) {try {o.deleteFromScene(scene)} catch (e) {}}",
-                "  P.rows = [];",
-                "  P.built = false;",
-                "  P.scroll = 120;",
-                "}",
-                "",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "if (P.owner !== scene) {",
-                "  P.owner = scene;",
-                "  P.rows = [];",
-                "  P.built = false;",
-                "  P.scroll = 120;",
-                "  P.pending = null;",
-                "  try {if (!G.has(\"rateselect\") || G.get(\"rateselect\").getAsNumber() === 0) G.get(\"rateselect\").setNumber(1)} catch (e) {}",
-                "  // sync the slider knob to the current filter (1 = all rated, 2 = featured)",
-                "  P.lastSel = rateselect();",
-                "  try {const sl = first(\"featuredSlider\"); if (sl) sl.SetValue(P.lastSel, null)} catch (e) {}",
-                "  fetchList();",
-                "  // title logo -> the rated strip",
-                "  try {",
-                "    const tt = first(\"titles\");",
-                "    if (tt) {",
-                "      tt.setXOffset(0); tt.setYOffset(138);",
-                "      tt.getBehavior(\"Resizable\").setWidth(64);",
-                "      tt.getBehavior(\"Resizable\").setHeight(20);",
-                "      tt.setX(216 - 64 / 2);",
-                "    }",
-                "  } catch (e) {}",
-                "  try {const tr = first(\"transition\"); if (tr) tr.getBehavior(\"FlashTransitionPainter\").PaintEffect(\"0;0;0\", 0.2, \"Circular\", \"Backward\", 0, null)} catch (e) {}",
-                "}",
-                "",
-                "// title wobble",
-                "P.tphase = (P.tphase || 0) + gdjs.evtTools.runtimeScene.getElapsedTimeInSeconds(scene) * 60;",
-                "try {const tt = first(\"titles\"); if (tt) {tt.setAngle(Math.cos(gdjs.toRad(P.tphase)) * 3); tt.setX(216 - tt.getWidth() / 2)}} catch (e) {}",
-                "",
-                "// status / filter label on the nerdview (centred)",
-                "const nv = first(\"nerdview\");",
-                "if (nv) {",
-                "  const msg = P.docs == null ? \"Loading rated levels...\" : (P.error ? \"Could not reach the server\" : \"\");",
-                "  settext(nv, msg);",
-                "  if (msg) {try {nv.setX(216 - nv.getWidth() / 2)} catch (e) {}}",
-                "}",
-                "",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "// build rows (filtered by rateselect) once data is in",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "if (P.docs && !P.built) {",
-                "  P.built = true;",
-                "  const sel = rateselect();",
-                "  const list = P.docs.filter(d => sel === 2 ? d.rate >= 2 : d.rate >= 1);",
-                "  for (let i = 0; i < list.length; i++) {",
-                "    const d = list[i];",
-                "    const y = 52 + 44 * i;",
-                "    const row = {lvl: d.lvl, objs: []};",
-                "",
-                "    const ml = create(\"maplevel\");",
-                "    if (ml) {try {ml.setLayer(\"mappack\")} catch (e) {} try {ml.setPosition(92, y)} catch (e) {} zord(ml, 2); row.bg = ml; row.objs.push(ml)}",
-                "    const bx = ml ? ml.getX() : 92;",
-                "    const base = ml ? ml.getY() : y;",
-                "    const rowH = ml ? ml.getHeight() : 40;",
-                "",
-                "    const tName = create(\"title\");",
-                "    if (tName) {try {tName.setLayer(\"mappack\")} catch (e) {} try {tName.setPosition(126, base + 10)} catch (e) {} zord(tName, 4); settext(tName, fmtName(d.name)); row.objs.push(tName)}",
-                "",
-                "    const tAuth = create(\"title\");",
-                "    if (tAuth) {",
-                "      try {tAuth.setLayer(\"mappack\")} catch (e) {}",
-                "      try {tAuth.setPosition(126, base + 21)} catch (e) {}",
-                "      zord(tAuth, 4);",
-                "      try {tAuth.setBitmapFontAndTextureAtlasResourceName(\"fonts\\\\garden.fnt\", \"fonts\\\\garden.png\")} catch (e) {}",
-                "      settext(tAuth, \"by \" + d.author);",
-                "      tint(tAuth, \"60;104;255\");",
-                "      row.objs.push(tAuth);",
-                "    }",
-                "",
-                "    // one static icon per level: rateicons_new.png cell = (rate-type column,",
-                "    // difficulty row). XOffset = rate*24 (rate type / glow), YOffset =",
-                "    // ratesheet.y (difficulty). NOT animated.",
-                "    const icon = create(\"mapPackLevelDifficulty\");",
-                "    if (icon) {",
-                "      try {icon.setLayer(\"mappack\")} catch (e) {}",
-                "      zord(icon, 3);",
-                "      const ry = RATE[(\"\" + d.diff).toLowerCase().replace(/ /g, \"\")];",
-                "      try {icon.setYOffset(ry == null ? RATE.na : ry)} catch (e) {}",
-                "      try {icon.setXOffset(d.rate * 24)} catch (e) {}",
-                "      try {icon.getBehavior(\"Resizable\").setWidth(24); icon.getBehavior(\"Resizable\").setHeight(24)} catch (e) {}",
-                "      try {icon.setPosition((bx + 20) - icon.getWidth() / 2, base + rowH / 2 - icon.getHeight() / 2)} catch (e) {}",
-                "      row.objs.push(icon);",
-                "    }",
-                "",
-                "    const play = create(\"playbutton\");",
-                "    if (play) {try {play.setLayer(\"mappack\")} catch (e) {} try {play.setPosition(308, base + 8)} catch (e) {} zord(play, 4); row.play = play; row.objs.push(play)}",
-                "",
-                "    P.rows.push(row);",
-                "  }",
-                "}",
-                "",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "// scroll the mappack-layer camera",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "const dt = gdjs.evtTools.runtimeScene.getElapsedTimeInSeconds(scene);",
-                "if (gdjs.evtTools.input.isScrollingDown && gdjs.evtTools.input.isScrollingDown(scene)) P.scroll += 44;",
-                "if (gdjs.evtTools.input.isScrollingUp && gdjs.evtTools.input.isScrollingUp(scene)) P.scroll -= 44;",
-                "if (gdjs.evtTools.input.isKeyPressed(scene, \"Down\")) P.scroll += 360 * dt;",
-                "if (gdjs.evtTools.input.isKeyPressed(scene, \"Up\")) P.scroll -= 360 * dt;",
-                "const count = P.rows ? P.rows.length : 0;",
-                "P.scroll = Math.min(Math.max(P.scroll, 120), Math.max(120, 44 * count - 56));",
-                "try {gdjs.evtTools.camera.setCameraY(scene, P.scroll, \"mappack\", 0)} catch (e) {}",
-                "",
-                "// rate-type slider: read its value, re-filter the list when it changes",
-                "try {",
-                "  const sl = first(\"featuredSlider\");",
-                "  if (sl) {",
-                "    const v = sl.Value(null);",
-                "    if (v != null && v !== P.lastSel) {",
-                "      P.lastSel = v;",
-                "      try {G.get(\"rateselect\").setNumber(v)} catch (e) {}",
-                "      clearRows();",
-                "    }",
-                "  }",
-                "} catch (e) {}",
-                "",
-                "// slider preview faces (rateicons.png): top = featured/epic (48;0),",
-                "// bottom = normal (no decoration, 0;0)",
-                "for (const rt of scene.getObjects(\"ratetype\") || []) {",
-                "  try {",
-                "    if (rt.getY() < 100) {rt.setXOffset(48); rt.setYOffset(0)}",
-                "    else {rt.setXOffset(0); rt.setYOffset(0)}",
-                "  } catch (e) {}",
-                "}",
-                "",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "// pending scene change",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "if (P.pending && performance.now() >= P.pending.at) {",
-                "  const tgt = P.pending.scene;",
-                "  P.pending = null;",
-                "  gdjs.evtTools.runtimeScene.replaceScene(scene, tgt, true);",
-                "}",
-                "",
-                "function paintGo(target) {",
-                "  try {const tr = first(\"transition\"); if (tr) tr.getBehavior(\"FlashTransitionPainter\").PaintEffect(\"0;0;0\", 0.2, \"Circular\", \"Forward\", 0, null)} catch (e) {}",
-                "  P.pending = {at: performance.now() + 200, scene: target};",
-                "}",
-                "",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "// input: play / back / refresh / toggle filter",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "if (!P.pending && released) {",
-                "  const back = first(\"backbutton\");",
-                "  const refresh = first(\"refresh\");",
-                "  if (back && hov(back)) {",
-                "    paintGo(\"portal\");",
-                "  } else if (refresh && hov(refresh)) {",
-                "    clearRows();",
-                "    fetchList();",
-                "  } else {",
-                "    for (const r of P.rows) {",
-                "      if (r.play && hov(r.play)) {",
-                "        try {G.get(\"level\").setString(r.lvl)} catch (e) {}",
-                "        try {G.get(\"lvlFrom\").setString(\"rated\")} catch (e) {}",
-                "        paintGo(\"level\");",
-                "        break;",
-                "      }",
-                "    }",
-                "  }",
-                "}",
-                ""
-              ],
-              "parameterObjects": "",
-              "useStrict": true,
-              "eventsSheetExpanded": false
-            }
-          ],
-          "parameters": []
-        },
-        {
           "type": "BuiltinCommonInstructions::Group",
           "disabled": false,
           "folded": true,
@@ -171254,6 +171153,242 @@
                 }
               ],
               "events": []
+            }
+          ]
+        },
+        {
+          "colorB": 74,
+          "colorG": 228,
+          "colorR": 176,
+          "creationTime": 0,
+          "folded": true,
+          "name": "rated (tas)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "parameters": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::JsCode",
+              "inlineCode": [
+                "const scene = runtimeScene;",
+                "const G = scene.getGame().getVariables();",
+                "const P = (window.__rated = window.__rated || {});",
+                "",
+                "// i hope yalls firebase is set up properly",
+                "const KEY = \"AIzaSyDW-WtdoFxgkx6IC9z6ZqKIo-9yTZ5ILWE\";",
+                "const URL = \"https://firestore.googleapis.com/v1/projects/tgd-reborn/databases/(default)/documents:runQuery?key=\" + KEY;",
+                "",
+                "const RATE = {",
+                "  na: 0, auto: 360, easy: 336, normal: 312, medium: 288, hard: 264, harder: 240,",
+                "  veryhard: 216, tough: 192, insane: 168, extreme: 144, easydemon: 120,",
+                "  mediumdemon: 96, demon: 72, harddemon: 72, insanedemon: 48, extremedemon: 24",
+                "};",
+                "",
+                "const create = n => {try {return scene.createObject(n)} catch (e) {return null}};",
+                "const first = n => {const l = scene.getObjects(n); return l && l.length ? l[0] : null};",
+                "const released = gdjs.evtTools.input.isMouseButtonReleased(scene, \"Left\");",
+                "const settext = (o, t) => {try {o.getBehavior(\"Text\").setText(t)} catch (e) {try {o.setText(t)} catch (e2) {}}};",
+                "const tint = (o, c) => {try {o.setTint(c)} catch (e) {}};",
+                "const zord = (o, z) => {try {o.setZOrder(z)} catch (e) {}};",
+                "const hov = o => {",
+                "  if (!o || o.isHidden()) return false;",
+                "  const ly = o.getLayer();",
+                "  const mx = gdjs.evtTools.input.getCursorX(scene, ly, 0);",
+                "  const my = gdjs.evtTools.input.getCursorY(scene, ly, 0);",
+                "  return mx >= o.getAABBLeft() && mx <= o.getAABBRight() && my >= o.getAABBTop() && my <= o.getAABBBottom();",
+                "};",
+                "const fmtName = s => ((\"\" + s).length > 21 ? (\"\" + s).substring(0, 18) + \"...\" : \"\" + s);",
+                "",
+                "function rateselect() {try {const r = G.get(\"rateselect\").getAsNumber(); return r === 2 ? 2 : 1} catch (e) {return 1}}",
+                "",
+                "function fetchList() {",
+                "  P.docs = null;",
+                "  P.error = \"\";",
+                "  try {",
+                "    // a plain collection GET silently paginates; the runQuery POST returns all of them",
+                "    fetch(URL, {method: \"POST\", headers: {\"Content-Type\": \"application/json\"},",
+                "      body: JSON.stringify({structuredQuery: {from: [{collectionId: \"rated\"}], limit: 300}})",
+                "    }).then(r => r.json()).then(j => {",
+                "      const g = (f, k) => {",
+                "        const c = f[k];",
+                "        if (!c) return \"\";",
+                "        if (c.stringValue != null) return c.stringValue;",
+                "        if (c.integerValue != null) return c.integerValue;",
+                "        if (c.doubleValue != null) return \"\" + c.doubleValue;",
+                "        return \"\";",
+                "      };",
+                "      const rows = Array.isArray(j) ? j.filter(x => x && x.document).map(x => x.document) : (j.documents || []);",
+                "      const docs = rows.map(d => {",
+                "        const f = d.fields || {};",
+                "        return {name: g(f, \"name\"), author: g(f, \"author\"), diff: g(f, \"diff\"),",
+                "          rate: parseInt(g(f, \"rate\") || \"1\", 10), rateDate: parseFloat(g(f, \"rateDate\") || \"0\"), lvl: g(f, \"lvl\")};",
+                "      });",
+                "      docs.sort((a, b) => b.rateDate - a.rateDate);",
+                "      P.docs = docs;",
+                "    }).catch(e => {P.docs = []; P.error = \"offline\"});",
+                "  } catch (e) {P.docs = []; P.error = \"offline\"}",
+                "}",
+                "",
+                "function clearRows() {",
+                "  for (const r of P.rows || []) for (const o of r.objs) {try {o.deleteFromScene(scene)} catch (e) {}}",
+                "  P.rows = [];",
+                "  P.built = false;",
+                "  P.scroll = 120;",
+                "}",
+                "",
+                "/*//////////////////////////////////////////////////////////////////////*/",
+                "",
+                "if (P.owner !== scene) {",
+                "  P.owner = scene;",
+                "  P.rows = [];",
+                "  P.built = false;",
+                "  P.scroll = 120;",
+                "  P.pending = null;",
+                "  try {if (!G.has(\"rateselect\") || G.get(\"rateselect\").getAsNumber() === 0) G.get(\"rateselect\").setNumber(1)} catch (e) {}",
+                "  P.lastSel = rateselect();",
+                "  try {const sl = first(\"featuredSlider\"); if (sl) sl.SetValue(P.lastSel, null)} catch (e) {}",
+                "  fetchList();",
+                "  try {",
+                "    const tt = first(\"titles\");",
+                "    if (tt) {",
+                "      tt.setXOffset(0); tt.setYOffset(138);",
+                "      tt.getBehavior(\"Resizable\").setWidth(64);",
+                "      tt.getBehavior(\"Resizable\").setHeight(20);",
+                "      tt.setX(216 - 64 / 2);",
+                "    }",
+                "  } catch (e) {}",
+                "  try {const tr = first(\"transition\"); if (tr) tr.getBehavior(\"FlashTransitionPainter\").PaintEffect(\"0;0;0\", 0.2, \"Circular\", \"Backward\", 0, null)} catch (e) {}",
+                "}",
+                "",
+                "P.tphase = (P.tphase || 0) + gdjs.evtTools.runtimeScene.getElapsedTimeInSeconds(scene) * 60;",
+                "try {const tt = first(\"titles\"); if (tt) {tt.setAngle(Math.cos(gdjs.toRad(P.tphase)) * 3); tt.setX(216 - tt.getWidth() / 2)}} catch (e) {}",
+                "",
+                "const nv = first(\"nerdview\");",
+                "if (nv) {",
+                "  const msg = P.docs == null ? \"Loading rated levels...\" : (P.error ? \"Could not reach the server :-(\" : \"\");",
+                "  settext(nv, msg);",
+                "  if (msg) {try {nv.setX(216 - nv.getWidth() / 2)} catch (e) {}}",
+                "}",
+                "",
+                "/*//////////////////////////////////////////////////////////////////////*/",
+                "",
+                "if (P.docs && !P.built) {",
+                "  P.built = true;",
+                "  const sel = rateselect();",
+                "  const list = P.docs.filter(d => sel === 2 ? d.rate >= 2 : d.rate >= 1);",
+                "  for (let i = 0; i < list.length; i++) {",
+                "    const d = list[i];",
+                "    const y = 52 + 44 * i;",
+                "    const row = {lvl: d.lvl, objs: []};",
+                "",
+                "    const ml = create(\"maplevel\");",
+                "    if (ml) {try {ml.setLayer(\"mappack\")} catch (e) {} try {ml.setPosition(92, y)} catch (e) {} zord(ml, 2); row.bg = ml; row.objs.push(ml)}",
+                "    const bx = ml ? ml.getX() : 92;",
+                "    const base = ml ? ml.getY() : y;",
+                "    const rowH = ml ? ml.getHeight() : 40;",
+                "",
+                "    const tName = create(\"title\");",
+                "    if (tName) {try {tName.setLayer(\"mappack\")} catch (e) {} try {tName.setPosition(126, base + 10)} catch (e) {} zord(tName, 4); settext(tName, fmtName(d.name)); row.objs.push(tName)}",
+                "",
+                "    const tAuth = create(\"title\");",
+                "    if (tAuth) {",
+                "      try {tAuth.setLayer(\"mappack\")} catch (e) {}",
+                "      try {tAuth.setPosition(126, base + 21)} catch (e) {}",
+                "      zord(tAuth, 4);",
+                "      try {tAuth.setBitmapFontAndTextureAtlasResourceName(\"fonts\\\\garden.fnt\", \"fonts\\\\garden.png\")} catch (e) {}",
+                "      settext(tAuth, \"by \" + d.author);",
+                "      tint(tAuth, \"60;104;255\");",
+                "      row.objs.push(tAuth);",
+                "    }",
+                "",
+                "    const icon = create(\"mapPackLevelDifficulty\");",
+                "    if (icon) {",
+                "      try {icon.setLayer(\"mappack\")} catch (e) {}",
+                "      zord(icon, 3);",
+                "      const ry = RATE[(\"\" + d.diff).toLowerCase().replace(/ /g, \"\")];",
+                "      try {icon.setYOffset(ry == null ? RATE.na : ry)} catch (e) {}",
+                "      try {icon.setXOffset(d.rate * 24)} catch (e) {}",
+                "      try {icon.getBehavior(\"Resizable\").setWidth(24); icon.getBehavior(\"Resizable\").setHeight(24)} catch (e) {}",
+                "      try {icon.setPosition((bx + 20) - icon.getWidth() / 2, base + rowH / 2 - icon.getHeight() / 2)} catch (e) {}",
+                "      row.objs.push(icon);",
+                "    }",
+                "",
+                "    const play = create(\"playbutton\");",
+                "    if (play) {try {play.setLayer(\"mappack\")} catch (e) {} try {play.setPosition(308, base + 8)} catch (e) {} zord(play, 4); row.play = play; row.objs.push(play)}",
+                "",
+                "    P.rows.push(row);",
+                "  }",
+                "}",
+                "",
+                "/*//////////////////////////////////////////////////////////////////////*/",
+                "",
+                "const dt = gdjs.evtTools.runtimeScene.getElapsedTimeInSeconds(scene);",
+                "if (gdjs.evtTools.input.isScrollingDown && gdjs.evtTools.input.isScrollingDown(scene)) P.scroll += 44;",
+                "if (gdjs.evtTools.input.isScrollingUp && gdjs.evtTools.input.isScrollingUp(scene)) P.scroll -= 44;",
+                "if (gdjs.evtTools.input.isKeyPressed(scene, \"Down\")) P.scroll += 360 * dt;",
+                "if (gdjs.evtTools.input.isKeyPressed(scene, \"Up\")) P.scroll -= 360 * dt;",
+                "const count = P.rows ? P.rows.length : 0;",
+                "P.scroll = Math.min(Math.max(P.scroll, 120), Math.max(120, 44 * count - 56));",
+                "try {gdjs.evtTools.camera.setCameraY(scene, P.scroll, \"mappack\", 0)} catch (e) {}",
+                "",
+                "try {",
+                "  const sl = first(\"featuredSlider\");",
+                "  if (sl) {",
+                "    const v = sl.Value(null);",
+                "    if (v != null && v !== P.lastSel) {",
+                "      P.lastSel = v;",
+                "      try {G.get(\"rateselect\").setNumber(v)} catch (e) {}",
+                "      clearRows();",
+                "    }",
+                "  }",
+                "} catch (e) {}",
+                "",
+                "for (const rt of scene.getObjects(\"ratetype\") || []) {",
+                "  try {",
+                "    if (rt.getY() < 100) {rt.setXOffset(48); rt.setYOffset(0)}",
+                "    else {rt.setXOffset(0); rt.setYOffset(0)}",
+                "  } catch (e) {}",
+                "}",
+                "",
+                "/*//////////////////////////////////////////////////////////////////////*/",
+                "",
+                "if (P.pending && performance.now() >= P.pending.at) {",
+                "  const tgt = P.pending.scene;",
+                "  P.pending = null;",
+                "  gdjs.evtTools.runtimeScene.replaceScene(scene, tgt, true);",
+                "}",
+                "",
+                "function paintGo(target) {",
+                "  try {const tr = first(\"transition\"); if (tr) tr.getBehavior(\"FlashTransitionPainter\").PaintEffect(\"0;0;0\", 0.2, \"Circular\", \"Forward\", 0, null)} catch (e) {}",
+                "  P.pending = {at: performance.now() + 200, scene: target};",
+                "}",
+                "",
+                "/*//////////////////////////////////////////////////////////////////////*/",
+                "",
+                "if (!P.pending && released) {",
+                "  const back = first(\"backbutton\");",
+                "  const refresh = first(\"refresh\");",
+                "  if (back && hov(back)) {",
+                "    paintGo(\"portal\");",
+                "  } else if (refresh && hov(refresh)) {",
+                "    clearRows();",
+                "    fetchList();",
+                "  } else {",
+                "    for (const r of P.rows) {",
+                "      if (r.play && hov(r.play)) {",
+                "        try {G.get(\"level\").setString(r.lvl)} catch (e) {}",
+                "        try {G.get(\"lvlFrom\").setString(\"rated\")} catch (e) {}",
+                "        paintGo(\"level\");",
+                "        break;",
+                "      }",
+                "    }",
+                "  }",
+                "}",
+                ""
+              ],
+              "parameterObjects": "",
+              "useStrict": true,
+              "eventsSheetExpanded": false
             }
           ]
         }

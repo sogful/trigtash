@@ -60,11 +60,11 @@
             try {gdjs.evtTools.runtimeScene.unpauseTimer(scene, "stopwatch")} catch (e) {}
           }
         }
-        // during a replay the timer is frame-locked to the played frames, so a
-        // pause can't change the final time (the game's pause/unpause is a frame
-        // late each toggle, which drifted the stopwatch a bit per pause)
         if (t.mode === "play" && t.timerstarted) {
-          try {const tm = scene.getTimeManager()._timers.get("stopwatch"); if (tm) tm.setTime((t.frame - (t.timerstartframe || 0)) * t.step)} catch (e) {}
+          // frame-lock the timer, BUT if the game has dropped it well below our value the
+          // level was restarted (pause-menu restart) - leave it so the step loop's restart
+          // detection catches it instead of us masking the reset.
+          try {const tm = scene.getTimeManager()._timers.get("stopwatch"); const want = Math.max(0, (t.frame - (t.timerstartframe || 0)) * t.step); if (tm && tm.getTime() >= want - 200) tm.setTime(want)} catch (e) {}
         }
         t.tprevx = plx; t.tprevy = ply;
       }
@@ -118,14 +118,32 @@
             if (s.length > 7) {s = n.toExponential(1); if (s.length > 7) s = n.toExponential(0)}
             return s.padStart(7);
           };
+          const vxs = fit(vx, 2);
           t.veltext.setText(
             lbl("x") + fit(px, 3) + " " + lbl("y") + fit(py, 3) + "\n" +
-            lbl("xvel") + fit(vx, 2) + " " + lbl("yvel") + fit(vy, 2) + "\n" +
+            lbl("xvel") + "       " + " " + lbl("yvel") + fit(vy, 2) + "\n" +
             lbl("ang") + va.toFixed(4));
+          try {t.veltext.setTint("255;255;255")} catch (e) {}
           let gh = 224; try {gh = game.getGameResolutionHeight()} catch (e) {}
-          t.veltext.setPosition(4, gh - 6 - t.veltext.getHeight());
-        } else if (t.veltext) {t.veltext.hide(true)}
-      } else if (t.veltext) {t.veltext.hide(true)}
+          const vty = gh - 6 - t.veltext.getHeight();
+          t.veltext.setPosition(4, vty);
+          // overlay just the xvel value, tinted redder the further |xvel| runs past the
+          // gamemode's normal cap - a successful xvel boost. cube/ball 150, ship 75,
+          // ufo 200, wave 175 (read live from the mode + <mode>speed scene vars)
+          if (t.xvelcol) {
+            let cap = 150;
+            try {const m = svar(scene, "mode").getAsString(); const c = svar(scene, m + "speed").getAsNumber(); if (c > 0) cap = c} catch (e) {}
+            const rr = Math.min(1, Math.max(0, Math.abs(vx) - cap) / (cap * 0.5));
+            const gb = Math.round(255 - rr * 195);
+            t.xvelcol.hide(false);
+            try {t.xvelcol.setScale(0.5)} catch (e) {}
+            t.xvelcol.setText(vxs);
+            try {t.xvelcol.setTint("255;" + gb + ";" + gb)} catch (e) {try {t.xvelcol.setColor("255;" + gb + ";" + gb)} catch (e2) {}}
+            let cw = 0, lh = 0; try {cw = t.veltext.getWidth() / 25; lh = t.veltext.getHeight() / 3} catch (e) {}
+            t.xvelcol.setPosition(4 + 5 * cw, vty + lh);
+          }
+        } else {if (t.veltext) t.veltext.hide(true); if (t.xvelcol) t.xvelcol.hide(true)}
+      } else {if (t.veltext) t.veltext.hide(true); if (t.xvelcol) t.xvelcol.hide(true)}
       if (t.veldraw) {
         try {t.veldraw.clear()} catch (e) {}
         if (pl && wantvec) {
@@ -184,6 +202,10 @@
       if (t.vidphase === "exported" && performance.now() - t.exporteddone > 2000) {
         t.vidphase = null; t.vidblock = false;
         completegrey(scene, false);
+        // the render dimmed the complete-screen objects to hide them from the footage;
+        // bring them back so the complete screen reappears after exporting - the bg dim
+        // is semitransparent (the game tweens it to 255/3), the rest are fully opaque
+        for (const n of completeobjs) for (const o of scene.getObjects(n) || []) {try {o.setOpacity(n === "levelCompleteBg" ? 85 : 255)} catch (e) {}}
         if (t.counttext) {t.counttext.hide(); try {t.counttext.setScale(3)} catch (e) {}}
         t.vidstep = "";
       }

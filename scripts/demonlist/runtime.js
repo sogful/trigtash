@@ -4,7 +4,7 @@ const P = (window.__demonlist = window.__demonlist || {});
 
 // you get the point
 const KEY = "AIzaSyDW-WtdoFxgkx6IC9z6ZqKIo-9yTZ5ILWE";
-const URL = "https://firestore.googleapis.com/v1/projects/tgd-reborn/databases/(default)/documents/demonlist?key=" + KEY + "&pageSize=300";
+const URL = "https://firestore.googleapis.com/v1/projects/tgd-reborn/databases/(default)/documents:runQuery?key=" + KEY;
 
 const DIFF = {
   unrated: [0, 48, 16, 16], auto: [0, 0, 16, 16], easy: [16, 0, 16, 16],
@@ -34,7 +34,10 @@ function fetchList() {
   P.docs = null;
   P.error = "";
   try {
-    fetch(URL).then(r => r.json()).then(j => {
+    // a plain collection GET silently paginates down to 18; the runQuery POST returns all 69
+    fetch(URL, {method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({structuredQuery: {from: [{collectionId: "demonlist"}], limit: 300}})
+    }).then(r => r.json()).then(j => {
       const g = (f, k) => {
         const c = f[k];
         if (!c) return "";
@@ -43,7 +46,8 @@ function fetchList() {
         if (c.doubleValue != null) return "" + c.doubleValue;
         return "";
       };
-      const docs = (j.documents || []).map(d => {
+      const rows = Array.isArray(j) ? j.filter(x => x && x.document).map(x => x.document) : (j.documents || []);
+      const docs = rows.map(d => {
         const f = d.fields || {};
         return {name: g(f, "name"), author: g(f, "author"), diff: g(f, "diff"),
           pos: parseFloat(g(f, "pos") || "0"), lvl: g(f, "lvl")};

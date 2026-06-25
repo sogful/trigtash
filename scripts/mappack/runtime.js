@@ -9,7 +9,7 @@ const META = [
 
 // i hope yalls firebase is configured correctly v2
 const KEY = "AIzaSyDW-WtdoFxgkx6IC9z6ZqKIo-9yTZ5ILWE";
-const URL = "https://firestore.googleapis.com/v1/projects/tgd-reborn/databases/(default)/documents/mappacks?key=" + KEY + "&pageSize=100";
+const URL = "https://firestore.googleapis.com/v1/projects/tgd-reborn/databases/(default)/documents:runQuery?key=" + KEY;
 
 /*////////////////////////////////////////////////////////////////////*/
 
@@ -41,9 +41,13 @@ if (P.owner !== scene) {
   } catch (e) {}
   if (cache) {makeLevelstore(cache); P.created = true}
   try {
-    fetch(URL).then(r => r.json()).then(j => {
+    // a plain collection GET silently paginates; the runQuery POST returns all of them
+    fetch(URL, {method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({structuredQuery: {from: [{collectionId: "mappacks"}], limit: 300}})
+    }).then(r => r.json()).then(j => {
       const byId = {};
-      (j.documents || []).forEach(d => {
+      const rows = Array.isArray(j) ? j.filter(x => x && x.document).map(x => x.document) : (j.documents || []);
+      rows.forEach(d => {
         const f = d.fields || {};
         const id = parseInt((f.id && (f.id.integerValue || f.id.doubleValue)) || "0", 10);
         const data = (f.data && f.data.arrayValue && f.data.arrayValue.values) || [];

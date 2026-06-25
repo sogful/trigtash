@@ -37,6 +37,18 @@ if (t.hudowner !== runtimeScene) {
     try {t.veltext.setWrapping(false)} catch (e) {}
     t.veltext.hide(true);
   }
+  // dedicated overlay for just the xvel value so it tints independently of the rest of
+  // the readout (bitmaptext is single-colour). the tasbtn pool is fully spent by the
+  // named grabs, so spin up a fresh instance
+  t.xvelcol = null;
+  try {t.xvelcol = runtimeScene.createObject("tasbtn")} catch (e) {}
+  if (t.xvelcol) {
+    t.xvelcol.setLayer("ui");
+    t.xvelcol.setZOrder(10006);
+    try {t.xvelcol.setScale(0.5)} catch (e) {}
+    try {t.xvelcol.setWrapping(false)} catch (e) {}
+    t.xvelcol.hide(true);
+  }
   t.tiptext = grab("tasbtn");
   if (t.tiptext) {
     t.tiptext.setLayer("ui");

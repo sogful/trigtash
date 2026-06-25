@@ -343,6 +343,9 @@ if (t.installed !== runtimeScene.getGame()) {
     if (t.mode === "record") {
       t.macro.events = t.macro.events.filter(ev => ev[0] < snap.frame);
       t.macro.icon.length = Math.min(t.macro.icon.length, snap.frame);
+      // remember the world state at this rollback frame so a replay can re-apply it
+      // (a replay only force-corrects the player, so physics + switch blocks would drift)
+      if (t.macro && snap.objs) (t.macro.worldsnaps = t.macro.worldsnaps || {})[snap.frame] = snap.objs;
       t.prevkeys = Object.assign({}, snap.reckeys || {});
       t.prevmouse = !!snap.recmouse;
       applykeystate({}, false);

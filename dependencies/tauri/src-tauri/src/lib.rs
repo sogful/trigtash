@@ -186,9 +186,11 @@ fn set_fullscreen(app: tauri::AppHandle, full: bool) -> Result<(), String> {
   use tauri::Manager;
   if let Some(win) = app.get_webview_window("main") {
     win.set_fullscreen(full).map_err(|e| e.to_string())?;
-    // borderless fullscreen otherwise lets an always-on-top taskbar draw over the
-    // game when focused; keeping the window on top while fullscreen prevents that.
-    let _ = win.set_always_on_top(full);
+    // never force always-on-top: a topmost borderless window blocks alt-tab (other
+    // windows draw behind it) and, combined with minimize-on-blur, could deadlock the
+    // window into an unfocusable state. borderless-windowed fullscreen covers the
+    // taskbar while focused yet alt-tabs cleanly, which is what we want.
+    let _ = win.set_always_on_top(false);
   }
   Ok(())
 }
@@ -522,14 +524,6 @@ pub fn run() {
         let target_h = (size.width as f64 / ASPECT).round() as u32;
         if size.height.abs_diff(target_h) > 2 {
           let _ = win.set_size(PhysicalSize::new(size.width, target_h));
-        }
-      }
-      // keep a fullscreen window above the taskbar ONLY while focused; dropping
-      // always-on-top on focus loss lets alt-tab actually switch away (otherwise
-      // the borderless fullscreen window stays stuck on top of everything).
-      if let WindowEvent::Focused(focused) = event {
-        if win.is_fullscreen().unwrap_or(false) {
-          let _ = win.set_always_on_top(*focused);
         }
       }
     })

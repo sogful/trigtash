@@ -163,7 +163,16 @@
       if (t.frame < t.playm.length) playframe();
       setblackalpha(0);
       applypendingsynth();
+      // replay the recorded death/backtrack: playframe sets requestbacktrack on "back"
+      // events, but the export never consumed it - so deaths only teleported the player
+      // and block states never reset. mirror the live replay (applynormalcp + R inject)
+      let backinject = false;
+      if (t.requestbacktrack && inlevel()) {const bt = (t.requestbacktrack === true) ? backtarget() : t.requestbacktrack; t.requestbacktrack = false; if (bt) {applynormalcp(scene, bt); t.ubacktrack = 8; backinject = true; try {input.onKeyPressed(82, 0)} catch (e) {}}}
+      // re-apply the recorded world state at rollback frames (same as the live replay),
+      // else physics + switch blocks drift in the export even though they're right live
+      if (t.playm.worldsnaps && t.playm.worldsnaps[t.frame]) {try {restoreobjs(scene, t.playm.worldsnaps[t.frame])} catch (e) {}}
       t.origstep(t.step);
+      if (backinject) try {input.onKeyReleased(82, 0)} catch (e) {}
       applyicon(scene, t.frame);
       paintandcap(scene);
       if (winshown(scene)) {t.offsub = "outro"; t.offwon = t.offframe; t.offcompleteat = -1}

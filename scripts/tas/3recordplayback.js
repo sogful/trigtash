@@ -60,6 +60,10 @@
   function applykeystate(keys, mouse) {
     for (const name in t.watch) {
       const code = t.watch[name];
+      // never REPLAY control keys as raw input: escape(27)/r(82)/t(84)/u(85) each have
+      // their own handling (pause via requestpause, restart, backtrack via "back" events).
+      // a recorded escape (user paused mid-record) would otherwise pause the replay.
+      if (code === 27 || code === 82 || code === 84 || code === 85) continue;
       const want = !!keys[name] || (code === 32 && mouse);
       if (want && !input.isKeyPressed(code)) input.onKeyPressed(code, 0);
       if (!want && input.isKeyPressed(code)) input.onKeyReleased(code, 0);
@@ -205,6 +209,7 @@
     let pos = 0, nf = 0;
     const desired = {keys: {}, mouse: false, cursor: null};
     const emitted = {keys: {}, mouse: false, cursor: null};
+    const ws = m.worldsnaps || {}, newworldsnaps = {};
     for (let f = 0; f < m.length; f++) {
       while (pos < events.length && events[pos][0] === f) {
         const ev = events[pos++];
@@ -230,11 +235,13 @@
         emitted.cursor = desired.cursor;
       }
       newicon[nf] = icon[f];
+      if (ws[f]) newworldsnaps[nf] = ws[f];
       nf++;
     }
     note("trimmed macro: " + m.length + " -> " + nf + " frames (" + clusters.length + " segment(s) merged)");
     m.events = newevents;
     m.icon = newicon;
+    m.worldsnaps = newworldsnaps;
     m.length = nf;
   }
   /*//// trim end ////*/
@@ -408,6 +415,7 @@
       t.prevkeys = {}; t.prevmouse = false; t.prevcursor = [0, 0];
       try {t.prevdeaths = svar(scene, "deaths").getAsNumber()} catch (e) {}
       t.prevstop = 0;
+      t.timerstarted = false; t.timerstartframe = 0; t.tprevx = undefined;
       t.practice = false;
 
       if (t.playable) {
@@ -484,6 +492,11 @@
 
       let backinject = false;
       if (t.requestbacktrack && inlevel()) {const bt = (t.requestbacktrack === true) ? backtarget() : t.requestbacktrack; t.requestbacktrack = false; if (bt) {applynormalcp(scene, bt); t.ubacktrack = 8; backinject = true; try {input.onKeyPressed(82, 0)} catch (e) {}}}
+      // re-apply the recorded world state at rollback frames so physics + switch blocks
+      // match the run instead of drifting (a replay only force-corrects the player)
+      if (t.mode === "play" && !replaypaused && t.playm.worldsnaps && t.playm.worldsnaps[t.frame]) {
+        try {restoreobjs(scene, t.playm.worldsnaps[t.frame])} catch (e) {}
+      }
       try {scene.render = (i === n - 1) ? realRender : noRender} catch (e) {}
       alive = t.origstep(t.step);
       if (pauseinject) try {input.onKeyReleased(27, 0)} catch (e) {}
@@ -518,7 +531,7 @@
 
   function startsession(scene) {
     t.timerstarted = false;
-    t.macro = {levelInfo: macrometa(scene), events: [], icon: [], length: 0};
+    t.macro = {levelInfo: macrometa(scene), events: [], icon: [], length: 0, worldsnaps: {}};
     t.frame = 0; t.ring = [];
     t.prevkeys = {}; t.prevmouse = false; t.prevcursor = [0, 0];
     t.editmode = false; t.cheated = false; t.fresh = null;
@@ -529,7 +542,7 @@
     const m = t.playable && t.playable.macro;
     if (!m || !m.length) {note("no finished macro to export"); return}
     const levelInfo = Object.assign({}, m.levelInfo, {length: m.length});
-    const data = JSON.stringify({levelInfo: levelInfo, events: m.events, icon: m.icon});
+    const data = JSON.stringify({levelInfo: levelInfo, events: m.events, icon: m.icon, worldsnaps: m.worldsnaps || {}});
     const fname = ((m.levelInfo && m.levelInfo.name) || "macro").replace(/[^\w\- ]/g, "") + ".tgdm";
     invoke("save_text_file", {defaultName: fname, content: data}).then(function (saved) {
       note(saved ? "macro exported" : "export cancelled");
@@ -549,7 +562,7 @@
         if (!m || !Array.isArray(m.events)) {note("invalid macro file"); return}
         const li = m.levelInfo || (m.meta && m.meta.level) || {};
         const len = (m.levelInfo && m.levelInfo.length) || m.length || 0;
-        t.playable = {macro: {levelInfo: li, events: m.events, icon: m.icon || [], length: len}, src: "loaded"};
+        t.playable = {macro: {levelInfo: li, events: m.events, icon: m.icon || [], length: len, worldsnaps: m.worldsnaps || {}}, src: "loaded"};
         note("macro imported (" + t.playable.macro.length + " frames)");
       } catch (e) {note("invalid macro file")}
     };
