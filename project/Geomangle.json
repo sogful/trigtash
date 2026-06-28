@@ -5001,6 +5001,14 @@
         "name": "assets\\textures\\logos\\taslogo.png",
         "smoothed": false,
         "userAdded": true
+      },
+      {
+        "file": "assets/images/game/cat.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "cat.png",
+        "smoothed": false,
+        "userAdded": true
       }
     ]
   },
@@ -66485,6 +66493,9 @@
             },
             {
               "name": "metalplatform"
+            },
+            {
+              "name": "cat"
             }
           ]
         },
@@ -99880,6 +99891,202 @@
           "behaviors": []
         },
         {
+          "adaptCollisionMaskAutomatically": false,
+          "assetStoreId": "",
+          "name": "cat",
+          "type": "Sprite",
+          "updateIfNotVisible": false,
+          "variables": [],
+          "effects": [],
+          "behaviors": [
+            {
+              "name": "Animation",
+              "type": "AnimatableCapability::AnimatableBehavior"
+            },
+            {
+              "name": "Effect",
+              "type": "EffectCapability::EffectBehavior"
+            },
+            {
+              "name": "Flippable",
+              "type": "FlippableCapability::FlippableBehavior"
+            },
+            {
+              "name": "Opacity",
+              "type": "OpacityCapability::OpacityBehavior"
+            },
+            {
+              "name": "Resizable",
+              "type": "ResizableCapability::ResizableBehavior"
+            },
+            {
+              "name": "Scale",
+              "type": "ScalableCapability::ScalableBehavior"
+            },
+            {
+              "name": "Physics2",
+              "type": "Physics2::Physics2Behavior",
+              "bodyType": "Dynamic",
+              "bullet": false,
+              "fixedRotation": false,
+              "canSleep": true,
+              "shape": "Box",
+              "shapeDimensionA": 0,
+              "shapeDimensionB": 0,
+              "shapeOffsetX": 0,
+              "shapeOffsetY": 0,
+              "polygonOrigin": "Center",
+              "vertices": [],
+              "density": 0.3,
+              "friction": 0.3,
+              "restitution": 0.1,
+              "linearDamping": 0.1,
+              "angularDamping": 0.1,
+              "gravityScale": 1,
+              "layers": 5,
+              "masks": 5
+            }
+          ],
+          "animations": [
+            {
+              "name": "",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "timeBetweenFrames": 0.08,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": true,
+                      "image": "cat.png",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 16,
+                        "y": 19
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": [
+                        [
+                          {
+                            "x": 25,
+                            "y": 0
+                          },
+                          {
+                            "x": 32,
+                            "y": 0
+                          },
+                          {
+                            "x": 32,
+                            "y": 4
+                          },
+                          {
+                            "x": 26,
+                            "y": 9
+                          },
+                          {
+                            "x": 26,
+                            "y": 12
+                          },
+                          {
+                            "x": 25,
+                            "y": 12
+                          },
+                          {
+                            "x": 26,
+                            "y": 24
+                          },
+                          {
+                            "x": 24,
+                            "y": 24
+                          },
+                          {
+                            "x": 23,
+                            "y": 30
+                          },
+                          {
+                            "x": 26,
+                            "y": 32
+                          },
+                          {
+                            "x": 26,
+                            "y": 35
+                          },
+                          {
+                            "x": 24,
+                            "y": 37
+                          },
+                          {
+                            "x": 19,
+                            "y": 36
+                          },
+                          {
+                            "x": 17,
+                            "y": 33
+                          },
+                          {
+                            "x": 16,
+                            "y": 33
+                          },
+                          {
+                            "x": 16,
+                            "y": 37
+                          },
+                          {
+                            "x": 10,
+                            "y": 37
+                          },
+                          {
+                            "x": 8,
+                            "y": 33
+                          },
+                          {
+                            "x": 8,
+                            "y": 29
+                          },
+                          {
+                            "x": 6,
+                            "y": 30
+                          },
+                          {
+                            "x": 2,
+                            "y": 29
+                          },
+                          {
+                            "x": 1,
+                            "y": 22
+                          },
+                          {
+                            "x": 3,
+                            "y": 21
+                          },
+                          {
+                            "x": 4,
+                            "y": 11
+                          },
+                          {
+                            "x": 0,
+                            "y": 7
+                          },
+                          {
+                            "x": 0,
+                            "y": 2
+                          }
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
           "assetStoreId": "",
           "name": "tasbtn",
           "type": "BitmapText::BitmapTextObject",
@@ -109556,7 +109763,7 @@
                           "parameters": [
                             "ptime",
                             "=",
-                            "TimerElapsedTime(\"stopwatch\")"
+                            "max(0,TimerElapsedTime(\"stopwatch\"))"
                           ]
                         }
                       ]
@@ -110907,7 +111114,7 @@
                     "timeAttackClock",
                     "Text",
                     "=",
-                    "ToString(trunc(Variable(loadedLevel.levelInfo.challengeTime)-TimerElapsedTime(\"stopwatch\")))"
+                    "ToString(trunc(max(0,Variable(loadedLevel.levelInfo.challengeTime)-TimerElapsedTime(\"stopwatch\"))))"
                   ]
                 },
                 {
@@ -133192,7 +133399,7 @@
                       "parameters": [
                         "ptime",
                         "=",
-                        "TimerElapsedTime(\"stopwatch\")"
+                        "max(0,TimerElapsedTime(\"stopwatch\"))"
                       ]
                     }
                   ]
@@ -135264,17 +135471,20 @@
                 "    t.off2dctx = t.off2d.getContext(\"2d\");",
                 "    const ow = t.offw * 3, oh = t.offh * 3;",
                 "    t.offtmp = null; t.ffhandle = null; t.fferr = false; t.offpaused = false;",
-                "    t.writechain = Promise.resolve(); t.pendingwrites = 0;",
+                "    t.writechain = Promise.resolve(); t.pendingwrites = 0; t.writeacc = 0;",
                 "",
-                "    // yuv444p for good color quality, but in the end it's kind of poorly supported",
+                "    // yuv420p H.264 high profile - the universally decodable format (browsers, phones,",
+                "    // social, every player), unlike yuv444p which only plays in mpv/ffmpeg. colors stay",
+                "    // faithful: bt709 throughout, a clean 3x nearest-neighbour upscale, and tv range so",
+                "    // players render it correctly whether or not they honour a full-range flag",
                 "    invoke(\"temp_path\", {suffix: \".mp4\"}).then(function (tmp) {",
                 "      t.offtmp = tmp;",
                 "      const args = [\"-y\", \"-f\", \"rawvideo\", \"-pix_fmt\", \"rgba\", \"-s\", t.offw + \"x\" + t.offh,",
                 "        \"-r\", \"60\", \"-i\", \"pipe:0\",",
-                "        \"-vf\", \"scale=\" + ow + \":\" + oh + \":flags=neighbor:in_range=full:out_range=full:out_color_matrix=bt709,format=yuv444p\",",
-                "        \"-c:v\", \"libx264\", \"-pix_fmt\", \"yuv444p\",",
-                "        \"-colorspace\", \"bt709\", \"-color_primaries\", \"bt709\", \"-color_trc\", \"bt709\", \"-color_range\", \"pc\",",
-                "        \"-crf\", \"16\", \"-preset\", \"veryfast\", t.offtmp];",
+                "        \"-vf\", \"scale=\" + ow + \":\" + oh + \":flags=neighbor:in_range=full:out_range=tv:out_color_matrix=bt709,format=yuv420p\",",
+                "        \"-c:v\", \"libx264\", \"-pix_fmt\", \"yuv420p\", \"-profile:v\", \"high\",",
+                "        \"-colorspace\", \"bt709\", \"-color_primaries\", \"bt709\", \"-color_trc\", \"bt709\", \"-color_range\", \"tv\",",
+                "        \"-crf\", \"16\", \"-preset\", \"veryfast\", \"-movflags\", \"+faststart\", t.offtmp];",
                 "      return invoke(\"ffmpeg_start\", {args: args});",
                 "    }).then(function (handle) {t.ffhandle = handle}).catch(function (e) {",
                 "      t.fferr = true; t.ffstderr = String(e); note(\"ffmpeg failed to start\");",
@@ -135314,10 +135524,18 @@
                 "      t.off2dctx.drawImage(gamecanvas(), 0, 0, t.offw, t.offh);",
                 "      const img = t.off2dctx.getImageData(0, 0, t.offw, t.offh);",
                 "      const buf = img.data.buffer;",
-                "      t.pendingwrites++;",
-                "      t.writechain = t.writechain.then(function () {",
-                "        return invoke(\"ffmpeg_write\", buf, {headers: {handle: String(t.ffhandle)}});",
-                "      }).then(function () {t.pendingwrites--}, function (e) {t.pendingwrites--; t.fferr = true; t.ffstderr = String(e)});",
+                "      // frame-hold to slow the gameplay to the speedhack rate: at pace<1 each rendered",
+                "      // frame is written 1/pace times, stretching the video to match the slowed music",
+                "      const sp = t.exportsp || 1;",
+                "      t.writeacc = (t.writeacc || 0) + 1 / sp;",
+                "      const copies = Math.floor(t.writeacc);",
+                "      t.writeacc -= copies;",
+                "      for (let c = 0; c < copies; c++) {",
+                "        t.pendingwrites++;",
+                "        t.writechain = t.writechain.then(function () {",
+                "          return invoke(\"ffmpeg_write\", buf, {headers: {handle: String(t.ffhandle)}});",
+                "        }).then(function () {t.pendingwrites--}, function (e) {t.pendingwrites--; t.fferr = true; t.ffstderr = String(e)});",
+                "      }",
                 "      if (t.pendingwrites > 24) t.offpaused = true;",
                 "    } catch (e) {}",
                 "  }",
@@ -135503,7 +135721,10 @@
                 "      // export at FULL volume regardless of the ingame setting, i don't think anybody would want musicless videos",
                 "      if (musicev) {musicev.frame = 30; musicev.vol = 1; log.push(musicev)}",
                 "      const sm = game.getSoundManager();",
-                "      const sr = 44100, dur = t.offframe / 60 + 1.5;",
+                "      // the music already plays slowed (its logged rate); stretch every sound's start by",
+                "      // 1/sp and slow the SFX rate by sp so the whole soundtrack matches the slowed video",
+                "      const sp = t.exportsp || 1;",
+                "      const sr = 44100, dur = t.offframe / 60 / sp + 1.5;",
                 "      const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;",
                 "      let octx;",
                 "      try {octx = new OAC(2, Math.ceil(dur * sr), sr)} catch (e) {resolve(null); return}",
@@ -135523,7 +135744,7 @@
                 "        t.vidstep = \"mixing audio...\";",
                 "        const master = octx.createGain();",
                 "        master.connect(octx.destination);",
-                "        const endt = t.offframe / 60;",
+                "        const endt = t.offframe / 60 / sp;",
                 "        try {master.gain.setValueAtTime(1, Math.max(0, endt - 1)); master.gain.linearRampToValueAtTime(0, endt)} catch (er) {}",
                 "        for (const e of log) {",
                 "          const b = buffers[e.res];",
@@ -135531,11 +135752,12 @@
                 "          try {",
                 "            const src = octx.createBufferSource();",
                 "            src.buffer = b; src.loop = !!e.loop;",
-                "            try {src.playbackRate.value = e.rate || 1} catch (er) {}",
+                "            // music keeps its already-slowed rate; SFX get slowed by sp to match it",
+                "            try {src.playbackRate.value = (e.rate || 1) * (e.music ? 1 : sp)} catch (er) {}",
                 "            const g = octx.createGain();",
                 "            g.gain.value = e.vol == null ? 1 : e.vol;",
                 "            src.connect(g); g.connect(master);",
-                "            src.start(Math.max(0, e.frame / 60));",
+                "            src.start(Math.max(0, e.frame / 60 / sp));",
                 "          } catch (er) {}",
                 "        }",
                 "        octx.startRendering().then(function (rendered) {",
@@ -135560,6 +135782,9 @@
                 "  function beginplayback(withvideo) {",
                 "    if (!t.playable) {note(\"no macro available\"); return}",
                 "    t.videopending = !!withvideo;",
+                "    // capture the speedhack now (the replay loop resets t.pace to 1). the music already",
+                "    // plays slowed at this rate; the export slows the video + SFX to match",
+                "    t.exportsp = withvideo ? (t.pace || 1) : 1;",
                 "    t.mode = \"idle\";",
                 "    t.frozen = false;",
                 "    releaseall();",
@@ -135815,6 +136040,7 @@
                 "        const phys = physmap[name];",
                 "        let col = null;",
                 "        if (name === \"icon\") col = \"0;230;230\";",
+                "        else if (name === \"cat\") col = \"255;150;64\";",
                 "        else if (t.killset[name]) col = \"255;64;64\";",
                 "        else if (radii[name] || t.greenset[name] || t.coinset[name] || name === \"onoffswitch\" || name === \"checkpoint\") col = \"64;255;64\";",
                 "        else if (phys) col = \"64;128;255\";",
@@ -135829,7 +136055,8 @@
                 "          d.drawCircle(ccx, ccy, (name === \"goal\" ? 48 : (objradius(o) || 48)) - 8);",
                 "          continue;",
                 "        }",
-                "        if (name === \"checkpoint\") drawcheckpoint(d, o);",
+                "        if (name === \"cat\") drawmask(d, o);",
+                "        else if (name === \"checkpoint\") drawcheckpoint(d, o);",
                 "        else if (phys) drawphys(d, o, phys, ccx, ccy);",
                 "        else drawmask(d, o);",
                 "      }",
@@ -135933,13 +136160,33 @@
                 "  }",
                 "  t.syncbridge = syncbridge;",
                 "",
+                "  function spawncat(scene) {",
+                "    let cat = null;",
+                "    try {cat = scene.createObject(\"cat\")} catch (e) {return}",
+                "    if (!cat) return;",
+                "    try {cat.setLayer(\"\")} catch (e) {}",
+                "    let rx = 216, ry = 120;",
+                "    try {",
+                "      const lay = scene.getLayer(\"\");",
+                "      const zoom = Math.max(0.05, lay.getCameraZoom());",
+                "      const hw = (216 / zoom) * 0.8, hh = (120 / zoom) * 0.8;",
+                "      rx = lay.getCameraX() + (Math.random() * 2 - 1) * hw;",
+                "      ry = lay.getCameraY() + (Math.random() * 2 - 1) * hh;",
+                "    } catch (e) {}",
+                "    try {cat.setPosition(rx, ry)} catch (e) {}",
+                "    try {const b = cat.getBehavior(\"Physics2\"); if (b.updateBodyFromObject) b.updateBodyFromObject(); b.setLinearVelocityX(0); b.setLinearVelocityY(0); b.setAngularVelocity((Math.random() * 2 - 1) * 40)} catch (e) {}",
+                "  }",
+                "",
                 "  function refreshhud() {",
                 "    const scene = inlevel();",
                 "    if (!scene) return;",
+                "    // spawn the easter-egg cat (overlay on always background-records, so \"record\" is",
+                "    // normal play here) - only block an active replay/export so it never desyncs those",
+                "    if (t.spawncat) {t.spawncat = false; if (t.hotkey && t.mode !== \"play\" && !t.vidphase && !t.countdown) spawncat(scene)}",
                 "",
                 "    // don't start timer until very slight movement occurs (facu really wanted this ig)",
                 "    {",
-                "      if (t.lastscene !== scene) {t.lastscene = scene; t.levelspawn = null; t.timerstarted = false}",
+                "      if (t.lastscene !== scene) {t.lastscene = scene; t.levelspawn = null; t.timerstarted = false; try {t.startcp = readcp(scene)} catch (e) {}}",
                 "      if (t.levelspawn === null) {try {t.levelspawn = [svar(scene, \"checkpointX\").getAsNumber(), svar(scene, \"checkpointY\").getAsNumber()]} catch (e) {}}",
                 "      const pl = aliveplayer(scene);",
                 "      if (pl && t.levelspawn) {",
@@ -136105,6 +136352,11 @@
                 "        // is semitransparent (the game tweens it to 255/3), the rest are fully opaque",
                 "        for (const n of completeobjs) for (const o of scene.getObjects(n) || []) {try {o.setOpacity(n === \"levelCompleteBg\" ? 85 : 255)} catch (e) {}}",
                 "        if (t.counttext) {t.counttext.hide(); try {t.counttext.setScale(3)} catch (e) {}}",
+                "        // the offline playthrough left practice checkpoints set (applynormalcp fires on",
+                "        // each replayed death), so a restart from the complete screen would respawn",
+                "        // mid-level with the stale bg. restore the clean level-start checkpoint captured",
+                "        // on load, so dying/restarting from here is a full reset to the start",
+                "        if (t.startcp) try {applycp(scene, t.startcp)} catch (e) {}",
                 "        t.vidstep = \"\";",
                 "      }",
                 "    }",
@@ -136336,9 +136588,13 @@
                 "      e.preventDefault();",
                 "      e.stopImmediatePropagation();",
                 "    } else {",
+                "      const sc = inlevel();",
                 "      let paused = false;",
-                "      try {paused = svar(inlevel(), \"paused\").getAsBoolean()} catch (e) {}",
-                "      if (!paused && !onpausebtn()) t.jumpclick = true;",
+                "      try {paused = svar(sc, \"paused\").getAsBoolean()} catch (e) {}",
+                "      // a click anywhere makes the player jump, but on the complete screen that jump",
+                "      // triggers the game's retry - so any click off the win buttons would glitch-restart.",
+                "      // suppress the click-jump while the win screen is up (the buttons stay clickable)",
+                "      if (!paused && !onpausebtn() && !winshown(sc)) t.jumpclick = true;",
                 "    }",
                 "  }, true);",
                 "",
@@ -136376,6 +136632,12 @@
                 "    if (e.code === \"Space\") {t.physjump.space = true; if (t.awaitrespawn) t.bufjump.space = true}",
                 "    if (e.code === \"ArrowUp\") {t.physjump.up = true; if (t.awaitrespawn) t.bufjump.up = true}",
                 "    if (!inlevel()) return;",
+                "    // easter egg: S, O, G pressed in order spawns a physics cat (macro overlay on)",
+                "    if (t.hotkey) {",
+                "      const sk = {KeyS: \"s\", KeyO: \"o\", KeyG: \"g\"};",
+                "      t.sogseq = (sk[e.code] ? ((t.sogseq || \"\") + sk[e.code]) : \"\").slice(-3);",
+                "      if (t.sogseq === \"sog\") {t.spawncat = true; t.sogseq = \"\"}",
+                "    }",
                 "    if (t.countdown) {",
                 "      if (e.code === \"Escape\") {",
                 "        t.countdown = null;",

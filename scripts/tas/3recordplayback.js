@@ -60,9 +60,6 @@
   function applykeystate(keys, mouse) {
     for (const name in t.watch) {
       const code = t.watch[name];
-      // never REPLAY control keys as raw input: escape(27)/r(82)/t(84)/u(85) each have
-      // their own handling (pause via requestpause, restart, backtrack via "back" events).
-      // a recorded escape (user paused mid-record) would otherwise pause the replay.
       if (code === 27 || code === 82 || code === 84 || code === 85) continue;
       const want = !!keys[name] || (code === 32 && mouse);
       if (want && !input.isKeyPressed(code)) input.onKeyPressed(code, 0);

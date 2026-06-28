@@ -71,17 +71,20 @@
     t.off2dctx = t.off2d.getContext("2d");
     const ow = t.offw * 3, oh = t.offh * 3;
     t.offtmp = null; t.ffhandle = null; t.fferr = false; t.offpaused = false;
-    t.writechain = Promise.resolve(); t.pendingwrites = 0;
+    t.writechain = Promise.resolve(); t.pendingwrites = 0; t.writeacc = 0;
 
-    // yuv444p for good color quality, but in the end it's kind of poorly supported
+    // yuv420p H.264 high profile - the universally decodable format (browsers, phones,
+    // social, every player), unlike yuv444p which only plays in mpv/ffmpeg. colors stay
+    // faithful: bt709 throughout, a clean 3x nearest-neighbour upscale, and tv range so
+    // players render it correctly whether or not they honour a full-range flag
     invoke("temp_path", {suffix: ".mp4"}).then(function (tmp) {
       t.offtmp = tmp;
       const args = ["-y", "-f", "rawvideo", "-pix_fmt", "rgba", "-s", t.offw + "x" + t.offh,
         "-r", "60", "-i", "pipe:0",
-        "-vf", "scale=" + ow + ":" + oh + ":flags=neighbor:in_range=full:out_range=full:out_color_matrix=bt709,format=yuv444p",
-        "-c:v", "libx264", "-pix_fmt", "yuv444p",
-        "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "pc",
-        "-crf", "16", "-preset", "veryfast", t.offtmp];
+        "-vf", "scale=" + ow + ":" + oh + ":flags=neighbor:in_range=full:out_range=tv:out_color_matrix=bt709,format=yuv420p",
+        "-c:v", "libx264", "-pix_fmt", "yuv420p", "-profile:v", "high",
+        "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv",
+        "-crf", "16", "-preset", "veryfast", "-movflags", "+faststart", t.offtmp];
       return invoke("ffmpeg_start", {args: args});
     }).then(function (handle) {t.ffhandle = handle}).catch(function (e) {
       t.fferr = true; t.ffstderr = String(e); note("ffmpeg failed to start");
@@ -121,10 +124,18 @@
       t.off2dctx.drawImage(gamecanvas(), 0, 0, t.offw, t.offh);
       const img = t.off2dctx.getImageData(0, 0, t.offw, t.offh);
       const buf = img.data.buffer;
-      t.pendingwrites++;
-      t.writechain = t.writechain.then(function () {
-        return invoke("ffmpeg_write", buf, {headers: {handle: String(t.ffhandle)}});
-      }).then(function () {t.pendingwrites--}, function (e) {t.pendingwrites--; t.fferr = true; t.ffstderr = String(e)});
+      // frame-hold to slow the gameplay to the speedhack rate: at pace<1 each rendered
+      // frame is written 1/pace times, stretching the video to match the slowed music
+      const sp = t.exportsp || 1;
+      t.writeacc = (t.writeacc || 0) + 1 / sp;
+      const copies = Math.floor(t.writeacc);
+      t.writeacc -= copies;
+      for (let c = 0; c < copies; c++) {
+        t.pendingwrites++;
+        t.writechain = t.writechain.then(function () {
+          return invoke("ffmpeg_write", buf, {headers: {handle: String(t.ffhandle)}});
+        }).then(function () {t.pendingwrites--}, function (e) {t.pendingwrites--; t.fferr = true; t.ffstderr = String(e)});
+      }
       if (t.pendingwrites > 24) t.offpaused = true;
     } catch (e) {}
   }
@@ -310,7 +321,10 @@
       // export at FULL volume regardless of the ingame setting, i don't think anybody would want musicless videos
       if (musicev) {musicev.frame = 30; musicev.vol = 1; log.push(musicev)}
       const sm = game.getSoundManager();
-      const sr = 44100, dur = t.offframe / 60 + 1.5;
+      // the music already plays slowed (its logged rate); stretch every sound's start by
+      // 1/sp and slow the SFX rate by sp so the whole soundtrack matches the slowed video
+      const sp = t.exportsp || 1;
+      const sr = 44100, dur = t.offframe / 60 / sp + 1.5;
       const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
       let octx;
       try {octx = new OAC(2, Math.ceil(dur * sr), sr)} catch (e) {resolve(null); return}
@@ -330,7 +344,7 @@
         t.vidstep = "mixing audio...";
         const master = octx.createGain();
         master.connect(octx.destination);
-        const endt = t.offframe / 60;
+        const endt = t.offframe / 60 / sp;
         try {master.gain.setValueAtTime(1, Math.max(0, endt - 1)); master.gain.linearRampToValueAtTime(0, endt)} catch (er) {}
         for (const e of log) {
           const b = buffers[e.res];
@@ -338,11 +352,12 @@
           try {
             const src = octx.createBufferSource();
             src.buffer = b; src.loop = !!e.loop;
-            try {src.playbackRate.value = e.rate || 1} catch (er) {}
+            // music keeps its already-slowed rate; SFX get slowed by sp to match it
+            try {src.playbackRate.value = (e.rate || 1) * (e.music ? 1 : sp)} catch (er) {}
             const g = octx.createGain();
             g.gain.value = e.vol == null ? 1 : e.vol;
             src.connect(g); g.connect(master);
-            src.start(Math.max(0, e.frame / 60));
+            src.start(Math.max(0, e.frame / 60 / sp));
           } catch (er) {}
         }
         octx.startRendering().then(function (rendered) {
@@ -367,6 +382,9 @@
   function beginplayback(withvideo) {
     if (!t.playable) {note("no macro available"); return}
     t.videopending = !!withvideo;
+    // capture the speedhack now (the replay loop resets t.pace to 1). the music already
+    // plays slowed at this rate; the export slows the video + SFX to match
+    t.exportsp = withvideo ? (t.pace || 1) : 1;
     t.mode = "idle";
     t.frozen = false;
     releaseall();
@@ -622,6 +640,7 @@
         const phys = physmap[name];
         let col = null;
         if (name === "icon") col = "0;230;230";
+        else if (name === "cat") col = "255;150;64";
         else if (t.killset[name]) col = "255;64;64";
         else if (radii[name] || t.greenset[name] || t.coinset[name] || name === "onoffswitch" || name === "checkpoint") col = "64;255;64";
         else if (phys) col = "64;128;255";
@@ -636,7 +655,8 @@
           d.drawCircle(ccx, ccy, (name === "goal" ? 48 : (objradius(o) || 48)) - 8);
           continue;
         }
-        if (name === "checkpoint") drawcheckpoint(d, o);
+        if (name === "cat") drawmask(d, o);
+        else if (name === "checkpoint") drawcheckpoint(d, o);
         else if (phys) drawphys(d, o, phys, ccx, ccy);
         else drawmask(d, o);
       }

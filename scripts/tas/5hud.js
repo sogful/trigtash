@@ -35,13 +35,29 @@
   }
   t.syncbridge = syncbridge;
 
+  function spawncat(scene) {
+    let cat = null;
+    try {cat = scene.createObject("cat")} catch (e) {return}
+    if (!cat) return;
+    try {cat.setLayer("")} catch (e) {}
+    let rx = 216, ry = 120;
+    try {
+      const lay = scene.getLayer("");
+      const zoom = Math.max(0.05, lay.getCameraZoom());
+      const hw = (216 / zoom) * 0.8, hh = (120 / zoom) * 0.8;
+      rx = lay.getCameraX() + (Math.random() * 2 - 1) * hw;
+      ry = lay.getCameraY() + (Math.random() * 2 - 1) * hh;
+    } catch (e) {}
+    try {cat.setPosition(rx, ry)} catch (e) {}
+    try {const b = cat.getBehavior("Physics2"); if (b.updateBodyFromObject) b.updateBodyFromObject(); b.setLinearVelocityX(0); b.setLinearVelocityY(0); b.setAngularVelocity((Math.random() * 2 - 1) * 40)} catch (e) {}
+  }
+
   function refreshhud() {
     const scene = inlevel();
     if (!scene) return;
-
-    // don't start timer until very slight movement occurs (facu really wanted this ig)
+    if (t.spawncat) {t.spawncat = false; if (t.hotkey && t.mode !== "play" && !t.vidphase && !t.countdown) spawncat(scene)}
     {
-      if (t.lastscene !== scene) {t.lastscene = scene; t.levelspawn = null; t.timerstarted = false}
+      if (t.lastscene !== scene) {t.lastscene = scene; t.levelspawn = null; t.timerstarted = false; try {t.startcp = readcp(scene)} catch (e) {}}
       if (t.levelspawn === null) {try {t.levelspawn = [svar(scene, "checkpointX").getAsNumber(), svar(scene, "checkpointY").getAsNumber()]} catch (e) {}}
       const pl = aliveplayer(scene);
       if (pl && t.levelspawn) {
@@ -61,9 +77,6 @@
           }
         }
         if (t.mode === "play" && t.timerstarted) {
-          // frame-lock the timer, BUT if the game has dropped it well below our value the
-          // level was restarted (pause-menu restart) - leave it so the step loop's restart
-          // detection catches it instead of us masking the reset.
           try {const tm = scene.getTimeManager()._timers.get("stopwatch"); const want = Math.max(0, (t.frame - (t.timerstartframe || 0)) * t.step); if (tm && tm.getTime() >= want - 200) tm.setTime(want)} catch (e) {}
         }
         t.tprevx = plx; t.tprevy = ply;
@@ -207,6 +220,11 @@
         // is semitransparent (the game tweens it to 255/3), the rest are fully opaque
         for (const n of completeobjs) for (const o of scene.getObjects(n) || []) {try {o.setOpacity(n === "levelCompleteBg" ? 85 : 255)} catch (e) {}}
         if (t.counttext) {t.counttext.hide(); try {t.counttext.setScale(3)} catch (e) {}}
+        // the offline playthrough left practice checkpoints set (applynormalcp fires on
+        // each replayed death), so a restart from the complete screen would respawn
+        // mid-level with the stale bg. restore the clean level-start checkpoint captured
+        // on load, so dying/restarting from here is a full reset to the start
+        if (t.startcp) try {applycp(scene, t.startcp)} catch (e) {}
         t.vidstep = "";
       }
     }
