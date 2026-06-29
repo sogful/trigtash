@@ -2723,7 +2723,7 @@
         "userAdded": true
       },
       {
-        "file": "assets/images/other/switch0.png",
+        "file": "assets/images/buttons/switch0.png",
         "kind": "image",
         "metadata": "",
         "name": "assets\\textures\\system\\switch0.png",
@@ -2731,7 +2731,7 @@
         "userAdded": true
       },
       {
-        "file": "assets/images/other/switch1.png",
+        "file": "assets/images/buttons/switch1.png",
         "kind": "image",
         "metadata": "",
         "name": "assets\\textures\\system\\switch1.png",
@@ -5009,6 +5009,22 @@
         "name": "cat.png",
         "smoothed": false,
         "userAdded": true
+      },
+      {
+        "name": "assets\\textures\\system\\switch1of3.png",
+        "file": "assets/images/buttons/switch1of3.png",
+        "kind": "image",
+        "metadata": "",
+        "smoothed": false,
+        "userAdded": true
+      },
+      {
+        "name": "assets\\textures\\system\\switch2of3.png",
+        "file": "assets/images/buttons/switch2of3.png",
+        "kind": "image",
+        "metadata": "",
+        "smoothed": false,
+        "userAdded": true
       }
     ]
   },
@@ -6950,7 +6966,7 @@
           "persistentUuid": "setsw000-0000-0000-0000-000000000017",
           "width": 0,
           "x": 476,
-          "y": 116,
+          "y": 136,
           "zOrder": 49,
           "numberProperties": [],
           "stringProperties": [],
@@ -6959,13 +6975,13 @@
               "folded": true,
               "name": "selectIndex",
               "type": "number",
-              "value": 4
+              "value": 1
             },
             {
               "folded": true,
               "name": "pos",
               "type": "number",
-              "value": 2
+              "value": 3
             },
             {
               "folded": true,
@@ -6996,7 +7012,7 @@
           "persistentUuid": "setsw000-0000-0000-0000-000000000018",
           "width": 0,
           "x": 476,
-          "y": 136,
+          "y": 116,
           "zOrder": 49,
           "numberProperties": [],
           "stringProperties": [],
@@ -7011,7 +7027,7 @@
               "folded": true,
               "name": "pos",
               "type": "number",
-              "value": 3
+              "value": 2
             },
             {
               "folded": true,
@@ -7051,7 +7067,7 @@
               "folded": true,
               "name": "selectIndex",
               "type": "number",
-              "value": 4
+              "value": 1
             },
             {
               "folded": true,
@@ -7097,7 +7113,7 @@
               "folded": true,
               "name": "selectIndex",
               "type": "number",
-              "value": 4
+              "value": 1
             },
             {
               "folded": true,
@@ -7122,6 +7138,110 @@
               "name": "description",
               "type": "string",
               "value": "Draws an arrow from the player showing the direction and strength of its current velocity."
+            }
+          ]
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "layer": "",
+          "name": "settingsSwitch",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000021",
+          "width": 0,
+          "x": 476,
+          "y": 136,
+          "zOrder": 49,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": [
+            {
+              "folded": true,
+              "name": "selectIndex",
+              "type": "number",
+              "value": 4
+            },
+            {
+              "folded": true,
+              "name": "pos",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "folded": true,
+              "name": "id",
+              "type": "string",
+              "value": "macrostopbutton"
+            },
+            {
+              "folded": true,
+              "name": "name",
+              "type": "string",
+              "value": "Start/Stop Button"
+            },
+            {
+              "folded": true,
+              "name": "description",
+              "type": "string",
+              "value": "Allows ending your macro before reaching the goal."
+            }
+          ]
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "layer": "",
+          "name": "settingsSwitch",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000022",
+          "width": 0,
+          "x": 476,
+          "y": 156,
+          "zOrder": 49,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": [
+            {
+              "folded": true,
+              "name": "selectIndex",
+              "type": "number",
+              "value": 4
+            },
+            {
+              "folded": true,
+              "name": "pos",
+              "type": "number",
+              "value": 4
+            },
+            {
+              "folded": true,
+              "name": "id",
+              "type": "string",
+              "value": "compressmb"
+            },
+            {
+              "folded": true,
+              "name": "name",
+              "type": "string",
+              "value": "Compress Export"
+            },
+            {
+              "folded": true,
+              "name": "description",
+              "type": "string",
+              "value": "Reencodes the exported video to fit social media upload limits. This should not be used for long levels."
+            },
+            {
+              "folded": true,
+              "name": "locked",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "folded": true,
+              "name": "cycle",
+              "type": "string",
+              "value": "0,8,15,30"
             }
           ]
         }
@@ -9241,6 +9361,102 @@
                     {
                       "hasCustomCollisionMask": true,
                       "image": "assets\\textures\\system\\switch1.png",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 8,
+                        "y": 8
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": [
+                        [
+                          {
+                            "x": 0,
+                            "y": 0
+                          },
+                          {
+                            "x": 34,
+                            "y": 0
+                          },
+                          {
+                            "x": 34,
+                            "y": 18
+                          },
+                          {
+                            "x": 0,
+                            "y": 18
+                          }
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "timeBetweenFrames": 0.08,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": true,
+                      "image": "assets\\textures\\system\\switch1of3.png",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 8,
+                        "y": 8
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": [
+                        [
+                          {
+                            "x": 0,
+                            "y": 0
+                          },
+                          {
+                            "x": 34,
+                            "y": 0
+                          },
+                          {
+                            "x": 34,
+                            "y": 18
+                          },
+                          {
+                            "x": 0,
+                            "y": 18
+                          }
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "timeBetweenFrames": 0.08,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": true,
+                      "image": "assets\\textures\\system\\switch2of3.png",
                       "points": [],
                       "originPoint": {
                         "name": "origine",
@@ -17604,6 +17820,39 @@
                 "      try {ok = window.confirm(\"This will wipe your current save file, make sure you save it first!\")} catch (e) {}",
                 "      if (ok) {try {gdjs.evtsExt__UDTFwTGD__UploadTextFile.func(scene, vars.get(\"importedData\"), null)} catch (e) {}}",
                 "    }",
+                "  }",
+                "  // cycle options (e.g. compress-export 0/8/15/30): click advances to the next value.",
+                "  // gate on a REAL cycle var via has() - get() auto-creates a \"0\" that read as truthy",
+                "  for (const sw of scene.getObjects(\"settingsSwitch\") || []) {",
+                "    if (sw.isHidden() || !sw.getVariables().has(\"cycle\")) continue;",
+                "    const cyc = sw.getVariables().get(\"cycle\").getAsString();",
+                "    if (cyc.indexOf(\",\") < 0) continue;",
+                "    if (cx < sw.getAABBLeft() || cx > sw.getAABBRight() || cy < sw.getAABBTop() || cy > sw.getAABBBottom()) continue;",
+                "    const vals = cyc.split(\",\").map(Number);",
+                "    let id = \"\"; try {id = sw.getVariables().get(\"id\").getAsString()} catch (e) {}",
+                "    let cur = 0; try {cur = vars.get(\"settings\").getChild(id).getAsNumber()} catch (e) {}",
+                "    let idx = vals.indexOf(cur); if (idx < 0) idx = 0;",
+                "    try {vars.get(\"settings\").getChild(id).setNumber(vals[(idx + 1) % vals.length])} catch (e) {}",
+                "    try {gdjs.evtTools.storage.writeStringInJSONFile(\"trigonometrydash\", \"settings\", gdjs.evtTools.network.variableStructureToJSON(vars.get(\"settings\")))} catch (e) {}",
+                "  }",
+                "}",
+                "",
+                "// cycle-switch fill: animation 0 Off / 2 = 8MB(1of3) / 3 = 15MB(2of3) / 1 = 30MB(full),",
+                "// plus the value appended to its row label (only this switch - gated by has(\"cycle\"))",
+                "const CYCANIM = {\"0\": 0, \"8\": 2, \"15\": 3, \"30\": 1};",
+                "for (const sw of scene.getObjects(\"settingsSwitch\") || []) {",
+                "  if (sw.isHidden() || !sw.getVariables().has(\"cycle\")) continue;",
+                "  let id = \"\", base = \"\", cur = 0;",
+                "  try {id = sw.getVariables().get(\"id\").getAsString()} catch (e) {}",
+                "  try {base = sw.getVariables().get(\"name\").getAsString()} catch (e) {}",
+                "  try {cur = vars.get(\"settings\").getChild(id).getAsNumber()} catch (e) {}",
+                "  const ai = CYCANIM[String(cur)];",
+                "  try {sw.getBehavior(\"Animation\").setAnimationIndex(ai != null ? ai : 0)} catch (e) {try {sw.setAnimationIndex(ai != null ? ai : 0)} catch (e2) {}}",
+                "  const label = base + \" (\" + (cur > 0 ? cur + \" MB\" : \"Off\") + \")\";",
+                "  const swcy = (sw.getAABBTop() + sw.getAABBBottom()) / 2;",
+                "  for (const nm of scene.getObjects(\"settingsName\") || []) {",
+                "    if (nm.isHidden() || Math.abs((nm.getAABBTop() + nm.getAABBBottom()) / 2 - swcy) > 8) continue;",
+                "    try {nm.getBehavior(\"Text\").setText(label)} catch (e) {try {nm.setText(label)} catch (e2) {}}",
                 "  }",
                 "}",
                 "",
@@ -67228,7 +67477,7 @@
           "height": 0,
           "keepRatio": true,
           "layer": "ui",
-          "name": "tasplay",
+          "name": "tasrec",
           "persistentUuid": "tas0000-0000-0000-0000-000000000000",
           "width": 0,
           "x": 232,
@@ -67244,7 +67493,7 @@
           "height": 0,
           "keepRatio": true,
           "layer": "ui",
-          "name": "tasstepb",
+          "name": "tasplay",
           "persistentUuid": "tas0000-0000-0000-0000-000000000001",
           "width": 0,
           "x": 252,
@@ -67260,7 +67509,7 @@
           "height": 0,
           "keepRatio": true,
           "layer": "ui",
-          "name": "tasstepf",
+          "name": "tasstepb",
           "persistentUuid": "tas0000-0000-0000-0000-000000000002",
           "width": 0,
           "x": 272,
@@ -67276,7 +67525,7 @@
           "height": 0,
           "keepRatio": true,
           "layer": "ui",
-          "name": "tasarrow",
+          "name": "tasstepf",
           "persistentUuid": "tas0000-0000-0000-0000-000000000003",
           "width": 0,
           "x": 292,
@@ -67292,7 +67541,7 @@
           "height": 0,
           "keepRatio": true,
           "layer": "ui",
-          "name": "tastime",
+          "name": "tasarrow",
           "persistentUuid": "tas0000-0000-0000-0000-000000000004",
           "width": 0,
           "x": 312,
@@ -67308,7 +67557,7 @@
           "height": 0,
           "keepRatio": true,
           "layer": "ui",
-          "name": "tasarrow",
+          "name": "tastime",
           "persistentUuid": "tas0000-0000-0000-0000-000000000005",
           "width": 0,
           "x": 332,
@@ -67324,7 +67573,7 @@
           "height": 0,
           "keepRatio": true,
           "layer": "ui",
-          "name": "tashitbox",
+          "name": "tasarrow",
           "persistentUuid": "tas0000-0000-0000-0000-000000000006",
           "width": 0,
           "x": 352,
@@ -67340,7 +67589,7 @@
           "height": 0,
           "keepRatio": true,
           "layer": "ui",
-          "name": "tasexport",
+          "name": "tashitbox",
           "persistentUuid": "tas0000-0000-0000-0000-000000000007",
           "width": 0,
           "x": 372,
@@ -67356,7 +67605,7 @@
           "height": 0,
           "keepRatio": true,
           "layer": "ui",
-          "name": "tasimport",
+          "name": "tasexport",
           "persistentUuid": "tas0000-0000-0000-0000-000000000008",
           "width": 0,
           "x": 392,
@@ -67372,8 +67621,24 @@
           "height": 0,
           "keepRatio": true,
           "layer": "ui",
-          "name": "tasvideo",
+          "name": "tasimport",
           "persistentUuid": "tas0000-0000-0000-0000-000000000009",
+          "width": 0,
+          "x": 412,
+          "y": 4,
+          "zOrder": 10001,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "ui",
+          "name": "tasvideo",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000010",
           "width": 0,
           "x": 412,
           "y": 32,
@@ -67389,7 +67654,7 @@
           "keepRatio": true,
           "layer": "ui",
           "name": "tasplaytiny",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000010",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000011",
           "width": 0,
           "x": 412,
           "y": 52,
@@ -67405,7 +67670,7 @@
           "keepRatio": true,
           "layer": "ui",
           "name": "macroPractice",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000011",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000012",
           "width": 0,
           "x": 204,
           "y": 168,
@@ -67421,7 +67686,7 @@
           "keepRatio": true,
           "layer": "ui",
           "name": "tasbtn",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000012",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000013",
           "width": 0,
           "x": 300,
           "y": 28,
@@ -67437,7 +67702,7 @@
           "keepRatio": true,
           "layer": "ui",
           "name": "tasbtn",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000013",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000014",
           "width": 0,
           "x": 200,
           "y": 104,
@@ -67453,7 +67718,7 @@
           "keepRatio": true,
           "layer": "ui",
           "name": "tasbtn",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000014",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000015",
           "width": 0,
           "x": 16,
           "y": 140,
@@ -67469,7 +67734,7 @@
           "keepRatio": true,
           "layer": "ui",
           "name": "tasbtn",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000015",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000016",
           "width": 0,
           "x": 4,
           "y": 180,
@@ -67485,7 +67750,7 @@
           "keepRatio": true,
           "layer": "ui",
           "name": "tasbtn",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000016",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000017",
           "width": 0,
           "x": 200,
           "y": 200,
@@ -67501,7 +67766,7 @@
           "keepRatio": true,
           "layer": "ui",
           "name": "tasbtn",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000017",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000018",
           "width": 0,
           "x": 200,
           "y": 210,
@@ -67517,7 +67782,7 @@
           "keepRatio": true,
           "layer": "ui",
           "name": "tasbtn",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000018",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000019",
           "width": 0,
           "x": 200,
           "y": 220,
@@ -67533,7 +67798,7 @@
           "keepRatio": true,
           "layer": "ui",
           "name": "tascpicon",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000019",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000020",
           "width": 0,
           "x": 186,
           "y": 220,
@@ -67549,7 +67814,7 @@
           "keepRatio": true,
           "layer": "",
           "name": "tasdraw",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000020",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000021",
           "width": 0,
           "x": 0,
           "y": 0,
@@ -67565,7 +67830,7 @@
           "keepRatio": true,
           "layer": "",
           "name": "tasveldraw",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000021",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000022",
           "width": 0,
           "x": 0,
           "y": 0,
@@ -67581,27 +67846,11 @@
           "keepRatio": true,
           "layer": "ui",
           "name": "tasblack",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000022",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000023",
           "width": 0,
           "x": 0,
           "y": 0,
           "zOrder": 10004,
-          "numberProperties": [],
-          "stringProperties": [],
-          "initialVariables": []
-        },
-        {
-          "angle": 0,
-          "customSize": false,
-          "height": 0,
-          "keepRatio": true,
-          "layer": "ui",
-          "name": "tasinput",
-          "persistentUuid": "tas0000-0000-0000-0000-000000000023",
-          "width": 0,
-          "x": -9999,
-          "y": -9999,
-          "zOrder": 10006,
           "numberProperties": [],
           "stringProperties": [],
           "initialVariables": []
@@ -67660,8 +67909,24 @@
           "height": 0,
           "keepRatio": true,
           "layer": "ui",
-          "name": "tasinputheld",
+          "name": "tasinput",
           "persistentUuid": "tas0000-0000-0000-0000-000000000027",
+          "width": 0,
+          "x": -9999,
+          "y": -9999,
+          "zOrder": 10006,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "ui",
+          "name": "tasinputheld",
+          "persistentUuid": "tas0000-0000-0000-0000-000000000028",
           "width": 0,
           "x": -9999,
           "y": -9999,
@@ -112016,7 +112281,7 @@
                           "parameters": [
                             "player",
                             "<",
-                            "-2000"
+                            "-3008"
                           ]
                         },
                         {
@@ -126156,16 +126421,6 @@
                             "",
                             "Up"
                           ]
-                        },
-                        {
-                          "type": {
-                            "value": "VarScene"
-                          },
-                          "parameters": [
-                            "mini",
-                            "=",
-                            "0"
-                          ]
                         }
                       ],
                       "actions": [
@@ -126275,18 +126530,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -126343,18 +126587,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -126411,18 +126644,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -126523,18 +126745,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -126591,18 +126802,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -126659,18 +126859,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -126771,18 +126960,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -126839,18 +127017,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -126907,18 +127074,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -127028,18 +127184,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -127096,18 +127241,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -127164,18 +127298,7 @@
                           "events": [
                             {
                               "type": "BuiltinCommonInstructions::Standard",
-                              "conditions": [
-                                {
-                                  "type": {
-                                    "value": "VarScene"
-                                  },
-                                  "parameters": [
-                                    "mini",
-                                    "=",
-                                    "0"
-                                  ]
-                                }
-                              ],
+                              "conditions": [],
                               "actions": [
                                 {
                                   "type": {
@@ -134298,6 +134421,14 @@
                 "    return false;",
                 "  };",
                 "",
+                "  // numeric variant (for the compress-export MB cycle setting). read localStorage first -",
+                "  // that's where the settings menu persists it; the scene var can lag a value behind",
+                "  t.readsettingnum = function(scene, id) {",
+                "    try {const file = JSON.parse(window.localStorage.getItem(\"GDJS_trigonometrydash\") || \"{}\"); if (file.settings && typeof file.settings.str === \"string\") {const v = JSON.parse(file.settings.str)[id]; if (v != null) return Number(v) || 0}} catch (e) {}",
+                "    try {const s = scene.getVariables(); if (s.has(\"settings\") && s.get(\"settings\").hasChild(id)) return s.get(\"settings\").getChild(id).getAsNumber()} catch (e) {}",
+                "    return 0;",
+                "  };",
+                "",
                 "  /*////////////////////////////////////////////////////////////////////*/",
                 "",
                 "  // sound/music rate follows game speed, kinda",
@@ -134431,7 +134562,9 @@
                 "        if (!o) return;",
                 "        try {o.getVariables().get(\"disabled\").setBoolean(!!s.d)} catch (e) {}",
                 "        setanim(o, s.a);",
-                "        o.setPosition(s.x, s.y);",
+                "        // only snap a coin back if it actually moved (collected coins fly up); idle coins",
+                "        // gently bob on a Y tween, so forcing the captured mid-bob position offsets them",
+                "        if (Math.abs(o.getX() - s.x) > 4 || Math.abs(o.getY() - s.y) > 4) o.setPosition(s.x, s.y);",
                 "        try {o.setOpacity(s.op)} catch (e) {}",
                 "      });",
                 "    }",
@@ -134863,9 +134996,6 @@
                 "  function applykeystate(keys, mouse) {",
                 "    for (const name in t.watch) {",
                 "      const code = t.watch[name];",
-                "      // never REPLAY control keys as raw input: escape(27)/r(82)/t(84)/u(85) each have",
-                "      // their own handling (pause via requestpause, restart, backtrack via \"back\" events).",
-                "      // a recorded escape (user paused mid-record) would otherwise pause the replay.",
                 "      if (code === 27 || code === 82 || code === 84 || code === 85) continue;",
                 "      const want = !!keys[name] || (code === 32 && mouse);",
                 "      if (want && !input.isKeyPressed(code)) input.onKeyPressed(code, 0);",
@@ -135483,14 +135613,30 @@
                 "        \"-r\", \"60\", \"-i\", \"pipe:0\",",
                 "        \"-vf\", \"scale=\" + ow + \":\" + oh + \":flags=neighbor:in_range=full:out_range=tv:out_color_matrix=bt709,format=yuv420p\",",
                 "        \"-c:v\", \"libx264\", \"-pix_fmt\", \"yuv420p\", \"-profile:v\", \"high\",",
-                "        \"-colorspace\", \"bt709\", \"-color_primaries\", \"bt709\", \"-color_trc\", \"bt709\", \"-color_range\", \"tv\",",
-                "        \"-crf\", \"16\", \"-preset\", \"veryfast\", \"-movflags\", \"+faststart\", t.offtmp];",
+                "        \"-colorspace\", \"bt709\", \"-color_primaries\", \"bt709\", \"-color_trc\", \"bt709\", \"-color_range\", \"tv\"]",
+                "        .concat(t.offratectrl, [\"-movflags\", \"+faststart\", t.offtmp]);",
                 "      return invoke(\"ffmpeg_start\", {args: args});",
                 "    }).then(function (handle) {t.ffhandle = handle}).catch(function (e) {",
                 "      t.fferr = true; t.ffstderr = String(e); note(\"ffmpeg failed to start\");",
                 "    });",
                 "    try {t.offvol = t.savedvol != null ? t.savedvol : (window.Howler ? window.Howler.volume() : 1); if (window.Howler) window.Howler.volume(0)} catch (e) {}",
                 "    t.vidphase = \"render\"; t.vidblock = true; t.offframe = 0; t.offsub = \"intro\"; t.offwon = 0; t.offcompleteat = -1;",
+                "    t.compressmb = t.readsettingnum(scene, \"compressmb\") || 0;",
+                "    // compression is done by the MAIN encode (raw frames -> target bitrate), not a second",
+                "    // pass: the stripped ffmpeg can't decode H.264 to re-encode a finished mp4. estimate",
+                "    // the duration from the macro length (+intro/outro) and aim the video bitrate at the",
+                "    // target minus the ~128k audio added later, with headroom so it lands under the limit",
+                "    t.offratectrl = [\"-crf\", \"16\", \"-preset\", \"veryfast\"];",
+                "    if (t.compressmb > 0) {",
+                "      const mlen = (t.playm && t.playm.length) || 1800;",
+                "      const est = Math.max(0.5, (mlen + 210) / ((t.exportsp || 1) * 60));",
+                "      const totalbits = t.compressmb * 1024 * 1024 * 8 * 0.88;",
+                "      let vbr = Math.floor((totalbits - 128000 * est) / est);",
+                "      if (vbr < 40000) vbr = 40000;",
+                "      // a much slower preset is far better quality per bit (the render just pauses for the",
+                "      // encoder via backpressure); looser maxrate lets x264 spend bits where frames need it",
+                "      t.offratectrl = [\"-b:v\", String(vbr), \"-maxrate\", String(Math.floor(vbr * 1.6)), \"-bufsize\", String(vbr * 2), \"-preset\", \"slow\"];",
+                "    }",
                 "    rebuildplaystate(0);",
                 "    try {",
                 "      const pl = aliveplayer(scene);",
@@ -135918,6 +136064,7 @@
                 "  };",
                 "",
                 "  t.buttondefs = [",
+                "    {id: \"record\", objname: \"tasrec\", opt: true},",
                 "    {id: \"pauseresume\", objname: \"tasplay\", adv: true},",
                 "    {id: \"stepb\", objname: \"tasstepb\", hold: true, adv: true},",
                 "    {id: \"stepf\", objname: \"tasstepf\", hold: true, adv: true},",
@@ -136180,11 +136327,7 @@
                 "  function refreshhud() {",
                 "    const scene = inlevel();",
                 "    if (!scene) return;",
-                "    // spawn the easter-egg cat (overlay on always background-records, so \"record\" is",
-                "    // normal play here) - only block an active replay/export so it never desyncs those",
                 "    if (t.spawncat) {t.spawncat = false; if (t.hotkey && t.mode !== \"play\" && !t.vidphase && !t.countdown) spawncat(scene)}",
-                "",
-                "    // don't start timer until very slight movement occurs (facu really wanted this ig)",
                 "    {",
                 "      if (t.lastscene !== scene) {t.lastscene = scene; t.levelspawn = null; t.timerstarted = false; try {t.startcp = readcp(scene)} catch (e) {}}",
                 "      if (t.levelspawn === null) {try {t.levelspawn = [svar(scene, \"checkpointX\").getAsNumber(), svar(scene, \"checkpointY\").getAsNumber()]} catch (e) {}}",
@@ -136206,9 +136349,6 @@
                 "          }",
                 "        }",
                 "        if (t.mode === \"play\" && t.timerstarted) {",
-                "          // frame-lock the timer, BUT if the game has dropped it well below our value the",
-                "          // level was restarted (pause-menu restart) - leave it so the step loop's restart",
-                "          // detection catches it instead of us masking the reset.",
                 "          try {const tm = scene.getTimeManager()._timers.get(\"stopwatch\"); const want = Math.max(0, (t.frame - (t.timerstartframe || 0)) * t.step); if (tm && tm.getTime() >= want - 200) tm.setTime(want)} catch (e) {}",
                 "        }",
                 "        t.tprevx = plx; t.tprevy = ply;",
@@ -136400,7 +136540,7 @@
                 "",
                 "    if (overlayon) {",
                 "      const rowh = 24;",
-                "      const inrow = btns.filter(b => !b.def.under && !(b.def.adv && !t.frameadv) && !demohidden(b));",
+                "      const inrow = btns.filter(b => !b.def.under && !(b.def.adv && !t.frameadv) && !(b.def.opt && !t.stopbutton) && !demohidden(b));",
                 "      let roww = 0;",
                 "      for (const b of inrow) roww += b.obj.getWidth() + 4;",
                 "      roww = Math.max(0, roww - 4);",
@@ -136427,6 +136567,7 @@
                 "          continue;",
                 "        }",
                 "        if (b.def.adv && !t.frameadv) {b.obj.hide(); b.hover = false; continue}",
+                "        if (b.def.opt && !t.stopbutton) {b.obj.hide(); b.hover = false; continue}",
                 "        if (demohidden(b)) {b.obj.hide(); b.hover = false; continue}",
                 "        b.obj.hide(false);",
                 "        if (b.def.id === \"pauseresume\") b.obj.setAnimationIndex(t.frozen ? 0 : 1);",
@@ -136825,6 +136966,7 @@
                 "  t.videoui = t.readsetting(runtimeScene, \"macrovideoui\");",
                 "  t.velocityreadout = t.readsetting(runtimeScene, \"macrovelocity\");",
                 "  t.velvector = t.readsetting(runtimeScene, \"macrovelvector\");",
+                "  t.stopbutton = t.readsetting(runtimeScene, \"macrostopbutton\");",
                 "  t.macro = null; t.prevstop = Infinity; t.practtween = null;",
                 "  t.prevz = false; t.prevx = false; t.prevr = false;",
                 "  t.armage = 0; t.pendingsynth = null;",

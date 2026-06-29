@@ -12,7 +12,7 @@ since you likely only care about the TAS folder,
 - `6listeners.js` - dom listeners
 - `7housekeeping.js` - scene housekeeping
 
-the chunks are slices of a single file, so please don't mind the syntax error at the end, patching it would break the final output!
+the chunks are slices of a single file, so please don't mind the syntax error at the end, fixing it would break the final output!
 
 ## building
 `node ~build.js` reassembles the chunks and fills placeholders then inserts the result into that gdevelop project json.

@@ -125,6 +125,7 @@ if (t.hudowner !== runtimeScene) {
   t.videoui = t.readsetting(runtimeScene, "macrovideoui");
   t.velocityreadout = t.readsetting(runtimeScene, "macrovelocity");
   t.velvector = t.readsetting(runtimeScene, "macrovelvector");
+  t.stopbutton = t.readsetting(runtimeScene, "macrostopbutton");
   t.macro = null; t.prevstop = Infinity; t.practtween = null;
   t.prevz = false; t.prevx = false; t.prevr = false;
   t.armage = 0; t.pendingsynth = null;

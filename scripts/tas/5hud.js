@@ -268,7 +268,7 @@
 
     if (overlayon) {
       const rowh = 24;
-      const inrow = btns.filter(b => !b.def.under && !(b.def.adv && !t.frameadv) && !demohidden(b));
+      const inrow = btns.filter(b => !b.def.under && !(b.def.adv && !t.frameadv) && !(b.def.opt && !t.stopbutton) && !demohidden(b));
       let roww = 0;
       for (const b of inrow) roww += b.obj.getWidth() + 4;
       roww = Math.max(0, roww - 4);
@@ -295,6 +295,7 @@
           continue;
         }
         if (b.def.adv && !t.frameadv) {b.obj.hide(); b.hover = false; continue}
+        if (b.def.opt && !t.stopbutton) {b.obj.hide(); b.hover = false; continue}
         if (demohidden(b)) {b.obj.hide(); b.hover = false; continue}
         b.obj.hide(false);
         if (b.def.id === "pauseresume") b.obj.setAnimationIndex(t.frozen ? 0 : 1);

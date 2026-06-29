@@ -62,6 +62,12 @@ for (const opt of settingsDef.options) {
     {folded: true, name: "name", type: "string", value: opt.name},
     {folded: true, name: "description", type: "string", value: opt.desc}
   ];
+  // a cycle option (e.g. compress export 0/8/15/30) is locked so the boolean-toggle
+  // event skips it; storage.js cycles its numeric value + draws the label/animation
+  if (opt.cycle) {
+    inst.initialVariables.push({folded: true, name: "locked", type: "number", value: 1});
+    inst.initialVariables.push({folded: true, name: "cycle", type: "string", value: opt.cycle.join(",")});
+  }
   mm.instances.push(inst);
 }
 console.log("settings regenerated from settings.json: " + settingsDef.tabs.length + " tabs, " + settingsDef.options.length + " options");

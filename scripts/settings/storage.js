@@ -48,6 +48,39 @@ if (released) {
       if (ok) {try {gdjs.evtsExt__UDTFwTGD__UploadTextFile.func(scene, vars.get("importedData"), null)} catch (e) {}}
     }
   }
+  // cycle options (e.g. compress-export 0/8/15/30): click advances to the next value.
+  // gate on a REAL cycle var via has() - get() auto-creates a "0" that read as truthy
+  for (const sw of scene.getObjects("settingsSwitch") || []) {
+    if (sw.isHidden() || !sw.getVariables().has("cycle")) continue;
+    const cyc = sw.getVariables().get("cycle").getAsString();
+    if (cyc.indexOf(",") < 0) continue;
+    if (cx < sw.getAABBLeft() || cx > sw.getAABBRight() || cy < sw.getAABBTop() || cy > sw.getAABBBottom()) continue;
+    const vals = cyc.split(",").map(Number);
+    let id = ""; try {id = sw.getVariables().get("id").getAsString()} catch (e) {}
+    let cur = 0; try {cur = vars.get("settings").getChild(id).getAsNumber()} catch (e) {}
+    let idx = vals.indexOf(cur); if (idx < 0) idx = 0;
+    try {vars.get("settings").getChild(id).setNumber(vals[(idx + 1) % vals.length])} catch (e) {}
+    try {gdjs.evtTools.storage.writeStringInJSONFile("trigonometrydash", "settings", gdjs.evtTools.network.variableStructureToJSON(vars.get("settings")))} catch (e) {}
+  }
+}
+
+// cycle-switch fill: animation 0 Off / 2 = 8MB(1of3) / 3 = 15MB(2of3) / 1 = 30MB(full),
+// plus the value appended to its row label (only this switch - gated by has("cycle"))
+const CYCANIM = {"0": 0, "8": 2, "15": 3, "30": 1};
+for (const sw of scene.getObjects("settingsSwitch") || []) {
+  if (sw.isHidden() || !sw.getVariables().has("cycle")) continue;
+  let id = "", base = "", cur = 0;
+  try {id = sw.getVariables().get("id").getAsString()} catch (e) {}
+  try {base = sw.getVariables().get("name").getAsString()} catch (e) {}
+  try {cur = vars.get("settings").getChild(id).getAsNumber()} catch (e) {}
+  const ai = CYCANIM[String(cur)];
+  try {sw.getBehavior("Animation").setAnimationIndex(ai != null ? ai : 0)} catch (e) {try {sw.setAnimationIndex(ai != null ? ai : 0)} catch (e2) {}}
+  const label = base + " (" + (cur > 0 ? cur + " MB" : "Off") + ")";
+  const swcy = (sw.getAABBTop() + sw.getAABBBottom()) / 2;
+  for (const nm of scene.getObjects("settingsName") || []) {
+    if (nm.isHidden() || Math.abs((nm.getAABBTop() + nm.getAABBBottom()) / 2 - swcy) > 8) continue;
+    try {nm.getBehavior("Text").setText(label)} catch (e) {try {nm.setText(label)} catch (e2) {}}
+  }
 }
 
 const imported = vars.get("importedData").getAsString();

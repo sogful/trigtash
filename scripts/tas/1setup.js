@@ -111,6 +111,14 @@ if (t.installed !== runtimeScene.getGame()) {
     return false;
   };
 
+  // numeric variant (for the compress-export MB cycle setting). read localStorage first -
+  // that's where the settings menu persists it; the scene var can lag a value behind
+  t.readsettingnum = function(scene, id) {
+    try {const file = JSON.parse(window.localStorage.getItem("GDJS_trigonometrydash") || "{}"); if (file.settings && typeof file.settings.str === "string") {const v = JSON.parse(file.settings.str)[id]; if (v != null) return Number(v) || 0}} catch (e) {}
+    try {const s = scene.getVariables(); if (s.has("settings") && s.get("settings").hasChild(id)) return s.get("settings").getChild(id).getAsNumber()} catch (e) {}
+    return 0;
+  };
+
   /*////////////////////////////////////////////////////////////////////*/
 
   // sound/music rate follows game speed, kinda
@@ -244,7 +252,9 @@ if (t.installed !== runtimeScene.getGame()) {
         if (!o) return;
         try {o.getVariables().get("disabled").setBoolean(!!s.d)} catch (e) {}
         setanim(o, s.a);
-        o.setPosition(s.x, s.y);
+        // only snap a coin back if it actually moved (collected coins fly up); idle coins
+        // gently bob on a Y tween, so forcing the captured mid-bob position offsets them
+        if (Math.abs(o.getX() - s.x) > 4 || Math.abs(o.getY() - s.y) > 4) o.setPosition(s.x, s.y);
         try {o.setOpacity(s.op)} catch (e) {}
       });
     }

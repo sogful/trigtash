@@ -215,7 +215,7 @@ function place(name, x, y, layer, z) {
   });
 }
 // top-right row (editor preview; runtime relays them out)
-const row = ["tasplay", "tasstepb", "tasstepf", "tasarrow", "tastime", "tasarrow",
+const row = ["tasrec", "tasplay", "tasstepb", "tasstepf", "tasarrow", "tastime", "tasarrow",
   "tashitbox", "tasexport", "tasimport"];
 let rx = 232;
 for (const n of row) {place(n, rx, 4, "ui", 10001); rx += 20}

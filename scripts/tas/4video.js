@@ -83,14 +83,30 @@
         "-r", "60", "-i", "pipe:0",
         "-vf", "scale=" + ow + ":" + oh + ":flags=neighbor:in_range=full:out_range=tv:out_color_matrix=bt709,format=yuv420p",
         "-c:v", "libx264", "-pix_fmt", "yuv420p", "-profile:v", "high",
-        "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv",
-        "-crf", "16", "-preset", "veryfast", "-movflags", "+faststart", t.offtmp];
+        "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv"]
+        .concat(t.offratectrl, ["-movflags", "+faststart", t.offtmp]);
       return invoke("ffmpeg_start", {args: args});
     }).then(function (handle) {t.ffhandle = handle}).catch(function (e) {
       t.fferr = true; t.ffstderr = String(e); note("ffmpeg failed to start");
     });
     try {t.offvol = t.savedvol != null ? t.savedvol : (window.Howler ? window.Howler.volume() : 1); if (window.Howler) window.Howler.volume(0)} catch (e) {}
     t.vidphase = "render"; t.vidblock = true; t.offframe = 0; t.offsub = "intro"; t.offwon = 0; t.offcompleteat = -1;
+    t.compressmb = t.readsettingnum(scene, "compressmb") || 0;
+    // compression is done by the MAIN encode (raw frames -> target bitrate), not a second
+    // pass: the stripped ffmpeg can't decode H.264 to re-encode a finished mp4. estimate
+    // the duration from the macro length (+intro/outro) and aim the video bitrate at the
+    // target minus the ~128k audio added later, with headroom so it lands under the limit
+    t.offratectrl = ["-crf", "16", "-preset", "veryfast"];
+    if (t.compressmb > 0) {
+      const mlen = (t.playm && t.playm.length) || 1800;
+      const est = Math.max(0.5, (mlen + 210) / ((t.exportsp || 1) * 60));
+      const totalbits = t.compressmb * 1024 * 1024 * 8 * 0.88;
+      let vbr = Math.floor((totalbits - 128000 * est) / est);
+      if (vbr < 40000) vbr = 40000;
+      // a much slower preset is far better quality per bit (the render just pauses for the
+      // encoder via backpressure); looser maxrate lets x264 spend bits where frames need it
+      t.offratectrl = ["-b:v", String(vbr), "-maxrate", String(Math.floor(vbr * 1.6)), "-bufsize", String(vbr * 2), "-preset", "slow"];
+    }
     rebuildplaystate(0);
     try {
       const pl = aliveplayer(scene);
@@ -518,6 +534,7 @@
   };
 
   t.buttondefs = [
+    {id: "record", objname: "tasrec", opt: true},
     {id: "pauseresume", objname: "tasplay", adv: true},
     {id: "stepb", objname: "tasstepb", hold: true, adv: true},
     {id: "stepf", objname: "tasstepf", hold: true, adv: true},
