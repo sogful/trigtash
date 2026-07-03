@@ -44,9 +44,6 @@
       const sc = inlevel();
       let paused = false;
       try {paused = svar(sc, "paused").getAsBoolean()} catch (e) {}
-      // a click anywhere makes the player jump, but on the complete screen that jump
-      // triggers the game's retry - so any click off the win buttons would glitch-restart.
-      // suppress the click-jump while the win screen is up (the buttons stay clickable)
       if (!paused && !onpausebtn() && !winshown(sc)) t.jumpclick = true;
     }
   }, true);
@@ -85,7 +82,7 @@
     if (e.code === "Space") {t.physjump.space = true; if (t.awaitrespawn) t.bufjump.space = true}
     if (e.code === "ArrowUp") {t.physjump.up = true; if (t.awaitrespawn) t.bufjump.up = true}
     if (!inlevel()) return;
-    // easter egg: S, O, G pressed in order spawns a physics cat (macro overlay on)
+    // miau
     if (t.hotkey) {
       const sk = {KeyS: "s", KeyO: "o", KeyG: "g"};
       t.sogseq = (sk[e.code] ? ((t.sogseq || "") + sk[e.code]) : "").slice(-3);

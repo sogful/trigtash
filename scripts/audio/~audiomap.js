@@ -1,6 +1,3 @@
-// the 25 music tracks, by their pretty filename (same in project/assets/audio/music
-// and .../music/compressed). swapcompressed + ~buildaltaudio read the compressed copy
-// of each by this name. "X." = not a numbered level song (menu / time attack).
 module.exports = [
   "1. Tutorial by Blazulite.ogg",
   "2. Swirl by Waterflame.ogg",

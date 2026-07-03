@@ -37,9 +37,6 @@ if (t.hudowner !== runtimeScene) {
     try {t.veltext.setWrapping(false)} catch (e) {}
     t.veltext.hide(true);
   }
-  // dedicated overlay for just the xvel value so it tints independently of the rest of
-  // the readout (bitmaptext is single-colour). the tasbtn pool is fully spent by the
-  // named grabs, so spin up a fresh instance
   t.xvelcol = null;
   try {t.xvelcol = runtimeScene.createObject("tasbtn")} catch (e) {}
   if (t.xvelcol) {
@@ -133,8 +130,6 @@ if (t.hudowner !== runtimeScene) {
   t.hadcp = false; t.cpinit = false;
   try {t.prevdeaths = runtimeScene.getVariables().get("deaths").getAsNumber()} catch (e) {t.prevdeaths = 0}
 }
-
-// after a scene change with practice still on recapture the base
 if (t.practice && !t.practbase) t.practbase = t.readcp(runtimeScene);
 
 t.practicetick(runtimeScene);

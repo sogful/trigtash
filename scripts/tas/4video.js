@@ -73,10 +73,7 @@
     t.offtmp = null; t.ffhandle = null; t.fferr = false; t.offpaused = false;
     t.writechain = Promise.resolve(); t.pendingwrites = 0; t.writeacc = 0;
 
-    // yuv420p H.264 high profile - the universally decodable format (browsers, phones,
-    // social, every player), unlike yuv444p which only plays in mpv/ffmpeg. colors stay
-    // faithful: bt709 throughout, a clean 3x nearest-neighbour upscale, and tv range so
-    // players render it correctly whether or not they honour a full-range flag
+    // yuv420p H.264
     invoke("temp_path", {suffix: ".mp4"}).then(function (tmp) {
       t.offtmp = tmp;
       const args = ["-y", "-f", "rawvideo", "-pix_fmt", "rgba", "-s", t.offw + "x" + t.offh,
@@ -92,10 +89,6 @@
     try {t.offvol = t.savedvol != null ? t.savedvol : (window.Howler ? window.Howler.volume() : 1); if (window.Howler) window.Howler.volume(0)} catch (e) {}
     t.vidphase = "render"; t.vidblock = true; t.offframe = 0; t.offsub = "intro"; t.offwon = 0; t.offcompleteat = -1;
     t.compressmb = t.readsettingnum(scene, "compressmb") || 0;
-    // compression is done by the MAIN encode (raw frames -> target bitrate), not a second
-    // pass: the stripped ffmpeg can't decode H.264 to re-encode a finished mp4. estimate
-    // the duration from the macro length (+intro/outro) and aim the video bitrate at the
-    // target minus the ~128k audio added later, with headroom so it lands under the limit
     t.offratectrl = ["-crf", "16", "-preset", "veryfast"];
     if (t.compressmb > 0) {
       const mlen = (t.playm && t.playm.length) || 1800;
@@ -103,8 +96,6 @@
       const totalbits = t.compressmb * 1024 * 1024 * 8 * 0.88;
       let vbr = Math.floor((totalbits - 128000 * est) / est);
       if (vbr < 40000) vbr = 40000;
-      // a much slower preset is far better quality per bit (the render just pauses for the
-      // encoder via backpressure); looser maxrate lets x264 spend bits where frames need it
       t.offratectrl = ["-b:v", String(vbr), "-maxrate", String(Math.floor(vbr * 1.6)), "-bufsize", String(vbr * 2), "-preset", "slow"];
     }
     rebuildplaystate(0);
@@ -337,8 +328,6 @@
       // export at FULL volume regardless of the ingame setting, i don't think anybody would want musicless videos
       if (musicev) {musicev.frame = 30; musicev.vol = 1; log.push(musicev)}
       const sm = game.getSoundManager();
-      // the music already plays slowed (its logged rate); stretch every sound's start by
-      // 1/sp and slow the SFX rate by sp so the whole soundtrack matches the slowed video
       const sp = t.exportsp || 1;
       const sr = 44100, dur = t.offframe / 60 / sp + 1.5;
       const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
@@ -660,6 +649,7 @@
         else if (name === "cat") col = "255;150;64";
         else if (t.killset[name]) col = "255;64;64";
         else if (radii[name] || t.greenset[name] || t.coinset[name] || name === "onoffswitch" || name === "checkpoint") col = "64;255;64";
+        else if (name === "breakblock") col = "255;180;64";
         else if (phys) col = "64;128;255";
         if (!col) continue;
         d.setFillColor(col);
@@ -677,6 +667,21 @@
         else if (phys) drawphys(d, o, phys, ccx, ccy);
         else drawmask(d, o);
       }
+      try {
+        for (const jc of scene.getObjects("jumpCheck") || []) {
+          d.setFillColor("255;255;64"); d.setFillOpacity(0);
+          d.setOutlineColor("255;255;64"); d.setOutlineOpacity(210);
+          drawmask(d, jc);
+        }
+      } catch (e) {}
+      try {
+        d.setFillColor("255;64;64"); d.setOutlineColor("255;64;64");
+        d.setFillOpacity(150); d.setOutlineOpacity(200);
+        if (Math.abs(-3008 - camy) < cullh) fillbox(d, camx, -3008, cullw, 0.5, 0);
+        const gl = svar(scene, "groundLeft").getAsNumber(), gr = svar(scene, "groundRight").getAsNumber();
+        if (Math.abs(gl - camx) < cullw) fillbox(d, gl, camy, 0.5, cullh, 0);
+        if (Math.abs(gr - camx) < cullw) fillbox(d, gr, camy, 0.5, cullh, 0);
+      } catch (e) {}
       drawplayer(scene, d);
     } catch (e) {}
   }

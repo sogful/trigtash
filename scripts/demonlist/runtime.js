@@ -34,7 +34,6 @@ function fetchList() {
   P.docs = null;
   P.error = "";
   try {
-    // a plain collection GET silently paginates down to 18; the runQuery POST returns all 69
     fetch(URL, {method: "POST", headers: {"Content-Type": "application/json"},
       body: JSON.stringify({structuredQuery: {from: [{collectionId: "demonlist"}], limit: 300}})
     }).then(r => r.json()).then(j => {

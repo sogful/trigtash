@@ -5025,6 +5025,14 @@
         "metadata": "",
         "smoothed": false,
         "userAdded": true
+      },
+      {
+        "file": "assets/images/buttons/dataeditorraw.png",
+        "kind": "image",
+        "metadata": "{\"localFilePath\":\"assets/textures/system/dataeditorraw.png\",\"extension\":\".png\"}",
+        "name": "assets\\textures\\system\\dataeditorraw.png",
+        "smoothed": false,
+        "userAdded": true
       }
     ]
   },
@@ -17821,8 +17829,6 @@
                 "      if (ok) {try {gdjs.evtsExt__UDTFwTGD__UploadTextFile.func(scene, vars.get(\"importedData\"), null)} catch (e) {}}",
                 "    }",
                 "  }",
-                "  // cycle options (e.g. compress-export 0/8/15/30): click advances to the next value.",
-                "  // gate on a REAL cycle var via has() - get() auto-creates a \"0\" that read as truthy",
                 "  for (const sw of scene.getObjects(\"settingsSwitch\") || []) {",
                 "    if (sw.isHidden() || !sw.getVariables().has(\"cycle\")) continue;",
                 "    const cyc = sw.getVariables().get(\"cycle\").getAsString();",
@@ -17837,8 +17843,6 @@
                 "  }",
                 "}",
                 "",
-                "// cycle-switch fill: animation 0 Off / 2 = 8MB(1of3) / 3 = 15MB(2of3) / 1 = 30MB(full),",
-                "// plus the value appended to its row label (only this switch - gated by has(\"cycle\"))",
                 "const CYCANIM = {\"0\": 0, \"8\": 2, \"15\": 3, \"30\": 1};",
                 "for (const sw of scene.getObjects(\"settingsSwitch\") || []) {",
                 "  if (sw.isHidden() || !sw.getVariables().has(\"cycle\")) continue;",
@@ -22601,7 +22605,7 @@
           ],
           "animations": [
             {
-              "name": "assets\\textures\\system\\dataeditor",
+              "name": "assets\\textures\\system\\dataeditorraw",
               "useMultipleDirections": false,
               "directions": [
                 {
@@ -22611,7 +22615,7 @@
                   "sprites": [
                     {
                       "hasCustomCollisionMask": true,
-                      "image": "assets\\textures\\system\\dataeditor.png",
+                      "image": "assets\\textures\\system\\dataeditorraw.png",
                       "points": [],
                       "originPoint": {
                         "name": "origine",
@@ -42022,6 +42026,43 @@
               "type": "ResizableCapability::ResizableBehavior"
             }
           ]
+        },
+        {
+          "assetStoreId": "",
+          "name": "textPreview",
+          "type": "BitmapText::BitmapTextObject",
+          "variables": [],
+          "effects": [],
+          "behaviors": [
+            {
+              "name": "Effect",
+              "type": "EffectCapability::EffectBehavior"
+            },
+            {
+              "name": "Opacity",
+              "type": "OpacityCapability::OpacityBehavior"
+            },
+            {
+              "name": "Scale",
+              "type": "ScalableCapability::ScalableBehavior"
+            },
+            {
+              "name": "Text",
+              "type": "TextContainerCapability::TextContainerBehavior"
+            }
+          ],
+          "content": {
+            "text": "12",
+            "opacity": 255,
+            "scale": 0.5,
+            "fontSize": 20,
+            "tint": "255;255;255",
+            "bitmapFontResourceName": "fonts\\garden.fnt",
+            "textureAtlasResourceName": "fonts\\garden.png",
+            "align": "left",
+            "wordWrap": true,
+            "verticalTextAlignment": "top"
+          }
         }
       ],
       "objectsFolderStructure": {
@@ -42348,6 +42389,58 @@
         ]
       },
       "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "// global editor placement guard. per-object SourisSurObjet exclusions on the",
+            "// \"creation of blocks\" event proved unreliable here (the cursor is converted with",
+            "// the wrong layer camera and silently misses), so instead: while the cursor is over",
+            "// ANY editor UI element, set the scene var \"overui\" and let the placement event gate",
+            "// on it. this checks each UI object's real runtime AABB against the cursor in that",
+            "// object's own layer. hidden objects, and near-fullscreen ones (paused darken etc),",
+            "// are skipped so they can't falsely block the whole canvas. mouseBlock is omitted on",
+            "// purpose - it follows the cursor and would always report a hit.",
+            "//",
+            "// CRITICAL: this runs FIRST each frame, so it is fully wrapped in try/catch - a throw",
+            "// here (e.g. AABB on an object mid-destruction during the save-and-exit transition)",
+            "// would otherwise abort the rest of the frame's events, including the level save.",
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "",
+            "const scene = runtimeScene;",
+            "// ONLY actual clickable Sprite buttons (small, reliable AABB). do NOT add backgrounds,",
+            "// overlays, text panels, or - critically - \"axis\" (a PrimitiveDrawing::Drawer that renders",
+            "// the editor grid across the WHOLE canvas): its AABB spans the canvas, so including it made",
+            "// overui true everywhere and blocked all tile placement, which then saved empty levels.",
+            "const names = [\"codebutton\", \"playlevel\", \"backbutton\", \"editbutton\", \"yesbutton\", \"nobutton\",",
+            "  \"editobjectbutton\", \"bgObjectEdit\", \"zoom\"];",
+            "",
+            "let over = false;",
+            "for (const n of names) {",
+            "  if (over) break;",
+            "  let list;",
+            "  try {list = scene.getObjects(n)} catch (e) {continue}",
+            "  for (const o of list || []) {",
+            "    try {",
+            "      if (o.isHidden()) continue;",
+            "      const l = o.getAABBLeft(), r = o.getAABBRight(), t = o.getAABBTop(), b = o.getAABBBottom();",
+            "      // backstop: skip anything bigger than a button (buttons are ~16-24px) so no large",
+            "      // object can ever blanket the canvas.",
+            "      if (r - l >= 100 || b - t >= 100) continue;",
+            "      const ly = o.getLayer();",
+            "      const mx = gdjs.evtTools.input.getCursorX(scene, ly, 0);",
+            "      const my = gdjs.evtTools.input.getCursorY(scene, ly, 0);",
+            "      if (mx >= l && mx <= r && my >= t && my <= b) {over = true; break}",
+            "    } catch (e) {}",
+            "  }",
+            "}",
+            "try {scene.getVariables().get(\"overui\").setBoolean(over)} catch (e) {}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        },
         {
           "colorB": 176,
           "colorG": 228,
@@ -43529,6 +43622,85 @@
                               ]
                             }
                           ]
+                        },
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "VarScene"
+                              },
+                              "parameters": [
+                                "levelCodeInputVar.13",
+                                "!=",
+                                "0"
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "OpacityCapability::OpacityBehavior::SetValue"
+                              },
+                              "parameters": [
+                                "tile",
+                                "Opacity",
+                                "=",
+                                "255-Variable(levelCodeInputVar.13)"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ModVarObjet"
+                              },
+                              "parameters": [
+                                "tile",
+                                "transp",
+                                "=",
+                                "Variable(levelCodeInputVar.13)"
+                              ]
+                            }
+                          ],
+                          "events": []
+                        },
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "VarScene"
+                              },
+                              "parameters": [
+                                "levelCodeInputVar.15",
+                                "=",
+                                "1"
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "FlippableCapability::FlippableBehavior::FlipX"
+                              },
+                              "parameters": [
+                                "tile",
+                                "Flippable",
+                                "yes"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ModVarObjet"
+                              },
+                              "parameters": [
+                                "tile",
+                                "flipped",
+                                "=",
+                                "1"
+                              ]
+                            }
+                          ],
+                          "events": []
                         }
                       ]
                     }
@@ -45946,6 +46118,16 @@
                     "=",
                     "1"
                   ]
+                },
+                {
+                  "type": {
+                    "value": "VarScene"
+                  },
+                  "parameters": [
+                    "tileCodeEditorShown",
+                    "!=",
+                    "1"
+                  ]
                 }
               ],
               "actions": [
@@ -45995,6 +46177,16 @@
                       "parameters": [
                         "numberOfSelected",
                         "=",
+                        "1"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "VarScene"
+                      },
+                      "parameters": [
+                        "tileCodeEditorShown",
+                        "!=",
                         "1"
                       ]
                     }
@@ -46205,6 +46397,14 @@
                     "settingsShown",
                     "=",
                     "-1"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Visible"
+                  },
+                  "parameters": [
+                    "yesbutton"
                   ]
                 }
               ],
@@ -47927,6 +48127,85 @@
                                   ]
                                 }
                               ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "VarScene"
+                                  },
+                                  "parameters": [
+                                    "levelCodeInputVar.13",
+                                    "!=",
+                                    "0"
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "OpacityCapability::OpacityBehavior::SetValue"
+                                  },
+                                  "parameters": [
+                                    "tile",
+                                    "Opacity",
+                                    "=",
+                                    "255-Variable(levelCodeInputVar.13)"
+                                  ]
+                                },
+                                {
+                                  "type": {
+                                    "value": "ModVarObjet"
+                                  },
+                                  "parameters": [
+                                    "tile",
+                                    "transp",
+                                    "=",
+                                    "Variable(levelCodeInputVar.13)"
+                                  ]
+                                }
+                              ],
+                              "events": []
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "VarScene"
+                                  },
+                                  "parameters": [
+                                    "levelCodeInputVar.15",
+                                    "=",
+                                    "1"
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "FlippableCapability::FlippableBehavior::FlipX"
+                                  },
+                                  "parameters": [
+                                    "tile",
+                                    "Flippable",
+                                    "yes"
+                                  ]
+                                },
+                                {
+                                  "type": {
+                                    "value": "ModVarObjet"
+                                  },
+                                  "parameters": [
+                                    "tile",
+                                    "flipped",
+                                    "=",
+                                    "1"
+                                  ]
+                                }
+                              ],
+                              "events": []
                             }
                           ]
                         }
@@ -48418,6 +48697,15 @@
                   },
                   "parameters": [
                     "paused",
+                    "False"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SceneVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "editingObject",
                     "False"
                   ]
                 }
@@ -49531,6 +49819,15 @@
                             "value": "SceneVariableAsBoolean"
                           },
                           "parameters": [
+                            "overui",
+                            "False"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "SceneVariableAsBoolean"
+                          },
+                          "parameters": [
                             "paused",
                             "False"
                           ]
@@ -49589,7 +49886,7 @@
                           },
                           "parameters": [
                             "codebutton",
-                            "",
+                            "editorui",
                             "no",
                             ""
                           ]
@@ -49607,7 +49904,7 @@
                               },
                               "parameters": [
                                 "yesbutton",
-                                "",
+                                "editorui",
                                 "",
                                 ""
                               ]
@@ -49636,7 +49933,7 @@
                               },
                               "parameters": [
                                 "editbutton",
-                                "",
+                                "editorui",
                                 "",
                                 ""
                               ]
@@ -49659,7 +49956,7 @@
                           },
                           "parameters": [
                             "editorbg",
-                            "",
+                            "editorui",
                             "no",
                             ""
                           ]
@@ -49671,7 +49968,7 @@
                           },
                           "parameters": [
                             "playlevel",
-                            "",
+                            "editorui",
                             "no",
                             ""
                           ]
@@ -49683,7 +49980,7 @@
                           },
                           "parameters": [
                             "backbutton",
-                            "",
+                            "editorui",
                             "no",
                             ""
                           ]
@@ -49725,6 +50022,30 @@
                                 ""
                               ]
                             }
+                          ]
+                        },
+                        {
+                          "type": {
+                            "inverted": true,
+                            "value": "SourisSurObjet"
+                          },
+                          "parameters": [
+                            "layerSelector",
+                            "editorui",
+                            "no",
+                            ""
+                          ]
+                        },
+                        {
+                          "type": {
+                            "inverted": true,
+                            "value": "SourisSurObjet"
+                          },
+                          "parameters": [
+                            "layer",
+                            "editorui",
+                            "no",
+                            ""
                           ]
                         }
                       ],
@@ -52567,6 +52888,61 @@
                                   ]
                                 }
                               ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "VarObjet"
+                                  },
+                                  "parameters": [
+                                    "tile",
+                                    "flipped",
+                                    "=",
+                                    "1"
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "SceneVariablePushString"
+                                  },
+                                  "parameters": [
+                                    "tileInfoTemp",
+                                    "\"15:1\""
+                                  ]
+                                }
+                              ],
+                              "events": []
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "BuiltinCommonInstructions::CompareNumbers"
+                                  },
+                                  "parameters": [
+                                    "tile.Variable(transp)",
+                                    "!=",
+                                    "0"
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "SceneVariablePushString"
+                                  },
+                                  "parameters": [
+                                    "tileInfoTemp",
+                                    "\"13:\"+ToString(round(tile.Variable(transp)))"
+                                  ]
+                                }
+                              ],
+                              "events": []
                             },
                             {
                               "type": "BuiltinCommonInstructions::ForEachChildVariable",
@@ -57918,128 +58294,6 @@
         },
         {
           "colorB": 74,
-          "colorG": 228,
-          "colorR": 176,
-          "creationTime": 0,
-          "folded": true,
-          "name": "object layers (tas)",
-          "source": "",
-          "type": "BuiltinCommonInstructions::Group",
-          "events": [
-            {
-              "type": "BuiltinCommonInstructions::JsCode",
-              "inlineCode": [
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "// editor object-layer selector (recovered from code1.js eventsList46/47/48",
-                "// + userFunc0x1c77a90). the grafted 1.4 editor had no layer logic, so the",
-                "// arrows + \"All\" display showed but did nothing.",
-                "//",
-                "// layerSelector is a sprite with 3 animations: 0 = up (+1), 1 = down (-1),",
-                "// 2 = all (-1). the \"layer\" bitmap text shows the current layer or \"All\".",
-                "// the \"layer\" scene var holds it (-1 = all). selecting a layer dims tiles",
-                "// not on it to 1/3 opacity. (the original hid the arrows in All mode and",
-                "// only entered a layer by selecting a tile; we keep the arrows visible and",
-                "// clickable so they're directly usable.)",
-                "/*//////////////////////////////////////////////////////////////////////*/",
-                "",
-                "const scene = runtimeScene;",
-                "const v = scene.getVariables();",
-                "const P = (window.__edlayers = window.__edlayers || {});",
-                "",
-                "const lerp = (a, b, k) => a + (b - a) * Math.max(0, Math.min(1, k));",
-                "const first = n => {const l = scene.getObjects(n); return l && l.length ? l[0] : null};",
-                "const released = gdjs.evtTools.input.isMouseButtonReleased(scene, \"Left\");",
-                "const hov = o => {",
-                "  if (!o || o.isHidden()) return false;",
-                "  const ly = o.getLayer();",
-                "  const mx = gdjs.evtTools.input.getCursorX(scene, ly, 0);",
-                "  const my = gdjs.evtTools.input.getCursorY(scene, ly, 0);",
-                "  return mx >= o.getAABBLeft() && mx <= o.getAABBRight() &&",
-                "    my >= o.getAABBTop() && my <= o.getAABBBottom();",
-                "};",
-                "const setText = (o, txt) => {try {o.getBehavior(\"Text\").setText(txt)} catch (e) {try {o.setText(txt)} catch (e2) {}}};",
-                "const flag = n => {try {return v.get(n).getAsBoolean()} catch (e) {return false}};",
-                "const anim = o => {try {return o.getAnimationIndex()} catch (e) {try {return o.getBehavior(\"Animation\").getAnimationIndex()} catch (e2) {return -1}}};",
-                "",
-                "if (P.owner !== scene) {",
-                "  P.owner = scene;",
-                "  try {if (!v.has(\"layer\")) v.get(\"layer\").setNumber(-1)} catch (e) {}",
-                "  P.dirty = true;",
-                "}",
-                "",
-                "let layer = v.get(\"layer\").getAsNumber();",
-                "const blocked = flag(\"paused\") || flag(\"pausedSettings\");",
-                "",
-                "for (const ls of scene.getObjects(\"layerSelector\") || []) {",
-                "  const h = !blocked && hov(ls);",
-                "  try {ls.setScale(lerp(ls.getScale(), h ? 1.2 : 1, 0.4))} catch (e) {}",
-                "  if (h && released) {",
-                "    const a = anim(ls);",
-                "    if (a === 0) {layer += 1; P.dirty = true}",
-                "    else if (a === 1 && layer >= 0) {layer -= 1; P.dirty = true}",
-                "    else if (a === 2) {layer = -1; P.dirty = true}",
-                "  }",
-                "}",
-                "v.get(\"layer\").setNumber(layer);",
-                "",
-                "const disp = first(\"layer\");",
-                "if (disp) {",
-                "  setText(disp, layer === -1 ? \"All\" : \"\" + layer);",
-                "  // wordWrap on a zero-width bitmap text shrinks/clips a lone number;",
-                "  // give it room and re-assert the intended 0.5 scale",
-                "  try {disp.setWrappingWidth(64)} catch (e) {}",
-                "  try {if (disp.getScale && disp.getScale() !== 0.5) disp.setScale(0.5)} catch (e) {}",
-                "}",
-                "",
-                "// recalc tile opacity: on layer change, and continuously while focused on",
-                "// a specific layer so freshly-placed tiles dim correctly too. a tile with",
-                "// layer -1 is an \"all-layers\" tile and stays full on every layer.",
-                "if (P.dirty || layer !== -1) {",
-                "  P.dirty = false;",
-                "  for (const tile of scene.getObjects(\"tile\") || []) {",
-                "    let base = 255;",
-                "    try {if (tile.getVariables().has(\"opacity\")) base = tile.getVariables().get(\"opacity\").getAsNumber()} catch (e) {}",
-                "    let op = base;",
-                "    if (layer !== -1) {",
-                "      let tl = 0;",
-                "      try {tl = tile.getVariables().get(\"layer\").getAsNumber()} catch (e) {}",
-                "      op = base / ((tl === layer || tl === -1) ? 1 : 3);",
-                "    }",
-                "    try {tile.getBehavior(\"Opacity\").setOpacity(op)} catch (e) {}",
-                "  }",
-                "}",
-                "",
-                "// layer-gated right-click erase. the grafted Delete (neutralised by",
-                "// buildlayererase.js) wiped any tile under the cursor regardless of layer;",
-                "// here we only erase tiles on the current layer (or all-layer -1 tiles, or",
-                "// anything while in All view), so other layers stay safe.",
-                "const rmb = !blocked &&",
-                "  gdjs.evtTools.input.isMouseButtonPressed(scene, \"Right\") &&",
-                "  !gdjs.evtTools.input.isMouseButtonPressed(scene, \"Left\");",
-                "if (rmb) {",
-                "  const mx = gdjs.evtTools.input.getCursorX(scene, \"\", 0);",
-                "  const my = gdjs.evtTools.input.getCursorY(scene, \"\", 0);",
-                "  for (const tile of (scene.getObjects(\"tile\") || []).slice()) {",
-                "    if (mx < tile.getAABBLeft() || mx > tile.getAABBRight() ||",
-                "      my < tile.getAABBTop() || my > tile.getAABBBottom()) continue;",
-                "    let tl = 0;",
-                "    try {tl = tile.getVariables().get(\"layer\").getAsNumber()} catch (e) {}",
-                "    if (layer === -1 || tl === layer || tl === -1) {",
-                "      try {tile.deleteFromScene(scene)} catch (e) {}",
-                "    }",
-                "  }",
-                "}",
-                ""
-              ],
-              "parameterObjects": "",
-              "useStrict": true,
-              "eventsSheetExpanded": false
-            }
-          ],
-          "parameters": []
-        },
-        {
-          "colorB": 74,
           "colorG": 176,
           "colorR": 228,
           "creationTime": 0,
@@ -58538,17 +58792,40 @@
                 "// pending transition -> scene change (Save and Play / Exit, etc.)",
                 "/*//////////////////////////////////////////////////////////////////////*/",
                 "",
-                "function go(target) {",
-                "  try {",
-                "    v.get(\"level\"); // ensure exists",
-                "    const json = gdjs.evtTools.network.variableStructureToJSON(v.get(\"levelData\"));",
-                "    scene.getGame().getVariables().get(\"level\").setString(json);",
-                "  } catch (e) {}",
+                "function go(target, keepLevel) {",
+                "  // keepLevel skips overwriting the global \"level\" with the editor's levelData.",
+                "  // levelData is only serialised by the native play/back-click events; when the",
+                "  // menu is opened via Escape that never runs, so levelData is stale/empty and",
+                "  // copying it would show mylevel a placeholder titled \"0\". a discard-exit passes",
+                "  // keepLevel and restores the real saved level itself (restoreSavedLevel).",
+                "  if (!keepLevel) {",
+                "    try {",
+                "      const json = gdjs.evtTools.network.variableStructureToJSON(v.get(\"levelData\"));",
+                "      scene.getGame().getVariables().get(\"level\").setString(json);",
+                "    } catch (e) {}",
+                "  }",
                 "  try {",
                 "    const tr = firstof(\"transition\");",
                 "    if (tr) tr.getBehavior(\"FlashTransitionPainter\").PaintEffect(\"0;0;0\", 0.2, \"Circular\", \"Forward\", 0, null);",
                 "  } catch (e) {}",
                 "  P.pending = {at: performance.now() + 200, scene: target};",
+                "}",
+                "",
+                "// point the global \"level\" back at the version last persisted under this uuid, so",
+                "// a discard-exit hands mylevel the real saved level (name + metadata) instead of",
+                "// the editor's unsaved/stale levelData.",
+                "function restoreSavedLevel() {",
+                "  try {",
+                "    const uuid = ensureUuid();",
+                "    if (!uuid) return;",
+                "    if (!gdjs.evtTools.storage.elementExistsInJSONFile(\"trigonometrydash\", \"levels\")) return;",
+                "    gdjs.evtTools.storage.readStringFromJSONFile(\"trigonometrydash\", \"levels\", scene, v.get(\"levelsTemp\"));",
+                "    const levelsVar = v.get(\"levels\");",
+                "    gdjs.evtTools.network.jsonToVariableStructure(v.get(\"levelsTemp\").getAsString(), levelsVar);",
+                "    if (!levelsVar.hasChild(uuid)) return;",
+                "    const saved = levelsVar.getChild(uuid).getAsString();",
+                "    if (saved) scene.getGame().getVariables().get(\"level\").setString(saved);",
+                "  } catch (e) {}",
                 "}",
                 "",
                 "if (P.pending && performance.now() >= P.pending.at) {",
@@ -58711,7 +58988,7 @@
                 "    else if (label === \"Exit\") {",
                 "      let ok = true;",
                 "      try {if (!getb(\"savedWithoutUnpausing\")) ok = window.confirm(\"Are you sure you want to leave? Any unsaved changes will be lost.\")} catch (e) {}",
-                "      if (ok) {closeMenu(); go(\"mylevel\")}",
+                "      if (ok) {restoreSavedLevel(); closeMenu(); go(\"mylevel\", true)}",
                 "    }",
                 "    else if (label === \"Select All\") {",
                 "      for (const tile of list(\"tile\")) {",
@@ -59014,7 +59291,7 @@
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "// qol-selectedbutton: the current tool's palette button shows the editorbuttonsselected",
-            "// texture (white outline). for the fill tool, the armed block-type button is outlined too.",
+            "// (white outline) texture. for fill, the armed block-type button is outlined too.",
             "const scene = runtimeScene;",
             "const num = (vr, d) => {try {return vr.getAsNumber()} catch (e) {return d}};",
             "const SEL = \"assets\\\\textures\\\\editor\\\\editorbuttonsselected.png\";",
@@ -59034,17 +59311,445 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "// qol-editormusic: the editor plays no music of its own, but the previous level's music",
-            "// (channel 1, global sound manager) carries into the editor and keeps playing. stopping",
-            "// it in the level scene on the edit click doesn't stick (the level re-plays / the async",
-            "// scene change races it), so stop it here on entry - for the first ~20 frames in case it",
-            "// resumes during scene init.",
+            "// qol-editormusic: the editor has no music of its own, but the previous level's music",
+            "// (channel 1, global) carries in and keeps playing. stopping it in the level scene on the",
+            "// edit click doesn't stick (level re-plays / async scene change races it), so stop it here",
+            "// on entry - for the first ~20 frames in case it resumes during scene init.",
             "const scene = runtimeScene;",
             "if (scene.__msframes === undefined) scene.__msframes = 0;",
             "if (scene.__msframes < 20) {",
             "  scene.__msframes++;",
             "  try {for (const ch of [0, 1, 2]) gdjs.evtTools.sound.stopMusicOnChannel(scene, ch)} catch (e) {}",
             "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        },
+        {
+          "colorB": 74,
+          "colorG": 228,
+          "colorR": 176,
+          "creationTime": 0,
+          "folded": true,
+          "name": "object layers (tas)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "parameters": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::JsCode",
+              "inlineCode": [
+                "/*//////////////////////////////////////////////////////////////////////*/",
+                "// SHELVED layer feature: the full selector/dimming logic lives in editor-layers.js",
+                "// (kept in the project for later), but it is unsafe against levels from other versions,",
+                "// so for now the editor should look like there is no layer feature. this stub just hides",
+                "// the switcher UI and keeps the plain right-click erase (the grafted Delete was",
+                "// neutralised by buildlayererase.js, so without a replacement erasing would break) -",
+                "// no layer gating, no dimming.",
+                "/*//////////////////////////////////////////////////////////////////////*/",
+                "",
+                "const scene = runtimeScene;",
+                "const v = scene.getVariables();",
+                "const flag = n => {try {return v.get(n).getAsBoolean()} catch (e) {return false}};",
+                "",
+                "for (const n of [\"layerSelector\", \"layer\", \"layerOverlay\"]) {",
+                "  try {for (const o of scene.getObjects(n)) o.hide(true)} catch (e) {}",
+                "}",
+                "",
+                "// fully wrapped: a throw here must never abort the frame's later events (the level save).",
+                "try {",
+                "  const blocked = flag(\"paused\") || flag(\"pausedSettings\");",
+                "  const rmb = !blocked &&",
+                "    gdjs.evtTools.input.isMouseButtonPressed(scene, \"Right\") &&",
+                "    !gdjs.evtTools.input.isMouseButtonPressed(scene, \"Left\");",
+                "  if (rmb) {",
+                "    const mx = gdjs.evtTools.input.getCursorX(scene, \"\", 0);",
+                "    const my = gdjs.evtTools.input.getCursorY(scene, \"\", 0);",
+                "    for (const tile of (scene.getObjects(\"tile\") || []).slice()) {",
+                "      if (mx < tile.getAABBLeft() || mx > tile.getAABBRight() ||",
+                "        my < tile.getAABBTop() || my > tile.getAABBBottom()) continue;",
+                "      try {tile.deleteFromScene(scene)} catch (e) {}",
+                "    }",
+                "  }",
+                "} catch (e) {}",
+                ""
+              ],
+              "parameterObjects": "",
+              "useStrict": true,
+              "eventsSheetExpanded": false
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "// editor object transform modal (editobjectbutton), rebuilt from the 1.5.2",
+            "// reference (code1.js userFunc0x196b648 + eventsList230-234). the recovered",
+            "// project had the objects (editobjectbutton, bgObjectEdit, propsInput/propsText/",
+            "// propsInputArrow - the last three created dynamically) but ZERO events, so it",
+            "// was fully dead. this is a self-contained JsCode module doing the whole flow in",
+            "// JS: show the button when tiles are selected, open a modal of numeric fields +",
+            "// -/+ arrows per property, apply to every selected tile (absolute, or additive",
+            "// when the field is \"Mixed\"), or cancel. the editor controls block is suspended",
+            "// via the scene var \"editingObject\" (an added condition on that native block).",
+            "//",
+            "// props: X, Y, Angle (native), Opacity, Flip. opacity/flip persist through the",
+            "// tileInfo save format via added keys 13 (transparency = 255-opacity) and 15",
+            "// (flip), applied on load in the editor + level scenes (see buildxformsave.js).",
+            "// opacity/flip are mirrored into the tile object vars \"transp\"/\"flipped\" so the",
+            "// native serializer can emit them. scale/z-order/layer are still out.",
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "",
+            "const scene = runtimeScene;",
+            "const v = scene.getVariables();",
+            "const S = (window.__edobj = window.__edobj || {});",
+            "",
+            "const released = gdjs.evtTools.input.isMouseButtonReleased(scene, \"Left\");",
+            "const num = n => {try {return v.get(n).getAsNumber()} catch (e) {return 0}};",
+            "const getb = n => {try {return v.get(n).getAsBoolean()} catch (e) {return false}};",
+            "const setb = (n, x) => {try {v.get(n).setBoolean(x)} catch (e) {}};",
+            "const first = n => {const l = scene.getObjects(n); return l && l.length ? l[0] : null};",
+            "const listOf = n => (scene.getObjects(n) || []).slice();",
+            "",
+            "// cursor must be read in the OBJECT'S own layer space (editor ui sits on editorui)",
+            "const hov = o => {",
+            "  if (!o || o.isHidden()) return false;",
+            "  const ly = o.getLayer();",
+            "  const mx = gdjs.evtTools.input.getCursorX(scene, ly, 0);",
+            "  const my = gdjs.evtTools.input.getCursorY(scene, ly, 0);",
+            "  return mx >= o.getAABBLeft() && mx <= o.getAABBRight() &&",
+            "    my >= o.getAABBTop() && my <= o.getAABBBottom();",
+            "};",
+            "// TextInput uses setString/getString; BitmapText uses the Text behavior",
+            "const inSet = (o, t) => {try {o.setString(t)} catch (e) {try {o.getBehavior(\"Text\").setText(t)} catch (e2) {}}};",
+            "const inGet = o => {try {return o.getString()} catch (e) {try {return o.getBehavior(\"Text\").getText()} catch (e2) {return \"\"}}};",
+            "const txtSet = (o, t) => {try {o.getBehavior(\"Text\").setText(t)} catch (e) {try {o.setText(t)} catch (e2) {}}};",
+            "const setW = (o, w) => {try {o.getBehavior(\"Resizable\").setWidth(w)} catch (e) {try {o.setWidth(w)} catch (e2) {}}};",
+            "const setH = (o, h) => {try {o.getBehavior(\"Resizable\").setHeight(h)} catch (e) {try {o.setHeight(h)} catch (e2) {}}};",
+            "const fmt = x => {const r = Math.round(x * 100) / 100; return \"\" + r};",
+            "",
+            "// opacity/flip bind to the sprite + mirror into vars the serializer reads",
+            "const getOpacity = t => {try {return t.getOpacity()} catch (e) {return 255}};",
+            "const setOpacity = (t, a) => {",
+            "  const o = Math.max(0, Math.min(255, Math.round(a)));",
+            "  try {t.setOpacity(o)} catch (e) {}",
+            "  try {t.getVariables().get(\"transp\").setNumber(255 - o)} catch (e) {}",
+            "};",
+            "const isFlip = t => {try {return t.getBehavior(\"Flippable\").isFlippedX()} catch (e) {return false}};",
+            "const setFlip = (t, on) => {",
+            "  try {t.getBehavior(\"Flippable\").flipX(!!on)} catch (e) {}",
+            "  try {t.getVariables().get(\"flipped\").setNumber(on ? 1 : 0)} catch (e) {}",
+            "};",
+            "",
+            "const selectedTiles = () => listOf(\"tile\").filter(t => {",
+            "  try {return t.getVariables().get(\"selected\").getAsBoolean()} catch (e) {return false}",
+            "});",
+            "",
+            "// property table (self, label, getter, setter, arrow step)",
+            "const PROPS = [",
+            "  {self: \"Xpos\", name: \"X\", get: t => t.getX(), set: (t, a) => t.setX(a), change: 16},",
+            "  {self: \"Ypos\", name: \"Y\", get: t => t.getY(), set: (t, a) => t.setY(a), change: 16},",
+            "  {self: \"Angle\", name: \"Angle\", get: t => t.getAngle(), set: (t, a) => t.setAngle(((a % 360) + 360) % 360), change: 15},",
+            "  {self: \"Opacity\", name: \"Opacity\", get: t => getOpacity(t), set: (t, a) => setOpacity(t, a), change: 15},",
+            "  {self: \"Flipped\", name: \"Flip\", get: t => (isFlip(t) ? 1 : 0), set: (t, a) => setFlip(t, Math.abs(Math.round(a)) % 2), change: 1}",
+            "];",
+            "",
+            "const FIELDW = 44;",
+            "const COLX = 88;",
+            "const PERROW = 3;",
+            "const ROWY = 64;",
+            "const ROWH = 42;",
+            "// the modal renders on \"saved\" (a non-scrolled layer above tilebuttons/editorui)",
+            "// so the tile palette + editor buttons don't draw over it. its camera is the",
+            "// scene default, same as editorui, so screen positions are unchanged.",
+            "const MODLAYER = \"saved\";",
+            "",
+            "const rowsFor = n => Math.ceil(n / PERROW);",
+            "const btnY = () => ROWY + rowsFor(PROPS.length) * ROWH + 4;",
+            "",
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "// build / teardown",
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "",
+            "function destroyModalObjects() {",
+            "  for (const n of [\"propsInput\", \"propsText\", \"propsInputArrow\"]) {",
+            "    for (const o of listOf(n)) {try {o.deleteFromScene(scene)} catch (e) {}}",
+            "  }",
+            "  for (const b of [S.applyBg, S.cancelBg]) {if (b) {try {b.deleteFromScene(scene)} catch (e) {}}}",
+            "  S.applyBg = null;",
+            "  S.cancelBg = null;",
+            "}",
+            "",
+            "function mkText(label, z) {",
+            "  const t = scene.createObject(\"propsText\");",
+            "  t.setLayer(MODLAYER);",
+            "  t.setZOrder(z);",
+            "  txtSet(t, label);",
+            "  return t;",
+            "}",
+            "",
+            "function openModal() {",
+            "  setb(\"editingObject\", true);",
+            "  S.open = true;",
+            "  S.inputs = [];",
+            "",
+            "  const bg = first(\"bgObjectEdit\");",
+            "  if (bg) {",
+            "    try {bg.setLayer(MODLAYER)} catch (e) {}",
+            "    setW(bg, 300);",
+            "    setH(bg, btnY() + 22 - (ROWY - 22));",
+            "    try {bg.setPosition(216 - 150, ROWY - 22)} catch (e) {}",
+            "    try {bg.setZOrder(48)} catch (e) {}",
+            "    try {bg.hide(false)} catch (e) {}",
+            "  }",
+            "  S.bg = bg;",
+            "",
+            "  const sel = selectedTiles();",
+            "  PROPS.forEach((prop, i) => {",
+            "    const col = i % PERROW, rowN = Math.floor(i / PERROW);",
+            "    const lockX = 216 + COLX * (col - 1); // three columns centred on 216: 128 / 216 / 304",
+            "    const y = ROWY + rowN * ROWH;",
+            "",
+            "    let val, mixed = false;",
+            "    for (const t of sel) {",
+            "      const g = prop.get(t);",
+            "      if (typeof val === \"undefined\") val = g;",
+            "      else if (val !== g) {mixed = true; break}",
+            "    }",
+            "",
+            "    const input = scene.createObject(\"propsInput\");",
+            "    input.setLayer(MODLAYER);",
+            "    input.setZOrder(50);",
+            "    setW(input, FIELDW);",
+            "    setH(input, 18);",
+            "    input.setPosition(lockX - FIELDW / 2, y);",
+            "    input.getVariables().get(\"self\").setString(prop.self);",
+            "    inSet(input, mixed ? \"Mixed\" : fmt(typeof val === \"undefined\" ? 0 : val));",
+            "",
+            "    const label = mkText(prop.name, 50);",
+            "",
+            "    const minus = scene.createObject(\"propsInputArrow\");",
+            "    minus.setLayer(MODLAYER);",
+            "    minus.setZOrder(50);",
+            "    minus.getVariables().get(\"change\").setNumber(-prop.change);",
+            "    minus.getVariables().get(\"parent\").setString(prop.self);",
+            "",
+            "    const plus = scene.createObject(\"propsInputArrow\");",
+            "    plus.setLayer(MODLAYER);",
+            "    plus.setZOrder(50);",
+            "    try {plus.getBehavior(\"Flippable\").flipX(true)} catch (e) {}",
+            "    plus.getVariables().get(\"change\").setNumber(prop.change);",
+            "    plus.getVariables().get(\"parent\").setString(prop.self);",
+            "",
+            "    S.inputs.push({input: input, prop: prop, minus: minus, plus: plus, label: label});",
+            "  });",
+            "",
+            "  // Apply / Cancel: a button panel with a text label on top. the button ships",
+            "  // with a BlackAndWhite \"grayscale\" effect enabled (grey) - disable it for the",
+            "  // usual pink, matching the pause-menu buttons.",
+            "  S.applyBg = scene.createObject(\"button\");",
+            "  S.applyBg.setLayer(MODLAYER);",
+            "  S.applyBg.setZOrder(50);",
+            "  try {S.applyBg.getBehavior(\"Effect\").enableEffect(\"grayscale\", false)} catch (e) {}",
+            "  S.apply = mkText(\"Apply\", 51);",
+            "",
+            "  S.cancelBg = scene.createObject(\"button\");",
+            "  S.cancelBg.setLayer(MODLAYER);",
+            "  S.cancelBg.setZOrder(50);",
+            "  try {S.cancelBg.getBehavior(\"Effect\").enableEffect(\"grayscale\", false)} catch (e) {}",
+            "  S.cancel = mkText(\"Cancel\", 51);",
+            "",
+            "  layout();",
+            "}",
+            "",
+            "// keep the -/+ arrows snug to each field and the buttons sized to their labels;",
+            "// runs every frame while open so it survives the first-frame text metrics.",
+            "function layout() {",
+            "  // TextInput reports a degenerate AABB (a point), so drive off its own",
+            "  // x/y/width/height instead to keep the -/+ arrows snug to each field.",
+            "  for (const rec of S.inputs || []) {",
+            "    const ix = rec.input.getX(), iy = rec.input.getY();",
+            "    const iw = rec.input.getWidth(), ih = rec.input.getHeight();",
+            "    const cy = iy + ih / 2;",
+            "    // propsInputArrow's sprite origin sits ~5px up-left of its top-left, so",
+            "    // nudge both arrows down+right to line up with the field.",
+            "    if (rec.minus) rec.minus.setPosition(ix - 4 - rec.minus.getWidth() + 5, cy - rec.minus.getHeight() / 2 + 5);",
+            "    if (rec.plus) rec.plus.setPosition(ix + iw + 4 + 5, cy - rec.plus.getHeight() / 2 + 5);",
+            "    if (rec.label) try {rec.label.setPosition(ix + iw / 2 - rec.label.getWidth() / 2, iy - 16)} catch (e) {}",
+            "  }",
+            "  fitButton(S.applyBg, S.apply, 176, btnY());",
+            "  fitButton(S.cancelBg, S.cancel, 262, btnY());",
+            "}",
+            "",
+            "function fitButton(bg, txt, cx, cy) {",
+            "  if (!bg || !txt) return;",
+            "  const w = txt.getWidth() + 18, h = txt.getHeight() + 12;",
+            "  setW(bg, w);",
+            "  setH(bg, h);",
+            "  bg.setPosition(cx - w / 2, cy - h / 2);",
+            "  txt.setPosition(cx - txt.getWidth() / 2, cy - txt.getHeight() / 2);",
+            "}",
+            "",
+            "function closeModal() {",
+            "  destroyModalObjects();",
+            "  if (S.bg) {try {S.bg.hide(true)} catch (e) {}}",
+            "  S.open = false;",
+            "  S.inputs = [];",
+            "  S.apply = null;",
+            "  S.cancel = null;",
+            "  setb(\"editingObject\", false);",
+            "}",
+            "",
+            "function applyAndClose() {",
+            "  const sel = selectedTiles();",
+            "  for (const rec of S.inputs) {",
+            "    let text = \"\" + inGet(rec.input);",
+            "    const add = /mixed/i.test(text);",
+            "    text = text.replace(/mixed/ig, \"\").replace(\"+\", \"\").replace(/\\s/g, \"\")",
+            "      .replace(/false/ig, \"0\").replace(/true/ig, \"1\");",
+            "    if (text === \"\") continue;",
+            "    const val = parseFloat(text);",
+            "    if (isNaN(val)) continue;",
+            "    for (const t of sel) {",
+            "      try {rec.prop.set(t, add ? rec.prop.get(t) + val : val)} catch (e) {}",
+            "    }",
+            "  }",
+            "  closeModal();",
+            "}",
+            "",
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "// per-scene reset (clear any strays left by a scene restart)",
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "",
+            "if (S.owner !== scene) {",
+            "  S.owner = scene;",
+            "  S.open = false;",
+            "  S.inputs = [];",
+            "  destroyModalObjects();",
+            "  const bg0 = first(\"bgObjectEdit\");",
+            "  if (bg0) {try {bg0.hide(true)} catch (e) {}}",
+            "  setb(\"editingObject\", false);",
+            "}",
+            "",
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "// main",
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "",
+            "const eob = first(\"editobjectbutton\");",
+            "",
+            "if (S.open) {",
+            "  layout();",
+            "  if (released) {",
+            "    for (const arrow of listOf(\"propsInputArrow\")) {",
+            "      if (!hov(arrow)) continue;",
+            "      const parent = arrow.getVariables().get(\"parent\").getAsString();",
+            "      const change = arrow.getVariables().get(\"change\").getAsNumber();",
+            "      const rec = (S.inputs || []).filter(r => r.prop.self === parent)[0];",
+            "      if (!rec) continue;",
+            "      const cur = \"\" + inGet(rec.input);",
+            "      const base = parseFloat(cur.replace(/mixed/ig, \"\").replace(\"+\", \"\"));",
+            "      if (isNaN(base)) inSet(rec.input, (change >= 0 ? \"+\" : \"\") + fmt(change));",
+            "      else inSet(rec.input, fmt(base + change));",
+            "    }",
+            "    if (hov(S.applyBg)) applyAndClose();",
+            "    else if (hov(S.cancelBg)) closeModal();",
+            "  }",
+            "  if (eob) {try {eob.hide(true)} catch (e) {}}",
+            "} else if (eob) {",
+            "  const show = !getb(\"paused\") && num(\"settingsShown\") === -1 &&",
+            "    num(\"tileCodeEditorShown\") !== 1 && selectedTiles().length > 0;",
+            "  if (show) {",
+            "    try {eob.setPosition(416, 160)} catch (e) {}",
+            "    try {eob.hide(false)} catch (e) {}",
+            "    if (released && hov(eob)) openModal();",
+            "  } else {",
+            "    try {eob.hide(true)} catch (e) {}",
+            "  }",
+            "}",
+            ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        },
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "// editor text-tile content preview. text triggers (tile id 83) show only the",
+            "// generic tile sprite in the editor; this renders their actual data.content on",
+            "// top - live - whenever it differs from the default \"Sample Text\", so you can",
+            "// read what a text object says without opening the data editor. one textPreview",
+            "// BitmapText is pooled per text tile (created on demand, removed when the tile is",
+            "// gone or reset to default). runs on the tile's own layer so it pans/zooms with",
+            "// the grid.",
+            "/*//////////////////////////////////////////////////////////////////////*/",
+            "",
+            "const scene = runtimeScene;",
+            "const P = (window.__edtextprev = window.__edtextprev || {});",
+            "",
+            "if (P.owner !== scene) {",
+            "  P.owner = scene;",
+            "  for (const o of scene.getObjects(\"textPreview\") || []) {try {o.deleteFromScene(scene)} catch (e) {}}",
+            "  P.recs = [];",
+            "}",
+            "",
+            "const DEFAULT = \"Sample Text\";",
+            "const txtSet = (o, t) => {try {o.getBehavior(\"Text\").setText(t)} catch (e) {try {o.setText(t)} catch (e2) {}}};",
+            "const isText = t => {try {return t.getVariables().get(\"id\").getAsNumber() === 83} catch (e) {return false}};",
+            "const contentOf = t => {",
+            "  try {",
+            "    const d = t.getVariables().get(\"data\");",
+            "    if (d.hasChild(\"content\")) return d.getChild(\"content\").getAsString();",
+            "  } catch (e) {}",
+            "  return \"\";",
+            "};",
+            "",
+            "// which text tiles want a preview this frame",
+            "const want = new Map();",
+            "for (const t of scene.getObjects(\"tile\") || []) {",
+            "  if (!isText(t)) continue;",
+            "  const c = contentOf(t);",
+            "  if (!c || c === DEFAULT) continue;",
+            "  want.set(t, c);",
+            "}",
+            "",
+            "// drop previews whose tile is gone or back to default",
+            "P.recs = (P.recs || []).filter(rec => {",
+            "  if (want.has(rec.tile)) return true;",
+            "  try {rec.obj.deleteFromScene(scene)} catch (e) {}",
+            "  return false;",
+            "});",
+            "",
+            "// create previews for newly-wanting tiles",
+            "const have = new Set(P.recs.map(r => r.tile));",
+            "for (const t of want.keys()) {",
+            "  if (have.has(t)) continue;",
+            "  const o = scene.createObject(\"textPreview\");",
+            "  if (o) P.recs.push({tile: t, obj: o});",
+            "}",
+            "",
+            "// position + text every frame (content or tile can move). matches the level:",
+            "// text starts at the tile's origin (left-aligned, vertical top), tinted by",
+            "// data.color, wrapped only when data.width is set.",
+            "for (const rec of P.recs) {",
+            "  const t = rec.tile, o = rec.obj, d = t.getVariables().get(\"data\");",
+            "  txtSet(o, want.get(t));",
+            "  try {",
+            "    const w = d.hasChild(\"width\") ? d.getChild(\"width\").getAsNumber() : 0;",
+            "    if (w) {o.setWrapping(true); o.setWrappingWidth(w)} else {o.setWrapping(false)}",
+            "  } catch (e) {}",
+            "  try {",
+            "    const col = d.getChild(\"color\").getAsString();",
+            "    if (/^\\d+;\\d+;\\d+$/.test(col)) o.setTint(col);",
+            "  } catch (e) {}",
+            "  try {o.setLayer(t.getLayer())} catch (e) {}",
+            "  try {o.setZOrder(t.getZOrder() + 1)} catch (e) {}",
+            "  try {o.setPosition(t.getX(), t.getY())} catch (e) {}",
+            "}",
+            ""
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -105065,6 +105770,85 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "VarScene"
+                      },
+                      "parameters": [
+                        "levelCodeInputVar.13",
+                        "!=",
+                        "0"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "OpacityCapability::OpacityBehavior::SetValue"
+                      },
+                      "parameters": [
+                        "tile",
+                        "Opacity",
+                        "=",
+                        "255-Variable(levelCodeInputVar.13)"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "tile",
+                        "transp",
+                        "=",
+                        "Variable(levelCodeInputVar.13)"
+                      ]
+                    }
+                  ],
+                  "events": []
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "VarScene"
+                      },
+                      "parameters": [
+                        "levelCodeInputVar.15",
+                        "=",
+                        "1"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "FlippableCapability::FlippableBehavior::FlipX"
+                      },
+                      "parameters": [
+                        "tile",
+                        "Flippable",
+                        "yes"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "tile",
+                        "flipped",
+                        "=",
+                        "1"
+                      ]
+                    }
+                  ],
+                  "events": []
                 }
               ]
             },
@@ -134146,6 +134930,282 @@
           "eventsSheetExpanded": false
         },
         {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "SceneVariableAsBoolean"
+              },
+              "parameters": [
+                "spacerestartrequested",
+                "True"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "SetSceneVariableAsBoolean"
+              },
+              "parameters": [
+                "spacerestartrequested",
+                "False"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetSceneVariableAsBoolean"
+              },
+              "parameters": [
+                "paused",
+                "False"
+              ]
+            },
+            {
+              "type": {
+                "value": "ResetTimer"
+              },
+              "parameters": [
+                "stopwatchTime",
+                "\"stopwatch\""
+              ]
+            },
+            {
+              "type": {
+                "value": "ModVarScene"
+              },
+              "parameters": [
+                "deaths",
+                "=",
+                "0"
+              ]
+            },
+            {
+              "type": {
+                "value": "ModVarScene"
+              },
+              "parameters": [
+                "winAnimationPhase",
+                "=",
+                "0"
+              ]
+            },
+            {
+              "type": {
+                "value": "SetSceneVariableAsBoolean"
+              },
+              "parameters": [
+                "win",
+                "False"
+              ]
+            }
+          ],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "Tween::AddObjectPositionYTween"
+                  },
+                  "parameters": [
+                    "deathCount",
+                    "Tween",
+                    "\"levelCompleteYMovementOut\"",
+                    "-200",
+                    "\"swingFrom\"",
+                    "500",
+                    "yes"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::AddObjectPositionYTween"
+                  },
+                  "parameters": [
+                    "completeTime",
+                    "Tween",
+                    "\"levelCompleteYMovementOut\"",
+                    "-200",
+                    "\"swingFrom\"",
+                    "500",
+                    "yes"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::AddObjectPositionYTween"
+                  },
+                  "parameters": [
+                    "levelCompleteBg",
+                    "Tween",
+                    "\"levelCompleteYMovementOut\"",
+                    "-200",
+                    "\"swingFrom\"",
+                    "500",
+                    "yes"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::AddObjectPositionYTween"
+                  },
+                  "parameters": [
+                    "levelComplete",
+                    "Tween",
+                    "\"levelCompleteYMovementOut\"",
+                    "-200",
+                    "\"swingFrom\"",
+                    "500",
+                    "yes"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::AddObjectPositionYTween"
+                  },
+                  "parameters": [
+                    "winLeave",
+                    "Tween",
+                    "\"levelCompleteYMovementOut\"",
+                    "-200",
+                    "\"swingFrom\"",
+                    "500",
+                    "yes"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::AddObjectPositionYTween"
+                  },
+                  "parameters": [
+                    "winRestart",
+                    "Tween",
+                    "\"levelCompleteYMovementOut\"",
+                    "-200",
+                    "\"swingFrom\"",
+                    "500",
+                    "yes"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::AddObjectPositionYTween"
+                  },
+                  "parameters": [
+                    "winEdit",
+                    "Tween",
+                    "\"levelCompleteYMovementOut\"",
+                    "-200",
+                    "\"swingFrom\"",
+                    "500",
+                    "yes"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::TweenBehavior::AddObjectOpacityTween2"
+                  },
+                  "parameters": [
+                    "timeAttackClock",
+                    "Tween",
+                    "\"tacOpEND\"",
+                    "255",
+                    "\"linear\"",
+                    "0.3",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::TweenBehavior::AddObjectOpacityTween2"
+                  },
+                  "parameters": [
+                    "timerIcon",
+                    "Tween",
+                    "\"tiOpEnd\"",
+                    "255",
+                    "\"linear\"",
+                    "0.3",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::AddObjectPositionXTween"
+                  },
+                  "parameters": [
+                    "winIcon",
+                    "Tween",
+                    "\"winIconXOut\"",
+                    "0-18",
+                    "\"swingTo\"",
+                    "300",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::TweenBehavior::AddObjectOpacityTween2"
+                  },
+                  "parameters": [
+                    "pauseTime",
+                    "Tween",
+                    "\"ptOp\"",
+                    "255",
+                    "\"linear\"",
+                    "0.3",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Tween::TweenBehavior::AddObjectOpacityTween2"
+                  },
+                  "parameters": [
+                    "pauseIcon",
+                    "Tween",
+                    "\"piOp\"",
+                    "255",
+                    "\"linear\"",
+                    "0.3",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::ForEach",
+              "object": "wincoin",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "Tween::TweenBehavior::AddObjectPositionYTween2"
+                  },
+                  "parameters": [
+                    "wincoin",
+                    "Tween",
+                    "\"winCoinYMoveOut\"",
+                    "-64",
+                    "\"swingTo\"",
+                    "0.2",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Link",
+              "include": {
+                "includeConfig": 0
+              },
+              "target": "restart"
+            }
+          ]
+        },
+        {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "// qol-spacerestart: Space restarts after complete / resumes from the pause menu",
@@ -134153,26 +135213,21 @@
             "let win = false; try {win = scene.getVariables().get(\"win\").getAsBoolean()} catch (e) {}",
             "let paused = false; try {paused = scene.getVariables().get(\"paused\").getAsBoolean()} catch (e) {}",
             "let space = false; try {space = gdjs.evtTools.input.wasKeyReleased(scene, \"Space\")} catch (e) {}",
-            "// only restart once the win screen actually exists (avoids freezing if pressed on",
-            "// the very first complete frame before the win UI is set up).",
+            "// only restart once the win screen exists (avoids freezing if pressed on the very",
+            "// first complete frame before the win UI is set up).",
             "let winUp = false; try {winUp = scene.getObjects('winRestart').length > 0} catch (e) {}",
             "if (space && win && winUp) {",
-            "  try {scene.getVariables().get(\"paused\").setBoolean(false)} catch (e) {}",
-            "  try {gdjs.evtTools.runtimeScene.resetTimer(scene, \"stopwatch\")} catch (e) {}",
-            "  try {scene.getVariables().get(\"deaths\").setNumber(0)} catch (e) {}",
-            "  try {scene.getVariables().get(\"winAnimationPhase\").setNumber(0)} catch (e) {}",
-            "  try {scene.getVariables().get(\"win\").setBoolean(false)} catch (e) {}",
-            "  // delete only the win-SPECIFIC objects (created each win, deleteOnFinish in the",
-            "  // native exit). NOT shared/persistent ones (winIcon, pauseTime, pauseIcon).",
-            "  for (const n of [\"deathCount\", \"completeTime\", \"levelCompleteBg\", \"levelComplete\", \"winLeave\", \"winRestart\", \"winEdit\", \"wincoin\"]) {try {for (const o of scene.getObjects(n)) o.deleteFromScene(scene)} catch (e) {}}",
-            "  try {gdjs.levelCode.eventsList158(scene)} catch (e) {}",
+            "  // hand off to the cloned winRestart-button event so Space does EXACTLY what the",
+            "  // button does (the manual reset here misplaced gamemode/position and skipped the",
+            "  // real restart).",
+            "  try {scene.getVariables().get(\"spacerestartrequested\").setBoolean(true)} catch (e) {}",
             "} else if (space && paused) {",
             "  try {scene.getVariables().get(\"paused\").setBoolean(false)} catch (e) {}",
-            "  // the pauseResume-click handler tweens the WHOLE pause menu out; it reads pauseResume from",
-            "  // the pre-filtered GDpauseResumeObjects3 (the mouse path fills this via cursorOnObject), so",
-            "  // populate it for Space too. WARNING: this game eventsList number shifts when the level",
-            "  // event sheet changes - if Space stops sliding the menu, grep code4 for the fn that",
-            "  // copyArrays all pause* objects and addObjectPositionTweens *XOut, and update the number.",
+            "  // the pauseResume-click handler tweens the whole pause menu out; it reads pauseResume from",
+            "  // the pre-filtered GDpauseResumeObjects3 (mouse path fills this via cursorOnObject), so",
+            "  // populate it for Space too. WARNING: this eventsList number shifts when the level event",
+            "  // sheet changes - if Space stops sliding the menu, grep code4 for the fn that copyArrays",
+            "  // all pause* objects + addObjectPositionTweens *XOut, and update the number.",
             "  try {gdjs.copyArray(scene.getObjects(\"pauseResume\"), gdjs.levelCode.GDpauseResumeObjects3)} catch (e) {}",
             "  try {gdjs.levelCode.eventsList35(scene)} catch (e) {}",
             "}"
@@ -134185,14 +135240,13 @@
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "// qol-editbutton: edit-any-level support.",
-            "//  (1) main/map-pack levels natively hide the pause Edit + Download (.tgd export) buttons - show + tween both in.",
-            "//  (2) when the Edit button (pause OR win) is clicked on ANY non-custom level (main/",
-            "//      pack/demonlist/rated), fork it into an independent custom copy (fresh uuid,",
-            "//      from=editor) from loadedLevel - so editing never touches the real level and each",
-            "//      copy gets its own slot. detecting the CLICK (not editThisLevel, which the native",
-            "//      buttons may set via an async callback) keeps the fork synchronous, before any",
-            "//      scene change. for main/pack we also open the editor (the native button is ours);",
-            "//      for demonlist/rated the native button opens it.",
+            "//  (1) main/map-pack levels natively hide the pause Edit + Download buttons - show + tween both in.",
+            "//  (2) when Edit (pause or win) is clicked on any non-custom level (main/pack/demonlist/",
+            "//      rated), fork it into an independent custom copy (fresh uuid, from=editor) from",
+            "//      loadedLevel - so editing never touches the real level and each copy gets its own",
+            "//      slot. detecting the CLICK (not editThisLevel, which native buttons may set via an",
+            "//      async callback) keeps the fork synchronous, before any scene change. for main/pack",
+            "//      we also open the editor; for demonlist/rated the native button opens it.",
             "//  (3) stop the level music (global channels) on edit so it doesn't carry into the editor.",
             "const scene = runtimeScene;",
             "const G = scene.getGame().getVariables();",
@@ -134223,11 +135277,11 @@
             "    scene.__editclick = true;",
             "    try {for (const ch of [0, 1, 2]) gdjs.evtTools.sound.stopMusicOnChannel(scene, ch)} catch (e) {}",
             "    try {",
-            "      // loadedLevel is the level actually being played; flip its source to editor.",
+            "      // loadedLevel is the level being played; flip its source to editor.",
             "      const lvl = JSON.parse(gdjs.evtTools.network.variableStructureToJSON(scene.getVariables().get(\"loadedLevel\")));",
             "      const info = lvl.levelInfo || (lvl.levelInfo = {});",
             "      info.from = \"editor\";",
-            "      // read existing custom levels first so we can pick a uuid that isn't taken.",
+            "      // read existing custom levels first to pick a free uuid.",
             "      const lv = scene.getVariables().get(\"__forklevels\");",
             "      lv.clearChildren();",
             "      try {if (gdjs.evtTools.storage.elementExistsInJSONFile(\"trigonometrydash\", \"levels\")) {gdjs.evtTools.storage.readStringFromJSONFile(\"trigonometrydash\", \"levels\", scene, lv); gdjs.evtTools.network.jsonToVariableStructure(lv.getAsString(), lv)}} catch (e) {}",
@@ -134251,12 +135305,11 @@
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
             "// qol-listexit: demonlist/rated levels carry levelInfo.from=\"editor\" (uploaded from the",
-            "// editor), so the native Leave routing sends them to the level-info (mylevel) scene. the",
-            "// real source is the global lvlFrom (set by demonlist/rated before launch) - but it's",
-            "// stale for custom/mappack (their launchers don't set it). so capture it into a scene var",
-            "// ONCE at level start + clear the global, making the per-level value reliable; then on a",
-            "// pause/win Leave for a demonlist/rated level, replicate the native exit (black-circle",
-            "// out-wipe + 0.2s wait + restart the menu theme on ch2, only-menu-music) then go to the list.",
+            "// editor), so native Leave routing sends them to the mylevel scene. the real source is the",
+            "// global lvlFrom (set by demonlist/rated before launch) - but stale for custom/mappack",
+            "// (their launchers don't set it). so capture it into a scene var ONCE at level start + clear",
+            "// the global; then on a pause/win Leave for a demonlist/rated level, replicate the native",
+            "// exit (black-circle out-wipe + 0.2s wait + restart menu theme on ch2) then go to the list.",
             "const scene = runtimeScene;",
             "const G = scene.getGame().getVariables();",
             "if (!scene.__lfcap) {",
@@ -134267,7 +135320,7 @@
             "let lf = \"\"; try {lf = scene.getVariables().get(\"mylvlfrom\").getAsString()} catch (e) {}",
             "if (lf === \"demonlist\" || lf === \"rated\") {",
             "  if (scene.__listexit) {",
-            "    // the out-wipe is playing; after ~0.2s restart the menu theme + replace to the list.",
+            "    // out-wipe playing; after ~0.2s restart the menu theme + replace to the list.",
             "    scene.__exitms = (scene.__exitms || 0) + (scene.getElapsedTime ? scene.getElapsedTime() : 16);",
             "    if (scene.__exitms >= 200 && !scene.__exitdone) {",
             "      scene.__exitdone = true;",
@@ -134421,8 +135474,6 @@
                 "    return false;",
                 "  };",
                 "",
-                "  // numeric variant (for the compress-export MB cycle setting). read localStorage first -",
-                "  // that's where the settings menu persists it; the scene var can lag a value behind",
                 "  t.readsettingnum = function(scene, id) {",
                 "    try {const file = JSON.parse(window.localStorage.getItem(\"GDJS_trigonometrydash\") || \"{}\"); if (file.settings && typeof file.settings.str === \"string\") {const v = JSON.parse(file.settings.str)[id]; if (v != null) return Number(v) || 0}} catch (e) {}",
                 "    try {const s = scene.getVariables(); if (s.has(\"settings\") && s.get(\"settings\").hasChild(id)) return s.get(\"settings\").getChild(id).getAsNumber()} catch (e) {}",
@@ -134511,7 +135562,9 @@
                 "      if (!b || typeof b.isDynamic !== \"function\") continue;",
                 "      let dyn = false; try {dyn = b.isDynamic()} catch (e) {}",
                 "      if (!dyn) continue;",
-                "      out.push({id: o.id, x: o.getX(), y: o.getY(), a: o.getAngle()});",
+                "      const e = {id: o.id, x: o.getX(), y: o.getY(), a: o.getAngle()};",
+                "      try {e.vx = b.getLinearVelocityX(); e.vy = b.getLinearVelocityY(); e.va = b.getAngularVelocity()} catch (er) {}",
+                "      out.push(e);",
                 "    }",
                 "    return out;",
                 "  }",
@@ -134522,7 +135575,9 @@
                 "    for (const o of all) {",
                 "      const d = map[o.id]; if (!d) continue;",
                 "      o.setPosition(d.x, d.y); try {o.setAngle(d.a)} catch (e) {}",
-                "      try {const b = o.getBehavior(\"Physics2\"); b.updateBodyFromObject(); b.setLinearVelocityX(0); b.setLinearVelocityY(0); b.setAngularVelocity(0)} catch (e) {}",
+                "      try {const b = o.getBehavior(\"Physics2\"); b.updateBodyFromObject();",
+                "        if (d.vx !== undefined) {b.setLinearVelocityX(d.vx); b.setLinearVelocityY(d.vy); b.setAngularVelocity(d.va)}",
+                "        else {b.setLinearVelocityX(0); b.setLinearVelocityY(0); b.setAngularVelocity(0)}} catch (e) {}",
                 "    }",
                 "  }",
                 "  function getanim(o) {try {return o.getBehavior(\"Animation\").getAnimationIndex()} catch (e) {} try {return o.getAnimationIndex()} catch (e) {return 0}}",
@@ -134541,10 +135596,12 @@
                 "    for (const n of orbnames) {const list = scene.getObjects(n) || []; if (list.length) out[n] = list.map(o => {let l = 0; try {l = o.getVariables().get(\"locked\").getAsBoolean() ? 1 : 0} catch (e) {} return {l: l, a: o.getAngle()}})}",
                 "    for (const n of spinnames) {const list = scene.getObjects(n) || []; if (list.length) out[\"@\" + n] = list.map(o => o.getAngle())}",
                 "    out.dyn = capturedyn(scene);",
+                "    try {const gv = scene.getVariables(); if (gv.has(\"on\")) out.on = gv.get(\"on\").getAsNumber()} catch (e) {}",
                 "    return out;",
                 "  }",
                 "  function restoreobjs(scene, objs) {",
                 "    if (!objs) return;",
+                "    if (objs.on !== undefined) {try {scene.getVariables().get(\"on\").setNumber(objs.on)} catch (e) {}}",
                 "    if (objs.breakblock) {",
                 "      const list = scene.getObjects(\"breakblock\") || [];",
                 "      objs.breakblock.forEach((s, i) => {",
@@ -134562,8 +135619,6 @@
                 "        if (!o) return;",
                 "        try {o.getVariables().get(\"disabled\").setBoolean(!!s.d)} catch (e) {}",
                 "        setanim(o, s.a);",
-                "        // only snap a coin back if it actually moved (collected coins fly up); idle coins",
-                "        // gently bob on a Y tween, so forcing the captured mid-bob position offsets them",
                 "        if (Math.abs(o.getX() - s.x) > 4 || Math.abs(o.getY() - s.y) > 4) o.setPosition(s.x, s.y);",
                 "        try {o.setOpacity(s.op)} catch (e) {}",
                 "      });",
@@ -134663,8 +135718,6 @@
                 "    if (t.mode === \"record\") {",
                 "      t.macro.events = t.macro.events.filter(ev => ev[0] < snap.frame);",
                 "      t.macro.icon.length = Math.min(t.macro.icon.length, snap.frame);",
-                "      // remember the world state at this rollback frame so a replay can re-apply it",
-                "      // (a replay only force-corrects the player, so physics + switch blocks would drift)",
                 "      if (t.macro && snap.objs) (t.macro.worldsnaps = t.macro.worldsnaps || {})[snap.frame] = snap.objs;",
                 "      t.prevkeys = Object.assign({}, snap.reckeys || {});",
                 "      t.prevmouse = !!snap.recmouse;",
@@ -135425,8 +136478,6 @@
                 "",
                 "      let backinject = false;",
                 "      if (t.requestbacktrack && inlevel()) {const bt = (t.requestbacktrack === true) ? backtarget() : t.requestbacktrack; t.requestbacktrack = false; if (bt) {applynormalcp(scene, bt); t.ubacktrack = 8; backinject = true; try {input.onKeyPressed(82, 0)} catch (e) {}}}",
-                "      // re-apply the recorded world state at rollback frames so physics + switch blocks",
-                "      // match the run instead of drifting (a replay only force-corrects the player)",
                 "      if (t.mode === \"play\" && !replaypaused && t.playm.worldsnaps && t.playm.worldsnaps[t.frame]) {",
                 "        try {restoreobjs(scene, t.playm.worldsnaps[t.frame])} catch (e) {}",
                 "      }",
@@ -135603,10 +136654,7 @@
                 "    t.offtmp = null; t.ffhandle = null; t.fferr = false; t.offpaused = false;",
                 "    t.writechain = Promise.resolve(); t.pendingwrites = 0; t.writeacc = 0;",
                 "",
-                "    // yuv420p H.264 high profile - the universally decodable format (browsers, phones,",
-                "    // social, every player), unlike yuv444p which only plays in mpv/ffmpeg. colors stay",
-                "    // faithful: bt709 throughout, a clean 3x nearest-neighbour upscale, and tv range so",
-                "    // players render it correctly whether or not they honour a full-range flag",
+                "    // yuv420p H.264",
                 "    invoke(\"temp_path\", {suffix: \".mp4\"}).then(function (tmp) {",
                 "      t.offtmp = tmp;",
                 "      const args = [\"-y\", \"-f\", \"rawvideo\", \"-pix_fmt\", \"rgba\", \"-s\", t.offw + \"x\" + t.offh,",
@@ -135622,10 +136670,6 @@
                 "    try {t.offvol = t.savedvol != null ? t.savedvol : (window.Howler ? window.Howler.volume() : 1); if (window.Howler) window.Howler.volume(0)} catch (e) {}",
                 "    t.vidphase = \"render\"; t.vidblock = true; t.offframe = 0; t.offsub = \"intro\"; t.offwon = 0; t.offcompleteat = -1;",
                 "    t.compressmb = t.readsettingnum(scene, \"compressmb\") || 0;",
-                "    // compression is done by the MAIN encode (raw frames -> target bitrate), not a second",
-                "    // pass: the stripped ffmpeg can't decode H.264 to re-encode a finished mp4. estimate",
-                "    // the duration from the macro length (+intro/outro) and aim the video bitrate at the",
-                "    // target minus the ~128k audio added later, with headroom so it lands under the limit",
                 "    t.offratectrl = [\"-crf\", \"16\", \"-preset\", \"veryfast\"];",
                 "    if (t.compressmb > 0) {",
                 "      const mlen = (t.playm && t.playm.length) || 1800;",
@@ -135633,8 +136677,6 @@
                 "      const totalbits = t.compressmb * 1024 * 1024 * 8 * 0.88;",
                 "      let vbr = Math.floor((totalbits - 128000 * est) / est);",
                 "      if (vbr < 40000) vbr = 40000;",
-                "      // a much slower preset is far better quality per bit (the render just pauses for the",
-                "      // encoder via backpressure); looser maxrate lets x264 spend bits where frames need it",
                 "      t.offratectrl = [\"-b:v\", String(vbr), \"-maxrate\", String(Math.floor(vbr * 1.6)), \"-bufsize\", String(vbr * 2), \"-preset\", \"slow\"];",
                 "    }",
                 "    rebuildplaystate(0);",
@@ -135867,8 +136909,6 @@
                 "      // export at FULL volume regardless of the ingame setting, i don't think anybody would want musicless videos",
                 "      if (musicev) {musicev.frame = 30; musicev.vol = 1; log.push(musicev)}",
                 "      const sm = game.getSoundManager();",
-                "      // the music already plays slowed (its logged rate); stretch every sound's start by",
-                "      // 1/sp and slow the SFX rate by sp so the whole soundtrack matches the slowed video",
                 "      const sp = t.exportsp || 1;",
                 "      const sr = 44100, dur = t.offframe / 60 / sp + 1.5;",
                 "      const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;",
@@ -136190,6 +137230,7 @@
                 "        else if (name === \"cat\") col = \"255;150;64\";",
                 "        else if (t.killset[name]) col = \"255;64;64\";",
                 "        else if (radii[name] || t.greenset[name] || t.coinset[name] || name === \"onoffswitch\" || name === \"checkpoint\") col = \"64;255;64\";",
+                "        else if (name === \"breakblock\") col = \"255;180;64\";",
                 "        else if (phys) col = \"64;128;255\";",
                 "        if (!col) continue;",
                 "        d.setFillColor(col);",
@@ -136207,6 +137248,21 @@
                 "        else if (phys) drawphys(d, o, phys, ccx, ccy);",
                 "        else drawmask(d, o);",
                 "      }",
+                "      try {",
+                "        for (const jc of scene.getObjects(\"jumpCheck\") || []) {",
+                "          d.setFillColor(\"255;255;64\"); d.setFillOpacity(0);",
+                "          d.setOutlineColor(\"255;255;64\"); d.setOutlineOpacity(210);",
+                "          drawmask(d, jc);",
+                "        }",
+                "      } catch (e) {}",
+                "      try {",
+                "        d.setFillColor(\"255;64;64\"); d.setOutlineColor(\"255;64;64\");",
+                "        d.setFillOpacity(150); d.setOutlineOpacity(200);",
+                "        if (Math.abs(-3008 - camy) < cullh) fillbox(d, camx, -3008, cullw, 0.5, 0);",
+                "        const gl = svar(scene, \"groundLeft\").getAsNumber(), gr = svar(scene, \"groundRight\").getAsNumber();",
+                "        if (Math.abs(gl - camx) < cullw) fillbox(d, gl, camy, 0.5, cullh, 0);",
+                "        if (Math.abs(gr - camx) < cullw) fillbox(d, gr, camy, 0.5, cullh, 0);",
+                "      } catch (e) {}",
                 "      drawplayer(scene, d);",
                 "    } catch (e) {}",
                 "  }",
@@ -136412,9 +137468,6 @@
                 "          let gh = 224; try {gh = game.getGameResolutionHeight()} catch (e) {}",
                 "          const vty = gh - 6 - t.veltext.getHeight();",
                 "          t.veltext.setPosition(4, vty);",
-                "          // overlay just the xvel value, tinted redder the further |xvel| runs past the",
-                "          // gamemode's normal cap - a successful xvel boost. cube/ball 150, ship 75,",
-                "          // ufo 200, wave 175 (read live from the mode + <mode>speed scene vars)",
                 "          if (t.xvelcol) {",
                 "            let cap = 150;",
                 "            try {const m = svar(scene, \"mode\").getAsString(); const c = svar(scene, m + \"speed\").getAsNumber(); if (c > 0) cap = c} catch (e) {}",
@@ -136487,15 +137540,8 @@
                 "      if (t.vidphase === \"exported\" && performance.now() - t.exporteddone > 2000) {",
                 "        t.vidphase = null; t.vidblock = false;",
                 "        completegrey(scene, false);",
-                "        // the render dimmed the complete-screen objects to hide them from the footage;",
-                "        // bring them back so the complete screen reappears after exporting - the bg dim",
-                "        // is semitransparent (the game tweens it to 255/3), the rest are fully opaque",
                 "        for (const n of completeobjs) for (const o of scene.getObjects(n) || []) {try {o.setOpacity(n === \"levelCompleteBg\" ? 85 : 255)} catch (e) {}}",
                 "        if (t.counttext) {t.counttext.hide(); try {t.counttext.setScale(3)} catch (e) {}}",
-                "        // the offline playthrough left practice checkpoints set (applynormalcp fires on",
-                "        // each replayed death), so a restart from the complete screen would respawn",
-                "        // mid-level with the stale bg. restore the clean level-start checkpoint captured",
-                "        // on load, so dying/restarting from here is a full reset to the start",
                 "        if (t.startcp) try {applycp(scene, t.startcp)} catch (e) {}",
                 "        t.vidstep = \"\";",
                 "      }",
@@ -136732,9 +137778,6 @@
                 "      const sc = inlevel();",
                 "      let paused = false;",
                 "      try {paused = svar(sc, \"paused\").getAsBoolean()} catch (e) {}",
-                "      // a click anywhere makes the player jump, but on the complete screen that jump",
-                "      // triggers the game's retry - so any click off the win buttons would glitch-restart.",
-                "      // suppress the click-jump while the win screen is up (the buttons stay clickable)",
                 "      if (!paused && !onpausebtn() && !winshown(sc)) t.jumpclick = true;",
                 "    }",
                 "  }, true);",
@@ -136773,7 +137816,7 @@
                 "    if (e.code === \"Space\") {t.physjump.space = true; if (t.awaitrespawn) t.bufjump.space = true}",
                 "    if (e.code === \"ArrowUp\") {t.physjump.up = true; if (t.awaitrespawn) t.bufjump.up = true}",
                 "    if (!inlevel()) return;",
-                "    // easter egg: S, O, G pressed in order spawns a physics cat (macro overlay on)",
+                "    // miau",
                 "    if (t.hotkey) {",
                 "      const sk = {KeyS: \"s\", KeyO: \"o\", KeyG: \"g\"};",
                 "      t.sogseq = (sk[e.code] ? ((t.sogseq || \"\") + sk[e.code]) : \"\").slice(-3);",
@@ -136878,9 +137921,6 @@
                 "    try {t.veltext.setWrapping(false)} catch (e) {}",
                 "    t.veltext.hide(true);",
                 "  }",
-                "  // dedicated overlay for just the xvel value so it tints independently of the rest of",
-                "  // the readout (bitmaptext is single-colour). the tasbtn pool is fully spent by the",
-                "  // named grabs, so spin up a fresh instance",
                 "  t.xvelcol = null;",
                 "  try {t.xvelcol = runtimeScene.createObject(\"tasbtn\")} catch (e) {}",
                 "  if (t.xvelcol) {",
@@ -136974,8 +138014,6 @@
                 "  t.hadcp = false; t.cpinit = false;",
                 "  try {t.prevdeaths = runtimeScene.getVariables().get(\"deaths\").getAsNumber()} catch (e) {t.prevdeaths = 0}",
                 "}",
-                "",
-                "// after a scene change with practice still on recapture the base",
                 "if (t.practice && !t.practbase) t.practbase = t.readcp(runtimeScene);",
                 "",
                 "t.practicetick(runtimeScene);",
@@ -145021,20 +146059,6 @@
           "eventsSheetExpanded": false
         },
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "// qol-demonface: the difficulty face (demon face for demon levels) is positioned at",
-            "// difficultyBg's center, but when difficultyBg isn't shown it defaults to ~(0,0) and",
-            "// appears top-left. hide it whenever its bg isn't visible.",
-            "const scene = runtimeScene;",
-            "let bgok = false; try {const b = scene.getObjects(\"difficultyBg\"); bgok = b.length > 0 && !b[0].isHidden()} catch (e) {}",
-            "if (!bgok) {try {for (const o of scene.getObjects(\"difficulties\")) o.hide(true)} catch (e) {}}"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        },
-        {
           "type": "BuiltinCommonInstructions::Group",
           "disabled": false,
           "folded": true,
@@ -145115,6 +146139,20 @@
               "events": []
             }
           ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "// qol-demonface: the difficulty face is positioned at difficultyBg's center, but when",
+            "// difficultyBg isn't shown it defaults to ~(0,0) and appears top-left. hide it whenever",
+            "// its bg isn't visible.",
+            "const scene = runtimeScene;",
+            "let bgok = false; try {const b = scene.getObjects(\"difficultyBg\"); bgok = b.length > 0 && !b[0].isHidden()} catch (e) {}",
+            "if (!bgok) {try {for (const o of scene.getObjects(\"difficulties\")) o.hide(true)} catch (e) {}}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
         }
       ],
       "layers": [
@@ -165555,7 +166593,7 @@
                 "  } catch (e) {}",
                 "  if (cache) {makeLevelstore(cache); P.created = true}",
                 "  try {",
-                "    // a plain collection GET silently paginates; the runQuery POST returns all of them",
+                "   ",
                 "    fetch(URL, {method: \"POST\", headers: {\"Content-Type\": \"application/json\"},",
                 "      body: JSON.stringify({structuredQuery: {from: [{collectionId: \"mappacks\"}], limit: 300}})",
                 "    }).then(r => r.json()).then(j => {",
@@ -167045,23 +168083,6 @@
           ]
         },
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "// qol-mappack: blank the '0'/'by 0' placeholder titles shown before a pack's level",
-            "// data has been fetched/parsed, so the player doesn't see placeholder titles. the",
-            "// native render re-sets the real levelName/author once loaded.",
-            "const scene = runtimeScene;",
-            "const sett = (o, t) => {try {o.getBehavior(\"Text\").setText(t)} catch (e) {try {o.setText(t)} catch (e2) {}}};",
-            "const gett = o => {try {return o.getBehavior(\"Text\").getText()} catch (e) {try {return o.getText()} catch (e2) {return \"\"}}};",
-            "try {for (const o of scene.getObjects(\"title\")) {const t = gett(o); if (t === \"0\" || t === \"by 0\") sett(o, \"\")}} catch (e) {}",
-            "// the refresh button (bottom-right) does nothing on click yet - hide it for now",
-            "try {for (const o of scene.getObjects(\"refresh\")) o.hide(true)} catch (e) {}"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        },
-        {
           "type": "BuiltinCommonInstructions::Group",
           "disabled": false,
           "folded": true,
@@ -167142,6 +168163,22 @@
               "events": []
             }
           ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "// qol-mappack: blank the '0'/'by 0' placeholder titles shown before a pack's level data",
+            "// is fetched. the native render re-sets the real levelName/author once loaded.",
+            "const scene = runtimeScene;",
+            "const sett = (o, t) => {try {o.getBehavior(\"Text\").setText(t)} catch (e) {try {o.setText(t)} catch (e2) {}}};",
+            "const gett = o => {try {return o.getBehavior(\"Text\").getText()} catch (e) {try {return o.getText()} catch (e2) {return \"\"}}};",
+            "try {for (const o of scene.getObjects(\"title\")) {const t = gett(o); if (t === \"0\" || t === \"by 0\") sett(o, \"\")}} catch (e) {}",
+            "// the refresh button (bottom-right) does nothing yet - hide it for now",
+            "try {for (const o of scene.getObjects(\"refresh\")) o.hide(true)} catch (e) {}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
         }
       ],
       "layers": [
@@ -169045,7 +170082,6 @@
                 "  P.docs = null;",
                 "  P.error = \"\";",
                 "  try {",
-                "    // a plain collection GET silently paginates down to 18; the runQuery POST returns all 69",
                 "    fetch(URL, {method: \"POST\", headers: {\"Content-Type\": \"application/json\"},",
                 "      body: JSON.stringify({structuredQuery: {from: [{collectionId: \"demonlist\"}], limit: 300}})",
                 "    }).then(r => r.json()).then(j => {",
@@ -171609,7 +172645,6 @@
                 "  P.docs = null;",
                 "  P.error = \"\";",
                 "  try {",
-                "    // a plain collection GET silently paginates; the runQuery POST returns all of them",
                 "    fetch(URL, {method: \"POST\", headers: {\"Content-Type\": \"application/json\"},",
                 "      body: JSON.stringify({structuredQuery: {from: [{collectionId: \"rated\"}], limit: 300}})",
                 "    }).then(r => r.json()).then(j => {",

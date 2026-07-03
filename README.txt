@@ -1,4 +1,3 @@
-## trigtash
 if you just want to play the game, run the exe in `/build/`!
 
 for the gdevelop project, see `/project/`
@@ -11,7 +10,6 @@ so realistically you don't even have to open the gdevelop ide to edit this mod :
 
 to rebuild the game, run `build.bat`.
 for a smaller 40mb build without hq audio, run `build (small).bat`.
-
 
 ⣿⣿⠿⠻⠟⠿⠻⠟⠿⠻⠟⠿⢻⣿⣿
 ⣿⢩⣿⣿⢿⣻⣟⣿⣻⡟⣿⢻⣷⢈⣿

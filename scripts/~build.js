@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
-const GAMEDIR = (process.argv[2] || ROOT + "/build/game").split("\\").join("/");
+const GAMEDIR = (process.argv[2] || ROOT + "/game/game").split("\\").join("/");
 const GJ = ROOT + "/project/Geomangle.json";
 
 const fwd = s => (s || "").split("\\").join("/");

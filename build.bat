@@ -4,7 +4,7 @@ set "ROOT=%~dp0"
 set "TAURI=%ROOT%dependencies\tauri"
 set "ST=%TAURI%\src-tauri"
 set "SIDECAR=%ST%\binaries\ffmpeg.exe"
-set "OUT=%ROOT%build"
+set "OUT=%ROOT%game"
 set "GDEXP=%ROOT%dependencies\gdexporter"
 set "STAGE=%TEMP%\tgd-export"
 set "EXPORTSRC=%STAGE%\app"
@@ -82,7 +82,7 @@ if not exist "%OUT%" mkdir "%OUT%"
 copy /Y "%ST%\target\release\trigonometry-dash.exe" "%OUT%\Trigonometry Dash.exe" >nul
 if exist "%SIDECAR%" copy /Y "%SIDECAR%" "%OUT%\ffmpeg.exe" >nul
 
-echo placing external game files (the ones in \build\game)
+echo placing external game files (the ones in \game\game)
 robocopy "%EXPORTSRC%" "%GAMEDIR%" /MIR /NFL /NDL /NJH /NJS /NP /R:1 /W:1 >nul
 if errorlevel 8 ( echo game files copy failed & exit /b 1 )
 
@@ -104,5 +104,5 @@ rd /s /q "%STAGE%" 2>nul
 
 echo.
 echo ~ done! see "%OUT%" ~
-start "" "%OUT%\Trigonometry Dash.exe"
+if not "%TGD_NOLAUNCH%"=="1" start "" "%OUT%\Trigonometry Dash.exe"
 endlocal

@@ -140,9 +140,6 @@
           let gh = 224; try {gh = game.getGameResolutionHeight()} catch (e) {}
           const vty = gh - 6 - t.veltext.getHeight();
           t.veltext.setPosition(4, vty);
-          // overlay just the xvel value, tinted redder the further |xvel| runs past the
-          // gamemode's normal cap - a successful xvel boost. cube/ball 150, ship 75,
-          // ufo 200, wave 175 (read live from the mode + <mode>speed scene vars)
           if (t.xvelcol) {
             let cap = 150;
             try {const m = svar(scene, "mode").getAsString(); const c = svar(scene, m + "speed").getAsNumber(); if (c > 0) cap = c} catch (e) {}
@@ -215,15 +212,8 @@
       if (t.vidphase === "exported" && performance.now() - t.exporteddone > 2000) {
         t.vidphase = null; t.vidblock = false;
         completegrey(scene, false);
-        // the render dimmed the complete-screen objects to hide them from the footage;
-        // bring them back so the complete screen reappears after exporting - the bg dim
-        // is semitransparent (the game tweens it to 255/3), the rest are fully opaque
         for (const n of completeobjs) for (const o of scene.getObjects(n) || []) {try {o.setOpacity(n === "levelCompleteBg" ? 85 : 255)} catch (e) {}}
         if (t.counttext) {t.counttext.hide(); try {t.counttext.setScale(3)} catch (e) {}}
-        // the offline playthrough left practice checkpoints set (applynormalcp fires on
-        // each replayed death), so a restart from the complete screen would respawn
-        // mid-level with the stale bg. restore the clean level-start checkpoint captured
-        // on load, so dying/restarting from here is a full reset to the start
         if (t.startcp) try {applycp(scene, t.startcp)} catch (e) {}
         t.vidstep = "";
       }

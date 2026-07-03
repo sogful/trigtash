@@ -62,8 +62,6 @@ for (const opt of settingsDef.options) {
     {folded: true, name: "name", type: "string", value: opt.name},
     {folded: true, name: "description", type: "string", value: opt.desc}
   ];
-  // a cycle option (e.g. compress export 0/8/15/30) is locked so the boolean-toggle
-  // event skips it; storage.js cycles its numeric value + draws the label/animation
   if (opt.cycle) {
     inst.initialVariables.push({folded: true, name: "locked", type: "number", value: 1});
     inst.initialVariables.push({folded: true, name: "cycle", type: "string", value: opt.cycle.join(",")});
@@ -114,8 +112,6 @@ const writeSettings = () => act("EcrireFichierTxt", ["\"trigonometrydash\"", "\"
 
 const events = [];
 
-// Escape closes the settings overlay. it is a same-scene camera page (not a real
-// scene), so the scene-transition ESC handler (buildmenuesc) never sees it.
 events.push(std([cond("KeyReleased", ["", "Escape"]), cond("SceneVariableAsBoolean", ["settingsPage", "True"])],
   [act("SetSceneVariableAsBoolean", ["settingsPage", "False"])]));
 

@@ -489,8 +489,6 @@
 
       let backinject = false;
       if (t.requestbacktrack && inlevel()) {const bt = (t.requestbacktrack === true) ? backtarget() : t.requestbacktrack; t.requestbacktrack = false; if (bt) {applynormalcp(scene, bt); t.ubacktrack = 8; backinject = true; try {input.onKeyPressed(82, 0)} catch (e) {}}}
-      // re-apply the recorded world state at rollback frames so physics + switch blocks
-      // match the run instead of drifting (a replay only force-corrects the player)
       if (t.mode === "play" && !replaypaused && t.playm.worldsnaps && t.playm.worldsnaps[t.frame]) {
         try {restoreobjs(scene, t.playm.worldsnaps[t.frame])} catch (e) {}
       }

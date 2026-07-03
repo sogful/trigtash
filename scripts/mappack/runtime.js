@@ -41,7 +41,7 @@ if (P.owner !== scene) {
   } catch (e) {}
   if (cache) {makeLevelstore(cache); P.created = true}
   try {
-    // a plain collection GET silently paginates; the runQuery POST returns all of them
+   
     fetch(URL, {method: "POST", headers: {"Content-Type": "application/json"},
       body: JSON.stringify({structuredQuery: {from: [{collectionId: "mappacks"}], limit: 300}})
     }).then(r => r.json()).then(j => {

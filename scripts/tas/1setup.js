@@ -111,8 +111,6 @@ if (t.installed !== runtimeScene.getGame()) {
     return false;
   };
 
-  // numeric variant (for the compress-export MB cycle setting). read localStorage first -
-  // that's where the settings menu persists it; the scene var can lag a value behind
   t.readsettingnum = function(scene, id) {
     try {const file = JSON.parse(window.localStorage.getItem("GDJS_trigonometrydash") || "{}"); if (file.settings && typeof file.settings.str === "string") {const v = JSON.parse(file.settings.str)[id]; if (v != null) return Number(v) || 0}} catch (e) {}
     try {const s = scene.getVariables(); if (s.has("settings") && s.get("settings").hasChild(id)) return s.get("settings").getChild(id).getAsNumber()} catch (e) {}
@@ -201,7 +199,9 @@ if (t.installed !== runtimeScene.getGame()) {
       if (!b || typeof b.isDynamic !== "function") continue;
       let dyn = false; try {dyn = b.isDynamic()} catch (e) {}
       if (!dyn) continue;
-      out.push({id: o.id, x: o.getX(), y: o.getY(), a: o.getAngle()});
+      const e = {id: o.id, x: o.getX(), y: o.getY(), a: o.getAngle()};
+      try {e.vx = b.getLinearVelocityX(); e.vy = b.getLinearVelocityY(); e.va = b.getAngularVelocity()} catch (er) {}
+      out.push(e);
     }
     return out;
   }
@@ -212,7 +212,9 @@ if (t.installed !== runtimeScene.getGame()) {
     for (const o of all) {
       const d = map[o.id]; if (!d) continue;
       o.setPosition(d.x, d.y); try {o.setAngle(d.a)} catch (e) {}
-      try {const b = o.getBehavior("Physics2"); b.updateBodyFromObject(); b.setLinearVelocityX(0); b.setLinearVelocityY(0); b.setAngularVelocity(0)} catch (e) {}
+      try {const b = o.getBehavior("Physics2"); b.updateBodyFromObject();
+        if (d.vx !== undefined) {b.setLinearVelocityX(d.vx); b.setLinearVelocityY(d.vy); b.setAngularVelocity(d.va)}
+        else {b.setLinearVelocityX(0); b.setLinearVelocityY(0); b.setAngularVelocity(0)}} catch (e) {}
     }
   }
   function getanim(o) {try {return o.getBehavior("Animation").getAnimationIndex()} catch (e) {} try {return o.getAnimationIndex()} catch (e) {return 0}}
@@ -231,10 +233,12 @@ if (t.installed !== runtimeScene.getGame()) {
     for (const n of orbnames) {const list = scene.getObjects(n) || []; if (list.length) out[n] = list.map(o => {let l = 0; try {l = o.getVariables().get("locked").getAsBoolean() ? 1 : 0} catch (e) {} return {l: l, a: o.getAngle()}})}
     for (const n of spinnames) {const list = scene.getObjects(n) || []; if (list.length) out["@" + n] = list.map(o => o.getAngle())}
     out.dyn = capturedyn(scene);
+    try {const gv = scene.getVariables(); if (gv.has("on")) out.on = gv.get("on").getAsNumber()} catch (e) {}
     return out;
   }
   function restoreobjs(scene, objs) {
     if (!objs) return;
+    if (objs.on !== undefined) {try {scene.getVariables().get("on").setNumber(objs.on)} catch (e) {}}
     if (objs.breakblock) {
       const list = scene.getObjects("breakblock") || [];
       objs.breakblock.forEach((s, i) => {
@@ -252,8 +256,6 @@ if (t.installed !== runtimeScene.getGame()) {
         if (!o) return;
         try {o.getVariables().get("disabled").setBoolean(!!s.d)} catch (e) {}
         setanim(o, s.a);
-        // only snap a coin back if it actually moved (collected coins fly up); idle coins
-        // gently bob on a Y tween, so forcing the captured mid-bob position offsets them
         if (Math.abs(o.getX() - s.x) > 4 || Math.abs(o.getY() - s.y) > 4) o.setPosition(s.x, s.y);
         try {o.setOpacity(s.op)} catch (e) {}
       });
@@ -353,8 +355,6 @@ if (t.installed !== runtimeScene.getGame()) {
     if (t.mode === "record") {
       t.macro.events = t.macro.events.filter(ev => ev[0] < snap.frame);
       t.macro.icon.length = Math.min(t.macro.icon.length, snap.frame);
-      // remember the world state at this rollback frame so a replay can re-apply it
-      // (a replay only force-corrects the player, so physics + switch blocks would drift)
       if (t.macro && snap.objs) (t.macro.worldsnaps = t.macro.worldsnaps || {})[snap.frame] = snap.objs;
       t.prevkeys = Object.assign({}, snap.reckeys || {});
       t.prevmouse = !!snap.recmouse;

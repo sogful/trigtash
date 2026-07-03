@@ -48,8 +48,6 @@ if (released) {
       if (ok) {try {gdjs.evtsExt__UDTFwTGD__UploadTextFile.func(scene, vars.get("importedData"), null)} catch (e) {}}
     }
   }
-  // cycle options (e.g. compress-export 0/8/15/30): click advances to the next value.
-  // gate on a REAL cycle var via has() - get() auto-creates a "0" that read as truthy
   for (const sw of scene.getObjects("settingsSwitch") || []) {
     if (sw.isHidden() || !sw.getVariables().has("cycle")) continue;
     const cyc = sw.getVariables().get("cycle").getAsString();
@@ -64,8 +62,6 @@ if (released) {
   }
 }
 
-// cycle-switch fill: animation 0 Off / 2 = 8MB(1of3) / 3 = 15MB(2of3) / 1 = 30MB(full),
-// plus the value appended to its row label (only this switch - gated by has("cycle"))
 const CYCANIM = {"0": 0, "8": 2, "15": 3, "30": 1};
 for (const sw of scene.getObjects("settingsSwitch") || []) {
   if (sw.isHidden() || !sw.getVariables().has("cycle")) continue;
