@@ -1,5 +1,6 @@
 [
   {"name": "Beginner Pack", "diff": "easy", "id": 0, "num": 3, "frontColor": "60;104;255", "backColor": "99;162;255"},
   {"name": "UFO Pack", "diff": "hard", "id": 1, "num": 3, "frontColor": "255;152;47", "backColor": "255;208;47"},
-  {"name": "Intermediate Pack", "diff": "hard", "id": 2, "num": 3, "frontColor": "255;152;47", "backColor": "255;208;47"}
+  {"name": "Intermediate Pack", "diff": "hard", "id": 2, "num": 3, "frontColor": "255;152;47", "backColor": "255;208;47"},
+  {"name": "Aptitude Pack", "diff": "easydemon", "id": 3, "num": 3, "frontColor": "237;56;124", "backColor": "255;109;183"}
 ]

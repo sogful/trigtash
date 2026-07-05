@@ -387,8 +387,6 @@
   function beginplayback(withvideo) {
     if (!t.playable) {note("no macro available"); return}
     t.videopending = !!withvideo;
-    // capture the speedhack now (the replay loop resets t.pace to 1). the music already
-    // plays slowed at this rate; the export slows the video + SFX to match
     t.exportsp = withvideo ? (t.pace || 1) : 1;
     t.mode = "idle";
     t.frozen = false;
