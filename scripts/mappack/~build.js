@@ -93,5 +93,22 @@ function walkPage(list) {
 walkPage(mp.events);
 console.log("page-arrow grey-out events fixed: " + pageFix);
 
+let lvlfrom = 0;
+function setLvlFrom(list) {
+  for (const e of list || []) {
+    const acts = e.actions || [];
+    const goesLevel = acts.some(a => a.type && a.type.value === "Scene" && (a.parameters || []).includes("\"level\""));
+    const idx = acts.findIndex(a => a.type && a.type.value === "ModVarGlobalTxt" && (a.parameters || [])[0] === "level");
+    const already = acts.some(a => a.type && a.type.value === "ModVarGlobalTxt" && (a.parameters || [])[0] === "lvlFrom");
+    if (goesLevel && idx !== -1 && !already) {
+      acts.splice(idx + 1, 0, {type: {value: "ModVarGlobalTxt"}, parameters: ["lvlFrom", "=", "\"mappack\""]});
+      lvlfrom++;
+    }
+    if (e.events) setLvlFrom(e.events);
+  }
+}
+setLvlFrom(mp.events);
+console.log("mappack lvlFrom=mappack on launch: " + lvlfrom);
+
 fs.writeFileSync(projfile, JSON.stringify(proj, null, 2));
 console.log("mappack data layer injected (" + code.length + " lines); back creator->portal: " + back);

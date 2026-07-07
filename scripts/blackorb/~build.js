@@ -12,9 +12,12 @@ const lvl = p.layouts.find(l => l.name === "level");
 if (!lvl) {console.error("no level layout"); process.exit(1)}
 
 const isCollNP = c => (c.type && c.type.value) === "CollisionNP";
-const isYellowAct = e => (e.conditions || []).some(c => isCollNP(c) && (c.parameters || [])[1] === "yelloworb") &&
+const isYellowAct = e => (e.conditions || []).some(c => isCollNP(c) && !c.type.inverted && (c.parameters || [])[1] === "yelloworb") &&
   (e.actions || []).some(a => (a.type && a.type.value) === "Create" && (a.parameters || [])[1] === "pulse");
-const isBlackAct = e => (e.conditions || []).some(c => isCollNP(c) && (c.parameters || [])[1] === "blackorb");
+// only the ACTIVATION clones (positive collision + pulse) - NOT the negative
+// "not touching any orb" guards below, which also carry a CollisionNP(blackorb).
+const isBlackAct = e => (e.conditions || []).some(c => isCollNP(c) && !c.type.inverted && (c.parameters || [])[1] === "blackorb") &&
+  (e.actions || []).some(a => (a.type && a.type.value) === "Create" && (a.parameters || [])[1] === "pulse");
 
 function removeClones(evs) {
   if (!Array.isArray(evs)) return;
@@ -55,4 +58,26 @@ function inject(evs) {
 }
 inject(lvl.events);
 
+// exclude blackorb from every "not touching any orb" guard (ball / ufo / oldufo),
+// so the normal gamemode action (flap / click) does NOT also fire on a black orb
+// and override its reversed velocity. mirror each inverted CollisionNP(obj,yelloworb).
+let guards = 0;
+function patchGuards(evs) {
+  if (!Array.isArray(evs)) return;
+  for (const e of evs) {
+    const conds = e.conditions || [];
+    const negY = conds.find(c => isCollNP(c) && c.type.inverted && (c.parameters || [])[1] === "yelloworb");
+    const hasNegB = conds.some(c => isCollNP(c) && c.type.inverted && (c.parameters || [])[1] === "blackorb");
+    if (negY && !hasNegB) {
+      const clone = JSON.parse(JSON.stringify(negY));
+      clone.parameters[1] = "blackorb";
+      conds.push(clone);
+      guards++;
+    }
+    if (e.events) patchGuards(e.events);
+  }
+}
+patchGuards(lvl.events);
+
 fs.writeFileSync(GJ, JSON.stringify(p, null, 2));
+console.log("blackorb: injected " + made + " activation clone(s); patched " + guards + " no-orb guard(s)");

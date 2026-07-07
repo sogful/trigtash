@@ -70,6 +70,15 @@ if (t.hudowner !== runtimeScene) {
     try {t.backtext.setWrapping(false)} catch (e) {}
     t.backtext.hide(true);
   }
+  t.stoptext = null;
+  try {t.stoptext = runtimeScene.createObject("tasbtn")} catch (e) {}
+  if (t.stoptext) {
+    t.stoptext.setLayer("ui");
+    t.stoptext.setZOrder(10005);
+    try {t.stoptext.setScale(0.5)} catch (e) {}
+    try {t.stoptext.setWrapping(false)} catch (e) {}
+    t.stoptext.hide(true);
+  }
   t.backicon = grab("tascpicon");
   if (t.backicon) {
     t.backicon.setLayer("ui");

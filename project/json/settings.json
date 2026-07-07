@@ -8,6 +8,7 @@
   ],
   "options": [
 
+    {"tab": 0, "id": "layoutmode", "name": "Layout Mode", "desc": "Bare-collision performance mode. Strips decorations and hidden/unreachable geometry, turns off particles and spinning, keeping every hazard, block, orb, portal and text. Physics stay identical. Big speedup, deliberately ugly."},
     {"tab": 0, "id": "nospin", "name": "Disable Spinning", "desc": "Removes spinning of objects like orbs and saws. May improve performance by up to 20% depending on the level."},
     {"tab": 0, "id": "disableparticles", "name": "Disable Particles", "desc": "Disables the use of the particle engine. May improve performance."},
     {"tab": 0, "id": "hidepause", "name": "Hide Pause Button", "desc": "Hides the pause button at the top right when playing."},

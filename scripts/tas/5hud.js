@@ -392,6 +392,17 @@
         }
       } else {t.backtext.hide(true); if (t.backicon) {try {t.backicon.hide(true)} catch (e) {}}}
     }
+    if (t.stoptext) {
+      const showstop = t.mode === "play" && ispaused(scene) && !t.vidblock && t.vidphase !== "render";
+      if (showstop) {
+        t.stoptext.hide(false);
+        try {t.stoptext.setScale(0.5)} catch (e) {}
+        try {t.stoptext.setOpacity(200)} catch (e) {}
+        t.stoptext.setText("press esc again to force stop macro");
+        let gw = 432, gh = 224; try {gw = game.getGameResolutionWidth(); gh = game.getGameResolutionHeight()} catch (e) {}
+        t.stoptext.setPosition(gw / 2 - t.stoptext.getWidth() / 2, gh - 13);
+      } else {t.stoptext.hide(true)}
+    }
   }
   t.refreshhud = refreshhud;
 

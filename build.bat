@@ -55,7 +55,7 @@ if not exist "%GDEXP%\node_modules\gdcore-tools\src\index.mjs" (
 )
 
 echo reinjecting feature scripts..
-for %%S in (tas\~build.js settings\~build.js demonlist\~build.js mappack\~build.js portal\~build.js rated\~build.js leveldeco\build.js blackorb\~build.js) do (
+for %%S in (tas\~build.js settings\~build.js demonlist\~build.js mappack\~build.js portal\~build.js rated\~build.js leveldeco\build.js blackorb\~build.js lowdetail\~build.js) do (
   call node "%ROOT%scripts\%%S" >nul
   if not "!errorlevel!"=="0" ( echo inject failed: %%S & exit /b 1 )
 )

@@ -67,8 +67,6 @@ if (P.owner !== scene) {
         });
       });
       try {gdjs.evtTools.storage.writeStringInJSONFile("trigonometrydash", "mappackLevels2", JSON.stringify(byId))} catch (e) {}
-      // reload if we had no cache, or the fetch revealed pack ids the cache lacked
-      // (e.g. a newly-added pack), so their levelstores are built this session
       const cachedIds = cache ? Object.keys(cache) : [];
       const hasNew = Object.keys(byId).some(id => cachedIds.indexOf(id) === -1);
       if (!P.created || hasNew) {P.pendingReload = true}

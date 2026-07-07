@@ -68,7 +68,7 @@
     const prevtop = t.practstack.length ? t.practstack[t.practstack.length - 1] : null;
     const stamp = t.fresh || (prevtop && prevtop.normalcp) || null;
     t.fresh = null;
-    t.practstack.push({prev: prev, snap: snap, marker: marker, normalcp: stamp});
+    t.practstack.push({prev: prev, snap: snap, marker: marker, normalcp: stamp, cpx: p.getX(), cpy: p.getY()});
     t.hadcp = true;
   }
 
@@ -185,8 +185,15 @@
       }
       if (t.practstack.length) {
         const arm = () => {
+          const top = t.practstack[t.practstack.length - 1];
+          // if a native level checkpoint was grabbed after this practice cp, it
+          // moved checkpointX/Y away from ours - don't hijack the respawn, let the
+          // native level-checkpoint respawn stand so there's no early-restore teleport
+          let acx = 0, acy = 0;
+          try {acx = svar(scene, "checkpointX").getAsNumber(); acy = svar(scene, "checkpointY").getAsNumber()} catch (e) {}
+          if (top && top.cpx !== undefined && (Math.abs(acx - top.cpx) > 4 || Math.abs(acy - top.cpy) > 4)) return;
           t.awaitrespawn = true; t.armage = 0;
-          t.earlysnap = t.practstack[t.practstack.length - 1].snap;
+          t.earlysnap = top.snap;
           t.earlyframes = 4; t.earlymax = 4; t.earlyplaced = false;
         };
         if (deaths > t.prevdeaths && !t.ubacktrack) arm();

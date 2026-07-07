@@ -6443,19 +6443,19 @@
               "folded": true,
               "name": "id",
               "type": "string",
-              "value": "nospin"
+              "value": "layoutmode"
             },
             {
               "folded": true,
               "name": "name",
               "type": "string",
-              "value": "Disable Spinning"
+              "value": "Layout Mode"
             },
             {
               "folded": true,
               "name": "description",
               "type": "string",
-              "value": "Removes spinning of objects like orbs and saws. May improve performance by up to 20% depending on the level."
+              "value": "Bare-collision performance mode. Strips decorations and hidden/unreachable geometry, turns off particles and spinning, keeping every hazard, block, orb, portal and text. Physics stay identical. Big speedup, deliberately ugly."
             }
           ]
         },
@@ -6489,19 +6489,19 @@
               "folded": true,
               "name": "id",
               "type": "string",
-              "value": "disableparticles"
+              "value": "nospin"
             },
             {
               "folded": true,
               "name": "name",
               "type": "string",
-              "value": "Disable Particles"
+              "value": "Disable Spinning"
             },
             {
               "folded": true,
               "name": "description",
               "type": "string",
-              "value": "Disables the use of the particle engine. May improve performance."
+              "value": "Removes spinning of objects like orbs and saws. May improve performance by up to 20% depending on the level."
             }
           ]
         },
@@ -6535,19 +6535,19 @@
               "folded": true,
               "name": "id",
               "type": "string",
-              "value": "hidepause"
+              "value": "disableparticles"
             },
             {
               "folded": true,
               "name": "name",
               "type": "string",
-              "value": "Hide Pause Button"
+              "value": "Disable Particles"
             },
             {
               "folded": true,
               "name": "description",
               "type": "string",
-              "value": "Hides the pause button at the top right when playing."
+              "value": "Disables the use of the particle engine. May improve performance."
             }
           ]
         },
@@ -6581,6 +6581,52 @@
               "folded": true,
               "name": "id",
               "type": "string",
+              "value": "hidepause"
+            },
+            {
+              "folded": true,
+              "name": "name",
+              "type": "string",
+              "value": "Hide Pause Button"
+            },
+            {
+              "folded": true,
+              "name": "description",
+              "type": "string",
+              "value": "Hides the pause button at the top right when playing."
+            }
+          ]
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "layer": "",
+          "name": "settingsSwitch",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000009",
+          "width": 0,
+          "x": 476,
+          "y": 156,
+          "zOrder": 49,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": [
+            {
+              "folded": true,
+              "name": "selectIndex",
+              "type": "number",
+              "value": 0
+            },
+            {
+              "folded": true,
+              "name": "pos",
+              "type": "number",
+              "value": 4
+            },
+            {
+              "folded": true,
+              "name": "id",
+              "type": "string",
               "value": "legacypads"
             },
             {
@@ -6603,7 +6649,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000009",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000010",
           "width": 0,
           "x": 476,
           "y": 76,
@@ -6649,7 +6695,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000010",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000011",
           "width": 0,
           "x": 476,
           "y": 96,
@@ -6695,7 +6741,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000011",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000012",
           "width": 0,
           "x": 476,
           "y": 116,
@@ -6741,7 +6787,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000012",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000013",
           "width": 0,
           "x": 476,
           "y": 76,
@@ -6787,7 +6833,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000013",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000014",
           "width": 0,
           "x": 476,
           "y": 76,
@@ -6833,7 +6879,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000014",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000015",
           "width": 0,
           "x": 476,
           "y": 96,
@@ -6879,7 +6925,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000015",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000016",
           "width": 0,
           "x": 476,
           "y": 76,
@@ -6925,7 +6971,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000016",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000017",
           "width": 0,
           "x": 476,
           "y": 96,
@@ -6971,7 +7017,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000017",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000018",
           "width": 0,
           "x": 476,
           "y": 136,
@@ -7017,7 +7063,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000018",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000019",
           "width": 0,
           "x": 476,
           "y": 116,
@@ -7063,7 +7109,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000019",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000020",
           "width": 0,
           "x": 476,
           "y": 156,
@@ -7109,7 +7155,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000020",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000021",
           "width": 0,
           "x": 476,
           "y": 176,
@@ -7155,7 +7201,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000021",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000022",
           "width": 0,
           "x": 476,
           "y": 136,
@@ -7201,7 +7247,7 @@
           "height": 0,
           "layer": "",
           "name": "settingsSwitch",
-          "persistentUuid": "setsw000-0000-0000-0000-000000000022",
+          "persistentUuid": "setsw000-0000-0000-0000-000000000023",
           "width": 0,
           "x": 476,
           "y": 156,
@@ -59275,58 +59321,6 @@
           "eventsSheetExpanded": false
         },
         {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "// qol-challengetime: hide the time-limit input unless time-attack mode",
-            "const scene = runtimeScene;",
-            "const num = (vr, d) => {try {return vr.getAsNumber()} catch (e) {return d}};",
-            "let ch = 1; try {ch = num(scene.getVariables().get(\"info\").getChild(\"challenge\"), 1)} catch (e) {}",
-            "if (ch !== 1) {try {for (const o of scene.getObjects(\"challengeTime\")) o.hide(true)} catch (e) {}}"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        },
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "// qol-selectedbutton: the current tool's palette button shows the editorbuttonsselected",
-            "// (white outline) texture. for fill, the armed block-type button is outlined too.",
-            "const scene = runtimeScene;",
-            "const num = (vr, d) => {try {return vr.getAsNumber()} catch (e) {return d}};",
-            "const SEL = \"assets\\\\textures\\\\editor\\\\editorbuttonsselected.png\";",
-            "const NORM = \"assets\\\\textures\\\\editor\\\\editorbuttons.png\";",
-            "const ct = num(scene.getVariables().get(\"currentTile\"), -1);",
-            "let filltype = -1; try {if (ct === 176 && window.__tgdfill && window.__tgdfill.armed) filltype = window.__tgdfill.curr} catch (e) {}",
-            "try {for (const b of scene.getObjects(\"editorbutton\")) {",
-            "  const isSub = num(b.getVariables().get(\"subfill\"), 0) === 1;",
-            "  const sel = isSub ? (filltype !== -1 && num(b.getVariables().get(\"subid\"), -999) === filltype) : (num(b.getVariables().get(\"id\"), -999) === ct);",
-            "  if (b.__outlined !== sel) {b.__outlined = sel; try {b.setTexture(sel ? SEL : NORM, scene)} catch (e) {}}",
-            "}} catch (e) {}"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        },
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
-            "// qol-editormusic: the editor has no music of its own, but the previous level's music",
-            "// (channel 1, global) carries in and keeps playing. stopping it in the level scene on the",
-            "// edit click doesn't stick (level re-plays / async scene change races it), so stop it here",
-            "// on entry - for the first ~20 frames in case it resumes during scene init.",
-            "const scene = runtimeScene;",
-            "if (scene.__msframes === undefined) scene.__msframes = 0;",
-            "if (scene.__msframes < 20) {",
-            "  scene.__msframes++;",
-            "  try {for (const ch of [0, 1, 2]) gdjs.evtTools.sound.stopMusicOnChannel(scene, ch)} catch (e) {}",
-            "}"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        },
-        {
           "colorB": 74,
           "colorG": 228,
           "colorR": 176,
@@ -59750,6 +59744,58 @@
             "  try {o.setPosition(t.getX(), t.getY())} catch (e) {}",
             "}",
             ""
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        },
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "// qol-challengetime: hide the time-limit input unless time-attack mode",
+            "const scene = runtimeScene;",
+            "const num = (vr, d) => {try {return vr.getAsNumber()} catch (e) {return d}};",
+            "let ch = 1; try {ch = num(scene.getVariables().get(\"info\").getChild(\"challenge\"), 1)} catch (e) {}",
+            "if (ch !== 1) {try {for (const o of scene.getObjects(\"challengeTime\")) o.hide(true)} catch (e) {}}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        },
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "// qol-selectedbutton: the current tool's palette button shows the editorbuttonsselected",
+            "// (white outline) texture. for fill, the armed block-type button is outlined too.",
+            "const scene = runtimeScene;",
+            "const num = (vr, d) => {try {return vr.getAsNumber()} catch (e) {return d}};",
+            "const SEL = \"assets\\\\textures\\\\editor\\\\editorbuttonsselected.png\";",
+            "const NORM = \"assets\\\\textures\\\\editor\\\\editorbuttons.png\";",
+            "const ct = num(scene.getVariables().get(\"currentTile\"), -1);",
+            "let filltype = -1; try {if (ct === 176 && window.__tgdfill && window.__tgdfill.armed) filltype = window.__tgdfill.curr} catch (e) {}",
+            "try {for (const b of scene.getObjects(\"editorbutton\")) {",
+            "  const isSub = num(b.getVariables().get(\"subfill\"), 0) === 1;",
+            "  const sel = isSub ? (filltype !== -1 && num(b.getVariables().get(\"subid\"), -999) === filltype) : (num(b.getVariables().get(\"id\"), -999) === ct);",
+            "  if (b.__outlined !== sel) {b.__outlined = sel; try {b.setTexture(sel ? SEL : NORM, scene)} catch (e) {}}",
+            "}} catch (e) {}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        },
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
+            "// qol-editormusic: the editor has no music of its own, but the previous level's music",
+            "// (channel 1, global) carries in and keeps playing. stopping it in the level scene on the",
+            "// edit click doesn't stick (level re-plays / async scene change races it), so stop it here",
+            "// on entry - for the first ~20 frames in case it resumes during scene init.",
+            "const scene = runtimeScene;",
+            "if (scene.__msframes === undefined) scene.__msframes = 0;",
+            "if (scene.__msframes < 20) {",
+            "  scene.__msframes++;",
+            "  try {for (const ch of [0, 1, 2]) gdjs.evtTools.sound.stopMusicOnChannel(scene, ch)} catch (e) {}",
+            "}"
           ],
           "parameterObjects": "",
           "useStrict": true,
@@ -106562,6 +106608,15 @@
                     "=",
                     "0"
                   ]
+                },
+                {
+                  "type": {
+                    "value": "ResetTimer"
+                  },
+                  "parameters": [
+                    "time",
+                    "\"spawnInvuln\""
+                  ]
                 }
               ],
               "events": [
@@ -110379,7 +110434,7 @@
                   "parameters": [
                     "tile",
                     "Physics2",
-                    "1"
+                    "Variable(speed)"
                   ]
                 },
                 {
@@ -110389,7 +110444,7 @@
                   "parameters": [
                     "player",
                     "Physics2",
-                    "1"
+                    "Variable(speed)"
                   ]
                 },
                 {
@@ -113108,6 +113163,16 @@
                           ]
                         }
                       ]
+                    },
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::CompareNumbers"
+                      },
+                      "parameters": [
+                        "TimerElapsedTime(\"spawnInvuln\")",
+                        ">",
+                        "0.1"
+                      ]
                     }
                   ],
                   "actions": [
@@ -113188,7 +113253,7 @@
                       "parameters": [
                         "physTransfer.a",
                         "=",
-                        "0"
+                        "Variable(checkpointAngle)"
                       ]
                     },
                     {
@@ -113515,6 +113580,15 @@
                         "=",
                         "Variable(checkpointOn)"
                       ]
+                    },
+                    {
+                      "type": {
+                        "value": "ResetTimer"
+                      },
+                      "parameters": [
+                        "time",
+                        "\"spawnInvuln\""
+                      ]
                     }
                   ],
                   "events": [
@@ -113811,7 +113885,7 @@
                           "parameters": [
                             "physTransfer.a",
                             "=",
-                            "0"
+                            "Variable(checkpointAngle)"
                           ]
                         },
                         {
@@ -114127,6 +114201,15 @@
                             "on",
                             "=",
                             "Variable(checkpointOn)"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "ResetTimer"
+                          },
+                          "parameters": [
+                            "time",
+                            "\"spawnInvuln\""
                           ]
                         }
                       ],
@@ -117401,7 +117484,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::LinearVelocityX(), -Variable(cubespeed)*Variable(speed), Variable(cubespeed)*Variable(speed))"
+                                "clamp(cube.Physics2::LinearVelocityX(), -Variable(cubespeed), Variable(cubespeed))"
                               ]
                             },
                             {
@@ -117423,7 +117506,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::AngularVelocity(), -100*Variable(speed), 100*Variable(speed))"
+                                "clamp(cube.Physics2::AngularVelocity(), -100, 100)"
                               ]
                             }
                           ]
@@ -117462,7 +117545,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::LinearVelocityX(), -Variable(cubespeed)*Variable(speed), Variable(cubespeed)*Variable(speed))"
+                                "clamp(cube.Physics2::LinearVelocityX(), -Variable(cubespeed), Variable(cubespeed))"
                               ]
                             },
                             {
@@ -117512,7 +117595,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::LinearVelocityY(), -Variable(cubespeed)*Variable(speed), Variable(cubespeed)*Variable(speed))"
+                                "clamp(cube.Physics2::LinearVelocityY(), -Variable(cubespeed), Variable(cubespeed))"
                               ]
                             },
                             {
@@ -117616,7 +117699,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::LinearVelocityX(), -Variable(cubespeed)*Variable(speed), Variable(cubespeed)*Variable(speed))"
+                                "clamp(cube.Physics2::LinearVelocityX(), -Variable(cubespeed), Variable(cubespeed))"
                               ]
                             },
                             {
@@ -117638,7 +117721,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::AngularVelocity(), -100*Variable(speed), 100*Variable(speed))"
+                                "clamp(cube.Physics2::AngularVelocity(), -100, 100)"
                               ]
                             }
                           ]
@@ -117677,7 +117760,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::LinearVelocityX(), -Variable(cubespeed)*Variable(speed), Variable(cubespeed)*Variable(speed))"
+                                "clamp(cube.Physics2::LinearVelocityX(), -Variable(cubespeed), Variable(cubespeed))"
                               ]
                             },
                             {
@@ -117727,7 +117810,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::LinearVelocityY(), -Variable(cubespeed)*Variable(speed), Variable(cubespeed)*Variable(speed))"
+                                "clamp(cube.Physics2::LinearVelocityY(), -Variable(cubespeed), Variable(cubespeed))"
                               ]
                             },
                             {
@@ -117829,6 +117912,15 @@
                               "parameters": [
                                 "pulse",
                                 "\"249;255;104\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ],
@@ -117984,6 +118076,15 @@
                                 "pulse",
                                 "\"68;51;77\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ],
                           "events": [
@@ -118138,6 +118239,15 @@
                                 "pulse",
                                 "\"255;109;183\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ],
                           "events": [
@@ -118291,6 +118401,15 @@
                               "parameters": [
                                 "pulse",
                                 "\"255;41;55\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ],
@@ -118474,6 +118593,15 @@
                               "parameters": [
                                 "blueorb",
                                 "\"blueOrbLock\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ],
@@ -118678,6 +118806,15 @@
                                 "greenorb",
                                 "\"greenOrbLock\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ],
                           "events": [
@@ -118881,6 +119018,15 @@
                                 "arroworb",
                                 "\"arrowOrbLock\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ],
                           "events": [
@@ -119078,7 +119224,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::LinearVelocityY(), -Variable(cubespeed)*Variable(speed), Variable(cubespeed)*Variable(speed))"
+                                "clamp(cube.Physics2::LinearVelocityY(), -Variable(cubespeed), Variable(cubespeed))"
                               ]
                             },
                             {
@@ -119100,7 +119246,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::AngularVelocity(), -100*Variable(speed), 100*Variable(speed))"
+                                "clamp(cube.Physics2::AngularVelocity(), -100, 100)"
                               ]
                             }
                           ]
@@ -119671,7 +119817,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::LinearVelocityY(), -Variable(cubespeed)*Variable(speed), Variable(cubespeed)*Variable(speed))"
+                                "clamp(cube.Physics2::LinearVelocityY(), -Variable(cubespeed), Variable(cubespeed))"
                               ]
                             },
                             {
@@ -119693,7 +119839,7 @@
                                 "cube",
                                 "Physics2",
                                 "=",
-                                "clamp(cube.Physics2::AngularVelocity(), -100*Variable(speed), 100*Variable(speed))"
+                                "clamp(cube.Physics2::AngularVelocity(), -100, 100)"
                               ]
                             }
                           ]
@@ -120320,7 +120466,7 @@
                             "ship",
                             "Physics2",
                             "ship.Angle()",
-                            "Variable(shipspeed)*TimeDelta()*60*Variable(speed)",
+                            "Variable(shipspeed)*TimeDelta()*60",
                             "ship.BoundingBoxCenterX()",
                             "ship.BoundingBoxCenterY()"
                           ]
@@ -121016,7 +121162,7 @@
                             "ship",
                             "Physics2",
                             "=",
-                            "clamp( ship.Physics2::AngularVelocity(),\n-((Variable(shipanglespeedcap)*Variable(speed))+(Variable(mini)*100)),\n(Variable(shipanglespeedcap)*Variable(speed))+(Variable(mini)*100) )"
+                            "clamp( ship.Physics2::AngularVelocity(),\n-((Variable(shipanglespeedcap))+(Variable(mini)*100)),\n(Variable(shipanglespeedcap))+(Variable(mini)*100) )"
                           ]
                         }
                       ]
@@ -121438,7 +121584,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::LinearVelocityY(), -Variable(ballspeed)*Variable(speed), Variable(ballspeed)*Variable(speed))"
+                                "clamp(ball.Physics2::LinearVelocityY(), -Variable(ballspeed), Variable(ballspeed))"
                               ]
                             },
                             {
@@ -121460,7 +121606,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::AngularVelocity(), -100*Variable(speed), 100*Variable(speed))"
+                                "clamp(ball.Physics2::AngularVelocity(), -100, 100)"
                               ]
                             }
                           ]
@@ -121471,80 +121617,11 @@
                           "conditions": [
                             {
                               "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
+                                "value": "SceneVariableAsBoolean"
                               },
                               "parameters": [
-                                "ball",
-                                "pinkorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "ball",
-                                "blueorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "ball",
-                                "greenorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "ball",
-                                "yelloworb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "ball",
-                                "redorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "ball",
-                                "arroworb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
+                                "orbUsed",
+                                "False"
                               ]
                             }
                           ],
@@ -121808,6 +121885,15 @@
                                 "pulse",
                                 "\"249;255;104\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ],
                           "events": [
@@ -121961,6 +122047,15 @@
                               "parameters": [
                                 "pulse",
                                 "\"68;51;77\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ],
@@ -122116,6 +122211,15 @@
                                 "pulse",
                                 "\"255;109;183\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ],
                           "events": [
@@ -122269,6 +122373,15 @@
                               "parameters": [
                                 "pulse",
                                 "\"255;41;55\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ],
@@ -122452,6 +122565,15 @@
                               "parameters": [
                                 "blueorb",
                                 "\"blueOrbLock\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ],
@@ -122656,6 +122778,15 @@
                                 "greenorb",
                                 "\"greenOrbLock\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ],
                           "events": [
@@ -122836,6 +122967,15 @@
                               "parameters": [
                                 "arroworb",
                                 "\"arrowOrbLock\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ],
@@ -123059,7 +123199,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::LinearVelocityX(), -Variable(ballspeed)*Variable(speed), Variable(ballspeed)*Variable(speed))"
+                                "clamp(ball.Physics2::LinearVelocityX(), -Variable(ballspeed), Variable(ballspeed))"
                               ]
                             },
                             {
@@ -123119,7 +123259,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::LinearVelocityX(), -Variable(ballspeed)*Variable(speed), Variable(ballspeed)*Variable(speed))"
+                                "clamp(ball.Physics2::LinearVelocityX(), -Variable(ballspeed), Variable(ballspeed))"
                               ]
                             },
                             {
@@ -123141,7 +123281,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::AngularVelocity(), -100*Variable(speed), 100*Variable(speed))"
+                                "clamp(ball.Physics2::AngularVelocity(), -100, 100)"
                               ]
                             }
                           ]
@@ -123180,7 +123320,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::LinearVelocityY(), -Variable(ballspeed)*Variable(speed), Variable(ballspeed)*Variable(speed))"
+                                "clamp(ball.Physics2::LinearVelocityY(), -Variable(ballspeed), Variable(ballspeed))"
                               ]
                             },
                             {
@@ -123275,7 +123415,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::LinearVelocityX(), -Variable(ballspeed)*Variable(speed), Variable(ballspeed)*Variable(speed))"
+                                "clamp(ball.Physics2::LinearVelocityX(), -Variable(ballspeed), Variable(ballspeed))"
                               ]
                             },
                             {
@@ -123297,7 +123437,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::AngularVelocity(), -100*Variable(speed), 100*Variable(speed))"
+                                "clamp(ball.Physics2::AngularVelocity(), -100, 100)"
                               ]
                             }
                           ]
@@ -123336,7 +123476,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::LinearVelocityX(), -Variable(ballspeed)*Variable(speed), Variable(ballspeed)*Variable(speed))"
+                                "clamp(ball.Physics2::LinearVelocityX(), -Variable(ballspeed), Variable(ballspeed))"
                               ]
                             },
                             {
@@ -123386,7 +123526,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::LinearVelocityY(), -Variable(ballspeed)*Variable(speed), Variable(ballspeed)*Variable(speed))"
+                                "clamp(ball.Physics2::LinearVelocityY(), -Variable(ballspeed), Variable(ballspeed))"
                               ]
                             },
                             {
@@ -123493,7 +123633,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::LinearVelocityY(), -Variable(ballspeed)*Variable(speed), Variable(ballspeed)*Variable(speed))"
+                                "clamp(ball.Physics2::LinearVelocityY(), -Variable(ballspeed), Variable(ballspeed))"
                               ]
                             },
                             {
@@ -123515,7 +123655,7 @@
                                 "ball",
                                 "Physics2",
                                 "=",
-                                "clamp(ball.Physics2::AngularVelocity(), -100*Variable(speed), 100*Variable(speed))"
+                                "clamp(ball.Physics2::AngularVelocity(), -100, 100)"
                               ]
                             }
                           ]
@@ -123775,6 +123915,15 @@
                                 "pulse",
                                 "\"249;255;104\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ],
                           "events": [
@@ -123928,6 +124077,15 @@
                               "parameters": [
                                 "pulse",
                                 "\"68;51;77\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ],
@@ -124083,6 +124241,15 @@
                                 "pulse",
                                 "\"255;109;183\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ],
                           "events": [
@@ -124236,6 +124403,15 @@
                               "parameters": [
                                 "pulse",
                                 "\"255;41;55\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ],
@@ -124419,6 +124595,15 @@
                               "parameters": [
                                 "blueorb",
                                 "\"blueOrbLock\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ],
@@ -124623,6 +124808,15 @@
                                 "greenorb",
                                 "\"greenOrbLock\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ],
                           "events": [
@@ -124826,6 +125020,15 @@
                                 "arroworb",
                                 "\"arrowOrbLock\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ],
                           "events": [
@@ -124985,87 +125188,18 @@
                           "conditions": [
                             {
                               "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "ufo",
-                                "pinkorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "ufo",
-                                "blueorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "ufo",
-                                "greenorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "ufo",
-                                "yelloworb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "ufo",
-                                "redorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "ufo",
-                                "arroworb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
                                 "value": "BuiltinCommonInstructions::Once"
                               },
                               "parameters": []
+                            },
+                            {
+                              "type": {
+                                "value": "SceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "False"
+                              ]
                             }
                           ],
                           "actions": [],
@@ -125293,7 +125427,7 @@
                                 "ufo",
                                 "Physics2",
                                 "=",
-                                "clamp(ufo.Physics2::LinearVelocityX(),-Variable(ufospeedx)*Variable(speed),Variable(ufospeedx)*Variable(speed))"
+                                "clamp(ufo.Physics2::LinearVelocityX(),-Variable(ufospeedx),Variable(ufospeedx))"
                               ]
                             },
                             {
@@ -125380,7 +125514,7 @@
                                 "ufo",
                                 "Physics2",
                                 "=",
-                                "clamp(ufo.Physics2::LinearVelocityY(),-Variable(ufospeedx)*Variable(speed),Variable(ufospeedx)*Variable(speed))"
+                                "clamp(ufo.Physics2::LinearVelocityY(),-Variable(ufospeedx),Variable(ufospeedx))"
                               ]
                             },
                             {
@@ -125464,7 +125598,7 @@
                                 "ufo",
                                 "Physics2",
                                 "=",
-                                "clamp(ufo.Physics2::LinearVelocityX(),-Variable(ufospeedx)*Variable(speed),Variable(ufospeedx)*Variable(speed))"
+                                "clamp(ufo.Physics2::LinearVelocityX(),-Variable(ufospeedx),Variable(ufospeedx))"
                               ]
                             },
                             {
@@ -125551,7 +125685,7 @@
                                 "ufo",
                                 "Physics2",
                                 "=",
-                                "clamp(ufo.Physics2::LinearVelocityY(),-Variable(ufospeedx)*Variable(speed),Variable(ufospeedx)*Variable(speed))"
+                                "clamp(ufo.Physics2::LinearVelocityY(),-Variable(ufospeedx),Variable(ufospeedx))"
                               ]
                             },
                             {
@@ -125962,6 +126096,15 @@
                                 "pulse",
                                 "\"255;41;55\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ]
                         },
@@ -126018,6 +126161,15 @@
                               "parameters": [
                                 "pulse",
                                 "\"249;255;104\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ]
@@ -126076,6 +126228,15 @@
                                 "pulse",
                                 "\"68;51;77\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ]
                         },
@@ -126132,6 +126293,15 @@
                               "parameters": [
                                 "pulse",
                                 "\"255;109;183\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
                               ]
                             }
                           ]
@@ -126229,6 +126399,15 @@
                                 "blueorb",
                                 "\"blueOrbLock\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ]
                         },
@@ -126325,6 +126504,15 @@
                                 "greenorb",
                                 "\"greenOrbLock\""
                               ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetSceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "True"
+                              ]
                             }
                           ]
                         },
@@ -126333,74 +126521,18 @@
                           "conditions": [
                             {
                               "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "oldufo",
-                                "pinkorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "oldufo",
-                                "blueorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "oldufo",
-                                "greenorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "oldufo",
-                                "yelloworb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "inverted": true,
-                                "value": "CollisionNP"
-                              },
-                              "parameters": [
-                                "oldufo",
-                                "redorb",
-                                "cube.BoundingBoxCenterY()+12",
-                                "",
-                                ""
-                              ]
-                            },
-                            {
-                              "type": {
                                 "value": "BuiltinCommonInstructions::Once"
                               },
                               "parameters": []
+                            },
+                            {
+                              "type": {
+                                "value": "SceneVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "orbUsed",
+                                "False"
+                              ]
                             }
                           ],
                           "actions": [
@@ -127297,7 +127429,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*Variable(speed)"
+                                "-Variable(wavespeed)"
                               ]
                             },
                             {
@@ -127354,7 +127486,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*Variable(speed)"
+                                "-Variable(wavespeed)"
                               ]
                             },
                             {
@@ -127411,7 +127543,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*Variable(speed)"
+                                "Variable(wavespeed)"
                               ]
                             },
                             {
@@ -127512,7 +127644,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*Variable(speed)"
+                                "Variable(wavespeed)"
                               ]
                             },
                             {
@@ -127569,7 +127701,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*Variable(speed)"
+                                "Variable(wavespeed)"
                               ]
                             },
                             {
@@ -127626,7 +127758,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*Variable(speed)"
+                                "-Variable(wavespeed)"
                               ]
                             },
                             {
@@ -127727,7 +127859,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*Variable(speed)"
+                                "Variable(wavespeed)"
                               ]
                             },
                             {
@@ -127784,7 +127916,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*Variable(gravity.y)*Variable(speed)"
+                                "Variable(wavespeed)*Variable(gravity.y)"
                               ]
                             },
                             {
@@ -127841,7 +127973,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*Variable(gravity.x)*Variable(speed)"
+                                "Variable(wavespeed)*Variable(gravity.x)"
                               ]
                             },
                             {
@@ -127951,7 +128083,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*Variable(speed)"
+                                "-Variable(wavespeed)"
                               ]
                             },
                             {
@@ -128008,7 +128140,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*Variable(gravity.y)*Variable(speed)"
+                                "-Variable(wavespeed)*Variable(gravity.y)"
                               ]
                             },
                             {
@@ -128065,7 +128197,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*Variable(gravity.x)*Variable(speed)"
+                                "-Variable(wavespeed)*Variable(gravity.x)"
                               ]
                             },
                             {
@@ -128213,7 +128345,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*sqrt(2)/2*Variable(speed)"
+                                "-Variable(wavespeed)*sqrt(2)/2"
                               ]
                             },
                             {
@@ -128224,7 +128356,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*(sqrt(2)/2)*Variable(speed)"
+                                "-Variable(wavespeed)*(sqrt(2)/2)"
                               ]
                             },
                             {
@@ -128262,7 +128394,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*sqrt(2)/2*Variable(speed)"
+                                "-Variable(wavespeed)*sqrt(2)/2"
                               ]
                             },
                             {
@@ -128273,7 +128405,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*(sqrt(2)/2)*Variable(gravity.y)*Variable(speed)"
+                                "-Variable(wavespeed)*(sqrt(2)/2)*Variable(gravity.y)"
                               ]
                             },
                             {
@@ -128311,7 +128443,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*sqrt(2)/2*Variable(speed)*Variable(gravity.x)"
+                                "-Variable(wavespeed)*sqrt(2)/2*Variable(gravity.x)"
                               ]
                             },
                             {
@@ -128322,7 +128454,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*(sqrt(2)/2)*Variable(speed)"
+                                "Variable(wavespeed)*(sqrt(2)/2)"
                               ]
                             },
                             {
@@ -128439,7 +128571,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*sqrt(2)/2*Variable(speed)"
+                                "Variable(wavespeed)*sqrt(2)/2"
                               ]
                             },
                             {
@@ -128450,7 +128582,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*(sqrt(2)/2)*Variable(speed)"
+                                "-Variable(wavespeed)*(sqrt(2)/2)"
                               ]
                             },
                             {
@@ -128488,7 +128620,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*sqrt(2)/2*Variable(speed)"
+                                "Variable(wavespeed)*sqrt(2)/2"
                               ]
                             },
                             {
@@ -128499,7 +128631,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*(sqrt(2)/2)*Variable(gravity.y)*Variable(speed)"
+                                "-Variable(wavespeed)*(sqrt(2)/2)*Variable(gravity.y)"
                               ]
                             },
                             {
@@ -128537,7 +128669,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*sqrt(2)/2*Variable(speed)*Variable(gravity.x)"
+                                "-Variable(wavespeed)*sqrt(2)/2*Variable(gravity.x)"
                               ]
                             },
                             {
@@ -128548,7 +128680,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*(sqrt(2)/2)*Variable(speed)"
+                                "-Variable(wavespeed)*(sqrt(2)/2)"
                               ]
                             },
                             {
@@ -128656,7 +128788,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*sqrt(2)/2*Variable(speed)"
+                                "Variable(wavespeed)*sqrt(2)/2"
                               ]
                             },
                             {
@@ -128667,7 +128799,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*(sqrt(2)/2)*Variable(speed)"
+                                "Variable(wavespeed)*(sqrt(2)/2)"
                               ]
                             },
                             {
@@ -128705,7 +128837,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*sqrt(2)/2*Variable(speed)"
+                                "Variable(wavespeed)*sqrt(2)/2"
                               ]
                             },
                             {
@@ -128716,7 +128848,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*(sqrt(2)/2)*Variable(gravity.y)*Variable(speed)"
+                                "Variable(wavespeed)*(sqrt(2)/2)*Variable(gravity.y)"
                               ]
                             },
                             {
@@ -128754,7 +128886,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*sqrt(2)/2*Variable(speed)*Variable(gravity.x)"
+                                "Variable(wavespeed)*sqrt(2)/2*Variable(gravity.x)"
                               ]
                             },
                             {
@@ -128765,7 +128897,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*(sqrt(2)/2)*Variable(speed)"
+                                "-Variable(wavespeed)*(sqrt(2)/2)"
                               ]
                             },
                             {
@@ -128873,7 +129005,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*sqrt(2)/2*Variable(speed)"
+                                "-Variable(wavespeed)*sqrt(2)/2"
                               ]
                             },
                             {
@@ -128884,7 +129016,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*(sqrt(2)/2)*Variable(speed)"
+                                "Variable(wavespeed)*(sqrt(2)/2)"
                               ]
                             },
                             {
@@ -128922,7 +129054,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "-Variable(wavespeed)*sqrt(2)/2*Variable(speed)"
+                                "-Variable(wavespeed)*sqrt(2)/2"
                               ]
                             },
                             {
@@ -128933,7 +129065,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*(sqrt(2)/2)*Variable(gravity.y)*Variable(speed)"
+                                "Variable(wavespeed)*(sqrt(2)/2)*Variable(gravity.y)"
                               ]
                             },
                             {
@@ -128971,7 +129103,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*sqrt(2)/2*Variable(speed)*Variable(gravity.x)"
+                                "Variable(wavespeed)*sqrt(2)/2*Variable(gravity.x)"
                               ]
                             },
                             {
@@ -128982,7 +129114,7 @@
                                 "wave",
                                 "Physics2",
                                 "=",
-                                "Variable(wavespeed)*(sqrt(2)/2)*Variable(speed)"
+                                "Variable(wavespeed)*(sqrt(2)/2)"
                               ]
                             },
                             {
@@ -129114,6 +129246,62 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetSceneVariableAsBoolean"
+                      },
+                      "parameters": [
+                        "orbUsed",
+                        "False"
+                      ]
+                    }
+                  ],
+                  "events": []
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "VarSceneTxt"
+                      },
+                      "parameters": [
+                        "mode",
+                        "!=",
+                        "\"cube\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "VarSceneTxt"
+                      },
+                      "parameters": [
+                        "mode",
+                        "!=",
+                        "\"ball\""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "MettreXY"
+                      },
+                      "parameters": [
+                        "jumpCheck",
+                        "=",
+                        "player.BoundingBoxCenterX()+10*Variable(gravity.x)",
+                        "=",
+                        "player.BoundingBoxCenterY()+10*Variable(gravity.y)"
+                      ]
+                    }
+                  ],
+                  "events": []
                 }
               ]
             },
@@ -133568,6 +133756,15 @@
                     "paused",
                     "False"
                   ]
+                },
+                {
+                  "type": {
+                    "value": "SceneVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "settings.nospin",
+                    "False"
+                  ]
                 }
               ],
               "actions": [
@@ -133859,6 +134056,16 @@
                                 "checkpointX",
                                 "=",
                                 "player.X()"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ModVarScene"
+                              },
+                              "parameters": [
+                                "checkpointAngle",
+                                "=",
+                                "player.Angle()"
                               ]
                             },
                             {
@@ -134841,46 +135048,6 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
-            "// fill-tool restore: replicate userFunc0x16773b8 for each loaded 176 tile",
-            "const scene = runtimeScene;",
-            "const num = (vr, d) => {try {return vr.getAsNumber()} catch (e) {return d}};",
-            "let sig = \"\";",
-            "try {sig = scene.getVariables().get(\"loadedLevel\").getChild(\"levelInfo\").getChild(\"var\").getAsString()} catch (e) {}",
-            "let tiles = null;",
-            "try {tiles = scene.getVariables().get(\"CELDOtiles\")} catch (e) {}",
-            "if (!tiles || window.__tgdfilllvl === sig + \"|\" + tiles.getChildrenCount()) return;",
-            "window.__tgdfilllvl = sig + \"|\" + tiles.getChildrenCount();",
-            "let kids = [];",
-            "try {kids = tiles.getType && tiles.getType() === \"array\" ? tiles.getAllChildrenArray() : Object.values(tiles.getAllChildren())} catch (e) {}",
-            "const f176 = [];",
-            "for (const t of kids) {try {if (t.getChild(\"0\").getAsNumber() === 176) f176.push(t)} catch (e) {}}",
-            "const rects = scene.getObjects(\"tiledrectangle\");",
-            "try {console.log(\"[fill] level=\" + sig + \" tiles176=\" + f176.length + \" existing=\" + rects.length)} catch (e) {}",
-            "for (let i = 0; i < f176.length; i++) {",
-            "  const t = f176[i];",
-            "  let rect = rects[i];",
-            "  if (!rect) {try {rect = scene.createObject(\"tiledrectangle\"); rect.setPosition(num(t.getChild(\"1\"), 0), num(t.getChild(\"2\"), 0))} catch (e) {rect = null}}",
-            "  if (!rect) continue;",
-            "  let id = num(t.getChild(\"6\"), 14);",
-            "  let w = num(t.getChild(\"7\"), 1);",
-            "  let h = num(t.getChild(\"8\"), 1);",
-            "  const a = num(t.getChild(\"3\"), 0);",
-            "  const rw = w, rh = h;",
-            "  if (w <= 0) {w = -(w) + 2; rect.setX(rect.getX() - (w - 1) * 16)}",
-            "  if (h <= 0) {h = -(h) + 2; rect.setY(rect.getY() - (h - 1) * 16)}",
-            "  if (![14, 26, 146, 189, 36, 93].includes(id)) id = 14;",
-            "  const letter = {14: \"q\", 26: \"w\", 146: \"e\", 189: \"r\", 36: \"\" + (1 + Math.round(a / 90) % 4), 93: \"\" + (5 + Math.round(a / 90) % 4)};",
-            "  try {rect.setText((letter[id].repeat(w) + \"\\n\").repeat(h)); rect.setZOrder(id === 26 ? 2.2 : 0)} catch (e) {}",
-            "  if (i < 4) {try {console.log(\"[fill#\" + i + \"] raw=(\" + rw + \",\" + rh + \") wh=(\" + w + \",\" + h + \") id=\" + id + \" pos=(\" + rect.getX() + \",\" + rect.getY() + \")\")} catch (e) {}}",
-            "}"
-          ],
-          "parameterObjects": "",
-          "useStrict": true,
-          "eventsSheetExpanded": false
-        },
-        {
-          "type": "BuiltinCommonInstructions::JsCode",
-          "inlineCode": [
             "// playtest-demo-level",
             "const scene = runtimeScene;",
             "let demo = false; try {demo = scene.getVariables().get(\"demoActive\").getAsBoolean()} catch (e) {}",
@@ -135208,6 +135375,50 @@
         {
           "type": "BuiltinCommonInstructions::JsCode",
           "inlineCode": [
+            "// fill-tool restore: replicate userFunc0x16773b8 per loaded 176 tile",
+            "const scene = runtimeScene;",
+            "const num = (vr, d) => {try {return vr.getAsNumber()} catch (e) {return d}};",
+            "let sig = \"\";",
+            "try {sig = scene.getVariables().get(\"loadedLevel\").getChild(\"levelInfo\").getChild(\"var\").getAsString()} catch (e) {}",
+            "let tiles = null;",
+            "try {tiles = scene.getVariables().get(\"CELDOtiles\")} catch (e) {}",
+            "if (!tiles) return;",
+            "let fillsig = null;",
+            "try {fillsig = scene.getVariables().get(\"__tgdfillsig\")} catch (e) {}",
+            "const cursig = sig + \"|\" + tiles.getChildrenCount();",
+            "if (fillsig && fillsig.getAsString() === cursig) return;",
+            "if (fillsig) fillsig.setString(cursig);",
+            "let kids = [];",
+            "try {kids = tiles.getType && tiles.getType() === \"array\" ? tiles.getAllChildrenArray() : Object.values(tiles.getAllChildren())} catch (e) {}",
+            "const f176 = [];",
+            "for (const t of kids) {try {if (t.getChild(\"0\").getAsNumber() === 176) f176.push(t)} catch (e) {}}",
+            "const rects = scene.getObjects(\"tiledrectangle\");",
+            "try {console.log(\"[fill] level=\" + sig + \" tiles176=\" + f176.length + \" existing=\" + rects.length)} catch (e) {}",
+            "for (let i = 0; i < f176.length; i++) {",
+            "  const t = f176[i];",
+            "  let rect = rects[i];",
+            "  if (!rect) {try {rect = scene.createObject(\"tiledrectangle\"); rect.setPosition(num(t.getChild(\"1\"), 0), num(t.getChild(\"2\"), 0))} catch (e) {rect = null}}",
+            "  if (!rect) continue;",
+            "  let id = num(t.getChild(\"6\"), 14);",
+            "  let w = num(t.getChild(\"7\"), 1);",
+            "  let h = num(t.getChild(\"8\"), 1);",
+            "  const a = num(t.getChild(\"3\"), 0);",
+            "  const rw = w, rh = h;",
+            "  if (w <= 0) {w = -(w) + 2; rect.setX(rect.getX() - (w - 1) * 16)}",
+            "  if (h <= 0) {h = -(h) + 2; rect.setY(rect.getY() - (h - 1) * 16)}",
+            "  if (![14, 26, 146, 189, 36, 93].includes(id)) id = 14;",
+            "  const letter = {14: \"q\", 26: \"w\", 146: \"e\", 189: \"r\", 36: \"\" + (1 + Math.round(a / 90) % 4), 93: \"\" + (5 + Math.round(a / 90) % 4)};",
+            "  try {rect.setText((letter[id].repeat(w) + \"\\n\").repeat(h)); rect.setZOrder(id === 26 ? 2.2 : 0)} catch (e) {}",
+            "  if (i < 4) {try {console.log(\"[fill#\" + i + \"] raw=(\" + rw + \",\" + rh + \") wh=(\" + w + \",\" + h + \") id=\" + id + \" pos=(\" + rect.getX() + \",\" + rect.getY() + \")\")} catch (e) {}}",
+            "}"
+          ],
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        },
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": [
             "// qol-spacerestart: Space restarts after complete / resumes from the pause menu",
             "const scene = runtimeScene;",
             "let win = false; try {win = scene.getVariables().get(\"win\").getAsBoolean()} catch (e) {}",
@@ -135306,9 +135517,9 @@
           "inlineCode": [
             "// qol-listexit: demonlist/rated levels carry levelInfo.from=\"editor\" (uploaded from the",
             "// editor), so native Leave routing sends them to the mylevel scene. the real source is the",
-            "// global lvlFrom (set by demonlist/rated before launch) - but stale for custom/mappack",
-            "// (their launchers don't set it). so capture it into a scene var ONCE at level start + clear",
-            "// the global; then on a pause/win Leave for a demonlist/rated level, replicate the native",
+            "// global lvlFrom (set by demonlist/rated/mappack before launch) - but stale for custom levels",
+            "// (their launcher doesn't set it). so capture it into a scene var ONCE at level start + clear",
+            "// the global; then on a pause/win Leave for a demonlist/rated/mappack level, replicate the native",
             "// exit (black-circle out-wipe + 0.2s wait + restart menu theme on ch2) then go to the list.",
             "const scene = runtimeScene;",
             "const G = scene.getGame().getVariables();",
@@ -135318,7 +135529,7 @@
             "  try {G.get(\"lvlFrom\").setString(\"\")} catch (e) {}",
             "}",
             "let lf = \"\"; try {lf = scene.getVariables().get(\"mylvlfrom\").getAsString()} catch (e) {}",
-            "if (lf === \"demonlist\" || lf === \"rated\") {",
+            "if (lf === \"demonlist\" || lf === \"rated\" || lf === \"mappack\") {",
             "  if (scene.__listexit) {",
             "    // out-wipe playing; after ~0.2s restart the menu theme + replace to the list.",
             "    scene.__exitms = (scene.__exitms || 0) + (scene.getElapsedTime ? scene.getElapsedTime() : 16);",
@@ -135346,6 +135557,86 @@
           "parameterObjects": "",
           "useStrict": true,
           "eventsSheetExpanded": false
+        },
+        {
+          "colorB": 80,
+          "colorG": 80,
+          "colorR": 255,
+          "creationTime": 0,
+          "folded": true,
+          "name": "profiler (temp)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "parameters": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::JsCode",
+              "inlineCode": [
+                "const scene = runtimeScene;",
+                "const W = (window.__prof = window.__prof || {});",
+                "if (W.scene !== scene) {",
+                "  W.scene = scene; W.n = 0; W.big = 0;",
+                "  W.sum = {pre: 0, ev: 0, post: 0, render: 0, async: 0, total: 0, gap: 0};",
+                "  W.cur = null; W.prevStart = 0;",
+                "  const now = () => performance.now();",
+                "  const wrap = (obj, key, bucket) => {",
+                "    if (!obj) return;",
+                "    const orig = obj[key];",
+                "    if (typeof orig !== 'function' || orig.__pw) return;",
+                "    const w = function () {const t = now(); const r = orig.apply(this, arguments); if (W.cur) W.cur[bucket] += now() - t; return r};",
+                "    w.__pw = true; obj[key] = w;",
+                "  };",
+                "  wrap(scene, '_updateObjectsPreEvents', 'pre');",
+                "  wrap(scene, '_stepBehaviorsPostEvents', 'post');",
+                "  wrap(scene, 'render', 'render');",
+                "  wrap(scene._asyncTasksManager, 'processTasks', 'async');",
+                "  if (scene._eventsFunction && !scene._eventsFunction.__pw) {",
+                "    const ev = scene._eventsFunction;",
+                "    const w = function (rs) {const t = now(); const r = ev(rs); if (W.cur) W.cur.ev += now() - t; return r};",
+                "    w.__pw = true; scene._eventsFunction = w;",
+                "  }",
+                "  const ras = scene.renderAndStep;",
+                "  if (!ras.__pw) {",
+                "    const w = function (dt) {",
+                "      W.cur = {pre: 0, ev: 0, post: 0, render: 0, async: 0};",
+                "      const t0 = now();",
+                "      if (W.prevStart) W.sum.gap += t0 - W.prevStart; W.prevStart = t0;",
+                "      const r = ras.call(this, dt);",
+                "      const total = now() - t0; const c = W.cur;",
+                "      W.sum.pre += c.pre; W.sum.ev += c.ev; W.sum.post += c.post; W.sum.render += c.render; W.sum.async += c.async; W.sum.total += total;",
+                "      W.n++;",
+                "      if (W.n >= 30) {",
+                "        const a = k => (W.sum[k] / W.n).toFixed(2);",
+                "        const realFps = W.sum.gap > 0 ? (1000 / (W.sum.gap / W.n)).toFixed(1) : '?';",
+                "        const workFps = (1000 / Math.max(0.01, W.sum.total / W.n)).toFixed(1);",
+                "        console.log('[prof] realFps=' + realFps + ' (workCap=' + workFps + ') frame=' + a('total') + 'ms || pre(behav+phys)=' + a('pre') + ' events=' + a('ev') + ' post=' + a('post') + ' render=' + a('render') + ' async=' + a('async'));",
+                "        W.big++;",
+                "        if (W.big % 4 === 1) {",
+                "          try {",
+                "            const all = scene.getAdhocListOfAllInstances();",
+                "            const cnt = {}; let phys = 0, vis = 0;",
+                "            for (const o of all) {",
+                "              const nm = o.getName(); cnt[nm] = (cnt[nm] || 0) + 1; if (!o.isHidden()) vis++;",
+                "              try {if (o._behaviors) for (const b of o._behaviors) {if (b && (b._body !== undefined || /hysics/.test((b.constructor && b.constructor.name) || ''))) {phys++; break}}} catch (e) {}",
+                "            }",
+                "            const top = Object.entries(cnt).sort((x, y) => y[1] - x[1]).slice(0, 15).map(e => e[0] + ':' + e[1]).join(' ');",
+                "            console.log('[prof] instances=' + all.length + ' visible=' + vis + ' physicsBodies~' + phys + ' || top: ' + top);",
+                "          } catch (e) {console.log('[prof] count err ' + e)}",
+                "        }",
+                "        W.n = 0; for (const k in W.sum) W.sum[k] = 0;",
+                "      }",
+                "      return r;",
+                "    };",
+                "    w.__pw = true; scene.renderAndStep = w;",
+                "  }",
+                "  console.log('[prof] installed on level scene');",
+                "}"
+              ],
+              "parameterObjects": "",
+              "useStrict": true,
+              "eventsSheetExpanded": false
+            }
+          ]
         },
         {
           "type": "BuiltinCommonInstructions::Group",
@@ -135824,7 +136115,7 @@
                 "    const prevtop = t.practstack.length ? t.practstack[t.practstack.length - 1] : null;",
                 "    const stamp = t.fresh || (prevtop && prevtop.normalcp) || null;",
                 "    t.fresh = null;",
-                "    t.practstack.push({prev: prev, snap: snap, marker: marker, normalcp: stamp});",
+                "    t.practstack.push({prev: prev, snap: snap, marker: marker, normalcp: stamp, cpx: p.getX(), cpy: p.getY()});",
                 "    t.hadcp = true;",
                 "  }",
                 "",
@@ -135941,8 +136232,15 @@
                 "      }",
                 "      if (t.practstack.length) {",
                 "        const arm = () => {",
+                "          const top = t.practstack[t.practstack.length - 1];",
+                "          // if a native level checkpoint was grabbed after this practice cp, it",
+                "          // moved checkpointX/Y away from ours - don't hijack the respawn, let the",
+                "          // native level-checkpoint respawn stand so there's no early-restore teleport",
+                "          let acx = 0, acy = 0;",
+                "          try {acx = svar(scene, \"checkpointX\").getAsNumber(); acy = svar(scene, \"checkpointY\").getAsNumber()} catch (e) {}",
+                "          if (top && top.cpx !== undefined && (Math.abs(acx - top.cpx) > 4 || Math.abs(acy - top.cpy) > 4)) return;",
                 "          t.awaitrespawn = true; t.armage = 0;",
-                "          t.earlysnap = t.practstack[t.practstack.length - 1].snap;",
+                "          t.earlysnap = top.snap;",
                 "          t.earlyframes = 4; t.earlymax = 4; t.earlyplaced = false;",
                 "        };",
                 "        if (deaths > t.prevdeaths && !t.ubacktrack) arm();",
@@ -137718,6 +138016,17 @@
                 "        }",
                 "      } else {t.backtext.hide(true); if (t.backicon) {try {t.backicon.hide(true)} catch (e) {}}}",
                 "    }",
+                "    if (t.stoptext) {",
+                "      const showstop = t.mode === \"play\" && ispaused(scene) && !t.vidblock && t.vidphase !== \"render\";",
+                "      if (showstop) {",
+                "        t.stoptext.hide(false);",
+                "        try {t.stoptext.setScale(0.5)} catch (e) {}",
+                "        try {t.stoptext.setOpacity(200)} catch (e) {}",
+                "        t.stoptext.setText(\"press esc again to force stop macro\");",
+                "        let gw = 432, gh = 224; try {gw = game.getGameResolutionWidth(); gh = game.getGameResolutionHeight()} catch (e) {}",
+                "        t.stoptext.setPosition(gw / 2 - t.stoptext.getWidth() / 2, gh - 13);",
+                "      } else {t.stoptext.hide(true)}",
+                "    }",
                 "  }",
                 "  t.refreshhud = refreshhud;",
                 "",
@@ -137832,7 +138141,12 @@
                 "      return;",
                 "    }",
                 "    if (t.mode === \"play\") {",
-                "      if (e.code === \"Escape\") {t.requestpause = true; e.preventDefault(); e.stopImmediatePropagation(); return}",
+                "      if (e.code === \"Escape\") {",
+                "        const sc = inlevel();",
+                "        if (sc && ispaused(sc) && !t.vidblock && t.vidphase !== \"render\") endplayback(\"macro stopped\");",
+                "        else t.requestpause = true;",
+                "        e.preventDefault(); e.stopImmediatePropagation(); return;",
+                "      }",
                 "      if (e.code === \"F12\" || (e.ctrlKey && e.shiftKey && (e.code === \"KeyI\" || e.code === \"KeyJ\" || e.code === \"KeyC\"))) return;",
                 "      e.preventDefault();",
                 "      e.stopImmediatePropagation();",
@@ -137951,6 +138265,15 @@
                 "    try {t.backtext.setScale(0.5)} catch (e) {}",
                 "    try {t.backtext.setWrapping(false)} catch (e) {}",
                 "    t.backtext.hide(true);",
+                "  }",
+                "  t.stoptext = null;",
+                "  try {t.stoptext = runtimeScene.createObject(\"tasbtn\")} catch (e) {}",
+                "  if (t.stoptext) {",
+                "    t.stoptext.setLayer(\"ui\");",
+                "    t.stoptext.setZOrder(10005);",
+                "    try {t.stoptext.setScale(0.5)} catch (e) {}",
+                "    try {t.stoptext.setWrapping(false)} catch (e) {}",
+                "    t.stoptext.hide(true);",
                 "  }",
                 "  t.backicon = grab(\"tascpicon\");",
                 "  if (t.backicon) {",
@@ -138079,6 +138402,133 @@
               "parameterObjects": "",
               "useStrict": true,
               "eventsSheetExpanded": false
+            }
+          ]
+        },
+        {
+          "colorB": 74,
+          "colorG": 228,
+          "colorR": 176,
+          "creationTime": 0,
+          "folded": true,
+          "name": "layout mode (tas)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "parameters": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::JsCode",
+              "inlineCode": [
+                "// layout mode: strip everything without a hitbox (decorations/fakes/fill), keep text +",
+                "// gameplay + real collision; delete enclosed interior solids and unify full-block skins",
+                "// to the default (physics identical); + particles/spin off + off-screen physics culling.",
+                "const scene = runtimeScene;",
+                "let lm = false, s = null;",
+                "try {s = scene.getVariables().get(\"settings\"); lm = s.getChild(\"layoutmode\").getAsBoolean()} catch (e) {}",
+                "if (lm) {",
+                "  try {s.getChild(\"disableparticles\").setBoolean(true)} catch (e) {}",
+                "  try {s.getChild(\"nospin\").setBoolean(true)} catch (e) {}",
+                "  const REMOVE = [\"emptyblock2\",\"emptyblackblock\",\"emptyblock3\",\"fakespike\",\"fakeshortspike\",\"fakesmallspike\",\"cornerthorns\",\"cornerripples\",\"emptybrickblock\",\"phant\",\"cornerdot\",\"emptyblock4\",\"cornerwaves\",\"cornerridges\",\"bigstarspinner\",\"starspinner\",\"smallstarspinner\",\"smallcrossspinner\",\"crossspinner\",\"bigcrossspinner\",\"cornersquares\",\"fakeminispike\",\"dotgrassblock\",\"emptygrassblock\",\"squarewireend\",\"squarewireline\",\"squarewirecorner\",\"squarewiretee\",\"squarewirecenter\",\"fakeblock\",\"fakeslab\",\"fakeminiblock\",\"baselesschain\",\"dotblock2\",\"dotblock3\",\"dotbrickblock\",\"dotblackblock\",\"squarewiresole\",\"bigfanspinner\",\"bigcogspinner\",\"fanspinner\",\"cogspinner\",\"smallcogspinner\",\"chevronarrow\",\"smallhelix\",\"helix\",\"note\",\"heart\",\"diamondstar\",\"squareclouds\",\"groundrectangles\",\"shortgroundthorn\",\"groundthorn\",\"tallgroundthorn\",\"pixel1x1\",\"pixel2x2\",\"pixel3x3\",\"pixel4x4\",\"cornerelectro\",\"edgeelectro\",\"dotelectro\",\"_4dotelectro\",\"cupelectro\",\"pillarelectro\",\"_2dotelectro\",\"edgedotelectro\",\"electrofill\",\"bigburstspinner\",\"bigflowerspinner\",\"bigoctospinner\",\"burstspinner\",\"chain\",\"crystals\",\"flowerspinner\",\"octospinner\",\"smallburstspinner\",\"smallchain\",\"smallflowerspinner\",\"smalloctospinner\",\"arrow\",\"clouds\",\"cross\",\"exclamationmark\",\"questionmark\",\"sharpy\",\"sharpycorner\",\"star\",\"swiggly\",\"swigglycorner\",\"triangle\",\"tiledrectangle\"];",
+                "  for (const name of REMOVE) {const l = scene.getObjects(name); if (l) {for (const o of l) o.deleteFromScene(scene);}}",
+                "  const FULLBLOCK = [\"block\",\"block2\",\"cupblock2\",\"pillarblock2\",\"cornerblock2\",\"block3\",\"cupblock3\",\"pillarblock3\",\"cornerblock3\",\"blackblock\",\"cupblackblock\",\"pillarblackblock\",\"cornerblackblock\",\"iceblock\",\"brickblock\",\"cupbrickblock\",\"pillarbrickblock\",\"cornerbrickblock\",\"metalblock\",\"lineblock\",\"cuplineblock\",\"pillarlineblock\",\"cornerlineblock\",\"block4\",\"cupblock4\",\"pillarblock4\",\"cornerblock4\",\"grassblock\",\"cupgrassblock\",\"pillargrassblock\",\"cornergrassblock\",\"goldenblock\"];",
+                "  const W = (window.__layout = window.__layout || {});",
+                "  if (W.scene !== scene) {W.scene = scene; W.done = false; W.stable = 0; W.last = -1;}",
+                "  if (!W.done) {",
+                "    let cnt = 0;",
+                "    for (const name of FULLBLOCK) {const l = scene.getObjects(name); if (l) cnt += l.length;}",
+                "    if (cnt === W.last) W.stable++; else {W.stable = 0; W.last = cnt;}",
+                "    if (cnt > 0 && W.stable >= 5) {",
+                "      W.done = true;",
+                "      const blocks = [];",
+                "      for (const name of FULLBLOCK) {const l = scene.getObjects(name); if (!l) continue; for (const o of l) blocks.push({o: o, w: o.getWidth(), h: o.getHeight(), x: o.getCenterXInScene(), y: o.getCenterYInScene()});}",
+                "      const step = vals => {",
+                "        const u = [...new Set(vals.map(v => Math.round(v)))].sort((a, b) => a - b), g = {};",
+                "        for (let i = 1; i < u.length; i++) {const d = u[i] - u[i - 1]; if (d > 0 && d <= 64) g[d] = (g[d] || 0) + 1;}",
+                "        let best = 0, S = 0; for (const d in g) if (g[d] > best) {best = g[d]; S = +d;} return S;",
+                "      };",
+                "      const S = step(blocks.map(b => b.x)) || step(blocks.map(b => b.y)) || 0;",
+                "      let removed = 0;",
+                "      if (S > 0) {",
+                "        const H = 8, cells = new Map();",
+                "        for (const b of blocks) {const k = Math.round(b.x / H) + \",\" + Math.round(b.y / H); if (!cells.has(k)) cells.set(k, []); cells.get(k).push(b);}",
+                "        const tol = S * 0.4, rad = Math.ceil(tol / H) + 1;",
+                "        const near = (x, y) => {",
+                "          const cx = Math.round(x / H), cy = Math.round(y / H);",
+                "          for (let dx = -rad; dx <= rad; dx++) for (let dy = -rad; dy <= rad; dy++) {const a = cells.get((cx + dx) + \",\" + (cy + dy)); if (a) for (const b of a) if (Math.abs(b.x - x) <= tol && Math.abs(b.y - y) <= tol) return true;}",
+                "          return false;",
+                "        };",
+                "        for (const b of blocks) if (near(b.x - S, b.y) && near(b.x + S, b.y) && near(b.x, b.y - S) && near(b.x, b.y + S)) {b.o.deleteFromScene(scene); b.dead = true; removed++;}",
+                "      }",
+                "      let retex = 0;",
+                "      const UNIFY = new Set([\"block2\",\"cupblock2\",\"pillarblock2\",\"cornerblock2\",\"block3\",\"cupblock3\",\"pillarblock3\",\"cornerblock3\",\"blackblock\",\"cupblackblock\",\"pillarblackblock\",\"cornerblackblock\",\"brickblock\",\"cupbrickblock\",\"pillarbrickblock\",\"cornerbrickblock\",\"metalblock\",\"lineblock\",\"cuplineblock\",\"pillarlineblock\",\"cornerlineblock\",\"block4\",\"cupblock4\",\"pillarblock4\",\"cornerblock4\",\"grassblock\",\"cupgrassblock\",\"pillargrassblock\",\"cornergrassblock\",\"goldenblock\"]);",
+                "      let tex = null;",
+                "      try {const bl = scene.getObjects(\"block\"); if (bl && bl.length) {const r = bl[0].getRendererObject(); if (r && r.texture) tex = r.texture;}} catch (e) {}",
+                "      if (!tex) {try {tex = scene.getGame().getImageManager().getPIXITexture(\"assets\\\\textures\\\\editor\\\\tiles\\\\block.png\")} catch (e) {}}",
+                "      if (tex) for (const b of blocks) {if (b.dead || !UNIFY.has(b.o.getName())) continue; try {const r = b.o.getRendererObject(); if (r && \"texture\" in r) {r.texture = tex; retex++}} catch (e) {}}",
+                "      try {console.log(\"[layout] step=\" + S + \" fullBlocks=\" + blocks.length + \" interiorRemoved=\" + removed + \" retextured=\" + retex)} catch (e) {}",
+                "    }",
+                "  }",
+                "  const CULL = [\"groundShine\",\"ground\",\"block\",\"slab\",\"block2\",\"cupblock2\",\"pillarblock2\",\"cornerblock2\",\"edgeblock2\",\"slope\",\"wedge\",\"flippedwedge\",\"spike\",\"shortspike\",\"thorns\",\"smallspike\",\"bigsaw\",\"saw\",\"smallsaw\",\"block3\",\"cupblock3\",\"pillarblock3\",\"cornerblock3\",\"edgeblock3\",\"slope3\",\"wedge3\",\"flippedwedge3\",\"ripples\",\"blackblock\",\"cupblackblock\",\"pillarblackblock\",\"cornerblackblock\",\"edgeblackblock\",\"blackslope\",\"blackwedge\",\"flippedblackwedge\",\"iceblock\",\"ghostblock\",\"ghostspike\",\"ghostshortspike\",\"ghostsmallspike\",\"ghostslope\",\"ghostwedge\",\"flippedghostwedge\",\"ghostslab\",\"ghostbigsaw\",\"ghostsaw\",\"ghostsmallsaw\",\"brickblock\",\"cupbrickblock\",\"pillarbrickblock\",\"cornerbrickblock\",\"edgebrickblock\",\"brickslope\",\"brickwedge\",\"flippedbrickwedge\",\"biggear\",\"gear\",\"smallgear\",\"breakblock\",\"playerpass\",\"physicspass\",\"onblock\",\"offblock\",\"onspike\",\"offspike\",\"metalblock\",\"lineblock\",\"cuplineblock\",\"pillarlineblock\",\"cornerlineblock\",\"edgelineblock\",\"lineslope\",\"linewedge\",\"flippedlinewedge\",\"block4\",\"cupblock4\",\"pillarblock4\",\"cornerblock4\",\"edgeblock4\",\"slope4\",\"wedge4\",\"flippedwedge4\",\"cavespike\",\"shortcavespike\",\"smallcavespike\",\"waves\",\"ridges\",\"squares\",\"miniblock\",\"minighostblock\",\"minispike\",\"minighostspike\",\"minicavespike\",\"grassblock\",\"cupgrassblock\",\"pillargrassblock\",\"cornergrassblock\",\"edgegrassblock\",\"bigspearsaw\",\"spearsaw\",\"smallspearsaw\",\"leftxslab\",\"mainxslab\",\"rightxslab\",\"solexslab\",\"cornerxslab\",\"dotxslab\",\"physic\",\"megablock\",\"megaghostblock\",\"goldenblock\",\"cornermetal\",\"slabmetal\",\"dotmetal\",\"metalplatform\"];",
+                "  const PLAYERS = [\"cube\", \"ship\", \"ball\", \"ufo\", \"wave\", \"oldufo\", \"icon\"];",
+                "  let px = null;",
+                "  for (const pn of PLAYERS) {const l = scene.getObjects(pn); if (l) {for (const o of l) {if (!o.isHidden()) {px = o.getX(); break}}} if (px !== null) break;}",
+                "  if (px === null) {try {px = gdjs.evtTools.camera.getCameraX(scene, \"\", 0)} catch (e) {}}",
+                "  if (px !== null) {",
+                "    let visW = 480;",
+                "    try {const z = gdjs.evtTools.camera.getCameraZoom(scene, \"\", 0) || 1; visW = scene.getGame().getGameResolutionWidth() / z} catch (e) {}",
+                "    const half = visW * 1.5, far = half * 1.2;",
+                "    for (const name of CULL) {",
+                "      const list = scene.getObjects(name); if (!list) continue;",
+                "      for (const o of list) {",
+                "        if (o.getWidth() > 1000) continue;",
+                "        const d = Math.abs(o.getX() - px), on = o.behaviorActivated(\"Physics2\");",
+                "        try {if (on && d > far) o.activateBehavior(\"Physics2\", false); else if (!on && d <= half) o.activateBehavior(\"Physics2\", true)} catch (e) {}",
+                "      }",
+                "    }",
+                "  }",
+                "}"
+              ],
+              "parameterObjects": "",
+              "useStrict": true,
+              "eventsSheetExpanded": false
+            }
+          ]
+        },
+        {
+          "colorB": 74,
+          "colorG": 228,
+          "colorR": 176,
+          "creationTime": 0,
+          "folded": true,
+          "name": "vignette hide (tas)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "parameters": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SceneVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "settings.hidemmvignette",
+                    "True"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "Cache"
+                  },
+                  "parameters": [
+                    "vignette"
+                  ]
+                }
+              ],
+              "events": []
             }
           ]
         }
@@ -167646,6 +168096,16 @@
                     "level",
                     "=",
                     "playbutton.VariableString(level)"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ModVarGlobalTxt"
+                  },
+                  "parameters": [
+                    "lvlFrom",
+                    "=",
+                    "\"mappack\""
                   ]
                 },
                 {

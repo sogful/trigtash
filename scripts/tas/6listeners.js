@@ -100,7 +100,12 @@
       return;
     }
     if (t.mode === "play") {
-      if (e.code === "Escape") {t.requestpause = true; e.preventDefault(); e.stopImmediatePropagation(); return}
+      if (e.code === "Escape") {
+        const sc = inlevel();
+        if (sc && ispaused(sc) && !t.vidblock && t.vidphase !== "render") endplayback("macro stopped");
+        else t.requestpause = true;
+        e.preventDefault(); e.stopImmediatePropagation(); return;
+      }
       if (e.code === "F12" || (e.ctrlKey && e.shiftKey && (e.code === "KeyI" || e.code === "KeyJ" || e.code === "KeyC"))) return;
       e.preventDefault();
       e.stopImmediatePropagation();
