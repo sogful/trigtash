@@ -8,7 +8,7 @@
   ],
   "options": [
 
-    {"tab": 0, "id": "layoutmode", "name": "Layout Mode", "desc": "Bare-collision performance mode. Strips decorations and hidden/unreachable geometry, turns off particles and spinning, keeping every hazard, block, orb, portal and text. Physics stay identical. Big speedup, deliberately ugly."},
+    {"tab": 0, "id": "layoutmode", "name": "Layout Mode", "desc": "Strips decorations and hidden/unreachable geometry, + uses optimization logic similar to the two settings below combined."},
     {"tab": 0, "id": "nospin", "name": "Disable Spinning", "desc": "Removes spinning of objects like orbs and saws. May improve performance by up to 20% depending on the level."},
     {"tab": 0, "id": "disableparticles", "name": "Disable Particles", "desc": "Disables the use of the particle engine. May improve performance."},
     {"tab": 0, "id": "hidepause", "name": "Hide Pause Button", "desc": "Hides the pause button at the top right when playing."},
@@ -33,6 +33,6 @@
     {"tab": 1, "id": "macrovelocity", "name": "Player Info", "desc": "Shows player's coordinates and X/Y/angular velocity in the bottom left. Could be useful for precise movement."},
     {"tab": 1, "id": "macrovelvector", "name": "Velocity Vector", "desc": "Draws an arrow from the player showing the direction and strength of its current velocity."},
     {"tab": 4, "id": "macrostopbutton", "name": "Start/Stop Button", "desc": "Allows ending your macro before reaching the goal."},
-    {"tab": 4, "id": "compressmb", "name": "Compress Export", "desc": "Reencodes the exported video to fit social media upload limits. This should not be used for long levels.", "cycle": [0, 8, 15, 30]}
+    {"tab": 4, "id": "compressmb", "name": "Compress Export", "desc": "Reencodes the exported video to fit social media upload limits. This might not work well for long levels.", "cycle": [0, 8, 15, 50]}
   ]
 }
