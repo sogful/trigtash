@@ -68,9 +68,7 @@ fn read_levels() -> String {
       for e in entries.flatten() {
         let path = e.path();
         if path.extension().and_then(|x| x.to_str()) == Some("tgd") {
-          if let (Some(stem), Ok(content)) =
-            (path.file_stem().and_then(|s| s.to_str()), std::fs::read_to_string(&path))
-          {
+          if let (Some(stem), Ok(content)) = (path.file_stem().and_then(|s| s.to_str()), std::fs::read_to_string(&path)) {
             out.insert(stem.to_string(), serde_json::Value::String(content));
           }
         }
@@ -378,7 +376,16 @@ fn ffmpeg_run(args: Vec<String>) -> Result<i32, String> {
 //////////////////////////////////////////////////////////////////////////
 
 fn game_dir() -> Option<PathBuf> {
-  std::env::current_exe().ok()?.parent().map(|d| d.join("game"))
+  let exe = std::env::current_exe().ok()?;
+  let dir = exe.parent()?;
+  let candidates = [
+    dir.join("game"),
+    dir.join("game").join("game"),
+    dir.join("build").join("game"),
+  ];
+  candidates
+    .into_iter()
+    .find(|candidate| candidate.join("index.html").is_file())
 }
 
 fn percent_decode(s: &str) -> String {
@@ -436,7 +443,20 @@ fn serve_game(uri_path: &str) -> tauri::http::Response<Vec<u8>> {
   let not_found = || tauri::http::Response::builder().status(404).body(Vec::new()).unwrap();
   let dir = match game_dir() {
     Some(d) => d,
-    None => return not_found(),
+    None => {
+      let expected = std::env::current_exe()
+        .ok()
+        .and_then(|p| p.parent().map(|d| d.join("game").join("index.html")))
+        .map(|p| p.to_string_lossy().replace('&', "&amp;").replace('<', "&lt;").replace('>', "&gt;"))
+        .unwrap_or_else(|| "the game folder beside this executable".to_string());
+      let html = format!(r#"<!doctype html><meta charset="utf-8"><title>Game files not found</title><style>html{{font:18px system-ui;background:#10131a;color:#f5f7ff}}body{{max-width:760px;margin:12vh auto;padding:32px}}code{{display:block;margin-top:18px;padding:16px;background:#202633;border-radius:8px;overflow-wrap:anywhere}}</style><h1>Game files not found</h1><p>Keep <b>Trigonometry Dash.exe</b> inside the extracted folder. The complete <b>game</b> folder must stay next to it.</p><p>Expected this file:</p><code>{expected}</code>"#);
+      return tauri::http::Response::builder()
+        .status(200)
+        .header("Content-Type", "text/html; charset=utf-8")
+        .header("Cache-Control", "no-store")
+        .body(html.into_bytes())
+        .unwrap();
+    }
   };
   let mut rel = percent_decode(uri_path.trim_start_matches('/'));
   if let Some(q) = rel.find('?') {

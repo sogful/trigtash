@@ -1,4 +1,8 @@
-if you just want to play the game, run the exe in `/build/`!
+if you just want to play the game, extract the whole zip and run `/game/Trigonometry Dash.exe`!
+don't move the exe out by itself (and don't delete this file: `/game/game/index.html`)
+
+if the launcher says "Game files not found", extract the whole zip again instead of
+opening or dragging only the exe out of the zip.
 
 for the gdevelop project, see `/project/`
 for javascript injected into the project, see `/scripts`
@@ -10,14 +14,3 @@ so realistically you don't even have to open the gdevelop ide to edit this mod :
 
 to rebuild the game, run `build.bat`.
 for a smaller 40mb build without hq audio, run `build (small).bat`.
-
-⣿⣿⠿⠻⠟⠿⠻⠟⠿⠻⠟⠿⢻⣿⣿
-⣿⢩⣿⣿⢿⣻⣟⣿⣻⡟⣿⢻⣷⢈⣿
-⣿⢂⡿⣇⢢⣘⡿⣞⡷⣅⢂⢿⡾⢠⣿
-⣿⢂⡿⣯⠷⣯⠿⣽⢻⡽⣻⢾⡽⢂⣿
-⣿⠢⣝⢦⠑⡄⠣⢄⠣⡐⢡⢺⡹⢠⣿
-⣿⡑⢮⢇⠿⣜⠻⣜⠳⣝⣣⠯⣕⠢⣿
-⣿⡐⠢⢌⡟⡤⢃⠄⠣⣜⣱⠂⠤⣑⣿
-⣿⡐⢻⢎⠾⣁⠂⡜⡳⢮⡱⢃⣶⣿⣿
-⣿⡄⠣⠌⠒⡄⣂⡐⠡⠂⠔⡡⣿⣿⣿
-⣿⣿⣧⣾⣴⣾⣿⣷⣦⣷⣦⣿⣿⣿⣿
