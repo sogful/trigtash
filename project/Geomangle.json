@@ -135777,191 +135777,6 @@
           ]
         },
         {
-          "colorB": 74,
-          "colorG": 228,
-          "colorR": 176,
-          "creationTime": 0,
-          "folded": true,
-          "name": "decoration colour (tas)",
-          "source": "",
-          "type": "BuiltinCommonInstructions::Group",
-          "parameters": [],
-          "events": [
-            {
-              "type": "BuiltinCommonInstructions::JsCode",
-              "inlineCode": [
-                "const scene = runtimeScene;",
-                "const v = scene.getVariables();",
-                "",
-                "const valid = s => /^\\d+;\\d+;\\d+$/.test(s);",
-                "const tint = (names, color) => {",
-                "  if (!valid(color)) return;",
-                "  for (const n of names) {",
-                "    for (const o of (scene.getObjects(n) || [])) {try {o.setColor(color)} catch (e) {}}",
-                "  }",
-                "};",
-                "",
-                "let deco1 = \"\", deco2 = \"\";",
-                "try {",
-                "  const li = v.get(\"loadedLevel\").getChild(\"levelInfo\");",
-                "  deco1 = li.getChild(\"deco1\").getAsString();",
-                "  deco2 = li.getChild(\"deco2\").getAsString();",
-                "} catch (e) {}",
-                "",
-                "const DECO1 = [\"baselesschain\", \"bigburstspinner\", \"bigcogspinner\", \"bigcrossspinner\",",
-                "  \"bigfanspinner\", \"bigflowerspinner\", \"bigoctospinner\", \"bigstarspinner\", \"burstspinner\",",
-                "  \"chain\", \"cogspinner\", \"crossspinner\", \"crystals\", \"fanspinner\", \"flowerspinner\",",
-                "  \"groundthorn\", \"helix\", \"octospinner\", \"shortgroundthorn\", \"smallburstspinner\",",
-                "  \"smallchain\", \"smallcogspinner\", \"smallcrossspinner\", \"smallflowerspinner\", \"smallhelix\",",
-                "  \"smalloctospinner\", \"smallstarspinner\", \"starspinner\", \"tallgroundthorn\"];",
-                "const DECO2 = [\"arrow\", \"chevronarrow\", \"clouds\", \"cross\", \"diamondstar\", \"exclamationmark\",",
-                "  \"groundrectangles\", \"heart\", \"note\", \"questionmark\", \"sharpy\", \"sharpycorner\",",
-                "  \"squareclouds\", \"squarewirecenter\", \"squarewirecorner\", \"squarewireend\", \"squarewireline\",",
-                "  \"squarewiresole\", \"squarewiretee\", \"star\", \"swiggly\", \"swigglycorner\", \"triangle\"];",
-                "",
-                "const P = (window.__leveldeco = window.__leveldeco || {});",
-                "if (P.owner !== scene) {P.owner = scene; P.d1 = null; P.d2 = null}",
-                "if (deco1 !== P.d1 || deco2 !== P.d2) {",
-                "  P.d1 = deco1; P.d2 = deco2;",
-                "  tint(DECO1, deco1);",
-                "  tint(DECO2, deco2);",
-                "}",
-                ""
-              ],
-              "parameterObjects": "",
-              "useStrict": true,
-              "eventsSheetExpanded": false
-            }
-          ]
-        },
-        {
-          "colorB": 74,
-          "colorG": 228,
-          "colorR": 176,
-          "creationTime": 0,
-          "folded": true,
-          "name": "layout mode (tas)",
-          "source": "",
-          "type": "BuiltinCommonInstructions::Group",
-          "parameters": [],
-          "events": [
-            {
-              "type": "BuiltinCommonInstructions::JsCode",
-              "inlineCode": [
-                "// layout mode: strip everything without a hitbox (decorations/fakes/fill), keep text +",
-                "// gameplay + real collision; delete enclosed interior solids and unify full-block skins",
-                "// to the default (physics identical); + particles/spin off + off-screen physics culling.",
-                "const scene = runtimeScene;",
-                "let lm = false, s = null;",
-                "try {s = scene.getVariables().get(\"settings\"); lm = s.getChild(\"layoutmode\").getAsBoolean()} catch (e) {}",
-                "if (lm) {",
-                "  try {s.getChild(\"disableparticles\").setBoolean(true)} catch (e) {}",
-                "  try {s.getChild(\"nospin\").setBoolean(true)} catch (e) {}",
-                "  const REMOVE = [\"emptyblock2\",\"emptyblackblock\",\"emptyblock3\",\"fakespike\",\"fakeshortspike\",\"fakesmallspike\",\"cornerthorns\",\"cornerripples\",\"emptybrickblock\",\"phant\",\"cornerdot\",\"emptyblock4\",\"cornerwaves\",\"cornerridges\",\"bigstarspinner\",\"starspinner\",\"smallstarspinner\",\"smallcrossspinner\",\"crossspinner\",\"bigcrossspinner\",\"cornersquares\",\"fakeminispike\",\"dotgrassblock\",\"emptygrassblock\",\"squarewireend\",\"squarewireline\",\"squarewirecorner\",\"squarewiretee\",\"squarewirecenter\",\"fakeblock\",\"fakeslab\",\"fakeminiblock\",\"baselesschain\",\"dotblock2\",\"dotblock3\",\"dotbrickblock\",\"dotblackblock\",\"squarewiresole\",\"bigfanspinner\",\"bigcogspinner\",\"fanspinner\",\"cogspinner\",\"smallcogspinner\",\"chevronarrow\",\"smallhelix\",\"helix\",\"note\",\"heart\",\"diamondstar\",\"squareclouds\",\"groundrectangles\",\"shortgroundthorn\",\"groundthorn\",\"tallgroundthorn\",\"pixel1x1\",\"pixel2x2\",\"pixel3x3\",\"pixel4x4\",\"cornerelectro\",\"edgeelectro\",\"dotelectro\",\"_4dotelectro\",\"cupelectro\",\"pillarelectro\",\"_2dotelectro\",\"edgedotelectro\",\"electrofill\",\"bigburstspinner\",\"bigflowerspinner\",\"bigoctospinner\",\"burstspinner\",\"chain\",\"crystals\",\"flowerspinner\",\"octospinner\",\"smallburstspinner\",\"smallchain\",\"smallflowerspinner\",\"smalloctospinner\",\"arrow\",\"clouds\",\"cross\",\"exclamationmark\",\"questionmark\",\"sharpy\",\"sharpycorner\",\"star\",\"swiggly\",\"swigglycorner\",\"triangle\",\"tiledrectangle\"];",
-                "  for (const name of REMOVE) {const l = scene.getObjects(name); if (l) {for (const o of l) o.deleteFromScene(scene);}}",
-                "  const FULLBLOCK = [\"block\",\"block2\",\"cupblock2\",\"pillarblock2\",\"cornerblock2\",\"block3\",\"cupblock3\",\"pillarblock3\",\"cornerblock3\",\"blackblock\",\"cupblackblock\",\"pillarblackblock\",\"cornerblackblock\",\"iceblock\",\"brickblock\",\"cupbrickblock\",\"pillarbrickblock\",\"cornerbrickblock\",\"metalblock\",\"lineblock\",\"cuplineblock\",\"pillarlineblock\",\"cornerlineblock\",\"block4\",\"cupblock4\",\"pillarblock4\",\"cornerblock4\",\"grassblock\",\"cupgrassblock\",\"pillargrassblock\",\"cornergrassblock\",\"goldenblock\"];",
-                "  const W = (window.__layout = window.__layout || {});",
-                "  if (W.scene !== scene) {W.scene = scene; W.done = false; W.stable = 0; W.last = -1;}",
-                "  if (!W.done) {",
-                "    let cnt = 0;",
-                "    for (const name of FULLBLOCK) {const l = scene.getObjects(name); if (l) cnt += l.length;}",
-                "    if (cnt === W.last) W.stable++; else {W.stable = 0; W.last = cnt;}",
-                "    if (cnt > 0 && W.stable >= 5) {",
-                "      W.done = true;",
-                "      const blocks = [];",
-                "      for (const name of FULLBLOCK) {const l = scene.getObjects(name); if (!l) continue; for (const o of l) blocks.push({o: o, w: o.getWidth(), h: o.getHeight(), x: o.getCenterXInScene(), y: o.getCenterYInScene()});}",
-                "      const step = vals => {",
-                "        const u = [...new Set(vals.map(v => Math.round(v)))].sort((a, b) => a - b), g = {};",
-                "        for (let i = 1; i < u.length; i++) {const d = u[i] - u[i - 1]; if (d > 0 && d <= 64) g[d] = (g[d] || 0) + 1;}",
-                "        let best = 0, S = 0; for (const d in g) if (g[d] > best) {best = g[d]; S = +d;} return S;",
-                "      };",
-                "      const S = step(blocks.map(b => b.x)) || step(blocks.map(b => b.y)) || 0;",
-                "      let removed = 0;",
-                "      if (S > 0) {",
-                "        const H = 8, cells = new Map();",
-                "        for (const b of blocks) {const k = Math.round(b.x / H) + \",\" + Math.round(b.y / H); if (!cells.has(k)) cells.set(k, []); cells.get(k).push(b);}",
-                "        const tol = S * 0.4, rad = Math.ceil(tol / H) + 1;",
-                "        const near = (x, y) => {",
-                "          const cx = Math.round(x / H), cy = Math.round(y / H);",
-                "          for (let dx = -rad; dx <= rad; dx++) for (let dy = -rad; dy <= rad; dy++) {const a = cells.get((cx + dx) + \",\" + (cy + dy)); if (a) for (const b of a) if (Math.abs(b.x - x) <= tol && Math.abs(b.y - y) <= tol) return true;}",
-                "          return false;",
-                "        };",
-                "        for (const b of blocks) if (near(b.x - S, b.y) && near(b.x + S, b.y) && near(b.x, b.y - S) && near(b.x, b.y + S)) {b.o.deleteFromScene(scene); b.dead = true; removed++;}",
-                "      }",
-                "      let retex = 0;",
-                "      const UNIFY = new Set([\"block2\",\"cupblock2\",\"pillarblock2\",\"cornerblock2\",\"block3\",\"cupblock3\",\"pillarblock3\",\"cornerblock3\",\"blackblock\",\"cupblackblock\",\"pillarblackblock\",\"cornerblackblock\",\"brickblock\",\"cupbrickblock\",\"pillarbrickblock\",\"cornerbrickblock\",\"metalblock\",\"lineblock\",\"cuplineblock\",\"pillarlineblock\",\"cornerlineblock\",\"block4\",\"cupblock4\",\"pillarblock4\",\"cornerblock4\",\"grassblock\",\"cupgrassblock\",\"pillargrassblock\",\"cornergrassblock\",\"goldenblock\"]);",
-                "      let tex = null;",
-                "      try {const bl = scene.getObjects(\"block\"); if (bl && bl.length) {const r = bl[0].getRendererObject(); if (r && r.texture) tex = r.texture;}} catch (e) {}",
-                "      if (!tex) {try {tex = scene.getGame().getImageManager().getPIXITexture(\"assets\\\\textures\\\\editor\\\\tiles\\\\block.png\")} catch (e) {}}",
-                "      if (tex) for (const b of blocks) {if (b.dead || !UNIFY.has(b.o.getName())) continue; try {const r = b.o.getRendererObject(); if (r && \"texture\" in r) {r.texture = tex; retex++}} catch (e) {}}",
-                "      try {console.log(\"[layout] step=\" + S + \" fullBlocks=\" + blocks.length + \" interiorRemoved=\" + removed + \" retextured=\" + retex)} catch (e) {}",
-                "    }",
-                "  }",
-                "  const CULL = [\"groundShine\",\"ground\",\"block\",\"slab\",\"block2\",\"cupblock2\",\"pillarblock2\",\"cornerblock2\",\"edgeblock2\",\"slope\",\"wedge\",\"flippedwedge\",\"spike\",\"shortspike\",\"thorns\",\"smallspike\",\"bigsaw\",\"saw\",\"smallsaw\",\"block3\",\"cupblock3\",\"pillarblock3\",\"cornerblock3\",\"edgeblock3\",\"slope3\",\"wedge3\",\"flippedwedge3\",\"ripples\",\"blackblock\",\"cupblackblock\",\"pillarblackblock\",\"cornerblackblock\",\"edgeblackblock\",\"blackslope\",\"blackwedge\",\"flippedblackwedge\",\"iceblock\",\"ghostblock\",\"ghostspike\",\"ghostshortspike\",\"ghostsmallspike\",\"ghostslope\",\"ghostwedge\",\"flippedghostwedge\",\"ghostslab\",\"ghostbigsaw\",\"ghostsaw\",\"ghostsmallsaw\",\"brickblock\",\"cupbrickblock\",\"pillarbrickblock\",\"cornerbrickblock\",\"edgebrickblock\",\"brickslope\",\"brickwedge\",\"flippedbrickwedge\",\"biggear\",\"gear\",\"smallgear\",\"breakblock\",\"playerpass\",\"physicspass\",\"onblock\",\"offblock\",\"onspike\",\"offspike\",\"metalblock\",\"lineblock\",\"cuplineblock\",\"pillarlineblock\",\"cornerlineblock\",\"edgelineblock\",\"lineslope\",\"linewedge\",\"flippedlinewedge\",\"block4\",\"cupblock4\",\"pillarblock4\",\"cornerblock4\",\"edgeblock4\",\"slope4\",\"wedge4\",\"flippedwedge4\",\"cavespike\",\"shortcavespike\",\"smallcavespike\",\"waves\",\"ridges\",\"squares\",\"miniblock\",\"minighostblock\",\"minispike\",\"minighostspike\",\"minicavespike\",\"grassblock\",\"cupgrassblock\",\"pillargrassblock\",\"cornergrassblock\",\"edgegrassblock\",\"bigspearsaw\",\"spearsaw\",\"smallspearsaw\",\"leftxslab\",\"mainxslab\",\"rightxslab\",\"solexslab\",\"cornerxslab\",\"dotxslab\",\"physic\",\"megablock\",\"megaghostblock\",\"goldenblock\",\"cornermetal\",\"slabmetal\",\"dotmetal\",\"metalplatform\"];",
-                "  const PLAYERS = [\"cube\", \"ship\", \"ball\", \"ufo\", \"wave\", \"oldufo\", \"icon\"];",
-                "  let px = null;",
-                "  for (const pn of PLAYERS) {const l = scene.getObjects(pn); if (l) {for (const o of l) {if (!o.isHidden()) {px = o.getX(); break}}} if (px !== null) break;}",
-                "  if (px === null) {try {px = gdjs.evtTools.camera.getCameraX(scene, \"\", 0)} catch (e) {}}",
-                "  if (px !== null) {",
-                "    let visW = 480;",
-                "    try {const z = gdjs.evtTools.camera.getCameraZoom(scene, \"\", 0) || 1; visW = scene.getGame().getGameResolutionWidth() / z} catch (e) {}",
-                "    const half = visW * 1.5, far = half * 1.2;",
-                "    for (const name of CULL) {",
-                "      const list = scene.getObjects(name); if (!list) continue;",
-                "      for (const o of list) {",
-                "        if (o.getWidth() > 1000) continue;",
-                "        const d = Math.abs(o.getX() - px), on = o.behaviorActivated(\"Physics2\");",
-                "        try {if (on && d > far) o.activateBehavior(\"Physics2\", false); else if (!on && d <= half) o.activateBehavior(\"Physics2\", true)} catch (e) {}",
-                "      }",
-                "    }",
-                "  }",
-                "}"
-              ],
-              "parameterObjects": "",
-              "useStrict": true,
-              "eventsSheetExpanded": false
-            }
-          ]
-        },
-        {
-          "colorB": 74,
-          "colorG": 228,
-          "colorR": 176,
-          "creationTime": 0,
-          "folded": true,
-          "name": "vignette hide (tas)",
-          "source": "",
-          "type": "BuiltinCommonInstructions::Group",
-          "parameters": [],
-          "events": [
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "SceneVariableAsBoolean"
-                  },
-                  "parameters": [
-                    "settings.hidemmvignette",
-                    "True"
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "Cache"
-                  },
-                  "parameters": [
-                    "vignette"
-                  ]
-                }
-              ],
-              "events": []
-            }
-          ]
-        },
-        {
           "type": "BuiltinCommonInstructions::Group",
           "disabled": false,
           "folded": true,
@@ -139122,6 +138937,189 @@
               "parameterObjects": "",
               "useStrict": true,
               "eventsSheetExpanded": false
+            }
+          ]
+        },
+        {
+          "colorB": 74,
+          "colorG": 228,
+          "colorR": 176,
+          "creationTime": 0,
+          "folded": true,
+          "name": "decoration colour (tas)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "parameters": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::JsCode",
+              "inlineCode": [
+                "const scene = runtimeScene;",
+                "const v = scene.getVariables();",
+                "",
+                "const valid = s => /^\\d+;\\d+;\\d+$/.test(s);",
+                "const tint = (names, color) => {",
+                "  if (!valid(color)) return;",
+                "  for (const n of names) {",
+                "    for (const o of (scene.getObjects(n) || [])) {try {o.setColor(color)} catch (e) {}}",
+                "  }",
+                "};",
+                "",
+                "let deco1 = \"\", deco2 = \"\";",
+                "try {",
+                "  const li = v.get(\"loadedLevel\").getChild(\"levelInfo\");",
+                "  deco1 = li.getChild(\"deco1\").getAsString();",
+                "  deco2 = li.getChild(\"deco2\").getAsString();",
+                "} catch (e) {}",
+                "",
+                "const DECO1 = [\"baselesschain\", \"bigburstspinner\", \"bigcogspinner\", \"bigcrossspinner\",",
+                "  \"bigfanspinner\", \"bigflowerspinner\", \"bigoctospinner\", \"bigstarspinner\", \"burstspinner\",",
+                "  \"chain\", \"cogspinner\", \"crossspinner\", \"crystals\", \"fanspinner\", \"flowerspinner\",",
+                "  \"groundthorn\", \"helix\", \"octospinner\", \"shortgroundthorn\", \"smallburstspinner\",",
+                "  \"smallchain\", \"smallcogspinner\", \"smallcrossspinner\", \"smallflowerspinner\", \"smallhelix\",",
+                "  \"smalloctospinner\", \"smallstarspinner\", \"starspinner\", \"tallgroundthorn\"];",
+                "const DECO2 = [\"arrow\", \"chevronarrow\", \"clouds\", \"cross\", \"diamondstar\", \"exclamationmark\",",
+                "  \"groundrectangles\", \"heart\", \"note\", \"questionmark\", \"sharpy\", \"sharpycorner\",",
+                "  \"squareclouds\", \"squarewirecenter\", \"squarewirecorner\", \"squarewireend\", \"squarewireline\",",
+                "  \"squarewiresole\", \"squarewiretee\", \"star\", \"swiggly\", \"swigglycorner\", \"triangle\"];",
+                "",
+                "const P = (window.__leveldeco = window.__leveldeco || {});",
+                "if (P.owner !== scene) {P.owner = scene; P.d1 = null; P.d2 = null}",
+                "if (deco1 !== P.d1 || deco2 !== P.d2) {",
+                "  P.d1 = deco1; P.d2 = deco2;",
+                "  tint(DECO1, deco1);",
+                "  tint(DECO2, deco2);",
+                "}",
+                ""
+              ],
+              "parameterObjects": "",
+              "useStrict": true,
+              "eventsSheetExpanded": false
+            }
+          ]
+        },
+        {
+          "colorB": 74,
+          "colorG": 228,
+          "colorR": 176,
+          "creationTime": 0,
+          "folded": true,
+          "name": "layout mode (tas)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "parameters": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::JsCode",
+              "inlineCode": [
+                "",
+                "const scene = runtimeScene;",
+                "let lm = false, s = null;",
+                "try {s = scene.getVariables().get(\"settings\"); lm = s.getChild(\"layoutmode\").getAsBoolean()} catch (e) {}",
+                "if (lm) {",
+                "  try {s.getChild(\"disableparticles\").setBoolean(true)} catch (e) {}",
+                "  try {s.getChild(\"nospin\").setBoolean(true)} catch (e) {}",
+                "  const REMOVE = [\"emptyblock2\",\"emptyblackblock\",\"emptyblock3\",\"fakespike\",\"fakeshortspike\",\"fakesmallspike\",\"cornerthorns\",\"cornerripples\",\"emptybrickblock\",\"phant\",\"cornerdot\",\"emptyblock4\",\"cornerwaves\",\"cornerridges\",\"bigstarspinner\",\"starspinner\",\"smallstarspinner\",\"smallcrossspinner\",\"crossspinner\",\"bigcrossspinner\",\"cornersquares\",\"fakeminispike\",\"dotgrassblock\",\"emptygrassblock\",\"squarewireend\",\"squarewireline\",\"squarewirecorner\",\"squarewiretee\",\"squarewirecenter\",\"fakeblock\",\"fakeslab\",\"fakeminiblock\",\"baselesschain\",\"dotblock2\",\"dotblock3\",\"dotbrickblock\",\"dotblackblock\",\"squarewiresole\",\"bigfanspinner\",\"bigcogspinner\",\"fanspinner\",\"cogspinner\",\"smallcogspinner\",\"chevronarrow\",\"smallhelix\",\"helix\",\"note\",\"heart\",\"diamondstar\",\"squareclouds\",\"groundrectangles\",\"shortgroundthorn\",\"groundthorn\",\"tallgroundthorn\",\"pixel1x1\",\"pixel2x2\",\"pixel3x3\",\"pixel4x4\",\"cornerelectro\",\"edgeelectro\",\"dotelectro\",\"_4dotelectro\",\"cupelectro\",\"pillarelectro\",\"_2dotelectro\",\"edgedotelectro\",\"electrofill\",\"bigburstspinner\",\"bigflowerspinner\",\"bigoctospinner\",\"burstspinner\",\"chain\",\"crystals\",\"flowerspinner\",\"octospinner\",\"smallburstspinner\",\"smallchain\",\"smallflowerspinner\",\"smalloctospinner\",\"arrow\",\"clouds\",\"cross\",\"exclamationmark\",\"questionmark\",\"sharpy\",\"sharpycorner\",\"star\",\"swiggly\",\"swigglycorner\",\"triangle\",\"tiledrectangle\"];",
+                "  for (const name of REMOVE) {const l = scene.getObjects(name); if (l) {for (const o of l) o.deleteFromScene(scene);}}",
+                "  const FULLBLOCK = [\"block\",\"block2\",\"cupblock2\",\"pillarblock2\",\"cornerblock2\",\"block3\",\"cupblock3\",\"pillarblock3\",\"cornerblock3\",\"blackblock\",\"cupblackblock\",\"pillarblackblock\",\"cornerblackblock\",\"iceblock\",\"brickblock\",\"cupbrickblock\",\"pillarbrickblock\",\"cornerbrickblock\",\"metalblock\",\"lineblock\",\"cuplineblock\",\"pillarlineblock\",\"cornerlineblock\",\"block4\",\"cupblock4\",\"pillarblock4\",\"cornerblock4\",\"grassblock\",\"cupgrassblock\",\"pillargrassblock\",\"cornergrassblock\",\"goldenblock\"];",
+                "  const W = (window.__layout = window.__layout || {});",
+                "  if (W.scene !== scene) {W.scene = scene; W.done = false; W.stable = 0; W.last = -1;}",
+                "  if (!W.done) {",
+                "    let cnt = 0;",
+                "    for (const name of FULLBLOCK) {const l = scene.getObjects(name); if (l) cnt += l.length;}",
+                "    if (cnt === W.last) W.stable++; else {W.stable = 0; W.last = cnt;}",
+                "    if (cnt > 0 && W.stable >= 5) {",
+                "      W.done = true;",
+                "      const blocks = [];",
+                "      for (const name of FULLBLOCK) {const l = scene.getObjects(name); if (!l) continue; for (const o of l) blocks.push({o: o, w: o.getWidth(), h: o.getHeight(), x: o.getCenterXInScene(), y: o.getCenterYInScene()});}",
+                "      const step = vals => {",
+                "        const u = [...new Set(vals.map(v => Math.round(v)))].sort((a, b) => a - b), g = {};",
+                "        for (let i = 1; i < u.length; i++) {const d = u[i] - u[i - 1]; if (d > 0 && d <= 64) g[d] = (g[d] || 0) + 1;}",
+                "        let best = 0, S = 0; for (const d in g) if (g[d] > best) {best = g[d]; S = +d;} return S;",
+                "      };",
+                "      const S = step(blocks.map(b => b.x)) || step(blocks.map(b => b.y)) || 0;",
+                "      let removed = 0;",
+                "      if (S > 0) {",
+                "        const H = 8, cells = new Map();",
+                "        for (const b of blocks) {const k = Math.round(b.x / H) + \",\" + Math.round(b.y / H); if (!cells.has(k)) cells.set(k, []); cells.get(k).push(b);}",
+                "        const tol = S * 0.4, rad = Math.ceil(tol / H) + 1;",
+                "        const near = (x, y) => {",
+                "          const cx = Math.round(x / H), cy = Math.round(y / H);",
+                "          for (let dx = -rad; dx <= rad; dx++) for (let dy = -rad; dy <= rad; dy++) {const a = cells.get((cx + dx) + \",\" + (cy + dy)); if (a) for (const b of a) if (Math.abs(b.x - x) <= tol && Math.abs(b.y - y) <= tol) return true;}",
+                "          return false;",
+                "        };",
+                "        for (const b of blocks) if (near(b.x - S, b.y) && near(b.x + S, b.y) && near(b.x, b.y - S) && near(b.x, b.y + S)) {b.o.deleteFromScene(scene); b.dead = true; removed++;}",
+                "      }",
+                "      let retex = 0;",
+                "      const UNIFY = new Set([\"block2\",\"cupblock2\",\"pillarblock2\",\"cornerblock2\",\"block3\",\"cupblock3\",\"pillarblock3\",\"cornerblock3\",\"blackblock\",\"cupblackblock\",\"pillarblackblock\",\"cornerblackblock\",\"brickblock\",\"cupbrickblock\",\"pillarbrickblock\",\"cornerbrickblock\",\"metalblock\",\"lineblock\",\"cuplineblock\",\"pillarlineblock\",\"cornerlineblock\",\"block4\",\"cupblock4\",\"pillarblock4\",\"cornerblock4\",\"grassblock\",\"cupgrassblock\",\"pillargrassblock\",\"cornergrassblock\",\"goldenblock\"]);",
+                "      let tex = null;",
+                "      try {const bl = scene.getObjects(\"block\"); if (bl && bl.length) {const r = bl[0].getRendererObject(); if (r && r.texture) tex = r.texture;}} catch (e) {}",
+                "      if (!tex) {try {tex = scene.getGame().getImageManager().getPIXITexture(\"assets\\\\textures\\\\editor\\\\tiles\\\\block.png\")} catch (e) {}}",
+                "      if (tex) for (const b of blocks) {if (b.dead || !UNIFY.has(b.o.getName())) continue; try {const r = b.o.getRendererObject(); if (r && \"texture\" in r) {r.texture = tex; retex++}} catch (e) {}}",
+                "      try {console.log(\"[layout] step=\" + S + \" fullBlocks=\" + blocks.length + \" interiorRemoved=\" + removed + \" retextured=\" + retex)} catch (e) {}",
+                "    }",
+                "  }",
+                "  const CULL = [\"groundShine\",\"ground\",\"block\",\"slab\",\"block2\",\"cupblock2\",\"pillarblock2\",\"cornerblock2\",\"edgeblock2\",\"slope\",\"wedge\",\"flippedwedge\",\"spike\",\"shortspike\",\"thorns\",\"smallspike\",\"bigsaw\",\"saw\",\"smallsaw\",\"block3\",\"cupblock3\",\"pillarblock3\",\"cornerblock3\",\"edgeblock3\",\"slope3\",\"wedge3\",\"flippedwedge3\",\"ripples\",\"blackblock\",\"cupblackblock\",\"pillarblackblock\",\"cornerblackblock\",\"edgeblackblock\",\"blackslope\",\"blackwedge\",\"flippedblackwedge\",\"iceblock\",\"ghostblock\",\"ghostspike\",\"ghostshortspike\",\"ghostsmallspike\",\"ghostslope\",\"ghostwedge\",\"flippedghostwedge\",\"ghostslab\",\"ghostbigsaw\",\"ghostsaw\",\"ghostsmallsaw\",\"brickblock\",\"cupbrickblock\",\"pillarbrickblock\",\"cornerbrickblock\",\"edgebrickblock\",\"brickslope\",\"brickwedge\",\"flippedbrickwedge\",\"biggear\",\"gear\",\"smallgear\",\"breakblock\",\"playerpass\",\"physicspass\",\"onblock\",\"offblock\",\"onspike\",\"offspike\",\"metalblock\",\"lineblock\",\"cuplineblock\",\"pillarlineblock\",\"cornerlineblock\",\"edgelineblock\",\"lineslope\",\"linewedge\",\"flippedlinewedge\",\"block4\",\"cupblock4\",\"pillarblock4\",\"cornerblock4\",\"edgeblock4\",\"slope4\",\"wedge4\",\"flippedwedge4\",\"cavespike\",\"shortcavespike\",\"smallcavespike\",\"waves\",\"ridges\",\"squares\",\"miniblock\",\"minighostblock\",\"minispike\",\"minighostspike\",\"minicavespike\",\"grassblock\",\"cupgrassblock\",\"pillargrassblock\",\"cornergrassblock\",\"edgegrassblock\",\"bigspearsaw\",\"spearsaw\",\"smallspearsaw\",\"leftxslab\",\"mainxslab\",\"rightxslab\",\"solexslab\",\"cornerxslab\",\"dotxslab\",\"physic\",\"megablock\",\"megaghostblock\",\"goldenblock\",\"cornermetal\",\"slabmetal\",\"dotmetal\",\"metalplatform\"];",
+                "  const PLAYERS = [\"cube\", \"ship\", \"ball\", \"ufo\", \"wave\", \"oldufo\", \"icon\"];",
+                "  let px = null;",
+                "  for (const pn of PLAYERS) {const l = scene.getObjects(pn); if (l) {for (const o of l) {if (!o.isHidden()) {px = o.getX(); break}}} if (px !== null) break;}",
+                "  if (px === null) {try {px = gdjs.evtTools.camera.getCameraX(scene, \"\", 0)} catch (e) {}}",
+                "  if (px !== null) {",
+                "    let visW = 480;",
+                "    try {const z = gdjs.evtTools.camera.getCameraZoom(scene, \"\", 0) || 1; visW = scene.getGame().getGameResolutionWidth() / z} catch (e) {}",
+                "    const half = visW * 1.5, far = half * 1.2;",
+                "    for (const name of CULL) {",
+                "      const list = scene.getObjects(name); if (!list) continue;",
+                "      for (const o of list) {",
+                "        if (o.getWidth() > 1000) continue;",
+                "        const d = Math.abs(o.getX() - px), on = o.behaviorActivated(\"Physics2\");",
+                "        try {if (on && d > far) o.activateBehavior(\"Physics2\", false); else if (!on && d <= half) o.activateBehavior(\"Physics2\", true)} catch (e) {}",
+                "      }",
+                "    }",
+                "  }",
+                "}"
+              ],
+              "parameterObjects": "",
+              "useStrict": true,
+              "eventsSheetExpanded": false
+            }
+          ]
+        },
+        {
+          "colorB": 74,
+          "colorG": 228,
+          "colorR": 176,
+          "creationTime": 0,
+          "folded": true,
+          "name": "vignette hide (tas)",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "parameters": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SceneVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "settings.hidemmvignette",
+                    "True"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "Cache"
+                  },
+                  "parameters": [
+                    "vignette"
+                  ]
+                }
+              ],
+              "events": []
             }
           ]
         }
@@ -167660,8 +167658,6 @@
                 "        });",
                 "      });",
                 "      try {gdjs.evtTools.storage.writeStringInJSONFile(\"trigonometrydash\", \"mappackLevels2\", JSON.stringify(byId))} catch (e) {}",
-                "      // reload if we had no cache, or the fetch revealed pack ids the cache lacked",
-                "      // (e.g. a newly-added pack), so their levelstores are built this session",
                 "      const cachedIds = cache ? Object.keys(cache) : [];",
                 "      const hasNew = Object.keys(byId).some(id => cachedIds.indexOf(id) === -1);",
                 "      if (!P.created || hasNew) {P.pendingReload = true}",
