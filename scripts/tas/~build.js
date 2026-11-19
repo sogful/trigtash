@@ -58,6 +58,12 @@ const objnames = ["tasHud", "tasHelp", "tasbtn", "tasclose", "tasrec", "tasvideo
 function removeinjected(list) {
   for (let i = list.length - 1; i >= 0; i--) {
     if (list[i].name === marker || list[i].name === marker + " early" || oldmarkers.includes(list[i].name)) list.splice(i, 1);
+    else if (list[i].events?.[0]?.name === marker + " respawn") {
+      const original = list[i].events[0].events[1];
+      list[i].actions.push(...original.actions);
+      list[i].events = original.events.slice(0, -1);
+      removeinjected(list[i].events);
+    }
     else if (list[i].events) removeinjected(list[i].events);
   }
 }
@@ -274,17 +280,55 @@ function gateCoins(list) {
 }
 gateCoins(level.events);
 console.log("coin-save gated on macro-off: " + coinGate + " event(s)");
+function practicehook(name) {
+  return {
+    type: "BuiltinCommonInstructions::JsCode",
+    inlineCode: ["if (window.__tas && window.__tas." + name + ") window.__tas." + name + "(runtimeScene);"],
+    parameterObjects: "", useStrict: true, eventsSheetExpanded: false
+  };
+}
+
 level.events.unshift({
   type: "BuiltinCommonInstructions::Group",
   disabled: false, folded: true,
   colorR: 228, colorG: 176, colorB: 74,
   creationTime: 0, name: marker + " early", source: "",
-  events: [{
-    type: "BuiltinCommonInstructions::JsCode",
-    inlineCode: ["if (window.__tas && window.__tas.earlyrespawn) window.__tas.earlyrespawn(runtimeScene);"],
-    parameterObjects: "", useStrict: true, eventsSheetExpanded: false
-  }]
+  events: [practicehook("legacyphysics")]
 });
+
+function patchrespawns(list) {
+  let count = 0;
+  for (const event of list) {
+    const wait = (event.actions || []).findIndex(action => action.type.value === "Wait");
+    const link = event.events?.some(child => child.type === "BuiltinCommonInstructions::Link" && child.target === "changeGamemode");
+    if (wait >= 0 && link && event.actions.some(action => action.parameters?.[2] === "Variable(checkpointX)")) {
+      const continuation = {
+        type: "BuiltinCommonInstructions::Standard", conditions: [],
+        actions: event.actions.splice(wait + 1),
+        events: [...event.events, practicehook("afterpracticerespawn")]
+      };
+      event.events = [{
+        type: "BuiltinCommonInstructions::Group", name: marker + " respawn",
+        disabled: false, folded: true, colorR: 228, colorG: 176, colorB: 74, creationTime: 0, source: "",
+        events: [practicehook("beforepracticerespawn"), continuation]
+      }];
+      count++;
+    } else if (event.events) {
+      count += patchrespawns(event.events);
+    }
+  }
+  return count;
+}
+
+const death = level.events.find(event => event.name === "DEATH");
+if (!death || patchrespawns(death.events) !== 2) throw new Error("native death and retry continuations not found");
+const retry = death.events[0].events.find(event => event.conditions?.some(condition =>
+  condition.type.value === "KeyPressed" && condition.parameters[1] === "r"
+));
+if (!retry) throw new Error("native retry key not found");
+if (!retry.conditions.some(condition => condition.parameters?.[0] === "tasretryheld")) {
+  retry.conditions.push({type: {value: "SceneVariableAsBoolean"}, parameters: ["tasretryheld", "False"]});
+}
 
 fs.writeFileSync(projfile, JSON.stringify(proj, null, 2));
 console.log("tas system injected into level (" + code.length + " lines)");

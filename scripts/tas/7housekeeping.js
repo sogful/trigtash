@@ -3,7 +3,6 @@
 if (t.hudowner !== runtimeScene) {
   t.hudowner = runtimeScene;
   t.skipvars = null; t.practstack = []; t.practbase = null;
-  t.awaitrespawn = false; t.earlyframes = 0; t.earlysnap = null;
   if (t.mode === "record") t.mode = "idle";
   t.dragcand = null; t.drewboxes = false;
   const pool = {};
@@ -128,14 +127,13 @@ if (t.hudowner !== runtimeScene) {
   t.recording = t.hotkey; // always record in the background while the macro setting is on!
   t.frameadv = t.readsetting(runtimeScene, "macroframeadv");
   t.inputviewer = t.readsetting(runtimeScene, "macroinputviewer");
+  t.inputvideo = t.readsetting(runtimeScene, "macroinputvideo");
   t.videoui = t.readsetting(runtimeScene, "macrovideoui");
   t.velocityreadout = t.readsetting(runtimeScene, "macrovelocity");
   t.velvector = t.readsetting(runtimeScene, "macrovelvector");
   t.stopbutton = t.readsetting(runtimeScene, "macrostopbutton");
   t.macro = null; t.prevstop = Infinity; t.practtween = null;
   t.prevz = false; t.prevx = false; t.prevr = false;
-  t.armage = 0; t.pendingsynth = null;
-  t.bufjump = {space: false, up: false, mouse: false};
   t.hadcp = false; t.cpinit = false;
   try {t.prevdeaths = runtimeScene.getVariables().get("deaths").getAsNumber()} catch (e) {t.prevdeaths = 0}
 }

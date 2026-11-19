@@ -30,9 +30,6 @@ if (t.installed !== runtimeScene.getGame()) {
   t.playend = null;
   t.fadein = null;
   t.countdown = null;
-  t.physjump = {space: false, up: false, mouse: false};
-  t.bufjump = {space: false, up: false, mouse: false};
-  t.pendingsynth = null;
   t.requestpractice = null;
   t.requestpause = false;
   t.hadcp = false;
@@ -59,7 +56,7 @@ if (t.installed !== runtimeScene.getGame()) {
   t.practstack = [];
   t.practbase = null;
   t.prevz = false; t.prevx = false; t.prevr = false;
-  t.prevdeaths = 0; t.awaitrespawn = false; t.armage = 0;
+  t.prevdeaths = 0;
 
   // gameplay input whitelist z/x included
   // so practice checkpoints replay correctly inside macros
@@ -69,14 +66,20 @@ if (t.installed !== runtimeScene.getGame()) {
 
   /*////////////////////////////////////////////////////////////////////*/
 
-  const input = game.getInputManager();
+  const realinput = game.getInputManager();
+  const input = {};
+  for (const method of ["onKeyPressed", "onKeyReleased", "isKeyPressed", "onMouseButtonPressed",
+    "onMouseButtonReleased", "isMouseButtonPressed", "onMouseMove", "getCursorX", "getCursorY",
+    "onTouchStart", "onTouchMove", "onTouchEnd", "onTouchCancel"]) {
+    input[method] = realinput[method].bind(realinput);
+  }
   const stack = game.getSceneStack ? game.getSceneStack() : game._sceneStack;
   t.stack = stack;
   t.origstep = stack.step.bind(stack);
 
-  const origframeend = input.onFrameEnded.bind(input);
+  const origframeend = realinput.onFrameEnded.bind(realinput);
   t.allowframeend = true;
-  input.onFrameEnded = function() {if (t.allowframeend) origframeend()};
+  realinput.onFrameEnded = function() {if (t.allowframeend) origframeend()};
 
   const note = msg => {try {console.log("[tas] " + msg)} catch (e) {}};
   t.note = note;
@@ -171,8 +174,71 @@ if (t.installed !== runtimeScene.getGame()) {
 
   /*////////////////////////////////////////////////////////////////////*/
 
-  // sloppy snapshots for frame unadvance
   const playernames = ["cube", "ship", "ball", "ufo", "wave", "oldufo"];
+
+  const pendingthrust = new WeakMap();
+  const physicsproto = gdjs.Physics2RuntimeBehavior.prototype;
+  const polarforce = physicsproto.applyPolarForce;
+  physicsproto.applyPolarForce = function(...args) {
+    if (t.practice && this.owner.getName() === "ship") {
+      const tm = this.owner.getRuntimeScene().getTimeManager();
+      pendingthrust.set(this.owner, {time: tm.getTimeFromStart(), args});
+    }
+    return polarforce.apply(this, args);
+  };
+
+  function readtimers(timers) {
+    const out = {};
+    for (const name in timers.items) {
+      const timer = timers.items[name];
+      out[name] = [timer.getTime(), timer.isPaused()];
+    }
+    return out;
+  }
+
+  function restoretimers(timers, saved, elapsed) {
+    for (const name in timers.items) {
+      if (!Object.hasOwn(saved, name)) timers.remove(name);
+    }
+    for (const name in saved) {
+      const [time, paused] = saved[name];
+      const timer = timers.containsKey(name) ? timers.get(name) : new gdjs.Timer(name);
+      timer.setTime(time + (paused ? 0 : elapsed));
+      timer.setPaused(paused);
+      timers.put(name, timer);
+    }
+  }
+
+  function readbody(behavior) {
+    return {
+      vx: behavior.getLinearVelocityX(), vy: behavior.getLinearVelocityY(),
+      va: behavior.getAngularVelocity(), sleeping: behavior.isSleeping()
+    };
+  }
+
+  function writebody(behavior, state, reconnect) {
+    const body = behavior.getBody();
+    if (!body) return;
+    if (reconnect) body.SetActive(false);
+    behavior.updateBodyFromObject();
+    if (reconnect) body.SetActive(true);
+    if (state.vx !== undefined) {
+      behavior.setLinearVelocityX(state.vx);
+      behavior.setLinearVelocityY(state.vy);
+      behavior.setAngularVelocity(state.va);
+    }
+    if (state.sleeping !== undefined) body.SetAwake(!state.sleeping);
+  }
+
+  function restorefilter(behavior, layers, masks) {
+    const layerchanges = behavior.layers ^ layers;
+    const maskchanges = behavior.masks ^ masks;
+    for (let bit = 0; bit < 16; bit++) {
+      const flag = 1 << bit;
+      if (layerchanges & flag) behavior.enableLayer(bit + 1, !!(layers & flag));
+      if (maskchanges & flag) behavior.enableMask(bit + 1, !!(masks & flag));
+    }
+  }
 
   function skiplist(scene) {
     if (t.skipvars && t.skipvars.scene === scene) return t.skipvars.names;
@@ -200,7 +266,7 @@ if (t.installed !== runtimeScene.getGame()) {
       let dyn = false; try {dyn = b.isDynamic()} catch (e) {}
       if (!dyn) continue;
       const e = {id: o.id, x: o.getX(), y: o.getY(), a: o.getAngle()};
-      try {e.vx = b.getLinearVelocityX(); e.vy = b.getLinearVelocityY(); e.va = b.getAngularVelocity()} catch (er) {}
+      Object.assign(e, readbody(b));
       out.push(e);
     }
     return out;
@@ -210,15 +276,21 @@ if (t.installed !== runtimeScene.getGame()) {
     const map = {}; for (const d of dyn) map[d.id] = d;
     let all; try {all = scene.getAdhocListOfAllInstances()} catch (e) {return}
     for (const o of all) {
-      const d = map[o.id]; if (!d) continue;
-      o.setPosition(d.x, d.y); try {o.setAngle(d.a)} catch (e) {}
-      try {const b = o.getBehavior("Physics2"); b.updateBodyFromObject();
-        if (d.vx !== undefined) {b.setLinearVelocityX(d.vx); b.setLinearVelocityY(d.vy); b.setAngularVelocity(d.va)}
-        else {b.setLinearVelocityX(0); b.setLinearVelocityY(0); b.setAngularVelocity(0)}} catch (e) {}
+      const d = map[o.id];
+      if (!d || !o.hasBehavior("Physics2")) continue;
+      const moved = o.getX() !== d.x || o.getY() !== d.y || o.getAngle() !== d.a;
+      if (moved) {
+        o.setPosition(d.x, d.y);
+        o.setAngle(d.a);
+      }
+      const b = o.getBehavior("Physics2");
+      if (b.isDynamic()) writebody(b, d, moved);
     }
   }
   function getanim(o) {try {return o.getBehavior("Animation").getAnimationIndex()} catch (e) {} try {return o.getAnimationIndex()} catch (e) {return 0}}
   function setanim(o, a) {try {o.getBehavior("Animation").setAnimationIndex(a); return} catch (e) {} try {o.setAnimationIndex(a)} catch (e) {}}
+  const switchnames = ["onblock", "offblock", "onspike", "offspike", "onoffswitch"];
+
   function captureobjs(scene) {
     const out = {};
     const bb = scene.getObjects("breakblock") || [];
@@ -232,6 +304,23 @@ if (t.installed !== runtimeScene.getGame()) {
     });
     for (const n of orbnames) {const list = scene.getObjects(n) || []; if (list.length) out[n] = list.map(o => {let l = 0; try {l = o.getVariables().get("locked").getAsBoolean() ? 1 : 0} catch (e) {} return {l: l, a: o.getAngle()}})}
     for (const n of spinnames) {const list = scene.getObjects(n) || []; if (list.length) out["@" + n] = list.map(o => o.getAngle())}
+    for (const name of switchnames) {
+      const list = scene.getObjects(name);
+      if (!list.length) continue;
+      out[name] = list.map(o => {
+        const state = {a: getanim(o)};
+        if (o.hasBehavior("Physics2")) {
+          const b = o.getBehavior("Physics2");
+          state.layers = b.layers;
+          state.masks = b.masks;
+        }
+        return state;
+      });
+    }
+    const checkpoints = scene.getObjects("checkpoint");
+    if (checkpoints.length) {
+      out.checkpoint = checkpoints.map(o => ({a: getanim(o), selected: o.getVariables().get("selected").getAsBoolean()}));
+    }
     out.dyn = capturedyn(scene);
     try {const gv = scene.getVariables(); if (gv.has("on")) out.on = gv.get("on").getAsNumber()} catch (e) {}
     return out;
@@ -270,6 +359,25 @@ if (t.installed !== runtimeScene.getGame()) {
       const list = scene.getObjects(n) || [];
       objs[key].forEach((a, i) => {const o = list[i]; if (!o) return; o.setAngle(a); try {o.getBehavior("Physics2").updateBodyFromObject()} catch (e) {}});
     }
+    for (const name of switchnames) {
+      if (!objs[name]) continue;
+      const list = scene.getObjects(name);
+      objs[name].forEach((state, index) => {
+        const o = list[index];
+        if (!o) return;
+        setanim(o, state.a);
+        if (state.layers !== undefined) restorefilter(o.getBehavior("Physics2"), state.layers, state.masks);
+      });
+    }
+    if (objs.checkpoint) {
+      const list = scene.getObjects("checkpoint");
+      objs.checkpoint.forEach((state, index) => {
+        const o = list[index];
+        if (!o) return;
+        setanim(o, state.a);
+        o.getVariables().get("selected").setBoolean(state.selected);
+      });
+    }
     restoredyn(scene, objs.dyn);
   }
 
@@ -284,28 +392,45 @@ if (t.installed !== runtimeScene.getGame()) {
     for (const pname of playernames) {
       const list = scene.getObjects(pname) || [];
       snap.players[pname] = list.map(o => {
-        const p = {x: o.getX(), y: o.getY(), angle: o.getAngle(), hidden: o.isHidden(), timers: {}};
-        if (o.hasBehavior && o.hasBehavior("Physics2")) {
-          const b = o.getBehavior("Physics2");
-          try {p.vx = b.getLinearVelocityX(); p.vy = b.getLinearVelocityY(); p.va = b.getAngularVelocity()} catch (e) {}
+        const p = {
+          x: o.getX(), y: o.getY(), angle: o.getAngle(), hidden: o.isHidden(),
+          width: o.getWidth(), height: o.getHeight(), offsetx: o.getXOffset(), offsety: o.getYOffset(),
+          opacity: o.getOpacity(), color: o.getColor(),
+          timers: readtimers(o._timers), vars: {}
+        };
+        for (const [name, value] of Object.entries(o.getVariables()._variables.items)) {
+          p.vars[name] = value.toJSObject();
         }
-        const ts = o._timers && o._timers.items;
-        for (const tn in ts || {}) p.timers[tn] = ts[tn].getTime();
+        if (o.hasBehavior("Physics2")) {
+          const b = o.getBehavior("Physics2");
+          Object.assign(p, readbody(b), {
+            shape: b.getShapeScale(), gravity: b.getGravityScale(),
+            linear: b.getLinearDamping(), angular: b.getAngularDamping(),
+            density: b.getDensity(), fixed: b.hasFixedRotation(), bodytype: b.bodyType,
+            layers: b.layers, masks: b.masks
+          });
+        }
+        const thrust = pendingthrust.get(o);
+        if (thrust && thrust.time === scene.getTimeManager().getTimeFromStart()) p.thrust = thrust.args;
         return p;
       });
     }
     const tm = scene.getTimeManager();
     snap.timescale = tm.getTimeScale();
     snap.timefromstart = tm.getTimeFromStart();
-    const sts = tm._timers && tm._timers.items;
-    for (const tn in sts || {}) snap.timers[tn] = sts[tn].getTime();
+    snap.timers = readtimers(tm._timers);
+    const once = scene.getOnceTriggers().getNetworkSyncData();
+    snap.once = {onceTriggers: {...once.onceTriggers}, lastFrameOnceTriggers: {...once.lastFrameOnceTriggers}};
+    const shared = scene.physics2SharedData;
+    if (shared) {
+      snap.physics = {time: shared.frameTime, scale: shared.timeScale, x: shared.gravityX, y: shared.gravityY};
+    }
     for (const lname of ["bg", "", "mastermodevignette", "light", "lightning", "ui", "transition"]) {
       try {
         const lay = scene.getLayer(lname);
         snap.cams[lname] = [lay.getCameraX(), lay.getCameraY(), lay.getCameraZoom()];
       } catch (e) {}
     }
-    if (t.mode === "record") {snap.reckeys = Object.assign({}, t.prevkeys); snap.recmouse = t.prevmouse}
     snap.objs = captureobjs(scene);
     return snap;
   }
@@ -317,27 +442,56 @@ if (t.installed !== runtimeScene.getGame()) {
       if (practice && name === "deaths") continue;
       try {container.get(name).fromJSObject(snap.vars[name])} catch (e) {}
     }
+    const tm = scene.getTimeManager();
+    const elapsed = practice ? tm.getElapsedTime() : 0;
+    tm.setTimeScale(snap.timescale);
+    tm._timeFromStart = snap.timefromstart + elapsed;
+    restoretimers(tm._timers, snap.timers, elapsed);
+    const once = snap.once;
+    scene.getOnceTriggers().updateNetworkSyncData({
+      onceTriggers: {...once.onceTriggers}, lastFrameOnceTriggers: {...once.lastFrameOnceTriggers}
+    });
     for (const pname in snap.players) {
-      const list = scene.getObjects(pname) || [];
-      snap.players[pname].forEach((p, i) => {
-        const o = list[i];
+      const list = (scene.getObjects(pname) || []).slice();
+      const saved = snap.players[pname];
+      for (let index = saved.length; index < list.length; index++) list[index].deleteFromScene(scene);
+      saved.forEach((p, index) => {
+        const o = list[index] || scene.createObject(pname);
         if (!o) return;
-        o.setX(p.x); o.setY(p.y); o.setAngle(p.angle); o.hide(p.hidden);
+        o.setPosition(p.x, p.y);
+        o.setAngle(p.angle);
+        o.hide(p.hidden);
+        o.setSize(p.width, p.height);
+        o.setXOffset(p.offsetx);
+        o.setYOffset(p.offsety);
+        o.setOpacity(p.opacity);
+        o.setColor(p.color);
+        for (const name in p.vars) o.getVariables().get(name).fromJSObject(p.vars[name]);
+        restoretimers(o._timers, p.timers, 0);
         o.clearForces();
-        if (o.hasBehavior && o.hasBehavior("Physics2")) {
-          const b = o.getBehavior("Physics2");
-          try {
-            b.updateBodyFromObject();
-            if (p.vx !== undefined) {b.setLinearVelocityX(p.vx); b.setLinearVelocityY(p.vy); b.setAngularVelocity(p.va)}
-          } catch (e) {}
+        if (p.shape === undefined) return;
+        const b = o.getBehavior("Physics2");
+        if (b.bodyType !== p.bodytype) {
+          if (p.bodytype === "Dynamic") b.setDynamic();
+          else if (p.bodytype === "Static") b.setStatic();
+          else b.setKinematic();
         }
-        for (const tn in p.timers) {try {o._timers.get(tn).setTime(p.timers[tn])} catch (e) {}}
+        b.setShapeScale(p.shape);
+        b.setGravityScale(p.gravity);
+        b.setLinearDamping(p.linear);
+        b.setAngularDamping(p.angular);
+        b.setDensity(p.density);
+        if (b.hasFixedRotation() !== p.fixed) b.setFixedRotation(p.fixed);
+        restorefilter(b, p.layers, p.masks);
+        writebody(b, p, true);
+        if (snap.physics) {
+          b._sharedData.frameTime = snap.physics.time;
+          b.setTimeScale(snap.physics.scale);
+          b.setGravity(snap.physics.x, snap.physics.y);
+        }
+        if (practice && p.thrust) b.applyPolarForce(...p.thrust);
       });
     }
-    const tm = scene.getTimeManager();
-    tm.setTimeScale(snap.timescale);
-    tm._timeFromStart = snap.timefromstart;
-    for (const tn in snap.timers) {try {tm._timers.get(tn).setTime(snap.timers[tn])} catch (e) {}}
     for (const lname in snap.cams) {
       try {
         const lay = scene.getLayer(lname);
@@ -353,41 +507,9 @@ if (t.installed !== runtimeScene.getGame()) {
     if (practice) return;
     t.frame = snap.frame;
     if (t.mode === "record") {
-      t.macro.events = t.macro.events.filter(ev => ev[0] < snap.frame);
-      t.macro.icon.length = Math.min(t.macro.icon.length, snap.frame);
-      if (t.macro && snap.objs) (t.macro.worldsnaps = t.macro.worldsnaps || {})[snap.frame] = snap.objs;
-      t.prevkeys = Object.assign({}, snap.reckeys || {});
-      t.prevmouse = !!snap.recmouse;
-      applykeystate({}, false);
+      if (!t.macro.inputonly && snap.objs) (t.macro.worldsnaps = t.macro.worldsnaps || {})[snap.frame] = snap.objs;
+      rewindrecord(snap.frame);
     }
     if (t.mode === "play") rebuildplaystate(snap.frame);
   }
-
-  t.earlyrespawn = function (scene) {
-    if (!t.earlysnap || t.earlyframes <= 0) return;
-
-    const snap = t.earlysnap;
-    let cpx = 0, cpy = 0;
-    try {cpx = svar(scene, "checkpointX").getAsNumber(); cpy = svar(scene, "checkpointY").getAsNumber()} catch (e) {}
-    let acted = false;
-    for (const pname in snap.players) {
-      const list = scene.getObjects(pname) || [];
-      snap.players[pname].forEach((pp, i) => {
-        const o = list[i];
-        if (!o) return;
-        if (!t.earlyplaced && (Math.abs(o.getX() - cpx) > 12 || Math.abs(o.getY() - cpy) > 12)) return;
-        acted = true;
-        if (!t.earlyplaced) {o.setX(pp.x); o.setY(pp.y)}
-        o.setAngle(pp.angle); o.hide(pp.hidden);
-        if (o.hasBehavior && o.hasBehavior("Physics2")) {
-          const b = o.getBehavior("Physics2");
-          try {
-            b.updateBodyFromObject();
-            if (pp.vx !== undefined) {b.setLinearVelocityX(pp.vx); b.setLinearVelocityY(pp.vy); b.setAngularVelocity(pp.va)}
-          } catch (e) {}
-        }
-      });
-    }
-    if (acted) {t.earlyplaced = true; t.earlyframes = 0}
-  };
 

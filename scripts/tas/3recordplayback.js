@@ -1,6 +1,10 @@
   /*////////////////////////////////////////////////////////////////////*/
 
-  // input recording & playback
+  function recordframe() {
+    if (t.macro.inputonly) recordinputs();
+    else recordlegacyframe();
+  }
+
   function samplekeys() {
     const cur = {};
     for (const name in t.watch) {
@@ -9,7 +13,7 @@
     return cur;
   }
 
-  function recordframe() {
+  function recordlegacyframe() {
     if (!t.macro) return;
     const cur = samplekeys();
     for (const name in t.watch) {
@@ -42,7 +46,7 @@
   }
 
   function applyicon(scene, frame) {
-    const entry = t.playm && t.playm.icon && t.playm.icon[frame];
+    const entry = t.playm && !t.playm.inputonly && t.playm.icon && t.playm.icon[frame];
     if (!Array.isArray(entry)) return;
     const list = scene.getObjects(playernames[entry[0]]) || [];
     const p = list.find(o => !o.isHidden()) || list[0];
@@ -70,6 +74,10 @@
   }
 
   function playframe() {
+    if (t.playm.inputonly) {
+      playinputframe();
+      return;
+    }
     while (t.playpos < t.playm.events.length && t.playm.events[t.playpos][0] === t.frame) {
       const ev = t.playm.events[t.playpos++];
       if (ev[1] === "kd") t.playkeys[ev[2]] = true;
@@ -84,6 +92,10 @@
   }
 
   function rebuildplaystate(frame) {
+    if (t.playm.inputonly) {
+      seekinput(frame);
+      return;
+    }
     t.playkeys = {}; t.playmouse = false; t.playcursor = null; t.playpos = 0;
     while (t.playpos < t.playm.events.length && t.playm.events[t.playpos][0] < frame) {
       const ev = t.playm.events[t.playpos++];
@@ -97,33 +109,38 @@
 
   function releaseall() {
     applykeystate({}, false);
-  }
-
-  function applypendingsynth() {
-    if (t.synthtap) {
-      if (t.synthtap.space) input.onKeyReleased(32, 0);
-      if (t.synthtap.up) input.onKeyReleased(38, 0);
-      if (t.synthtap.mouse) input.onMouseButtonReleased(0);
-      t.synthtap = null;
+    if (t.playm && t.playm.inputonly) {
+      if (input.isKeyPressed(t.watch.Escape)) input.onKeyReleased(t.watch.Escape, 0);
+      if (input.isKeyPressed(t.watch.r)) input.onKeyReleased(t.watch.r, 0);
+      if (input.isKeyPressed(t.watch.t)) input.onKeyReleased(t.watch.t, 0);
+      for (const id of t.playtouches.keys()) input.onTouchEnd(id);
+      t.playtouches.clear();
+      t.clickspace = false;
+      t.inputseek = false;
     }
-    const s = t.pendingsynth;
-    if (!s) return;
-    t.pendingsynth = null;
-    const tap = {};
-    if (s.space) {input.onKeyReleased(32, 0); input.onKeyPressed(32, 0); if (!t.physjump.space) tap.space = true}
-    if (s.up) {input.onKeyReleased(38, 0); input.onKeyPressed(38, 0); if (!t.physjump.up) tap.up = true}
-    if (s.mouse) {input.onMouseButtonReleased(0); input.onMouseButtonPressed(0); if (!t.physjump.mouse) tap.mouse = true}
-    t.synthtap = tap;
   }
 
   function resyncheld() {
     if (t.mode === "play") return;
-    if (t.physjump.space && !input.isKeyPressed(32)) input.onKeyPressed(32, 0);
-    if (t.physjump.up && !input.isKeyPressed(38)) input.onKeyPressed(38, 0);
-    if (t.physjump.mouse && !input.isMouseButtonPressed(0)) input.onMouseButtonPressed(0);
-    if (t.jumpclick) {if (!input.isKeyPressed(32)) {input.onKeyPressed(32, 0); t.clickspace = true}}
-    else if (t.clickspace) {input.onKeyReleased(32, 0); t.clickspace = false}
+    bridgeclick(t.jumpclick);
   }
+
+  function bridgeclick(held) {
+    if (held && !input.isKeyPressed(32)) {
+      input.onKeyPressed(32, 0);
+      t.clickspace = true;
+    } else if (!held && t.clickspace) {
+      if (!(t.mode === "play" ? t.playkeys.Space : t.realkeys.Space)) input.onKeyReleased(32, 0);
+      t.clickspace = false;
+    }
+  }
+
+  t.legacyphysics = function(scene) {
+    const legacy = t.priminglegacy ||
+      (t.mode === "play" && t.playm && !t.playm.inputonly) ||
+      (t.mode === "record" && t.macro && !t.macro.inputonly);
+    svar(scene, "macrolegacyphysics").setNumber(legacy ? 1 : 0);
+  };
 
   function dotreset(scene) {
     let qrvar = null, qrold = null;
@@ -156,7 +173,7 @@
 
   /*//// trim start ////*/
   function trimmacro(m) {
-    if (!m.icon || !m.icon.length) return;
+    if (m.inputonly || !m.icon || !m.icon.length) return;
     const icon = m.icon;
     const alive = f => Array.isArray(icon[f]);
     const keep = new Array(m.length).fill(true);
@@ -208,6 +225,7 @@
     const emitted = {keys: {}, mouse: false, cursor: null};
     const ws = m.worldsnaps || {}, newworldsnaps = {};
     for (let f = 0; f < m.length; f++) {
+      const actions = [];
       while (pos < events.length && events[pos][0] === f) {
         const ev = events[pos++];
         if (ev[1] === "kd") desired.keys[ev[2]] = true;
@@ -215,6 +233,7 @@
         if (ev[1] === "md") desired.mouse = true;
         if (ev[1] === "mu") desired.mouse = false;
         if (ev[1] === "mm") desired.cursor = [ev[2], ev[3]];
+        if (ev[1] === "back") actions.push(ev);
       }
       if (!keep[f]) continue;
       for (const name in Object.assign({}, emitted.keys, desired.keys)) {
@@ -231,6 +250,7 @@
         newevents.push([nf, "mm", desired.cursor[0], desired.cursor[1]]);
         emitted.cursor = desired.cursor;
       }
+      for (const action of actions) newevents.push([nf, ...action.slice(1)]);
       newicon[nf] = icon[f];
       if (ws[f]) newworldsnaps[nf] = ws[f];
       nf++;
@@ -245,6 +265,8 @@
 
   function endplayback(msg) {
     t.mode = "idle"; t.playend = null;
+    t.requestbacktrack = false;
+    t.manualpause = false;
     releaseall();
     t.fadein = performance.now();
     if (t.vidphase === "render" || t.ffhandle != null) abortoffline();
@@ -260,7 +282,7 @@
       if (t.mode !== "idle" || t.frozen || t.pace !== 1 || t.countdown || t.requestpractice) {
         t.mode = "idle"; t.frozen = false; t.pace = 1; t.requestrestart = null;
         t.playend = null; t.countdown = null; t.requestpractice = null;
-        t.pendingsynth = null; t.macro = null; t.prevstop = Infinity;
+        t.macro = null; t.prevstop = Infinity;
         t.videopending = false;
         if (t.vidphase === "render" || t.ffhandle != null) abortoffline();
         t.vidphase = null; t.vidblock = false; t.vidstep = "";
@@ -280,7 +302,7 @@
       const timer = scene.getTimeManager()._timers.get("stopwatch");
       if (timer) stopnow = timer.getTime();
     } catch (e) {}
-    if (t.mode === "play" && t.prevstop !== Infinity && stopnow < t.prevstop - 1) {
+    if (t.mode === "play" && !t.playm.inputonly && t.prevstop !== Infinity && stopnow < t.prevstop - 1) {
       endplayback("level restarted");
       t.prevstop = stopnow;
       refreshhud();
@@ -288,7 +310,7 @@
     }
     if (t.recording && !t.countdown && !t.requestrestart && !t.requestpractice && !t.ubacktrack) {
       const fresh = stopnow < t.prevstop - 1;
-      if (t.mode === "record" && fresh) startsession(scene);
+      if (t.mode === "record" && fresh && !t.macro.inputonly) startsession(scene);
       else if (t.mode === "idle" && !t.playend && !winshown(scene) && (t.macro === null || fresh)) startsession(scene);
     }
     t.prevstop = stopnow;
@@ -364,6 +386,10 @@
         t.macro = JSON.parse(JSON.stringify(t.playm));
         t.macro.events = (t.macro.events || []).filter(ev => ev[0] < t.frame);
         if (Array.isArray(t.macro.icon)) t.macro.icon.length = Math.min(t.macro.icon.length, t.frame);
+        if (t.macro.inputonly) {
+          rewindrecord(t.frame);
+          t.inputqueue.length = 0;
+        }
         t.macro.length = t.frame;
         t.prevkeys = Object.assign({}, t.playkeys);
         t.prevmouse = !!t.playmouse;
@@ -396,15 +422,31 @@
       const ok = dotreset(scene);
       t.practice = want;
       clearpractice(scene, true);
+      if (t.recording) startsession(scene);
       try {t.prevdeaths = svar(scene, "deaths").getAsNumber()} catch (e) {}
       refreshhud();
       return ok;
     }
 
     if (t.requestrestart) {
+      const restart = t.requestrestart;
       t.requestrestart = null;
       t.editmode = false;
-      const ok = dotreset(scene);
+      t.mode = "idle";
+      if (restart === "play") {
+        releaseall();
+        t.realkeys = {};
+        t.realmouse = false;
+        t.jumpclick = false;
+        for (const id of t.realtouches.keys()) input.onTouchEnd(id);
+        t.realtouches.clear();
+      }
+      t.manualpause = false;
+      svar(scene, "paused").setBoolean(false);
+      t.priminglegacy = restart === "play" && t.playable && !t.playable.macro.inputonly;
+      let ok;
+      try {ok = dotreset(scene)}
+      finally {t.priminglegacy = false}
 
       try {svar(scene, "paused").setBoolean(false)} catch (e) {}
       clearpractice(scene, true);
@@ -415,7 +457,9 @@
       t.timerstarted = false; t.timerstartframe = 0; t.tprevx = undefined;
       t.practice = false;
 
-      if (t.playable) {
+      if (restart === "record") {
+        startsession(scene);
+      } else if (t.playable) {
         t.playm = JSON.parse(JSON.stringify(t.playable.macro));
         trimmacro(t.playm);
         let offok = false;
@@ -431,10 +475,10 @@
       return ok;
     }
     if (t.vidphase === "render") return offlinetick(scene);
+    if (t.mode !== "record") t.inputqueue.length = 0;
 
     if (!engaged()) {
       t.acc = 0;
-      applypendingsynth();
       resyncheld();
       refreshhud();
       return t.origstep(elapsed);
@@ -448,7 +492,8 @@
     }
 
     let n = 0;
-    const replaypaused = (t.mode === "play" && ispaused(scene));
+    if (t.manualpause && !ispaused(scene)) t.manualpause = false;
+    const replaypaused = t.mode === "play" && (t.playm.inputonly ? t.manualpause : ispaused(scene));
     if (replaypaused) {
       n = 1;
     } else if (t.frozen) {
@@ -469,11 +514,11 @@
         if (t.ring.length > t.ringsize) t.ring.shift();
       }
       if (i > 0) origframeend();
-      applypendingsynth();
       resyncheld();
       if (t.mode === "play") {
         if (replaypaused) {
-          releaseall();
+          if (t.playm.inputonly) {if (!t.inputseek) seekinput(t.frame)}
+          else releaseall();
         } else if (t.frame >= t.playm.length) {
           if (winshown(scene)) {
             if (!t.playend) t.playend = performance.now() + 4000;
@@ -483,20 +528,35 @@
           }
         } else playframe();
       }
-      if (t.mode === "record") recordframe();
+      const recording = t.mode === "record" && t.macro;
+      if (recording) recordframe();
       let pauseinject = false;
       if (t.requestpause && t.mode === "play") {t.requestpause = false; pauseinject = true; try {input.onKeyPressed(27, 0)} catch (e) {}}
 
       let backinject = false;
-      if (t.requestbacktrack && inlevel()) {const bt = (t.requestbacktrack === true) ? backtarget() : t.requestbacktrack; t.requestbacktrack = false; if (bt) {applynormalcp(scene, bt); t.ubacktrack = 8; backinject = true; try {input.onKeyPressed(82, 0)} catch (e) {}}}
+      if (t.requestbacktrack && inlevel()) {
+        const target = t.requestbacktrack === true ? backtarget() : t.requestbacktrack;
+        t.requestbacktrack = false;
+        if (target) {
+          if (recording && t.macro.inputonly) t.macro.events.push([t.frame, "back", target]);
+          applynormalcp(scene, target);
+          t.ubacktrack = 8;
+          backinject = true;
+          input.onKeyPressed(82, 0);
+        }
+      }
       if (t.mode === "play" && !replaypaused && t.playm.worldsnaps && t.playm.worldsnaps[t.frame]) {
         try {restoreobjs(scene, t.playm.worldsnaps[t.frame])} catch (e) {}
       }
       try {scene.render = (i === n - 1) ? realRender : noRender} catch (e) {}
       alive = t.origstep(t.step);
-      if (pauseinject) try {input.onKeyReleased(27, 0)} catch (e) {}
+      if (pauseinject) {
+        input.onKeyReleased(27, 0);
+        if (t.playm.inputonly) t.manualpause = ispaused(scene);
+      }
       if (backinject) try {input.onKeyReleased(82, 0)} catch (e) {}
-      if (t.mode === "record") recordicon(scene, t.frame);
+      if (inlevel() !== scene) break;
+      if (recording && !t.macro.inputonly) recordicon(scene, t.frame);
       if (t.mode === "play" && !replaypaused) applyicon(scene, t.frame);
       if (!replaypaused) t.frame++;
       if (!inlevel()) break;
@@ -526,7 +586,11 @@
 
   function startsession(scene) {
     t.timerstarted = false;
-    t.macro = {levelInfo: macrometa(scene), events: [], icon: [], length: 0, worldsnaps: {}};
+    t.macro = {levelInfo: macrometa(scene), inputonly: true, events: [], length: 0};
+    t.recinput = inputstate();
+    t.restoredretry = false;
+    t.recbaseline = false;
+    t.inputqueue = baselineinput();
     t.frame = 0; t.ring = [];
     t.prevkeys = {}; t.prevmouse = false; t.prevcursor = [0, 0];
     t.editmode = false; t.cheated = false; t.fresh = null;
@@ -537,7 +601,9 @@
     const m = t.playable && t.playable.macro;
     if (!m || !m.length) {note("no finished macro to export"); return}
     const levelInfo = Object.assign({}, m.levelInfo, {length: m.length});
-    const data = JSON.stringify({levelInfo: levelInfo, events: m.events, icon: m.icon, worldsnaps: m.worldsnaps || {}});
+    const data = JSON.stringify(m.inputonly ?
+      {levelInfo: levelInfo, inputonly: true, events: m.events} :
+      {levelInfo: levelInfo, events: m.events, icon: m.icon, worldsnaps: m.worldsnaps || {}});
     const fname = ((m.levelInfo && m.levelInfo.name) || "macro").replace(/[^\w\- ]/g, "") + ".tgdm";
     invoke("save_text_file", {defaultName: fname, content: data}).then(function (saved) {
       note(saved ? "macro exported" : "export cancelled");
@@ -550,14 +616,24 @@
     });
   }
 
+  function parsemacro(data) {
+    const m = JSON.parse(data);
+    const li = m && (m.levelInfo || (m.meta && m.meta.level)) || {};
+    const len = (m && m.levelInfo && m.levelInfo.length) || (m && m.length) || 0;
+    if (!m || !Array.isArray(m.events) || !Number.isSafeInteger(len) || len < 1) throw new Error("invalid macro");
+    const macro = {levelInfo: li, events: m.events, length: len};
+    if (m.inputonly === true) macro.inputonly = true;
+    else {
+      macro.icon = m.icon || [];
+      macro.worldsnaps = m.worldsnaps || {};
+    }
+    return macro;
+  }
+
   function importmacro() {
     const accept = data => {
       try {
-        const m = JSON.parse(data);
-        if (!m || !Array.isArray(m.events)) {note("invalid macro file"); return}
-        const li = m.levelInfo || (m.meta && m.meta.level) || {};
-        const len = (m.levelInfo && m.levelInfo.length) || m.length || 0;
-        t.playable = {macro: {levelInfo: li, events: m.events, icon: m.icon || [], length: len, worldsnaps: m.worldsnaps || {}}, src: "loaded"};
+        t.playable = {macro: parsemacro(data), src: "loaded"};
         note("macro imported (" + t.playable.macro.length + " frames)");
       } catch (e) {note("invalid macro file")}
     };

@@ -1,7 +1,6 @@
   /*////////////////////////////////////////////////////////////////////*/
 
-  // practice mode
-  const cpnames = ["checkpointMode", "checkpointX", "checkpointY", "checkpointSpeed",
+  const cpnames = ["checkpointMode", "checkpointX", "checkpointY", "checkpointAngle", "checkpointSpeed",
     "checkpointSize", "checkpointGravX", "checkpointGravY", "checkpointOn",
     "checkpointbgColor1R", "checkpointbgColor1G", "checkpointbgColor1B",
     "checkpointbgColor2R", "checkpointbgColor2G", "checkpointbgColor2B",
@@ -20,14 +19,12 @@
   t.readcp = readcp;
 
   function aliveplayer(scene) {
-    let fallback = null;
     for (const pname of playernames) {
       for (const o of scene.getObjects(pname) || []) {
         if (!o.isHidden()) return o;
-        fallback = fallback || o;
       }
     }
-    return fallback;
+    return null;
   }
 
   function placecp(scene) {
@@ -44,6 +41,7 @@
     try {num("checkpointSize", vars.get("mini").getAsNumber())} catch (e) {}
     num("checkpointX", p.getX());
     num("checkpointY", p.getY());
+    num("checkpointAngle", p.getAngle());
     try {num("checkpointSpeed", vars.get("speed").getAsNumber())} catch (e) {}
     try {num("checkpointOn", vars.get("on").getAsNumber())} catch (e) {}
     for (const [varname, prefix] of [["bgcolor1", "checkpointbgColor1"], ["bgcolor2", "checkpointbgColor2"],
@@ -54,6 +52,7 @@
       } catch (e) {}
     }
     const snap = capture(scene);
+    if (t.mode === "record") snap.frame++;
     let marker = null;
     try {
       marker = scene.createObject("practicepoint");
@@ -68,23 +67,31 @@
     const prevtop = t.practstack.length ? t.practstack[t.practstack.length - 1] : null;
     const stamp = t.fresh || (prevtop && prevtop.normalcp) || null;
     t.fresh = null;
-    t.practstack.push({prev: prev, snap: snap, marker: marker, normalcp: stamp, cpx: p.getX(), cpy: p.getY()});
+    t.practstack.push({prev, snap, marker, normalcp: stamp, cp: readcp(scene), hadcp: t.hadcp});
     t.hadcp = true;
+  }
+
+  function matchespractice(scene, entry) {
+    if (!entry) return false;
+    const cp = readcp(scene);
+    return cpnames.every(name => cp[name] === entry.cp[name]);
   }
 
   function erasecp(scene) {
     const entry = t.practstack.pop();
     if (!entry) return;
-    applycp(scene, entry.prev);
+    if (matchespractice(scene, entry)) {
+      applycp(scene, entry.prev);
+      t.hadcp = entry.hadcp;
+    }
     if (entry.marker) {try {entry.marker.deleteFromScene(scene)} catch (e) {}}
-    if (!t.practstack.length) t.awaitrespawn = false;
   }
 
   function clearpractice(scene, rebase) {
     for (const entry of t.practstack) {
       if (entry.marker) {try {entry.marker.deleteFromScene(scene)} catch (e) {}}
     }
-    t.practstack = []; t.awaitrespawn = false;
+    t.practstack = [];
     t.practbase = rebase && t.practice ? readcp(scene) : null;
   }
 
@@ -124,25 +131,35 @@
   }
   t.applynormalcp = applynormalcp;
 
-  t.practicetick = function(scene) {
-    if (t.reassert && t.reassert.frames > 0) {
-      const ra = t.reassert;
-      for (const o of scene.getObjects(ra.name) || []) {
-        if (o.isHidden()) continue;
-        try {
-          if (o.hasBehavior && o.hasBehavior("Physics2")) {
-            const b = o.getBehavior("Physics2");
-            const cvx = b.getLinearVelocityX(), cvy = b.getLinearVelocityY();
-            if (Math.abs(cvx) < 1 && Math.abs(cvy) < 1) {
-              b.setLinearVelocityX(ra.vx); b.setLinearVelocityY(ra.vy); b.setAngularVelocity(ra.va);
-            }
-          }
-        } catch (e) {}
-      }
-      ra.frames--;
+  t.beforepracticerespawn = function(scene) {
+    if (!t.practice || ispaused(scene) || winshown(scene)) return;
+    const xdown = scene.getGame().getInputManager().isKeyPressed(88);
+    if (xdown && !t.prevx) {
+      erasecp(scene);
+      t.prevx = true;
     }
+  };
+
+  t.afterpracticerespawn = function(scene) {
+    if (!t.practice || t.ubacktrack || winshown(scene) || ispaused(scene)) return;
+    const entry = t.practstack[t.practstack.length - 1];
+    if (!matchespractice(scene, entry)) return;
+    restore(scene, entry.snap, "practice");
+    const inputmanager = scene.getGame().getInputManager();
+    svar(scene, "tasretryheld").setBoolean(inputmanager.isKeyPressed(82));
+    t.ring.length = 0;
+    if (t.mode === "record") rewindrecord(entry.snap.frame, true);
+    t.prevdeaths = svar(scene, "deaths").getAsNumber();
+  };
+
+  /*//////////////////////////////////////////////////////////////////////*/
+
+  t.practicetick = function(scene) {
     const im = scene.getGame().getInputManager();
     const zdown = im.isKeyPressed(90), xdown = im.isKeyPressed(88), rdown = im.isKeyPressed(82);
+    if ((!rdown || im.wasKeyReleased(82)) && scene.getVariables().has("tasretryheld")) {
+      svar(scene, "tasretryheld").setBoolean(false);
+    }
     let deaths = t.prevdeaths;
     try {deaths = svar(scene, "deaths").getAsNumber()} catch (e) {}
 
@@ -174,65 +191,12 @@
     const udown = im.isKeyPressed(85);
     if (udown && !t.prevu && backtarget() && !t.ubacktrack && t.mode === "record" && !ispaused(scene) && !winshown(scene)) {
       t.requestbacktrack = backtarget();
-      if (t.macro) t.macro.events.push([t.frame, "back", t.requestbacktrack]);
+      if (t.macro && !t.macro.inputonly) t.macro.events.push([t.frame, "back", t.requestbacktrack]);
     }
 
-    if (t.practice) {
-      const active = !ispaused(scene) && !winshown(scene);
-      if (active) {
-        if (zdown && !t.prevz) placecp(scene);
-        if (xdown && !t.prevx) erasecp(scene);
-      }
-      if (t.practstack.length) {
-        const arm = () => {
-          const top = t.practstack[t.practstack.length - 1];
-          // if a native level checkpoint was grabbed after this practice cp, it
-          // moved checkpointX/Y away from ours - don't hijack the respawn, let the
-          // native level-checkpoint respawn stand so there's no early-restore teleport
-          let acx = 0, acy = 0;
-          try {acx = svar(scene, "checkpointX").getAsNumber(); acy = svar(scene, "checkpointY").getAsNumber()} catch (e) {}
-          if (top && top.cpx !== undefined && (Math.abs(acx - top.cpx) > 4 || Math.abs(acy - top.cpy) > 4)) return;
-          t.awaitrespawn = true; t.armage = 0;
-          t.earlysnap = top.snap;
-          t.earlyframes = 4; t.earlymax = 4; t.earlyplaced = false;
-        };
-        if (deaths > t.prevdeaths && !t.ubacktrack) arm();
-        if (active && rdown && !t.prevr && !t.ubacktrack) arm();
-      }
-
-      if (t.awaitrespawn && t.practstack.length && !ispaused(scene) && !t.ubacktrack) {
-        t.armage++;
-        if (t.armage > 300) t.awaitrespawn = false;
-        else if (t.armage >= 1) {
-          const top = t.practstack[t.practstack.length - 1];
-          const p = aliveplayer(scene);
-          let cpx = 0, cpy = 0;
-          try {cpx = svar(scene, "checkpointX").getAsNumber(); cpy = svar(scene, "checkpointY").getAsNumber()} catch (e) {}
-          if (p && Math.abs(p.getX() - cpx) < 4 && Math.abs(p.getY() - cpy) < 4) {
-            t.awaitrespawn = false;
-            restore(scene, top.snap, t.mode === "record" ? "rollback" : "practice");
-            const ap = aliveplayer(scene);
-            if (ap) {
-              let vx = 0, vy = 0, va = 0;
-              if (ap.hasBehavior && ap.hasBehavior("Physics2")) {
-                const b = ap.getBehavior("Physics2");
-                try {vx = b.getLinearVelocityX(); vy = b.getLinearVelocityY(); va = b.getAngularVelocity()} catch (e) {}
-              }
-              t.reassert = {name: ap.getName(), angle: ap.getAngle(), vx: vx, vy: vy, va: va, frames: 5};
-            }
-            try {deaths = svar(scene, "deaths").getAsNumber()} catch (e) {}
-            if (t.mode !== "play") {
-              const s = {
-                space: t.physjump.space || t.bufjump.space,
-                up: t.physjump.up || t.bufjump.up,
-                mouse: t.physjump.mouse || t.bufjump.mouse
-              };
-              if (s.space || s.up || s.mouse) t.pendingsynth = s;
-            }
-            t.bufjump = {space: false, up: false, mouse: false};
-          }
-        }
-      }
+    if (t.practice && !ispaused(scene) && !winshown(scene)) {
+      if (zdown && !t.prevz) placecp(scene);
+      if (xdown && !t.prevx) erasecp(scene);
     }
     t.prevz = zdown; t.prevx = xdown; t.prevr = rdown;
     t.prevu = udown; t.prevdeaths = deaths;

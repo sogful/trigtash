@@ -3,10 +3,6 @@
   // dom listeners
   window.addEventListener("mousedown", function(e) {
     if (t.vidblock) {e.preventDefault(); e.stopImmediatePropagation(); return}
-    if (e.button === 0) {
-      t.physjump.mouse = true;
-      if (t.awaitrespawn) t.bufjump.mouse = true;
-    }
     if (!inlevel()) return;
     if (t.mode === "play") {
       let pausedrep = false;
@@ -51,7 +47,7 @@
   window.addEventListener("mouseup", function(e) {
     if (t.vidblock) {e.preventDefault(); e.stopImmediatePropagation(); return}
     t.hold = null;
-    if (e.button === 0) {t.physjump.mouse = false; t.jumpclick = false}
+    if (e.button === 0) t.jumpclick = false;
     if (t.dragcand) {
       const c = t.dragcand;
       t.dragcand = null;
@@ -79,8 +75,6 @@
   }, true);
 
   window.addEventListener("keydown", function(e) {
-    if (e.code === "Space") {t.physjump.space = true; if (t.awaitrespawn) t.bufjump.space = true}
-    if (e.code === "ArrowUp") {t.physjump.up = true; if (t.awaitrespawn) t.bufjump.up = true}
     if (!inlevel()) return;
     // miau
     if (t.hotkey) {
@@ -99,6 +93,15 @@
       e.stopImmediatePropagation();
       return;
     }
+    if (t.vidblock) {
+      if (e.code === "Escape") {
+        abortoffline();
+        endplayback("recording stopped");
+      }
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      return;
+    }
     if (t.mode === "play") {
       if (e.code === "Escape") {
         const sc = inlevel();
@@ -107,13 +110,6 @@
         e.preventDefault(); e.stopImmediatePropagation(); return;
       }
       if (e.code === "F12" || (e.ctrlKey && e.shiftKey && (e.code === "KeyI" || e.code === "KeyJ" || e.code === "KeyC"))) return;
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      return;
-    }
-    // abort key for video exports
-    if (t.vidblock || t.vidphase === "render") {
-      if (e.code === "Escape") endplayback("recording stopped");
       e.preventDefault();
       e.stopImmediatePropagation();
       return;
@@ -145,8 +141,6 @@
   }, true);
 
   window.addEventListener("keyup", function(e) {
-    if (e.code === "Space") t.physjump.space = false;
-    if (e.code === "ArrowUp") t.physjump.up = false;
     if (!inlevel()) return;
     if (t.mode === "play" || t.countdown) {e.preventDefault(); e.stopImmediatePropagation(); return}
     if (e.code === "KeyT" && t.practice) {e.preventDefault(); e.stopImmediatePropagation()}
