@@ -52,6 +52,36 @@
     try {const b = cat.getBehavior("Physics2"); if (b.updateBodyFromObject) b.updateBodyFromObject(); b.setLinearVelocityX(0); b.setLinearVelocityY(0); b.setAngularVelocity((Math.random() * 2 - 1) * 40)} catch (e) {}
   }
 
+  const inputcells = [[384, 178, 20, 0, "up"], [364, 198, 0, 20, "left"],
+    [404, 198, 40, 20, "right"], [384, 198, 20, 20, "down"]];
+  function drawinputoverlay(scene, show, replay) {
+    try {
+      const cells = scene.getObjects("tasinput") || [];
+      const pressed = name => replay ? !!t.playkeys[name] : input.isKeyPressed(t.watch[name]);
+      const held = show ? {
+        up: pressed("Space") || pressed("Up") || pressed("w") || (replay ? !!t.playmouse : !!t.jumpclick || input.isMouseButtonPressed(0)),
+        left: pressed("Left") || pressed("a"),
+        right: pressed("Right") || pressed("d"),
+        down: pressed("Down") || pressed("s")
+      } : {};
+      for (let i = 0; i < cells.length && i < inputcells.length; i++) {
+        const o = cells[i], a = inputcells[i];
+        o.hide(!show);
+        if (!show) continue;
+        o.setLayer("ui");
+        o.setZOrder(t.vidphase === "render" ? 10003 : 10006);
+        o.setWidth(20); o.setHeight(20);
+        const h = !!held[a[4]];
+        if (o.__inpheld !== h) {
+          o.setTexture(h ? "assets\\textures\\inputsheld.png" : "assets\\textures\\inputs.png", scene);
+          o.__inpheld = h;
+        }
+        o.setXOffset(a[2]); o.setYOffset(a[3]);
+        o.setPosition(a[0], a[1]);
+      }
+    } catch (e) {}
+  }
+
   function refreshhud() {
     const scene = inlevel();
     if (!scene) return;
@@ -83,34 +113,8 @@
       }
     }
 
-    // input display
-    try {
-      const cells = scene.getObjects("tasinput") || [];
-      const showinp = t.inputviewer && !t.countdown && !t.playend && !t.vidblock && !t.vidphase;
-      const LAY = [[384, 178, 20, 0, "up"], [364, 198, 0, 20, "left"],
-        [404, 198, 40, 20, "right"], [384, 198, 20, 20, "down"]];
-      let jump = false, lf = false, rt = false;
-      if (showinp && t.mode === "play") {
-        const pk = t.playkeys || {};
-        jump = !!pk.Space || !!pk.Up || !!t.playmouse; lf = !!pk.Left; rt = !!pk.Right;
-      } else if (showinp) {
-        try {jump = input.isKeyPressed(t.watch.Space) || input.isKeyPressed(t.watch.Up) || input.isKeyPressed(87) || !!t.jumpclick} catch (e) {}
-        try {lf = input.isKeyPressed(t.watch.Left) || input.isKeyPressed(65)} catch (e) {}
-        try {rt = input.isKeyPressed(t.watch.Right) || input.isKeyPressed(68)} catch (e) {}
-      }
-      const held = {up: jump, left: lf, right: rt, down: false};
-      const IDLE = "assets\\textures\\inputs.png", HELD = "assets\\textures\\inputsheld.png";
-      for (let i = 0; i < cells.length && i < LAY.length; i++) {
-        const o = cells[i], a = LAY[i];
-        if (!showinp) {o.hide(true); continue}
-        o.hide(false);
-        try {o.setLayer("ui"); o.setZOrder(10006); o.setWidth(20); o.setHeight(20)} catch (e) {}
-        const h = !!held[a[4]];
-        if (o.__inpheld !== h) {o.__inpheld = h; try {o.setTexture(h ? HELD : IDLE, scene)} catch (e) {}}
-        try {o.setXOffset(a[2]); o.setYOffset(a[3])} catch (e) {}
-        try {o.setPosition(a[0], a[1])} catch (e) {}
-      }
-    } catch (e) {}
+    const showinp = t.inputviewer && !t.countdown && !t.playend && !t.vidblock;
+    if (t.vidphase !== "render") drawinputoverlay(scene, showinp, t.mode === "play");
 
     try {
       let pl = null, vx = 0, vy = 0;
@@ -201,7 +205,6 @@
     }
 
     if (t.vidphase === "export" || t.vidphase === "exported") {
-      completegrey(scene, true);
       if (t.counttext) {
         t.counttext.hide(false);
         try {t.counttext.setScale(0.5)} catch (e) {}
@@ -210,11 +213,8 @@
       }
       // "video exported!" for 2s
       if (t.vidphase === "exported" && performance.now() - t.exporteddone > 2000) {
-        t.vidphase = null; t.vidblock = false;
-        completegrey(scene, false);
-        for (const n of completeobjs) for (const o of scene.getObjects(n) || []) {try {o.setOpacity(n === "levelCompleteBg" ? 85 : 255)} catch (e) {}}
+        t.vidphase = null;
         if (t.counttext) {t.counttext.hide(); try {t.counttext.setScale(3)} catch (e) {}}
-        if (t.startcp) try {applycp(scene, t.startcp)} catch (e) {}
         t.vidstep = "";
       }
     }

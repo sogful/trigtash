@@ -145,27 +145,27 @@ fn remove_file(path: String) {
 
 // save-as: show a dialog and COPY a temp file (the final mp4) to the chosen path
 #[tauri::command]
-async fn save_file_as(app: tauri::AppHandle, src: String, default_name: String) -> Result<bool, String> {
+async fn save_file_as(window: tauri::Window, src: String, default_name: String) -> Result<bool, String> {
   use tauri_plugin_dialog::DialogExt;
-  let name = default_name.clone();
-  let picked = tauri::async_runtime::spawn_blocking(move || {
-    let ext = name.rsplit('.').next().unwrap_or("bin").to_string();
-    app.dialog()
+  tauri::async_runtime::spawn_blocking(move || {
+    let ext = default_name.rsplit('.').next().unwrap_or("bin");
+    let picked = window
+      .dialog()
       .file()
-      .set_file_name(&name)
-      .add_filter(&ext, &[ext.as_str()])
-      .blocking_save_file()
-  })
-  .await
-  .map_err(|e| e.to_string())?;
-  match picked {
-    Some(fp) => {
+      .set_parent(&window)
+      .set_title("Save video")
+      .set_file_name(&default_name)
+      .add_filter(ext, &[ext])
+      .blocking_save_file();
+    if let Some(fp) = picked {
       let dest = fp.into_path().map_err(|e| e.to_string())?;
       std::fs::copy(&src, &dest).map_err(|e| e.to_string())?;
-      Ok(true)
+      return Ok(true);
     }
-    None => Ok(false),
-  }
+    Ok(false)
+  })
+  .await
+  .map_err(|e| e.to_string())?
 }
 
 // native clipboard read (the init script points navigator.clipboard.readText
@@ -336,8 +336,21 @@ fn ffmpeg_write(request: tauri::ipc::Request<'_>, state: State<Ffmpeg>) -> Resul
   stdin.write_all(bytes).map_err(|e| e.to_string())
 }
 
+fn waitffmpeg(mut child: Child, timeout: std::time::Duration) -> Result<i32, String> {
+  let start = std::time::Instant::now();
+  while start.elapsed() < timeout {
+    if let Some(status) = child.try_wait().map_err(|e| e.to_string())? {
+      return Ok(status.code().unwrap_or(-1));
+    }
+    std::thread::sleep(std::time::Duration::from_millis(50));
+  }
+  let _ = child.kill();
+  let _ = child.wait();
+  Err("ffmpeg timed out".into())
+}
+
 #[tauri::command]
-fn ffmpeg_finish(state: State<Ffmpeg>, handle: u32) -> Result<i32, String> {
+async fn ffmpeg_finish(state: State<'_, Ffmpeg>, handle: u32) -> Result<i32, String> {
   let mut child = state
     .jobs
     .lock()
@@ -345,27 +358,32 @@ fn ffmpeg_finish(state: State<Ffmpeg>, handle: u32) -> Result<i32, String> {
     .remove(&handle)
     .ok_or("no such ffmpeg job")?;
   drop(child.stdin.take());
-  let status = child.wait().map_err(|e| e.to_string())?;
-  Ok(status.code().unwrap_or(-1))
+  tauri::async_runtime::spawn_blocking(move || waitffmpeg(child, std::time::Duration::from_secs(30)))
+    .await
+    .map_err(|e| e.to_string())?
 }
 
 #[tauri::command]
 fn ffmpeg_kill(state: State<Ffmpeg>, handle: u32) {
   if let Some(mut child) = state.jobs.lock().unwrap().remove(&handle) {
     let _ = child.kill();
+    let _ = child.wait();
   }
 }
 
 #[tauri::command]
-fn ffmpeg_run(args: Vec<String>) -> Result<i32, String> {
+async fn ffmpeg_run(args: Vec<String>) -> Result<i32, String> {
   let path = ffmpeg_path()?;
-  let status = make_cmd(&path)
+  let child = make_cmd(&path)
     .args(&args)
+    .stdin(Stdio::null())
     .stdout(Stdio::null())
     .stderr(Stdio::null())
-    .status()
+    .spawn()
     .map_err(|e| e.to_string())?;
-  Ok(status.code().unwrap_or(-1))
+  tauri::async_runtime::spawn_blocking(move || waitffmpeg(child, std::time::Duration::from_secs(45)))
+    .await
+    .map_err(|e| e.to_string())?
 }
 
 //////////////////////////////////////////////////////////////////////////

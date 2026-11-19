@@ -3,12 +3,18 @@
   // video capture
   const completeobjs = ["levelComplete", "levelCompleteBg", "winRestart", "winLeave",
     "winEdit", "wincoin", "winIcon", "completeTime", "deathCount", "wincoinMany", "leftbutton", "rightbutton"];
-  const completebtns = ["winRestart", "winLeave", "winEdit", "leftbutton", "rightbutton"];
   function completedim(scene) {
     for (const n of completeobjs) for (const o of scene.getObjects(n) || []) {try {o.setOpacity(0)} catch (e) {}}
   }
-  function completegrey(scene, grey) {
-    for (const n of completebtns) for (const o of scene.getObjects(n) || []) {try {o.setColor(grey ? "120;120;120" : "255;255;255")} catch (e) {}}
+  function restorevideoui(scene) {
+    if (scene !== inlevel()) return;
+    for (const n of completeobjs) {
+      for (const o of scene.getObjects(n) || []) {
+        try {o.setOpacity(n === "levelCompleteBg" ? 85 : 255)} catch (e) {}
+      }
+    }
+    if (t.startcp) try {applycp(scene, t.startcp)} catch (e) {}
+    try {if (t.counttext) {t.counttext.hide(); t.counttext.setScale(3)}} catch (e) {}
   }
 
   function gamecanvas() {
@@ -36,6 +42,19 @@
     return TC.invoke(cmd, args, opts);
   };
 
+  function removevideotemp(path) {
+    if (path) return invoke("remove_file", {path: path}).catch(function () {});
+    return Promise.resolve();
+  }
+
+  function videodeadline(promise, ms) {
+    let timer;
+    const timeout = new Promise(function (resolve, reject) {
+      timer = setTimeout(function () {reject(new Error("video export timed out"))}, ms);
+    });
+    return Promise.race([promise, timeout]).finally(function () {clearTimeout(timer)});
+  }
+
   function hideoverlayforvideo(scene) {
     try {for (const b of (t.buttons || []).concat(t.pract ? [t.pract] : [])) b.obj.hide(true)} catch (e) {}
     try {if (t.speedtext) t.speedtext.hide(true)} catch (e) {}
@@ -45,7 +64,6 @@
       try {for (const o of scene.getObjects("pausebutton") || []) o.hide(true)} catch (e) {}
       try {for (const o of scene.getObjects("fpscounter") || []) o.hide(true)} catch (e) {}
     }
-    try {for (const o of scene.getObjects("tasinput") || []) o.hide(true)} catch (e) {}
   }
 
   function setblackalpha(a) {
@@ -70,20 +88,31 @@
     t.off2d.width = t.offw; t.off2d.height = t.offh;
     t.off2dctx = t.off2d.getContext("2d");
     const ow = t.offw * 3, oh = t.offh * 3;
-    t.offtmp = null; t.ffhandle = null; t.fferr = false; t.offpaused = false;
+    const job = {scene: scene, path: null, lastprogress: performance.now()};
+    t.videojob = job;
+    t.ffhandle = null; t.fferr = false; t.offpaused = false;
     t.writechain = Promise.resolve(); t.pendingwrites = 0; t.writeacc = 0;
 
     // yuv420p H.264
     invoke("temp_path", {suffix: ".mp4"}).then(function (tmp) {
-      t.offtmp = tmp;
+      if (t.videojob !== job) return null;
+      job.path = tmp;
       const args = ["-y", "-f", "rawvideo", "-pix_fmt", "rgba", "-s", t.offw + "x" + t.offh,
         "-r", "60", "-i", "pipe:0",
         "-vf", "scale=" + ow + ":" + oh + ":flags=neighbor:in_range=full:out_range=tv:out_color_matrix=bt709,format=yuv420p",
         "-c:v", "libx264", "-pix_fmt", "yuv420p", "-profile:v", "high",
         "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv"]
-        .concat(t.offratectrl, ["-movflags", "+faststart", t.offtmp]);
+        .concat(t.offratectrl, ["-movflags", "+faststart", tmp]);
       return invoke("ffmpeg_start", {args: args});
-    }).then(function (handle) {t.ffhandle = handle}).catch(function (e) {
+    }).then(function (handle) {
+      if (handle == null) return;
+      if (t.videojob !== job) {
+        return invoke("ffmpeg_kill", {handle: handle}).catch(function () {}).then(function () {return removevideotemp(job.path)});
+      }
+      t.ffhandle = handle;
+      job.lastprogress = performance.now();
+    }).catch(function (e) {
+      if (t.videojob !== job) return;
       t.fferr = true; t.ffstderr = String(e); note("ffmpeg failed to start");
     });
     try {t.offvol = t.savedvol != null ? t.savedvol : (window.Howler ? window.Howler.volume() : 1); if (window.Howler) window.Howler.volume(0)} catch (e) {}
@@ -127,6 +156,8 @@
 
   function readbackandwrite() {
     if (t.fferr || t.ffhandle == null) return;
+    const job = t.videojob;
+    const handle = t.ffhandle;
     try {
       t.off2dctx.drawImage(gamecanvas(), 0, 0, t.offw, t.offh);
       const img = t.off2dctx.getImageData(0, 0, t.offw, t.offh);
@@ -140,11 +171,19 @@
       for (let c = 0; c < copies; c++) {
         t.pendingwrites++;
         t.writechain = t.writechain.then(function () {
-          return invoke("ffmpeg_write", buf, {headers: {handle: String(t.ffhandle)}});
-        }).then(function () {t.pendingwrites--}, function (e) {t.pendingwrites--; t.fferr = true; t.ffstderr = String(e)});
+          if (t.videojob === job && !t.fferr) return invoke("ffmpeg_write", buf, {headers: {handle: String(handle)}});
+        }).then(function () {
+          if (t.videojob !== job) return;
+          t.pendingwrites--;
+          job.lastprogress = performance.now();
+        }, function (e) {
+          if (t.videojob !== job) return;
+          t.pendingwrites--;
+          t.fferr = true; t.ffstderr = String(e);
+        });
       }
       if (t.pendingwrites > 24) t.offpaused = true;
-    } catch (e) {}
+    } catch (e) {t.fferr = true; t.ffstderr = String(e)}
   }
 
   function settimer(scene, a) {
@@ -156,7 +195,7 @@
       try {for (const o of scene.getObjects("fpscounter") || []) o.hide(true)} catch (e) {}
       try {for (const o of scene.getObjects("pausebutton") || []) o.hide(true)} catch (e) {}
     }
-    try {for (const o of scene.getObjects("tasinput") || []) o.hide(true)} catch (e) {}
+    drawinputoverlay(scene, t.inputvideo, true);
     completedim(scene);
     if (t.hitboxes) {try {drawhitboxes(scene)} catch (e) {}}
     try {scene.render()} catch (e) {}
@@ -179,8 +218,11 @@
     if (t.offsub === "play") {
       origframeend();
       if (t.frame < t.playm.length) playframe();
+      else if (t.playm.inputonly && t.frame === t.playm.length) {
+        releaseall();
+        t.playkeys = {}; t.playmouse = false;
+      }
       setblackalpha(0);
-      applypendingsynth();
       // replay the recorded death/backtrack: playframe sets requestbacktrack on "back"
       // events, but the export never consumed it - so deaths only teleported the player
       // and block states never reset. mirror the live replay (applynormalcp + R inject)
@@ -193,7 +235,10 @@
       if (backinject) try {input.onKeyReleased(82, 0)} catch (e) {}
       applyicon(scene, t.frame);
       paintandcap(scene);
-      if (winshown(scene)) {t.offsub = "outro"; t.offwon = t.offframe; t.offcompleteat = -1}
+      if (winshown(scene)) {
+        t.offsub = "outro"; t.offwon = t.offframe; t.offcompleteat = -1;
+        if (t.playm.inputonly) {releaseall(); t.playkeys = {}; t.playmouse = false}
+      }
       else if (t.frame >= t.playm.length + 240) {t.offsub = "outro"; t.offwon = t.offframe; t.offcompleteat = t.offframe}
       t.frame++; t.offframe++;
       return true;
@@ -217,7 +262,12 @@
   }
 
   function offlinetick(scene) {
-    if (t.fferr) {note("ffmpeg error during render"); abortoffline(); return true}
+    if (t.fferr || performance.now() - t.videojob.lastprogress > 30000) {
+      note(t.fferr ? "video render failed: " + t.ffstderr : "video render timed out");
+      abortoffline();
+      videoresult(scene, "Video render failed");
+      return true;
+    }
     t.allowframeend = false;
     if (t.ffhandle == null) return true;
     if (t.offpaused) {
@@ -225,19 +275,25 @@
     }
     const budget = performance.now() + 12;
     let more = true;
-    while (more && !t.offpaused && performance.now() < budget) more = offlineframe(scene);
+    try {
+      while (more && !t.offpaused && !t.fferr && performance.now() < budget) more = offlineframe(scene);
+    } catch (e) {t.fferr = true; t.ffstderr = String(e)}
     if (!more) finishoffline();
     return true;
   }
 
   function abortoffline() {
-    try {if (t.ffhandle != null) invoke("ffmpeg_kill", {handle: t.ffhandle})} catch (e) {}
+    const job = t.videojob;
+    t.videojob = null;
+    const kill = t.ffhandle == null ? Promise.resolve() : invoke("ffmpeg_kill", {handle: t.ffhandle}).catch(function () {});
+    if (job) kill.then(function () {return removevideotemp(job.path)});
     t.ffhandle = null;
     hooksounds(false);
     try {if (window.Howler && t.offvol != null) {window.Howler.volume(t.offvol); t.offvol = null}} catch (e) {}
     t.vidphase = null; t.vidblock = false; t.vidstep = "";
     releaseall();
     setblackalpha(0);
+    if (job) restorevideoui(job.scene);
   }
 
   /*////////////////////////////////////////////////////////////////////*/
@@ -319,69 +375,74 @@
   }
 
   // decode every logged sound and render to wav file
-  function buildaudio() {
-    return new Promise(function (resolve) {
-      const all = (t.soundlog || []).slice();
-      if (!all.length) {resolve(null); return}
-      const log = all.filter(e => !e.music);
-      const musicev = all.filter(e => e.music).sort((a, b) => a.frame - b.frame)[0];
-      // export at FULL volume regardless of the ingame setting, i don't think anybody would want musicless videos
-      if (musicev) {musicev.frame = 30; musicev.vol = 1; log.push(musicev)}
-      const sm = game.getSoundManager();
-      const sp = t.exportsp || 1;
-      const sr = 44100, dur = t.offframe / 60 / sp + 1.5;
-      const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
-      let octx;
-      try {octx = new OAC(2, Math.ceil(dur * sr), sr)} catch (e) {resolve(null); return}
-      const urls = {};
-      for (const e of log) if (!(e.res in urls)) urls[e.res] = soundurl(sm, e.res);
-      const buffers = {};
-      const tasks = Object.keys(urls).map(function (res) {
-        const url = urls[res];
-        if (!url) return Promise.resolve();
-        return fetchaudio(url).then(function (abuf) {
-          if (!abuf) return;
-          return octx.decodeAudioData(abuf).then(function (b) {buffers[res] = b}).catch(function () {});
-        }).catch(function () {});
-      });
-      t.vidstep = "decoding audio...";
-      Promise.all(tasks).then(function () {
-        t.vidstep = "mixing audio...";
-        const master = octx.createGain();
-        master.connect(octx.destination);
-        const endt = t.offframe / 60 / sp;
-        try {master.gain.setValueAtTime(1, Math.max(0, endt - 1)); master.gain.linearRampToValueAtTime(0, endt)} catch (er) {}
-        for (const e of log) {
-          const b = buffers[e.res];
-          if (!b) continue;
-          try {
-            const src = octx.createBufferSource();
-            src.buffer = b; src.loop = !!e.loop;
-            // music keeps its already-slowed rate; SFX get slowed by sp to match it
-            try {src.playbackRate.value = (e.rate || 1) * (e.music ? 1 : sp)} catch (er) {}
-            const g = octx.createGain();
-            g.gain.value = e.vol == null ? 1 : e.vol;
-            src.connect(g); g.connect(master);
-            src.start(Math.max(0, e.frame / 60 / sp));
-          } catch (er) {}
-        }
-        octx.startRendering().then(function (rendered) {
-          const bytes = audiobuffertowav(rendered);
-          invoke("temp_path", {suffix: ".wav"}).then(function (wp) {
-            return invoke("write_bytes", {path: wp, data: Array.from(bytes)}).then(function () {resolve(wp)});
-          }).catch(function () {resolve(null)});
-        }).catch(function () {resolve(null)});
-      });
-    });
+  async function buildaudio(job) {
+    const all = t.soundlog || [];
+    if (!all.length) return null;
+    const log = all.filter(e => !e.music);
+    const music = all.filter(e => e.music).sort((a, b) => a.frame - b.frame)[0];
+    if (music) log.push(Object.assign({}, music, {frame: 30, vol: 1}));
+    const sm = game.getSoundManager();
+    const sp = t.exportsp || 1;
+    const sr = 44100, endt = t.offframe / 60 / sp;
+    const octx = new (window.OfflineAudioContext || window.webkitOfflineAudioContext)(2, Math.ceil((endt + 1.5) * sr), sr);
+    const buffers = new Map();
+    t.vidstep = "Decoding audio...";
+    await Promise.all([...new Set(log.map(e => e.res))].map(async function (res) {
+      const url = soundurl(sm, res);
+      if (!url) return;
+      try {
+        const bytes = await fetchaudio(url);
+        if (bytes) buffers.set(res, await octx.decodeAudioData(bytes));
+      } catch (e) {}
+    }));
+    if (t.videojob !== job || job.audioexpired) return null;
+    t.vidstep = "Mixing audio...";
+    const master = octx.createGain();
+    master.connect(octx.destination);
+    try {master.gain.setValueAtTime(1, Math.max(0, endt - 1)); master.gain.linearRampToValueAtTime(0, endt)} catch (e) {}
+    for (const e of log) {
+      const buffer = buffers.get(e.res);
+      if (!buffer) continue;
+      try {
+        const src = octx.createBufferSource();
+        src.buffer = buffer; src.loop = !!e.loop;
+        src.playbackRate.value = (e.rate || 1) * (e.music ? 1 : sp);
+        const gain = octx.createGain();
+        gain.gain.value = e.vol == null ? 1 : e.vol;
+        src.connect(gain); gain.connect(master);
+        src.start(Math.max(0, e.frame / 60 / sp));
+      } catch (e) {}
+    }
+    const rendered = await octx.startRendering();
+    if (t.videojob !== job || job.audioexpired) return null;
+    const wav = await invoke("temp_path", {suffix: ".wav"});
+    if (t.videojob !== job || job.audioexpired) return null;
+    try {
+      await invoke("write_bytes", {path: wav, data: Array.from(audiobuffertowav(rendered))});
+      return wav;
+    } catch (e) {
+      removevideotemp(wav);
+      throw e;
+    }
   }
 
-  function muxav(videopath, wavpath) {
-    return new Promise(function (resolve) {
-      invoke("temp_path", {suffix: ".mp4"}).then(function (out) {
-        const args = ["-y", "-i", videopath, "-i", wavpath, "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", out];
-        return invoke("ffmpeg_run", {args: args}).then(function (code) {resolve(code === 0 ? out : null)});
-      }).catch(function () {resolve(null)});
-    });
+  async function muxaudio(job) {
+    const wav = await buildaudio(job);
+    if (!wav) return null;
+    let out = null, keep = false;
+    try {
+      if (t.videojob !== job || job.audioexpired) return null;
+      out = await invoke("temp_path", {suffix: ".mp4"});
+      if (t.videojob !== job || job.audioexpired) return null;
+      const args = ["-y", "-i", job.path, "-i", wav, "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", out];
+      const code = await invoke("ffmpeg_run", {args: args});
+      keep = code === 0 && t.videojob === job && !job.audioexpired;
+      return keep ? out : null;
+    } finally {
+      removevideotemp(wav);
+      if (!keep) removevideotemp(out);
+      if (job.cleanpath) removevideotemp(job.path);
+    }
   }
 
   function beginplayback(withvideo) {
@@ -424,55 +485,62 @@
     } catch (e) {}
   }
 
-  function finishoffline() {
-    t.vidphase = "export"; t.vidblock = true; t.vidstep = "encoding...";
-    t.mode = "idle"; t.fadein = performance.now(); t.exportfade = performance.now();
+  function videoresult(scene, status) {
+    if (scene !== inlevel()) return;
+    if (t.vidblock) restorevideoui(scene);
+    t.vidblock = false;
+    t.vidphase = "exported"; t.vidstep = status; t.exporteddone = performance.now();
+  }
+
+  async function finishoffline() {
+    const job = t.videojob;
+    t.vidphase = "export"; t.vidstep = "Encoding video...";
+    t.mode = "idle"; t.fadein = performance.now();
     setblackalpha(0);
     releaseall();
     try {if (window.Howler && t.offvol != null) {window.Howler.volume(t.offvol); t.offvol = null}} catch (e) {}
     hooksounds(false);
-    t.writechain.then(function () {
-      return invoke("ffmpeg_finish", {handle: t.ffhandle});
-    }).then(function (code) {
+    try {
+      const code = await videodeadline(t.writechain.then(function () {
+        if (t.videojob !== job) return null;
+        if (t.fferr) throw new Error(t.ffstderr);
+        return invoke("ffmpeg_finish", {handle: t.ffhandle});
+      }), 35000);
+      if (t.videojob !== job) return;
       t.ffhandle = null;
-      if (code !== 0) {
-        note("ffmpeg exit " + code); t.vidstep = "encode failed (" + code + ")";
-        t.vidphase = "exported"; t.exporteddone = performance.now();
-        return;
+      if (code !== 0) throw new Error("ffmpeg exit " + code);
+      let finalpath;
+      try {finalpath = await videodeadline(muxaudio(job), 30000)} catch (e) {
+        job.audioexpired = true;
+        note("audio export failed: " + e);
       }
-      // mux the logged sounds onto the silent video, then save! 
-      t.vidstep = "muxing audio...";
-      let done = false;
-      const finish = function (p) {if (done) return; done = true; savemp4(p || t.offtmp)};
-      setTimeout(function () {finish(t.offtmp)}, 30000);
-      Promise.resolve().then(buildaudio).then(function (wav) {
-        if (!wav) return t.offtmp;
-        return muxav(t.offtmp, wav).then(function (muxed) {
-          try {invoke("remove_file", {path: wav})} catch (e) {}
-          return muxed || t.offtmp;
-        });
-      }).then(finish).catch(function (e) {note("audio mux failed?! " + e); finish(t.offtmp)});
-    }).catch(function (e) {
-      t.ffhandle = null; note("ffmpeg finish failed: " + e);
-      t.vidstep = "encode failed"; t.vidphase = "exported"; t.exporteddone = performance.now();
-    });
+      if (t.videojob !== job) {removevideotemp(finalpath); return}
+      savemp4(job, finalpath || job.path);
+    } catch (e) {
+      if (t.videojob !== job) return;
+      note("ffmpeg finish failed: " + e);
+      abortoffline();
+      videoresult(job.scene, "Video encoding failed");
+    }
   }
 
-  function savemp4(finalpath) {
-    t.vidstep = "saving...";
-    const cleanup = function () {
-      try {invoke("remove_file", {path: t.offtmp})} catch (e) {}
-      if (finalpath !== t.offtmp) {try {invoke("remove_file", {path: finalpath})} catch (e) {}}
-    };
-    invoke("save_file_as", {src: finalpath, defaultName: videofilename()}).then(function (saved) {
-      t.vidstep = saved ? "video exported!" : "export cancelled";
-    }, function () {
-      t.vidstep = "save failed";
-    }).then(function () {
-      cleanup();
-      t.vidphase = "exported"; t.exporteddone = performance.now();
-      t.ffhandle = null;
-    });
+  async function savemp4(job, finalpath) {
+    videoresult(job.scene, "Choose where to save the video");
+    let status;
+    try {
+      const saved = await invoke("save_file_as", {src: finalpath, defaultName: videofilename()});
+      status = saved ? "Video exported" : "Export cancelled";
+      job.cleanpath = true;
+      removevideotemp(job.path);
+      if (finalpath !== job.path) removevideotemp(finalpath);
+    } catch (e) {
+      status = "Save failed. Video kept in the temp folder.";
+      note("save failed for " + finalpath + " (" + e + ")");
+      if (finalpath !== job.path) removevideotemp(job.path);
+    }
+    if (t.videojob !== job) return;
+    t.videojob = null;
+    if (!t.countdown && t.mode !== "play") videoresult(job.scene, status);
   }
 
   /*////////////////////////////////////////////////////////////////////*/
@@ -488,8 +556,7 @@
         note("recording stopped");
       } else {
         t.recording = true;
-        const sc = inlevel();
-        if (sc) startsession(sc);
+        if (inlevel()) t.requestrestart = "record";
         note("recording...");
       }
     },
