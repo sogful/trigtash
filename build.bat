@@ -2,6 +2,7 @@
 setlocal enabledelayedexpansion
 set "ROOT=%~dp0"
 set "TAURI=%ROOT%dependencies\tauri"
+set "TAURICLI=%TAURI%\node_modules\@tauri-apps\cli\tauri.js"
 set "ST=%TAURI%\src-tauri"
 set "SIDECAR=%ST%\binaries\ffmpeg.exe"
 set "OUT=%ROOT%game"
@@ -12,10 +13,19 @@ set "GAMEDIR=%OUT%\game"
 
 echo ~ trigtash builder!! ~
 
-where cargo >nul 2>&1 || ( echo [error] rust/cargo not on PATH & exit /b 1 )
-where npm   >nul 2>&1 || ( echo [error] npm not on PATH & exit /b 1 )
+set "BUILDENV=%TEMP%\trigtash-build-env.cmd"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%ROOT%scripts\ensure-build-tools.ps1" -EnvironmentFile "%BUILDENV%"
+if errorlevel 1 ( echo [error] build tool setup failed & exit /b 1 )
+if not exist "%BUILDENV%" ( echo [error] build tool setup did not create its environment & exit /b 1 )
+call "%BUILDENV%"
+del "%BUILDENV%" >nul 2>&1
 
-if not exist "%TAURI%\node_modules" (
+where cargo >nul 2>&1 || ( echo [error] rust/cargo setup failed & exit /b 1 )
+where npm >nul 2>&1 || ( echo [error] node/npm setup failed & exit /b 1 )
+where python >nul 2>&1 || ( echo [error] python setup failed & exit /b 1 )
+where cl >nul 2>&1 || ( echo [error] visual c++ build tools setup failed & exit /b 1 )
+
+if not exist "%TAURICLI%" (
   echo installing tauri cli..
   pushd "%TAURI%"
   call npm install
@@ -27,7 +37,7 @@ if not exist "%TAURI%\node_modules" (
 if not exist "%ST%\icons\icon.ico" (
   echo generating app icons..
   pushd "%TAURI%"
-  call npx tauri icon "%ROOT%project\icons\desktop-icon-512.png"
+  node "%TAURICLI%" icon "%ROOT%project\icons\desktop-icon-512.png"
   popd
 )
 
@@ -73,13 +83,13 @@ if not exist "%EXPORTSRC%\index.html" (
 )
 echo building.. this might take a long time
 pushd "%TAURI%"
-call npx tauri build --no-bundle
+node "%TAURICLI%" build --no-bundle
 set "ERR=!errorlevel!"
 popd
 if not "!ERR!"=="0" ( echo tauri build failed & exit /b 1 )
 
 if not exist "%OUT%" mkdir "%OUT%"
-copy /Y "%ST%\target\release\trigonometry-dash.exe" "%OUT%\Trigonometry Dash.exe" >nul
+copy /Y "%ST%\target\release\trigonometry-dash.exe" "%OUT%\Trigonometry Dash.exe" >nul || (echo [error] could not install the game executable & exit /b 1)
 if exist "%SIDECAR%" copy /Y "%SIDECAR%" "%OUT%\ffmpeg.exe" >nul
 
 echo placing external game files (the ones in \game\game)

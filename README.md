@@ -13,5 +13,5 @@ for javascript injected into the project, see `/scripts/`<br>
   - gdexporter to package the game without having to do it 
 so realistically you don't even have to open the gdevelop ide to edit this mod :p
 
-to rebuild the game, run `build.bat`.<br>
+to rebuild the game, run `build.bat`. the first run installs missing node.js, python, rust, visual c++ build tools, and webview2 prerequisites, then installs the project-local tauri and gdevelop packages.<br>
 for a smaller 40mb build without hq audio, run `build (small).bat`.
