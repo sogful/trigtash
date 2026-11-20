@@ -47,8 +47,11 @@ try {
   }
   if (Test-Path -LiteralPath $cargobin) { $env:Path = "$cargobin;$env:Path" }
   if (get-commandpath "rustup") {
-    & rustup toolchain install stable --profile minimal
-    if ($LASTEXITCODE -ne 0) { throw "Installing the stable Rust toolchain failed (exit $LASTEXITCODE)." }
+    $toolchains = & rustup toolchain list
+    if (-not ($toolchains | Where-Object { $_ -match "^stable(-|$)" })) {
+      & rustup toolchain install stable --profile minimal
+      if ($LASTEXITCODE -ne 0) { throw "Installing the stable Rust toolchain failed (exit $LASTEXITCODE)." }
+    }
   }
 
   $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
@@ -76,16 +79,20 @@ try {
     Join-Path $_.FullName ""
     Join-Path $_.FullName "Scripts"
   }
+  $registeredpath = @(
+    [Environment]::GetEnvironmentVariable("Path", "User") -split ";"
+    [Environment]::GetEnvironmentVariable("Path", "Machine") -split ";"
+  )
+  $pythonentries = $registeredpath | Where-Object { $_ -match "(?i)python" }
   $pathparts = @(
     $cargobin,
-    (Join-Path $env:ProgramFiles "nodejs"),
-    (Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer")
-  ) + $pythonpaths + ($env:Path -split ";") + ([Environment]::GetEnvironmentVariable("Path", "User") -split ";") + ([Environment]::GetEnvironmentVariable("Path", "Machine") -split ";")
-  $env:Path = ($pathparts | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -Unique) -join ";"
+    (Join-Path $env:ProgramFiles "nodejs")
+  ) + $pythonpaths + $pythonentries
+  $pathprefix = ($pathparts | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -Unique) -join ";"
 
   $vsdevcmd = Join-Path $vsinstall "Common7\Tools\VsDevCmd.bat"
   if (-not (Test-Path -LiteralPath $vsdevcmd)) { throw "Visual Studio developer environment script was not found." }
-  $envline = 'set "PATH=' + $env:Path + ';%PATH%"' + "`r`n" + 'call "' + $vsdevcmd + '" -no_logo -arch=amd64 -host_arch=amd64'
+  $envline = 'set "PATH=' + $pathprefix + ';%PATH%"' + "`r`n" + 'call "' + $vsdevcmd + '" -no_logo -arch=amd64 -host_arch=amd64'
   Set-Content -LiteralPath $EnvironmentFile -Value $envline -Encoding Ascii
   Write-Host "Build tools are ready."
 } catch {
