@@ -61,6 +61,9 @@
     input.onMouseButtonPressed(button);
   };
   realinput.onMouseButtonReleased = function(button) {
+    if (button === 0 && t.mode === "play" && !t.vidblock && ispaused(inlevel())) {
+      t.menurelease = true;
+    }
     if (button === 0) t.jumpclick = false;
     if (button === 0 && t.realmouse) {
       queueinput(["mu"]);

@@ -60,10 +60,6 @@
     try {if (t.speedtext) t.speedtext.hide(true)} catch (e) {}
     try {if (t.tiptext) t.tiptext.hide(true)} catch (e) {}
     try {if (t.draw && !t.hitboxes) {t.draw.clear(); t.drewboxes = false}} catch (e) {}
-    if (!t.videoui) {
-      try {for (const o of scene.getObjects("pausebutton") || []) o.hide(true)} catch (e) {}
-      try {for (const o of scene.getObjects("fpscounter") || []) o.hide(true)} catch (e) {}
-    }
   }
 
   function setblackalpha(a) {
@@ -127,16 +123,6 @@
       if (vbr < 40000) vbr = 40000;
       t.offratectrl = ["-b:v", String(vbr), "-maxrate", String(Math.floor(vbr * 1.6)), "-bufsize", String(vbr * 2), "-preset", "slow"];
     }
-    rebuildplaystate(0);
-    try {
-      const pl = aliveplayer(scene);
-      if (pl) {const lay = scene.getLayer(""); lay.setCameraX(pl.getAABBCenterX()); lay.setCameraY(pl.getAABBCenterY())}
-    } catch (e) {}
-    resetstopwatch(scene);
-    try {const tm = scene.getTimeManager()._timers.get("stopwatch"); if (tm) tm.setTime(-t.step)} catch (e) {}
-    try {origframeend(); t.origstep(t.step)} catch (e) {}
-    resetstopwatch(scene);
-    applyicon(scene, 0);
     // uncollect coins
     try {
       for (const o of scene.getObjects("coin") || []) {
@@ -191,14 +177,19 @@
     try {for (const o of scene.getObjects("timerIcon") || []) o.setOpacity(a)} catch (e) {}
   }
   function paintandcap(scene) {
-    if (!t.videoui) {
-      try {for (const o of scene.getObjects("fpscounter") || []) o.hide(true)} catch (e) {}
-      try {for (const o of scene.getObjects("pausebutton") || []) o.hide(true)} catch (e) {}
-    }
     drawinputoverlay(scene, t.inputvideo, true);
     completedim(scene);
     if (t.hitboxes) {try {drawhitboxes(scene)} catch (e) {}}
-    try {scene.render()} catch (e) {}
+    const hidden = [];
+    if (!t.videoui) {
+      for (const name of ["fpscounter", "pausebutton"]) {
+        for (const o of scene.getObjects(name)) {
+          if (!o.isHidden()) {o.hide(true); hidden.push(o)}
+        }
+      }
+    }
+    try {scene.render()}
+    finally {for (const o of hidden) o.hide(false)}
     readbackandwrite();
   }
 
@@ -206,34 +197,24 @@
     const introN = 30; // 0.5s
     hideoverlayforvideo(scene);
     if (t.offsub === "intro") {
-      applyicon(scene, 0);
       settimer(scene, Math.round((t.offframe / introN) * 255));
       setblackalpha(1 - t.offframe / introN);
       paintandcap(scene);
       t.offframe++;
-      if (t.offframe >= introN) {t.offsub = "play"; t.frame = 0; rebuildplaystate(0)}
+      if (t.offframe >= introN) t.offsub = "play";
       return true;
     }
     settimer(scene, 255);
     if (t.offsub === "play") {
       origframeend();
-      if (t.frame < t.playm.length) playframe();
-      else if (t.playm.inputonly && t.frame === t.playm.length) {
+      const replaying = t.frame < t.playm.length;
+      if (replaying) playframe();
+      else if (t.frame === t.playm.length) {
         releaseall();
         t.playkeys = {}; t.playmouse = false;
       }
       setblackalpha(0);
-      // replay the recorded death/backtrack: playframe sets requestbacktrack on "back"
-      // events, but the export never consumed it - so deaths only teleported the player
-      // and block states never reset. mirror the live replay (applynormalcp + R inject)
-      let backinject = false;
-      if (t.requestbacktrack && inlevel()) {const bt = (t.requestbacktrack === true) ? backtarget() : t.requestbacktrack; t.requestbacktrack = false; if (bt) {applynormalcp(scene, bt); t.ubacktrack = 8; backinject = true; try {input.onKeyPressed(82, 0)} catch (e) {}}}
-      // re-apply the recorded world state at rollback frames (same as the live replay),
-      // else physics + switch blocks drift in the export even though they're right live
-      if (t.playm.worldsnaps && t.playm.worldsnaps[t.frame]) {try {restoreobjs(scene, t.playm.worldsnaps[t.frame])} catch (e) {}}
-      t.origstep(t.step);
-      if (backinject) try {input.onKeyReleased(82, 0)} catch (e) {}
-      applyicon(scene, t.frame);
+      if (!stepmacro(scene, replaying, false) || inlevel() !== scene) throw new Error("level closed during video export");
       paintandcap(scene);
       if (winshown(scene)) {
         t.offsub = "outro"; t.offwon = t.offframe; t.offcompleteat = -1;
@@ -290,6 +271,7 @@
     t.ffhandle = null;
     hooksounds(false);
     try {if (window.Howler && t.offvol != null) {window.Howler.volume(t.offvol); t.offvol = null}} catch (e) {}
+    if (t.vidphase === "render") t.mode = "idle";
     t.vidphase = null; t.vidblock = false; t.vidstep = "";
     releaseall();
     setblackalpha(0);

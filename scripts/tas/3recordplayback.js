@@ -266,11 +266,56 @@
   function endplayback(msg) {
     t.mode = "idle"; t.playend = null;
     t.requestbacktrack = false;
+    t.requestpause = false;
     t.manualpause = false;
+    t.menupause = false;
     releaseall();
     t.fadein = performance.now();
     if (t.vidphase === "render" || t.ffhandle != null) abortoffline();
     note(msg);
+  }
+
+  t.menurestart = function() {
+    if (t.mode === "play" && t.menurelease) {
+      endplayback("level restarted");
+      t.frame = 0; t.playpos = 0; t.acc = 0;
+      t.ring.length = 0;
+      t.macro = null;
+    }
+  };
+
+  function preparebacktrack(scene, recording) {
+    if (!t.requestbacktrack) return false;
+    const target = t.requestbacktrack === true ? backtarget() : t.requestbacktrack;
+    t.requestbacktrack = false;
+    if (!target) return false;
+    if (recording && t.macro.inputonly) t.macro.events.push([t.frame, "back", target]);
+    applynormalcp(scene, target);
+    t.ubacktrack = 8;
+    input.onKeyPressed(82, 0);
+    return true;
+  }
+
+  function stepmacro(scene, replaying, recording) {
+    const back = preparebacktrack(scene, recording);
+    if (replaying && t.playm.worldsnaps?.[t.frame]) {
+      try {restoreobjs(scene, t.playm.worldsnaps[t.frame])} catch (e) {}
+    }
+    let alive;
+    try {alive = t.origstep(t.step)}
+    finally {
+      t.menurelease = false;
+      if (back) input.onKeyReleased(82, 0);
+    }
+    if (replaying && t.mode === "play" && inlevel() === scene) applyicon(scene, t.frame);
+    return alive;
+  }
+
+  function suspendplayinput(frame) {
+    if (t.playm.inputonly) seekinput(frame);
+    else releaseall();
+    t.menupause = true;
+    origframeend();
   }
 
   /*////////////////////////////////////////////////////////////////////*/
@@ -295,6 +340,7 @@
     }
 
     if (!t.frameadv && t.frozen) {t.frozen = false; t.pendingsteps = 0; t.pendingrollback = 0}
+    if (t.vidphase === "render") return offlinetick(scene);
 
     // background session recording
     let stopnow = t.prevstop;
@@ -302,12 +348,6 @@
       const timer = scene.getTimeManager()._timers.get("stopwatch");
       if (timer) stopnow = timer.getTime();
     } catch (e) {}
-    if (t.mode === "play" && !t.playm.inputonly && t.prevstop !== Infinity && stopnow < t.prevstop - 1) {
-      endplayback("level restarted");
-      t.prevstop = stopnow;
-      refreshhud();
-      return t.origstep(elapsed);
-    }
     if (t.recording && !t.countdown && !t.requestrestart && !t.requestpractice && !t.ubacktrack) {
       const fresh = stopnow < t.prevstop - 1;
       if (t.mode === "record" && fresh && !t.macro.inputonly) startsession(scene);
@@ -442,6 +482,8 @@
         t.realtouches.clear();
       }
       t.manualpause = false;
+      t.menupause = false;
+      t.menurelease = false;
       svar(scene, "paused").setBoolean(false);
       t.priminglegacy = restart === "play" && t.playable && !t.playable.macro.inputonly;
       let ok;
@@ -462,19 +504,16 @@
       } else if (t.playable) {
         t.playm = JSON.parse(JSON.stringify(t.playable.macro));
         trimmacro(t.playm);
+        t.mode = "play";
+        rebuildplaystate(0);
+        setblackalpha(0);
         let offok = false;
         if (t.videopending) {t.videopending = false; offok = startoffline(scene)}
-        if (!offok) {
-          t.mode = "play";
-          t.vidphase = null;
-          rebuildplaystate(0);
-          setblackalpha(0);
-        }
+        if (!offok) t.vidphase = null;
       }
       refreshhud();
       return ok;
     }
-    if (t.vidphase === "render") return offlinetick(scene);
     if (t.mode !== "record") t.inputqueue.length = 0;
 
     if (!engaged()) {
@@ -494,6 +533,7 @@
     let n = 0;
     if (t.manualpause && !ispaused(scene)) t.manualpause = false;
     const replaypaused = t.mode === "play" && (t.playm.inputonly ? t.manualpause : ispaused(scene));
+    if (!replaypaused) t.menupause = false;
     if (replaypaused) {
       n = 1;
     } else if (t.frozen) {
@@ -517,8 +557,7 @@
       resyncheld();
       if (t.mode === "play") {
         if (replaypaused) {
-          if (t.playm.inputonly) {if (!t.inputseek) seekinput(t.frame)}
-          else releaseall();
+          if (!t.menupause) suspendplayinput(t.frame);
         } else if (t.frame >= t.playm.length) {
           if (winshown(scene)) {
             if (!t.playend) t.playend = performance.now() + 4000;
@@ -533,32 +572,20 @@
       let pauseinject = false;
       if (t.requestpause && t.mode === "play") {t.requestpause = false; pauseinject = true; try {input.onKeyPressed(27, 0)} catch (e) {}}
 
-      let backinject = false;
-      if (t.requestbacktrack && inlevel()) {
-        const target = t.requestbacktrack === true ? backtarget() : t.requestbacktrack;
-        t.requestbacktrack = false;
-        if (target) {
-          if (recording && t.macro.inputonly) t.macro.events.push([t.frame, "back", target]);
-          applynormalcp(scene, target);
-          t.ubacktrack = 8;
-          backinject = true;
-          input.onKeyPressed(82, 0);
-        }
-      }
-      if (t.mode === "play" && !replaypaused && t.playm.worldsnaps && t.playm.worldsnaps[t.frame]) {
-        try {restoreobjs(scene, t.playm.worldsnaps[t.frame])} catch (e) {}
-      }
       try {scene.render = (i === n - 1) ? realRender : noRender} catch (e) {}
-      alive = t.origstep(t.step);
+      alive = stepmacro(scene, t.mode === "play" && !replaypaused, recording);
       if (pauseinject) {
         input.onKeyReleased(27, 0);
         if (t.playm.inputonly) t.manualpause = ispaused(scene);
       }
-      if (backinject) try {input.onKeyReleased(82, 0)} catch (e) {}
       if (inlevel() !== scene) break;
       if (recording && !t.macro.inputonly) recordicon(scene, t.frame);
-      if (t.mode === "play" && !replaypaused) applyicon(scene, t.frame);
       if (!replaypaused) t.frame++;
+      if (!t.menupause && t.mode === "play" && ispaused(scene) && (t.manualpause || !t.playm.inputonly)) {
+        suspendplayinput(t.frame);
+        t.acc = 0;
+        break;
+      }
       if (!inlevel()) break;
     }
     try {scene.render = realRender} catch (e) {}

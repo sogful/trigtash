@@ -330,5 +330,25 @@ if (!retry.conditions.some(condition => condition.parameters?.[0] === "tasretryh
   retry.conditions.push({type: {value: "SceneVariableAsBoolean"}, parameters: ["tasretryheld", "False"]});
 }
 
+const pausemenu = level.events.find(event => event.name === "PAUSE MENU");
+let restartbutton;
+function findpauserestart(events) {
+  for (const event of events) {
+    if (event.conditions?.some(condition => condition.type.value === "SourisSurObjet" &&
+      condition.parameters[0] === "pauseRestart" && !condition.inverted && !condition.type.inverted)) {
+      restartbutton = event.events?.find(child => child.conditions?.some(condition =>
+        condition.type.value === "MouseButtonReleased" && condition.parameters[1] === "Left"));
+      if (restartbutton) return;
+    }
+    if (event.events) findpauserestart(event.events);
+    if (restartbutton) return;
+  }
+}
+findpauserestart(pausemenu?.events || []);
+if (!restartbutton) throw new Error("native pause restart button not found");
+restartbutton.events = (restartbutton.events || []).filter(event => !event.inlineCode?.some(line =>
+  line.includes("window.__tas.menurestart")));
+restartbutton.events.unshift(practicehook("menurestart"));
+
 fs.writeFileSync(projfile, JSON.stringify(proj, null, 2));
 console.log("tas system injected into level (" + code.length + " lines)");
